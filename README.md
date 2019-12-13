@@ -1,2 +1,2 @@
 # Projet Génie Logiciel, Ensimag.
-Equipe @AUTHOR@, le @DATE@.
+Equipe gl48, le 01/01/2020.
