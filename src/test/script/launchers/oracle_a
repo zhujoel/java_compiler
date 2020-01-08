@@ -1,0 +1,28 @@
+#!/bin/sh
+
+DECAC_HOME=$(cd "$(dirname "$0")"/../../../../ && pwd)
+CP_FILE="$DECAC_HOME"/target/generated-sources/classpath.txt
+
+CP="$DECAC_HOME"/target/generated-classes/cobertura:"$DECAC_HOME"/target/test-classes/:"$DECAC_HOME"/target/classes/:$(cat "$CP_FILE")
+
+cd ../../deca/syntax/valid/created
+
+tmpfile=$(mktemp /tmp/temp.XXX)
+echo
+echo "------------------------------------"
+for prog in *.deca
+do
+    echo "Résultat de ${prog%.*}:"
+
+    # On rentre le resultat de la commande java dans un fichier temporaire et on compare avec
+    # Le fichier txt attendu
+    # java -enableassertions -cp "$CP" fr.ensimag.deca.syntax.ManualTestLex "$prog" > tmpfile
+    test_lex $prog > tmpfile
+    cat tmpfile
+    diff -u ../alexpected/${prog%.*}.txt $tmpfile
+    tmpfile=$(mktemp /tmp/temp.XXX)
+    echo "------------------------------------"
+done
+
+rm "$tmpfile"
+exit
