@@ -10,6 +10,7 @@ options {
 
 @members {
 }
+<<<<<<< HEAD
 // Deca lexer rules.
 
 // Mots réservés
