@@ -69,16 +69,16 @@ fragment POSITIVE_DIGIT : '1' .. '9' ;
 INT : '0' | POSITIVE_DIGIT DIGIT* ;
 
 // Littéraux flottants
-NUM : DIGIT+ ;
-SIGN : '+' | '-';
-EXP : ('E' | 'e') SIGN NUM ;
-DEC : NUM '.' NUM ;
-FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ) ;
+fragment NUM : DIGIT+ ;
+fragment SIGN : (('+' | '-')?) ;
+fragment EXP : ('E' | 'e') SIGN NUM ;
+fragment DEC : NUM '.' NUM ;
+fragment FLOATDEC : (DEC | DEC EXP) (('F' | 'f')?) ;
 fragment HEX_MAJUSC : 'A' .. 'F' ;
 fragment HEX_MINUSC : 'a' .. 'f' ;
-DIGITHEX : DIGIT | HEX_MAJUSC | HEX_MINUSC ;
-NUMHEX : DIGITHEX+ ;
-FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ) ;
+fragment DIGITHEX : DIGIT | HEX_MAJUSC | HEX_MINUSC ;
+fragment NUMHEX : DIGITHEX+ ;
+fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM (('F' | 'f' )?) ;
 FLOAT : FLOATDEC | FLOATHEX ;
 
 // Chaines de caractères
@@ -94,5 +94,5 @@ MONO_LINE_COMMENT : '//' (~('\n'))* ('\n' | EOF) { skip() ; } ;
 SEPAR : ( ' ' | '\t' | '\n' | '\r' ) { skip(); } ;
 
 // Inclusion de fichier
-FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+ ;
+fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+ ;
 INCLUDE : '#include' (' ')* '"' FILENAME '"' ;
