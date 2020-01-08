@@ -80,12 +80,14 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
     : dv1=decl_var[$t] {
         $l.add($dv1.tree);
         } (COMMA dv2=decl_var[$t] {
+        	$l.add($dv2.tree);
         }
       )*
     ;
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
+			$tree = new DeclVar($t.tree, $i.tree, $e.tree);
         }
     : i=ident {
         }
@@ -337,18 +339,30 @@ type returns[AbstractIdentifier tree]
 
 literal returns[AbstractExpr tree]
     : INT {
+    		$tree = new IntLiteral(Integer.parseInt($INT.text));
         }
     | fd=FLOAT {
+    		$tree = new FloatLiteral(Float.parseFloat($FLOAT.text));
         }
     | STRING {
+    		$tree = new StringLiteral($STRING.text);
         }
     | TRUE {
+    		$tree = new BooleanLiteral(true);
         }
     | FALSE {
+    		$tree = new BooleanLiteral(false);
         }
     | THIS {
+    		if ($THIS.text.equals("this")){
+    			$tree = new BooleanLiteral(false);
+    		}
+    		else{
+    			$tree = new BooleanLiteral(true);
+    		}
         }
     | NULL {
+    		$tree = null;
         }
     ;
 
@@ -445,3 +459,5 @@ param
     : type ident {
         }
     ;
+
+    
