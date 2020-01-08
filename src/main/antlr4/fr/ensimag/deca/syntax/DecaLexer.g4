@@ -10,58 +10,59 @@ options {
 
 @members {
 }
+
 // Deca lexer rules.
 
 // Mots réservés
-ASM : 'asm' { skip() ; } ;
-CLASS : 'class' { skip() ; } ;
-EXTENDS : 'extends' { skip() ; } ;
-ELSE : 'else' { skip() ; } ;
-FALSE : 'false' { skip() ; } ;
-IF : 'if' { skip() ; } ;
-INSTANCEOF : 'instanceof' { skip() ; } ;
-NEW  : 'new' { skip() ; } ;
-NULL : 'null' { skip() ; } ;
-READINT : 'readInt' { skip() ; } ;
-READFLOAT : 'readFloat' { skip() ; } ;
-PRINT : 'print' { skip() ; } ;
-PRINTLN : 'println' { skip() ; } ;
-PRINTLNX : 'printlnx' { skip() ; } ;
-PRINTX : 'printx' { skip() ; } ;
-PROTECTED : 'protected' { skip() ; } ;
-RETURN : 'return' { skip() ; } ;
-THIS : 'this' { skip() ; } ;
-TRUE : 'true' { skip() ; } ;
-WHILE : 'while' { skip() ; } ;
+ASM : 'asm' ;
+CLASS : 'class' ;
+EXTENDS : 'extends' ;
+ELSE : 'else' ;
+FALSE : 'false' ;
+IF : 'if' ;
+INSTANCEOF : 'instanceof' ;
+NEW  : 'new' ;
+NULL : 'null' ;
+READINT : 'readInt' ;
+READFLOAT : 'readFloat' ;
+PRINT : 'print' ;
+PRINTLN : 'println'  ;
+PRINTLNX : 'printlnx' ;
+PRINTX : 'printx' ;
+PROTECTED : 'protected' ;
+RETURN : 'return' ;
+THIS : 'this' ;
+TRUE : 'true' ;
+WHILE : 'while' ;
 
 // Identificateurs
-fragment LETTER : 'a' .. 'z' 'A' .. 'Z';
+fragment LETTER : ('a' .. 'z') | ('A' .. 'Z');
 fragment DIGIT : '0' .. '9' ;
 IDENT : (LETTER | '$' | '_')(LETTER | DIGIT | '$' | '_')* ;
 
 // Symboles spéciaux
-LT : '<' { skip() ; } ;
-GT : '>' { skip() ; } ;
-EQUALS : '=' { skip() ; } ;
-PLUS : '+' { skip() ; } ;
-MINUS : '-' { skip() ; } ;
-TIMES : '*' { skip() ; } ;
-SLASH : '/' { skip() ; } ;
-PERCENT : '%' { skip() ; } ;
-DOT : '.' { skip() ; } ;
-COMMA : ',' { skip() ; } ;
-OPARENT : '(' { skip() ; } ;
-CPARENT : ')' { skip() ; } ;
-OBRACE : '{' { skip() ; } ;
-CBRACE : '}' { skip() ; } ;
-EXCLAM : '!' { skip() ; } ;
-SEMI : ';' { skip() ; } ;
-EQEQ : '==' { skip() ; } ;
-NEQ : '!=' { skip() ; } ;
-GEQ : '>=' { skip() ; } ;
-LEQ : '<=' { skip() ; } ;
-AND : '&&' { skip() ; } ;
-OR : '||' { skip() ; } ;
+LT : '<' ;
+GT : '>' ;
+EQUALS : '=' ;
+PLUS : '+' ;
+MINUS : '-' ;
+TIMES : '*' ;
+SLASH : '/' ;
+PERCENT : '%' ;
+DOT : '.' ;
+COMMA : ',' ;
+OPARENT : '(' ;
+CPARENT : ')' ;
+OBRACE : '{' ;
+CBRACE : '}' ;
+EXCLAM : '!' ;
+SEMI : ';' ;
+EQEQ : '==' ;
+NEQ : '!=' ;
+GEQ : '>=' ;
+LEQ : '<=' ;
+AND : '&&' ;
+OR : '||' ;
 
 // Littéraux entiers
 fragment POSITIVE_DIGIT : '1' .. '9' ;
@@ -81,7 +82,7 @@ FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ) ;
 FLOAT : FLOATDEC | FLOATHEX ;
 
 // Chaines de caractères
-fragment STRING_CAR : (~('"') ~('\\') ~('\n'))+ ;
+fragment STRING_CAR : (~('"' | '\\' | '\n'))+ ;
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"' ;
 MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"' ;
 
