@@ -40,28 +40,28 @@ fragment DIGIT : '0' .. '9' ;
 IDENT : (LETTER | '$' | '_')(LETTER | DIGIT | '$' | '_')* ;
 
 // Symboles spéciaux
-INF : '<' { skip() ; } ;
-SUP : '>' { skip() ; } ;
-AFFEC : '=' { skip() ; } ;
+LT : '<' { skip() ; } ;
+GT : '>' { skip() ; } ;
+EQUALS : '=' { skip() ; } ;
 PLUS : '+' { skip() ; } ;
-MOINS : '-' { skip() ; } ;
-MULT : '*' { skip() ; } ;
-DIV : '/' { skip() ; } ;
-MOD : '%' { skip() ; } ;
-POINT : '.' { skip() ; } ;
-VIRGULE : ',' { skip() ; } ;
-OPAR : '(' { skip() ; } ;
-FPAR : ')' { skip() ; } ;
-OACC : '{' { skip() ; } ;
-FACC : '}' { skip() ; } ;
-NEG : '!' { skip() ; } ;
-PVIR : ';' { skip() ; } ;
-EGAL : '==' { skip() ; } ;
-DIFF : '!=' { skip() ; } ;
-SUP_EGAL : '>=' { skip() ; } ;
-INF_EGAL : '<=' { skip() ; } ;
-ET : '&&' { skip() ; } ;
-OU : '||' { skip() ; } ;
+MINUS : '-' { skip() ; } ;
+TIMES : '*' { skip() ; } ;
+SLASH : '/' { skip() ; } ;
+PERCENT : '%' { skip() ; } ;
+DOT : '.' { skip() ; } ;
+COMMA : ',' { skip() ; } ;
+OPARENT : '(' { skip() ; } ;
+CPARENT : ')' { skip() ; } ;
+OBRACE : '{' { skip() ; } ;
+CBRACE : '}' { skip() ; } ;
+EXCLAM : '!' { skip() ; } ;
+SEMI : ';' { skip() ; } ;
+EQEQ : '==' { skip() ; } ;
+NEQ : '!=' { skip() ; } ;
+GEQ : '>=' { skip() ; } ;
+LEQ : '<=' { skip() ; } ;
+AND : '&&' { skip() ; } ;
+OR : '||' { skip() ; } ;
 
 // Littéraux entiers
 fragment POSITIVE_DIGIT : '1' .. '9' ;
@@ -69,25 +69,25 @@ INT : '0' | POSITIVE_DIGIT DIGIT* ;
 
 // Littéraux flottants
 NUM : DIGIT+ ;
-SIGN : '+' | '-' | '' ;
+SIGN : '+' | '-' | ;
 EXP : ('E' | 'e') SIGN NUM ;
 DEC : NUM '.' NUM ;
-FLOATDEC : (DEC | DEC EXP) ('F' | 'f' + '') ;
+FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ) ;
 fragment HEX_MAJUSC : 'A' .. 'F' ;
 fragment HEX_MINUSC : 'a' .. 'f' ;
 DIGITHEX : DIGIT | HEX_MAJUSC | HEX_MINUSC ;
 NUMHEX : DIGITHEX+ ;
-FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | '') ;
+FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | ) ;
 FLOAT : FLOATDEC | FLOATHEX ;
 
 // Chaines de caractères
-fragment STRING_CAR : (^('"' '\' 'EOL'))+ ;
+fragment STRING_CAR : (~('"') ~('\\') ~('\n'))+ ;
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"' ;
-MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"' ;
+MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"' ;
 
 // Commentaires
 MULTI_LINE_COMMENT : '/*' MULTI_LINE_STRING '*/' { skip() ; } ;
-MONO_LINE_COMMENT : '//' (^(EOL))* (EOL | EOF) { skip() ; } ;
+MONO_LINE_COMMENT : '//' (~('\n'))* ('\n' | EOF) { skip() ; } ;
 
 // Séparateurs
 SEPAR : ( ' ' | '\t' | '\n' | '\r' ) { skip(); } ;
