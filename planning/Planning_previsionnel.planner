@@ -103,61 +103,56 @@
         <predecessor id="1" predecessor-id="27" type="FS"/>
       </predecessors>
     </task>
-    <task id="29" name="Rendu des documentations de conception, de validation et de l&#x2019;extension" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
+    <task id="29" name="Ecriture de la documentation" note="" work="230400" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="30" name="Rendu des documentations de conception, de validation et de l&#x2019;extension" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="31" name="Bilan individuel de comp&#xE9;tences" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="32" name="R&#xE9;trospectives collectives" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="33" name="Bilan du gestion d'&#xE9;quipe et de projet" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="34" name="Manuel utilisateur" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="35" name="Documentation de conception" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="36" name="Documentation sur la validation" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="37" name="Documentation sur les extensions" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
+        </predecessors>
+      </task>
     </task>
-    <task id="30" name="Bilan individuel de comp&#xE9;tences" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="38" name="Rendu final" note="" work="28800" start="20200129T090000Z" end="20200130T090000Z" work-start="20200129T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="31" name="R&#xE9;trospectives collectives" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="32" name="Bilan du gestion d'&#xE9;quipe et de projet" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="33" name="Manuel utilisateur" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="34" name="Documentation de conception" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="35" name="Documentation sur la validation" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="36" name="Documentation sur les extensions" note="" work="28800" start="20200128T090000Z" end="20200129T090000Z" work-start="20200128T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
-      </predecessors>
-    </task>
-    <task id="37" name="Rendu final" note="" work="28800" start="20200129T090000Z" end="20200130T090000Z" work-start="20200129T090000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <predecessors>
-        <predecessor id="1" predecessor-id="31" type="FS"/>
-        <predecessor id="1" predecessor-id="34" type="FS"/>
-        <predecessor id="1" predecessor-id="36" type="FS"/>
-        <predecessor id="1" predecessor-id="35" type="FS"/>
-        <predecessor id="1" predecessor-id="33" type="FS"/>
-        <predecessor id="1" predecessor-id="32" type="FS"/>
-        <predecessor id="1" predecessor-id="30" type="FS"/>
         <predecessor id="1" predecessor-id="29" type="FS"/>
       </predecessors>
     </task>
-    <task id="38" name="Soutenance" note="" work="28800" start="20200130T090000Z" end="20200131T090000Z" work-start="20200130T090000Z" percent-complete="10" priority="0" type="normal" scheduling="fixed-work">
+    <task id="39" name="Soutenance" note="" work="28800" start="20200130T090000Z" end="20200131T090000Z" work-start="20200130T090000Z" percent-complete="10" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="37" type="FS"/>
+        <predecessor id="1" predecessor-id="38" type="FS"/>
       </predecessors>
     </task>
   </tasks>
