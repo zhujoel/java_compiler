@@ -10,7 +10,6 @@ options {
 
 @members {
 }
-<<<<<<< HEAD
 // Deca lexer rules.
 
 // Mots réservés
@@ -70,7 +69,7 @@ INT : '0' | POSITIVE_DIGIT DIGIT* ;
 
 // Littéraux flottants
 NUM : DIGIT+ ;
-SIGN : '+' | '-' | ;
+SIGN : '+' | '-';
 EXP : ('E' | 'e') SIGN NUM ;
 DEC : NUM '.' NUM ;
 FLOATDEC : (DEC | DEC EXP) ('F' | 'f' | ) ;
