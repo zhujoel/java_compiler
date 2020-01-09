@@ -1,6 +1,9 @@
+'class'
+IDENT
 '{'
 IDENT
 IDENT
+'='
+INT
 ';'
 '}'
-'/'
