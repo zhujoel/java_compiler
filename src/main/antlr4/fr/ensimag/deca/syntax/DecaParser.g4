@@ -97,6 +97,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 
 list_inst returns[ListInst tree]
 @init {
+	$tree = new ListInst();
 }
     : (inst {
         }
@@ -360,6 +361,9 @@ ident returns[AbstractIdentifier tree]
 /****     Class related rules     ****/
 
 list_classes returns[ListDeclClass tree]
+@init{
+	$tree = new ListDeclClass();
+}
     :
       (c1=class_decl {
         }
