@@ -79,36 +79,25 @@ decl_var_set[ListDeclVar l]
 
 list_decl_var[ListDeclVar l, AbstractIdentifier t]
     : dv1=decl_var[$t] {
-    		System.out.println("on est làdsfsdfdsfs3");
         $l.add($dv1.tree);
-    		System.out.println("on est là3fdsfsdfsdfsdfrgfg");
         } (COMMA dv2=decl_var[$t] {
         	// on ajoute dans la liste 
         	$l.add($dv2.tree);
-    		System.out.println("on est là3 liste decl var");
         }
       )*
     ;
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
-			Initialization init;
-    		System.out.println("on est là333");
         }
     : i=ident {
-    		System.out.println("on est là344");
-			$i = $i.tree;
         }
       (EQUALS e=expr {
-    		System.out.println("on est là3");
-      		init = new Initialization($e.tree);
-    		System.out.println("on est là4");
+      		$tree = new DeclVar($t, $i.tree, new Initialization($e.tree));
         }
       )? {
 			// nouvelle déclaration
-    		System.out.println("on est là5");
-			//$tree = new DeclVar($t.tree, $i.tree, init);
-    		System.out.println("on est là 2");
+			$tree = new DeclVar($t, $i.tree, new NoInitialization());
         }
     ;
 
@@ -193,9 +182,12 @@ assign_expr returns[AbstractExpr tree]
         EQUALS e2=assign_expr {
             assert($e.tree != null);
             assert($e2.tree != null);
+            $tree = new Assign($e.tree, $e2.tree);
+            
         }
       | /* epsilon */ {
             assert($e.tree != null);
+            $tree = $e.tree ;
         }
       )
     ;
@@ -352,11 +344,9 @@ primary_expr returns[AbstractExpr tree]
 
 type returns[AbstractIdentifier tree]
     : ident {
-    		System.out.println("on est là354534");
             assert($ident.tree != null);
             // modified
             $tree = $ident.tree;
-    		System.out.println("on est là3fdsfsdgsgdf");
         }
     ;
 
@@ -380,9 +370,7 @@ literal returns[AbstractExpr tree]
 ident returns[AbstractIdentifier tree]
     : IDENT {
     		// on crée un identifier
-    		System.out.println("on est là");
-    		$tree = new Identifier(new SymbolTable().create($IDENT.text));
-    		System.out.println("on est là38");
+    		$tree = new Identifier(super.getDecacCompiler().getSymbolTable().create($IDENT.text));
         }
     ;
 

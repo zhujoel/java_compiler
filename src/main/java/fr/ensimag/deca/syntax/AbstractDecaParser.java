@@ -24,7 +24,7 @@ public abstract class AbstractDecaParser extends Parser {
     Logger LOG = Logger.getLogger(AbstractDecaParser.class);
 
     private DecacCompiler decacCompiler;
-
+    
     protected DecacCompiler getDecacCompiler() {
         return decacCompiler;
     }
