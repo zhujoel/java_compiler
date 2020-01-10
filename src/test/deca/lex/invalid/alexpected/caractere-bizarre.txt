@@ -1,0 +1,2 @@
+'{'
+INFO  fr.ensimag.deca.syntax.DecacErrorListner.syntaxError(DecacErrorListner.java

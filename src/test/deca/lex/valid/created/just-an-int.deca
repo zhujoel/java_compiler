@@ -1,0 +1,4 @@
+// On déclare juste une variable a
+{
+    int a;
+}

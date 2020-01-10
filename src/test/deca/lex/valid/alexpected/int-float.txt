@@ -2,7 +2,6 @@
 IDENT
 IDENT
 '='
-STRING
-IDENT
-STRING
+INT
+';'
 '}'

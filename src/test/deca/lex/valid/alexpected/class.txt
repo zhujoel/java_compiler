@@ -1,8 +1,9 @@
+'class'
+IDENT
 '{'
 IDENT
 IDENT
 '='
-STRING
-IDENT
-STRING
+INT
+';'
 '}'

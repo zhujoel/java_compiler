@@ -1,0 +1,17 @@
+'{'
+IDENT
+IDENT
+'='
+INT
+';'
+IDENT
+'='
+IDENT
+'+'
+'+'
+INT
+';'
+'return'
+IDENT
+';'
+'}'

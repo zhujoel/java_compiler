@@ -11,7 +11,7 @@ reset=`tput sgr0`
 reussis=0
 total=0
 
-cd $DECAC_HOME/src/test/deca/syntax/invalid/created
+cd $DECAC_HOME/src/test/deca/lex/invalid/created
 
 tmpfile=$(mktemp /tmp/temp.XXX)
 
@@ -25,7 +25,6 @@ do
     test_lex $prog > $tmpfile
     # On utilise le script python pour couper le fichier tmp pour faire une bonne comparaison
     ../../../../script/launchers/cutting-files.py $tmpfile
-
     # Si le diff est vide, alors le test est réussi
     DIFF=$(diff -u ../alexpected/${prog%.*}.txt $tmpfile)
     if [$DIFF == ""]
@@ -35,6 +34,7 @@ do
     else
         echo "${red}Test échoué${reset}"
         echo "${grey}Obtenu                              Attendu${reset}"
+        # Affiche les deux fichiers sur deux colonnes
         pr -m -t $tmpfile ../alexpected/${prog%.*}.txt
         # diff  ../alexpected/${prog%.*}.txt $tmpfile
     fi
