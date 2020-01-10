@@ -1,0 +1,6 @@
+'{'
+IDENT
+IDENT
+'='
+STRING
+'}'
