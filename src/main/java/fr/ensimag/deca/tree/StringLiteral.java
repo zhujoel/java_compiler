@@ -35,13 +35,9 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	if (value == null) {throw new ContextualError("Chaine de caractere nulle : ", getLocation());}
-    	else {
-    		// probleme : ne pas utiliser new, pas sur de cette ligne...
-    		//return new StringType(compiler.getSymbolTable().create("string"));
-    		return null;
-    	}
+    	this.setType(compiler.getType("string"));
+    	return compiler.getType("string");
+    	
     }
 
     @Override
