@@ -52,7 +52,7 @@ public class DecacCompiler {
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
-        this.envType = new EnvironmentType(null);
+        this.envType = new EnvironmentType(symbolTable);
     }
 
     public SymbolTable getSymbolTable() {
