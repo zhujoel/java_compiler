@@ -7,7 +7,6 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.StringType;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import java.io.PrintStream;
@@ -37,10 +36,11 @@ public class StringLiteral extends AbstractStringLiteral {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
         //throw new UnsupportedOperationException("not yet implemented");
-    	if (value == null) {throw new ContextualError("a", getLocation());}
+    	if (value == null) {throw new ContextualError("Chaine de caractere nulle : ", getLocation());}
     	else {
-    		//a finir
-    		return new StringType();
+    		// probleme : ne pas utiliser new, pas sur de cette ligne...
+    		//return new StringType(compiler.getSymbolTable().create("string"));
+    		return compiler
     	}
     }
 
