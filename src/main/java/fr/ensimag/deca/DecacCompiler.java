@@ -1,8 +1,10 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
@@ -35,6 +37,10 @@ import org.apache.log4j.Logger;
  */
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+    private SymbolTable symbolTable;
+    
+    private EnvironmentType envType;//ajouté par flichya
+    
     
     /**
      * Portable newline character.
@@ -45,8 +51,18 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+        this.symbolTable = new SymbolTable();
+        this.envType = new EnvironmentType(symbolTable);
     }
 
+    public SymbolTable getSymbolTable() {
+    	return this.symbolTable;
+    }
+    
+    public EnvironmentType getEnvironmentType() {
+    	return this.envType;
+    }
+    
     /**
      * Source file associated with this compiler instance.
      */
