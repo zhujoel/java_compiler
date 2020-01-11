@@ -43,7 +43,15 @@ public class CompilerOptions {
 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE : parcourir args pour positionner les options correctement.
+        int i = 0;
+        while (i < args.length) {
+            if (args[i].matches("[0-3]")) {
+                debug = Integer.parseInt(args[i]);
+                break;
+            }
+            i++;
+        }
+        // DONE! A FAIRE : parcourir args pour positionner les options correctement.
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
@@ -67,10 +75,26 @@ public class CompilerOptions {
             logger.info("Java assertions disabled");
         }
 
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+        String usage = "";
+        switch (getDebug()) {
+            case QUIET:
+                System.out.println("Usage: QUIET (default)");
+            case INFO:
+                System.out.println("Usage: INFO");
+                break;
+            case DEBUG:
+                System.out.println("Usage: DEBUG");
+                break;
+            case TRACE:
+                System.out.println("Usage: TRACE");
+                break;
+            default: System.out.println("No usage set");
+        }
+        
     }
 }

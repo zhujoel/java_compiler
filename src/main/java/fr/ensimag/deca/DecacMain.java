@@ -1,6 +1,11 @@
 package fr.ensimag.deca;
 
 import java.io.File;
+import static java.lang.Runtime.getRuntime;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import org.apache.log4j.Logger;
 
 /**
@@ -25,13 +30,15 @@ public class DecacMain {
             options.displayUsage();
             System.exit(1);
         }
-        if (options.getPrintBanner()) {
+        if (options.getPrintBanner()) { //what is a PrintBanner?
             throw new UnsupportedOperationException("decac -b not yet implemented");
         }
         if (options.getSourceFiles().isEmpty()) {
             throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
         if (options.getParallel()) {
+            Executor pool =  newFixedThreadPool(getRuntime().availableProcessors());
+            
             // A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
