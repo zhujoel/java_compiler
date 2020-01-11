@@ -40,6 +40,8 @@ public abstract class AbstractPrint extends AbstractInst {
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
+    	//recuperer un iterateur sur arguments (qui est une treelist) 
+    	//et parcourir arguments pour appliquer verify a chaque fois
     }
 
     @Override
