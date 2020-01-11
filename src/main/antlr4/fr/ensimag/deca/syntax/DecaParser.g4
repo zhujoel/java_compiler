@@ -25,7 +25,6 @@ options {
 // which packages should be imported?
 @header {
     import fr.ensimag.deca.tree.*;
-    import fr.ensimag.deca.tools.*;
     import java.io.PrintStream;
 }
 
@@ -143,7 +142,7 @@ inst returns[AbstractInst tree]
         }
     | if_then_else {
             assert($if_then_else.tree != null);
-            //$tree = $if_then_else.tree;
+            $tree = $if_then_else.tree;
             //SetLocation($tree, $if_then_else.start);
         }
     | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
@@ -161,14 +160,17 @@ inst returns[AbstractInst tree]
 
 if_then_else returns[IfThenElse tree]
 @init {
+	ListInst elseBranch = new ListInst();
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
-    	
+    		$tree = new IfThenElse($condition.tree, $li_if.tree, elseBranch);
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
+        	elseBranch.add(new IfThenElse($elsif_cond.tree, $elsif_li.tree, new ListInst()));
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
+      		elseBranch.add(new IfThenElse(new BooleanLiteral(true), $li_else.tree, new ListInst()));
         }
       )?
     ;
@@ -182,7 +184,8 @@ list_expr returns[ListExpr tree]
     		//setlocation
         }
        (COMMA e2=expr {
-       		//$tree.add($e2.tree);
+       		// TODO: compléter
+       		$tree.add($e2.tree);
        		//setlocation
         }
        )* )?
@@ -207,13 +210,12 @@ assign_expr returns[AbstractExpr tree]
         EQUALS e2=assign_expr {
             assert($e.tree != null);
             assert($e2.tree != null);
-			//$tree = new Assign($e.tree, $e2.tree);
+			$tree = new Assign((AbstractLValue)$e.tree, $e2.tree);
             
         }
       | /* epsilon */ {
             assert($e.tree != null);
             $tree = $e.tree;
-			//$tree = new NoInitialization();
         }
       )
     ;
@@ -289,7 +291,7 @@ inequality_expr returns[AbstractExpr tree]
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
             assert($type.tree != null);
-            // à faire
+            // TODO: compléter
         }
     ;
 
@@ -357,14 +359,17 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
+            // TODO: compléter
             
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
             assert($args.tree != null);
+            // TODO: compléter
         }
         | /* epsilon */ {
             // we matched "e.i"
+            // TODO: compléter
         }
         )
     ;
@@ -377,6 +382,7 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
+            // TODO: compléter
             
         }
     | OPARENT expr CPARENT {
@@ -384,10 +390,10 @@ primary_expr returns[AbstractExpr tree]
             $tree = $expr.tree;
         }
     | READINT OPARENT CPARENT {
-    	$tree = new ReadInt();
+    		$tree = new ReadInt();
         }
     | READFLOAT OPARENT CPARENT {
-    	$tree = new ReadFloat();
+    		$tree = new ReadFloat();
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
@@ -396,7 +402,7 @@ primary_expr returns[AbstractExpr tree]
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
-            // à faire
+            // TODO: compléter
         }
     | literal {
             assert($literal.tree != null);
@@ -422,12 +428,13 @@ literal returns[AbstractExpr tree]
     		$tree = new StringLiteral($STRING.text);
         }
     | TRUE {
-    		//$tree = new BooleanLiteral(true);
+    		$tree = new BooleanLiteral(true);
         }
     | FALSE {
-    		//$tree = new BooleanLiteral(false);
+    		$tree = new BooleanLiteral(false);
         }
     | THIS {
+            // TODO: compléter
     		//if ($THIS.text.equals("this")){
     		//	$tree = new BooleanLiteral(false);
     		//}
@@ -436,6 +443,7 @@ literal returns[AbstractExpr tree]
     		//}
         }
     | NULL {
+            // TODO: compléter
     		//$tree = new NullLiteral();
     		//$tree.text = 'null';
     		}
