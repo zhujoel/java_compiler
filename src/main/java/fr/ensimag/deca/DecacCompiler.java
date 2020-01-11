@@ -69,6 +69,10 @@ public class DecacCompiler {
     	return this.envType.get(this.symbolTable.create(s));
     }
     
+    public Type getType(Symbol key) {
+    	return this.envType.get(key);
+    }
+    
     /**
      * Source file associated with this compiler instance.
      */

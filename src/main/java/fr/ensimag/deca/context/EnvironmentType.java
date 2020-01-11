@@ -20,6 +20,7 @@ public class EnvironmentType {
 	public EnvironmentType(SymbolTable symbolTable) {
 		env = new HashMap<Symbol, Type>();
 		env.put(symbolTable.create("string"), new StringType(symbolTable.create("string")));
+		env.put(symbolTable.create("int"), new IntType(symbolTable.create("int")));
 	}
 	
 	public Type get(Symbol key) {

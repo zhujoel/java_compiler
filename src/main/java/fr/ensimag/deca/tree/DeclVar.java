@@ -8,12 +8,14 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * @author gl48
  * @date 01/01/2020
  */
 public class DeclVar extends AbstractDeclVar {
+	private static final Logger LOG = Logger.getLogger(DeclVar.class);
 
     
     final private AbstractIdentifier type;
@@ -33,6 +35,12 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+    	LOG.debug("verify Type : start");
+    	Type t = type.verifyType(compiler);
+    	LOG.debug("verify Type : end");
+    	LOG.debug("verify Initialisation : start");
+    	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
+    	LOG.debug("verify Initialisation : end");
     }
 
     

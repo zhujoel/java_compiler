@@ -8,12 +8,14 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * @author gl48
  * @date 01/01/2020
  */
 public class Initialization extends AbstractInitialization {
+	private static final Logger LOG = Logger.getLogger(Initialization.class);
 
     public AbstractExpr getExpression() {
         return expression;
@@ -35,7 +37,9 @@ public class Initialization extends AbstractInitialization {
     protected void verifyInitialization(DecacCompiler compiler, Type t,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    	LOG.debug("verify rvalue : start");
+    	expression.verifyRValue(compiler, localEnv, currentClass, t);
+    	LOG.debug("verify rvalue : end");
     }
 
 
