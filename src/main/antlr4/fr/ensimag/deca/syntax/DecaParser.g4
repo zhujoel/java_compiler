@@ -459,7 +459,6 @@ ident returns[AbstractIdentifier tree]
 /****     Class related rules     ****/
 
 list_classes returns[ListDeclClass tree]
-// on garde ça pour l'instant
 @init{
 	$tree = new ListDeclClass();
 }

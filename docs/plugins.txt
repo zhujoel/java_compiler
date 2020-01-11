@@ -2,3 +2,17 @@ Liste des plugins eclipse installés :
     Maven Integration for Eclipse (Luna) 1.5.0
     ANTLR 4 IDE 0.3.6
     Bash Editor 2.2.3
+
+
+Liste des install pour travailler sur machine personnelle windows :
+	installation de wsl (chercher un tuto sur l'interweb mondial)
+	installation de eclipse et des plugins ci-dessus
+	ensuite ouvrir une wsl puis :
+		- sudo apt update
+		- sudo apt install default-jre
+		- sudo apt install maven
+		- sudo apt install gcc
+		- sudo apt install gnat-8
+	Ensuite il faut cloner les ressources de l'imag (pensez a vous connecter au vpn) : suivez le tuto de l'ensiwiki (Installation de l'environnement du projet)
+	
+	
