@@ -40,7 +40,7 @@ public class StringLiteral extends AbstractStringLiteral {
     	else {
     		// probleme : ne pas utiliser new, pas sur de cette ligne...
     		//return new StringType(compiler.getSymbolTable().create("string"));
-    		return compiler
+    		return null;
     	}
     }
 
