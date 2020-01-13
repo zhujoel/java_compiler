@@ -22,6 +22,8 @@ public class EnvironmentType {
 		env.put(symbolTable.create("string"), new StringType(symbolTable.create("string")));
 		env.put(symbolTable.create("int"), new IntType(symbolTable.create("int")));
 		env.put(symbolTable.create("float"), new FloatType(symbolTable.create("float")));
+		env.put(symbolTable.create("boolean"), new BooleanType(symbolTable.create("boolean")));
+
 	}
 	
 	public Type get(Symbol key) {
