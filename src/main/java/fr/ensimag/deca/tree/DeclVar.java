@@ -1,10 +1,14 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -42,9 +46,27 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Type : start");
     	Type t = type.verifyType(compiler);
     	LOG.debug("verify Type : end");
+    	//condition type != void
+    	if (t.isVoid()) {
+    		throw new ContextualError("Variable de type void : ", getLocation());
+    	}
     	LOG.debug("verify Initialisation : start");
     	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
     	LOG.debug("verify Initialisation : end");
+    	
+    	//generation de la definition pour la decoration de l'arbre
+    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
+    	try {
+    		//declaration de la variable dans l'environement des expressions
+			localEnv.declare(this.varName.getName(), d);
+			//decoration de l'arbre :
+			varName.setDefinition(d);
+			varName.setType(t);
+			
+		} catch (DoubleDefException e) {
+			throw new ContextualError("Declaration d'une variable deja déclarée précédement", getLocation());
+		}
+    	
     }
 
     

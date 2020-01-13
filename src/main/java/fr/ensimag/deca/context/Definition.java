@@ -66,7 +66,13 @@ public abstract class Definition {
      */
     public MethodDefinition asMethodDefinition(String errorMessage, Location l)
             throws ContextualError {
-        throw new ContextualError(errorMessage, l);
+        MethodDefinition m;
+        try{
+            m = (MethodDefinition) this;
+            return m;
+        }catch(ClassCastException e){
+            throw new ContextualError(errorMessage, l);
+        }
     }
     
     /**
@@ -75,7 +81,13 @@ public abstract class Definition {
      */
     public FieldDefinition asFieldDefinition(String errorMessage, Location l)
             throws ContextualError {
-        throw new ContextualError(errorMessage, l);
+        FieldDefinition f;
+        try{
+            f = (FieldDefinition) this;
+            return f;
+        }catch(ClassCastException e){
+            throw new ContextualError(errorMessage, l);
+        }
     }
 
     public abstract boolean isExpression();

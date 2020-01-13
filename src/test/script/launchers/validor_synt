@@ -11,7 +11,7 @@ reset=`tput sgr0`
 reussis=0
 total=0
 
-cd $DECAC_HOME/src/test/deca/lex/valid/created
+cd $DECAC_HOME/src/test/deca/syntax/valid/created
 
 tmpfile=$(mktemp /tmp/temp.XXX)
 
@@ -21,10 +21,10 @@ do
 
     # On rentre le resultat de la commande java dans un fichier temporaire et on compare avec
     # Le fichier txt attendu
-    # java -enableassertions -cp "$CP" fr.ensimag.deca.syntax.ManualTestLex "$prog" > tmpfile
-    test_lex $prog > $tmpfile
+    # java -enableassertions -cp "$CP" fr.ensimag.deca.syntax.ManualTestSynt "$prog" > tmpfile
+    test_synt $prog > $tmpfile
     # On utilise le script python pour couper le fichier tmp pour faire une bonne comparaison
-    ../../../../script/launchers/cutting-files.py $tmpfile
+    # ../../../../script/launchers/cutting-files.py $tmpfile
     # Si le diff est vide, alors le test est réussi
     DIFF=$(diff -u ../alexpected/${prog%.*}.txt $tmpfile)
     if [$DIFF == ""]
