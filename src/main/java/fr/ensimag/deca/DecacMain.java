@@ -36,10 +36,7 @@ public class DecacMain {
         if (options.getPrintBanner() && args.length == 1) {//option -b
             System.out.println(" Équipe gl48");
             
-        }else if(options.getPrintBanner() && args.length > 1){
-            System.out.println("The -b option cannot be used with other options");
         }
-        
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
             System.out.println("\n Options pour le compilateur\n");
             System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
@@ -77,9 +74,6 @@ public class DecacMain {
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
             //throw new UnsupportedOperationException("Parallel build not yet implemented");
-        }else if(options.getParallel() && options.getVerification()){
-            System.err.println("Les options [-p] et [-v] sont incompatibles.");
-            System.exit(0);
         }else {//un seule fichier à compiler
             try {
                 for (File source : options.getSourceFiles()) {

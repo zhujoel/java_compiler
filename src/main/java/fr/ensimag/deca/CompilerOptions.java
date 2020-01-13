@@ -57,21 +57,39 @@ public class CompilerOptions {
             } else {
                 switch (args[i]) {
                     case "-b":
-                        printBanner = true;
+                        if (i == 0 && args.length == 1) {
+                            printBanner = true;
+                        } else {
+                            System.out.println("The -b option cannot "
+                                    + "be used with other options");
+                            System.exit(1);
+                        }
                         break;
                     case "-p":
                         System.out.println("Option -p ");
                         break;
                     case "-P":
-                        parallel = true;
-                        System.out.println("Option -P");
+                        if (verification) {
+                            System.err.println("Les options [-p] et [-v] "
+                                    + "sont incompatibles.");
+                            System.exit(1);
+                        } else {
+                            parallel = true;
+                            System.out.println("Option -P");
+                        }
                         break;
                     case "-d":
                         debug++;
                         break;
                     case "-v":
-                        verification = true;
-                        System.out.println("Option -v");
+                        if (parallel) {
+                            System.err.println("Les options [-p] et [-v] "
+                                    + "sont incompatibles.");
+                            System.exit(1);
+                        } else {
+                            verification = true;
+                            System.out.println("Option -v");
+                        }
                         break;
                     case "-n":
                         noCheck = true;
@@ -83,6 +101,10 @@ public class CompilerOptions {
             i++;
         }
         
+        if(sourceFiles.isEmpty()){
+            System.err.println(" No valid path for the source file was detected");
+            System.exit(1);
+        }
         
         // DONE! A FAIRE : parcourir args pour positionner les options correctement.
         Logger logger = Logger.getRootLogger();
