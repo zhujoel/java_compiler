@@ -170,15 +170,16 @@ public class Identifier extends AbstractIdentifier {
             ClassDefinition currentClass) throws ContextualError {
     	
     	
+    	//POUR UNE VARIABLE
+    	
     	Symbol s = this.getName();
-    	System.out.println(s.toString());
     	Definition d = localEnv.get(s);
-    	System.out.println(d.toString());
     	
     	this.setType(d.getType());
+    	this.setDefinition(d);
     	return this.getType();
     	
-    	//throw new UnsupportedOperationException("not yet implemented");
+    	//faire pour un field et une class aussi :)
         
     }
 
@@ -190,7 +191,7 @@ public class Identifier extends AbstractIdentifier {
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
         setType(compiler.getType(name.getName()));
         //peut etre a changer (decoration bizarre)
-        this.setDefinition(new TypeDefinition(this.getType(), getLocation()));
+        this.setDefinition(new TypeDefinition(this.getType(), Location.BUILTIN));
         return this.getType();
     }
     

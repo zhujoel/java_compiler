@@ -51,7 +51,7 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Initialisation : end");
     	
     	//generation de la definition pour la decoration de l'arbre
-    	ExpDefinition d = new VariableDefinition(t, getLocation());
+    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
     	try {
     		//declaration de la variable dans l'environement des expressions
 			localEnv.declare(this.varName.getName(), d);
@@ -60,7 +60,7 @@ public class DeclVar extends AbstractDeclVar {
 			varName.setType(t);
 			
 		} catch (DoubleDefException e) {
-			e.printStackTrace();
+			throw new ContextualError("Declaration d'une variable deja déclarée précédement", getLocation());
 		}
     	
     }
