@@ -85,9 +85,11 @@ public class CompilerOptions {
                 case "-p":
                     System.out.println("fsdfsdfsdfsdfs");
                     break;
+
             }
 
             i++;
+        }
         }
         
         
@@ -122,8 +124,9 @@ public class CompilerOptions {
 
     }
 
-    protected void displayUsage() {//what should it do?
+    protected void displayUsage(){//what should it do?
         //throw new UnsupportedOperationException("not yet implemented");
         System.out.println("");
     }
 }
+
