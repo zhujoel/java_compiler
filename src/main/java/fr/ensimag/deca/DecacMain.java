@@ -33,7 +33,6 @@ public class DecacMain {
         }
         if (options.getPrintBanner()) { 
             System.out.println("Équipe gl48");
-            
         }
         if (options.getSourceFiles().isEmpty()) {
             System.out.println("Options pour le compilateur");
