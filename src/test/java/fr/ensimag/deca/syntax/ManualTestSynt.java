@@ -32,6 +32,7 @@ public class ManualTestSynt {
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);
+            prog.decompile(System.out);
         }
     }
 }
