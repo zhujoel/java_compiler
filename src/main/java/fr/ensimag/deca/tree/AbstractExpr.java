@@ -83,12 +83,13 @@ public abstract class AbstractExpr extends AbstractInst {
             Type expectedType)
             throws ContextualError {
     	type = this.verifyExpr(compiler, localEnv, currentClass);
-    	if(type.isFloat() && expectedType.isInt()) {
+    	if(type.isInt() && expectedType.isFloat()) {
     		return new ConvFloat(this);
     	} else if (type.sameType(expectedType)) {
     		return this;
     	}
-    	System.out.println("type : " + type.toString() + " expected type : " + expectedType.toString());
+    	System.out.println("Affecttation error, "
+    			+ "type: " + type.toString() + ", expected type: " + expectedType.toString());
     	throw new ContextualError("Affectation illegale !", getLocation());
     	
     	
