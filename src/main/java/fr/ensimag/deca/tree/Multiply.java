@@ -1,6 +1,6 @@
 package fr.ensimag.deca.tree;
 
-
+import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
  * @author gl48
@@ -16,5 +16,4 @@ public class Multiply extends AbstractOpArith {
     protected String getOperatorName() {
         return "*";
     }
-
 }

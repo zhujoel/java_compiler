@@ -1,9 +1,5 @@
 {
-	int a = 5;
-	float c = 2.5;
-	int b;
-	b = 2;
-	if(a >= b){
+	if(b >= a){
 		print("if branch");
 	}
 	else if (a == b){

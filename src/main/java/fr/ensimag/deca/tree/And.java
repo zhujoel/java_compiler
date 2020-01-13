@@ -1,5 +1,6 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
  *
@@ -16,6 +17,5 @@ public class And extends AbstractOpBool {
     protected String getOperatorName() {
         return "&&";
     }
-
 
 }
