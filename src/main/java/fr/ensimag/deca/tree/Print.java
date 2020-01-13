@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.tools.IndentPrintStream;
+
 /**
  * @author gl48
  * @date 01/01/2020
@@ -17,4 +19,17 @@ public class Print extends AbstractPrint {
     String getSuffix() {
         return "";
     }
+
+    @Override
+    public void decompile(IndentPrintStream s) {
+    	if(this.getPrintHex()) {
+    		s.print("printx(");
+    	}
+    	else {
+    		s.print("print(");
+    	}
+    	this.getArguments().decompile(s);
+    	s.print(");");
+    }
+
 }
