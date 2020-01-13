@@ -1,0 +1,9 @@
+{
+	if(5 > 2){
+		print("if boucle");
+		print("if boucle2");
+	}
+	else{
+		print("else boucle");
+	}
+}
