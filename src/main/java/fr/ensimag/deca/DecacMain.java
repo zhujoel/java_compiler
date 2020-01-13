@@ -38,9 +38,8 @@ public class DecacMain {
             
         }else if(options.getPrintBanner() && args.length > 1){
             System.out.println("The -b option cannot be used with other options");
-        if (options.getPrintBanner()) { 
-            System.out.println("Équipe gl48");
         }
+        
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
             System.out.println("\n Options pour le compilateur\n");
             System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
@@ -96,5 +95,5 @@ public class DecacMain {
         }
         System.exit(error ? 1 : 0);
     }
-    }
 }
+

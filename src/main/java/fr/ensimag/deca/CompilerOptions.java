@@ -78,18 +78,9 @@ public class CompilerOptions {
                         break;
 
                 }
-            switch(args[i]){
-                case "-b":
-                    printBanner = true;
-                    break;
-                case "-p":
-                    System.out.println("fsdfsdfsdfsdfs");
-                    break;
-
-            }
-
-            i++;
+            
         }
+            i++;
         }
         
         
