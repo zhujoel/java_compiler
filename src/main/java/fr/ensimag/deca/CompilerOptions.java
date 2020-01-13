@@ -50,7 +50,7 @@ public class CompilerOptions {
                     printBanner = true;
                     break;
                 case "-p":
-                    System.out.println("Option -p ");
+                    System.out.println("fsdfsdfsdfsdfs");
                     break;
             }
             i++;
