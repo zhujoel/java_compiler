@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -147,5 +148,10 @@ public abstract class AbstractExpr extends AbstractInst {
             s.print(t);
             s.println();
         }
+    }
+    
+    
+    protected DVal getDVal() {
+    	throw new UnsupportedOperationException("not yet implemented");
     }
 }

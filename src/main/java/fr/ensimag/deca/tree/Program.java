@@ -3,6 +3,9 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -45,6 +48,9 @@ public class Program extends AbstractProgram {
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
         compiler.addComment("Main program");
+        compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
     }
