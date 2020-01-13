@@ -20,34 +20,38 @@ public class DecacMain {
     
     public static void main(String[] args) {
         // example log4j message.
+        
         LOG.info("Decac compiler started");
         boolean error = false;
         final CompilerOptions options = new CompilerOptions();
         try {
             options.parseArgs(args);
-        } catch (CLIException e) {
+        } catch (CLIException e) {//the command-line options are incorrect
             System.err.println("Error during option parsing:\n"
                     + e.getMessage());
             options.displayUsage();
             System.exit(1);
         }
-        if (options.getPrintBanner()) { 
-            System.out.println("Équipe gl48");
+        if (options.getPrintBanner() && args.length == 1) {//option -b
+            System.out.println(" Équipe gl48");
             
+        }else if(options.getPrintBanner() && args.length > 1){
+            System.out.println("The -b option cannot be used with other options");
         }
-        if (options.getSourceFiles().isEmpty()) {
-            System.out.println("Options pour le compilateur");
-            System.out.println(" -b\n    Affiche une bannière indiquant le nom de l’équipe.");
-            System.out.println(" -p\n    Arrête decac après l’étape de construction de\n" + 
+        if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
+            System.out.println("\n Options pour le compilateur\n");
+            System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
+            System.out.println("  -p\n    Arrête decac après l’étape de construction de\n" + 
                     "    l’arbre, et affiche la décompilation de ce dernier.");
-            System.out.println(" -v\n    Arrête decac après l’étape de vérifications.");
-            System.out.println(" -n\n    Supprime les tests de débordement à l’exécution.");
-            System.out.println(" -r\n    Limite les registres banalisés disponibles.");
-            System.out.println(" -d");
-            System.out.println(" -P");
+            System.out.println("  -v\n    Arrête decac après l’étape de vérifications.");
+            System.out.println("  -n\n    Supprime les tests de débordement à l’exécution.");
+            System.out.println("  -r\n    Limite les registres banalisés disponibles.");
+            System.out.println("  -d\n    Active les traces de debug.");
+            System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n" +
+                    "    lance la compilation des fichiers en parallèle\n");
             //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
-        if (options.getParallel()) {
+        if (options.getParallel() && !options.getVerification()) {//option -P
             // creation d'un ensemble de fils d’exécution travailleurs
             // on utilise getRuntime().availableProcessors() pour obtenir
             // le nombre de processeurs sur la machine et créer le meme
@@ -71,13 +75,21 @@ public class DecacMain {
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
             //throw new UnsupportedOperationException("Parallel build not yet implemented");
-        } else {
-            for (File source : options.getSourceFiles()) {
-                DecacCompiler compiler = new DecacCompiler(options, source);
-                if (compiler.compile()) {
-                    error = true;
+        }else if(options.getParallel() && options.getVerification()){
+            System.err.println("Les options [-p] et [-v] sont incompatibles.");
+            System.exit(0);
+        }else {//un seule fichier à compiler
+            try {
+                for (File source : options.getSourceFiles()) {
+                    DecacCompiler compiler = new DecacCompiler(options, source);
+                    if (compiler.compile()) {
+                        error = true;
+                    }
                 }
+            } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
+                System.out.println("Error in the file path");
             }
+
         }
         System.exit(error ? 1 : 0);
     }
