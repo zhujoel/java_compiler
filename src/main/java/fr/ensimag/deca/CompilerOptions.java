@@ -45,9 +45,13 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         int i = 0;
         while (i < args.length) {
-            if (args[i].matches("[0-3]")) {
-                debug = Integer.parseInt(args[i]);
-                break;
+            switch(args[i]){
+                case "-b":
+                    printBanner = true;
+                    break;
+                case "-p":
+                    System.out.println("Option -p ");
+                    break;
             }
             i++;
         }

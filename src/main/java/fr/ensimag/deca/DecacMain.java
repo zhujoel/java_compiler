@@ -2,6 +2,7 @@ package fr.ensimag.deca;
 
 import java.io.File;
 import static java.lang.Runtime.getRuntime;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,20 +31,46 @@ public class DecacMain {
             options.displayUsage();
             System.exit(1);
         }
-        if (options.getPrintBanner()) { //what is a PrintBanner?
-            throw new UnsupportedOperationException("decac -b not yet implemented");
+        if (options.getPrintBanner()) { 
+            System.out.println("Équipe gl48");
+            
         }
         if (options.getSourceFiles().isEmpty()) {
-            throw new UnsupportedOperationException("decac without argument not yet implemented");
+            System.out.println("Options pour le compilateur");
+            System.out.println(" -b\n    Affiche une bannière indiquant le nom de l’équipe.");
+            System.out.println(" -p\n    Arrête decac après l’étape de construction de\n" + 
+                    "    l’arbre, et affiche la décompilation de ce dernier.");
+            System.out.println(" -v\n    Arrête decac après l’étape de vérifications.");
+            System.out.println(" -n\n    Supprime les tests de débordement à l’exécution.");
+            System.out.println(" -r\n    Limite les registres banalisés disponibles.");
+            System.out.println(" -d");
+            System.out.println(" -P");
+            //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
         if (options.getParallel()) {
-            Executor pool =  newFixedThreadPool(getRuntime().availableProcessors());
-            
-            // A FAIRE : instancier DecacCompiler pour chaque fichier à
+            // creation d'un ensemble de fils d’exécution travailleurs
+            // on utilise getRuntime().availableProcessors() pour obtenir
+            // le nombre de processeurs sur la machine et créer le meme
+            // nombre de fils d’exécution
+            ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
+            for (File source : options.getSourceFiles()) {
+                // pour chaque fichier à compiler DecacCompiler est instancié
+                DecacCompiler compiler = new DecacCompiler(options, source);
+                
+                Callable<Boolean> task = () -> {
+                    boolean r = compiler.compile();
+                    return r;
+                    
+                };
+                
+                pool.submit(task);
+                
+            }
+            // DONE! A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-            throw new UnsupportedOperationException("Parallel build not yet implemented");
+            //throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);
