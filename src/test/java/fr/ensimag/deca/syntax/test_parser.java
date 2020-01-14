@@ -56,6 +56,20 @@ public class test_parser {
         return source;
     }
     
+    public static void deleteLocation(Tree tree) {
+    	Location location = null;
+    	tree.setLocation(location);
+    }
+    
+    protected static void deleteAllLocations(AbstractProgram prog) {
+    	prog.iter(new TreeFunction() {
+    		@Override
+    		public void apply(Tree t) {
+    			deleteLocation(t);
+    		}
+    	});
+    }
+    
     public static void genAbstractSyntaxTree(String[] sourceName) throws IOException {
     	DecaLexer lex = AbstractDecaLexer.createLexerFromArgs(sourceName);
         CommonTokenStream tokens = new CommonTokenStream(lex);
@@ -67,14 +81,13 @@ public class test_parser {
         final DecacCompiler decacCompiler = new DecacCompiler(new CompilerOptions(), file);
         parser.setDecacCompiler(decacCompiler);
         AbstractProgram prog = parser.parseProgramAndManageErrors(System.err);
+        deleteAllLocations(prog);
         if (prog == null) {
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);
-            prog.decompile(System.out);
         }
     }
-
     
     public static void test(AbstractProgram source, String path) throws IOException {
         System.out.println("---- From the following program ----");
@@ -88,17 +101,14 @@ public class test_parser {
 			  System.out.println (line);
 		}
 		in.close();
-        System.out.println("---- From the following Abstract Syntax Tree manualy ----");
+        System.out.println("---- From the following Abstract Syntax Tree manualy created ----");
         source.prettyPrint(System.out);
         System.out.println("---- We generate the following Abstract Syntax Tree by parsing ----");
         genAbstractSyntaxTree(fichier_teste);
     }
 
     public static void main(String args[]) throws IOException {
-        //AbstractProgram sourcePrint = initTestPrint();
     	AbstractProgram sourceInt = just_an_int();
-    	
-    	//test(sourcePrint);
         test(sourceInt, "/user/0/cassagth/Documents/gl48/src/test/deca/syntax/valid/created/just-an-int.deca");
     }
         
