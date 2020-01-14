@@ -84,7 +84,9 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
     	type = this.verifyExpr(compiler, localEnv, currentClass);
     	if(type.isInt() && expectedType.isFloat()) {
-    		return new ConvFloat(this);
+    		ConvFloat c = new ConvFloat(this);
+    		c.verifyExpr(compiler, localEnv, currentClass);
+    		return c;
     	} else if (type.sameType(expectedType)) {
     		return this;
     	}
