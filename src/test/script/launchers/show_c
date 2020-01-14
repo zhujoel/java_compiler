@@ -1,0 +1,31 @@
+#!/bin/sh
+
+DECAC_HOME=$(cd "$(dirname "$0")"/../../../../ && pwd)
+CP_FILE="$DECAC_HOME"/target/generated-sources/classpath.txt
+
+CP="$DECAC_HOME"/target/generated-classes/cobertura:"$DECAC_HOME"/target/test-classes/:"$DECAC_HOME"/target/classes/:$(cat "$CP_FILE")
+red=`tput setaf 1`
+green=`tput setaf 2`
+grey=`tput setaf 8`
+reset=`tput sgr0`
+reussis=0
+total=0
+
+cd $DECAC_HOME
+
+tmpfile=$(mktemp /tmp/temp.XXX)
+
+for prog in "$DECAC_HOME/src/test/java/fr/ensimag/deca/tree/*"
+do
+    filename=$(basename -- $prog)
+    echo "Test de ${filename%.*}..."
+    mvn -q exec:java -Dexec.classpathScope="test" \
+        -Dexec.mainClass="fr.ensimag.deca.tree.${filename%.*}"
+    ((total++))
+done
+
+echo "$total test(s) au total."
+
+
+rm "$tmpfile"
+exit

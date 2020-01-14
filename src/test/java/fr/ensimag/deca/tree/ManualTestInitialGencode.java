@@ -13,8 +13,10 @@ import fr.ensimag.deca.DecacCompiler;
  * @date 01/01/2020
  */
 public class ManualTestInitialGencode {
+	
+	private static DecacCompiler compiler = new DecacCompiler(null,null);
     
-    public static AbstractProgram initTest1() {
+    public static AbstractProgram initTestPrint() {
         ListInst linst = new ListInst();
         AbstractProgram source =
             new Program(
@@ -28,31 +30,44 @@ public class ManualTestInitialGencode {
         return source;
     }
     
+    public static AbstractProgram initTestInt() {
+        ListInst linst = new ListInst();
+        ListDeclVar lDecl = new ListDeclVar();
+        AbstractProgram source =
+            new Program(
+                new ListDeclClass(),
+                new Main(lDecl,linst));
+
+        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
+        Initialization init = new Initialization(new IntLiteral(5));
+        lDecl.add(new DeclVar(type, varName, init));
+		
+        return source;
+    }
+    
     public static String gencodeSource(AbstractProgram source) {
-        DecacCompiler compiler = new DecacCompiler(null,null);
+        compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
         return compiler.displayIMAProgram();
     }
 
-    public static void test1() {
-        AbstractProgram source = initTest1();
+    
+    public static void test(AbstractProgram source) {
         System.out.println("---- From the following Abstract Syntax Tree ----");
         source.prettyPrint(System.out);
         System.out.println("---- We generate the following assembly code ----");        
         String result = gencodeSource(source);
         System.out.println(result);
-        assert(result.equals(
-                "; Main program\n" +
-                "; Beginning of main function:\n" +
-                "	WSTR \"Hello \"\n" +
-                "	WSTR \"everybody !\"\n" +
-                "	WNL\n" +
-                "	HALT\n"));
-    }    
+    }
 
-        
+       
         
     public static void main(String args[]) {
-        test1();
+        AbstractProgram sourcePrint = initTestPrint();
+    	AbstractProgram sourceInt = initTestInt();
+    	
+    	test(sourcePrint);
+        test(sourceInt);
     }
 }
