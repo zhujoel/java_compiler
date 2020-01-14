@@ -35,13 +35,10 @@ public class Main extends AbstractMain {
         
         EnvironmentExp envExp = new EnvironmentExp(null);
         
-        
         declVariables.verifyListDeclVariable(compiler, envExp, null);
         
-        //TODO changer le 2eme null de l'appel ci dessous en Typevoid quand il sera défini
-        insts.verifyListInst(compiler, envExp, null, null);
+        insts.verifyListInst(compiler, envExp, null, compiler.getType("void"));
         LOG.debug("verify Main: end");
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -49,6 +46,7 @@ public class Main extends AbstractMain {
         // A FAIRE: traiter les déclarations de variables.
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);
+        declVariables.codeGenListDeclVar(compiler);
     }
     
     @Override

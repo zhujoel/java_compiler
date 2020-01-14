@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -14,6 +15,8 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -167,7 +170,19 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    	
+    	
+    	//POUR UNE VARIABLE
+    	
+    	Symbol s = this.getName();
+    	Definition d = localEnv.get(s);
+    	
+    	this.setType(d.getType());
+    	this.setDefinition(d);
+    	return this.getType();
+    	
+    	//faire pour un field et une class aussi :)
+        
     }
 
     /**
@@ -176,10 +191,9 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        if (compiler.getType(name.getName()) == null) {
-        	throw new ContextualError("Type inconnu : ", getLocation());
-        }
         setType(compiler.getType(name.getName()));
+        //peut etre a changer (decoration bizarre)
+        this.setDefinition(new TypeDefinition(this.getType(), Location.BUILTIN));
         return this.getType();
     }
     
@@ -217,5 +231,8 @@ public class Identifier extends AbstractIdentifier {
             s.println();
         }
     }
+    
+    
+    
 
 }
