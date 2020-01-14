@@ -1,7 +1,9 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.ima.pseudocode.Register;
 import java.io.File;
 import java.io.PrintStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,6 +47,7 @@ public class CompilerOptions {
     private boolean printBanner = false;
     private boolean verification = false;
     private boolean noCheck = false;
+    private boolean parse = false;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
@@ -66,23 +69,25 @@ public class CompilerOptions {
                         }
                         break;
                     case "-p":
-                        System.out.println("Option -p ");
-                        break;
-                    case "-P":
                         if (verification) {
                             System.err.println("Les options [-p] et [-v] "
                                     + "sont incompatibles.");
                             System.exit(1);
                         } else {
+                        parse = true;
+                        System.out.println("Option -p ");
+                        }
+                        break;
+                    case "-P":
                             parallel = true;
                             System.out.println("Option -P");
-                        }
+                        
                         break;
                     case "-d":
                         debug++;
                         break;
                     case "-v":
-                        if (parallel) {
+                        if (parse) {
                             System.err.println("Les options [-p] et [-v] "
                                     + "sont incompatibles.");
                             System.exit(1);
@@ -94,6 +99,23 @@ public class CompilerOptions {
                     case "-n":
                         noCheck = true;
                         break;
+                    case "-r":
+                        try {
+                            int x = Integer.parseInt(args[i + 1]);
+                            if (x >= 4 && x <= 16) {// 4 <= X <= 16
+                                System.out.println("X = " + x);
+                            } else {
+                                System.out.println("X must have a value between 4 and 16");
+                                System.exit(1);
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid value for X");
+                            System.exit(1);
+                        } catch (ArrayIndexOutOfBoundsException a) {
+                            System.out.println("No value for X was entered");
+                            System.exit(1);
+                        }
+                        break;
 
                 }
             
@@ -102,10 +124,10 @@ public class CompilerOptions {
         }
         
         if(sourceFiles.isEmpty() && args.length > 0 && !printBanner){
-            System.err.println(" No valid path for the source file was detected");
+            System.err.println("No valid path for the source file was detected");
             System.exit(1);
         }else if(!sourceFiles.isEmpty() && args.length > 0 && parallel && sourceFiles.size() < 2){
-            System.err.println(" The [-P] option needs at least 2 source files");
+            System.err.println("The [-P] option needs at least 2 source files");
             System.exit(1);
         }
         

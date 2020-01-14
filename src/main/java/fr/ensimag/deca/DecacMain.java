@@ -34,7 +34,7 @@ public class DecacMain {
         }
 
         if (options.getPrintBanner() && args.length == 1) {//option -b
-            System.out.println(" Équipe gl48");
+            System.out.println("Équipe gl48");
             
         }
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
@@ -48,10 +48,9 @@ public class DecacMain {
             System.out.println("  -d\n    Active les traces de debug.");
             System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n" +
                     "    lance la compilation des fichiers en parallèle\n");
-            //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
         
-        if (options.getParallel() && !options.getVerification()) {//option -P
+        if (options.getParallel()) {//option -P
             System.out.println("Compilation en parallel");
             // creation d'un ensemble de fils d’exécution travailleurs
             // on utilise getRuntime().availableProcessors() pour obtenir
