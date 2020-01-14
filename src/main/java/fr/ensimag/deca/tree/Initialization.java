@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.RegManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -67,11 +68,13 @@ public class Initialization extends AbstractInitialization {
     }
     
     @Override
-    protected void codeGenInit(DecacCompiler compiler) {
-    	expression.codeGenInst(compiler);
-        compiler.addInstruction(new LOAD(new RegisterOffset(2, Register.GB), Register.getR(2)));
-        compiler.addInstruction(new STORE(Register.getR(2), new RegisterOffset(2, Register.GB)));
-
+    protected int codeGenInit(DecacCompiler compiler) {
+    	GPRegister reg = expression.codeGenReg(compiler);
+    	int sLocation = compiler.getRegManager().getStackCpt();
+        compiler.addInstruction(new STORE(reg, new RegisterOffset(sLocation, Register.GB)));
+        compiler.getRegManager().freeRegistre(reg.getNumber());
+        compiler.getRegManager().addStackCpt();
+        return sLocation;
     }
 
 }

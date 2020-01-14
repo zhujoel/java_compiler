@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.codegen.RegManager;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.syntax.DecaLexer;
@@ -40,6 +41,7 @@ import org.apache.log4j.Logger;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     private SymbolTable symbolTable;
+    private RegManager regManager;
     
     private EnvironmentType envType;
     
@@ -54,11 +56,16 @@ public class DecacCompiler {
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
+        this.regManager = new RegManager(16);
         this.envType = new EnvironmentType(symbolTable);
     }
 
     public SymbolTable getSymbolTable() {
     	return this.symbolTable;
+    }
+    
+    public RegManager getRegManager() {
+    	return this.regManager;
     }
     
     public EnvironmentType getEnvironmentType() {

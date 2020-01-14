@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 
 public class NullLiteral extends AbstractExpr{
 
@@ -39,6 +40,12 @@ public class NullLiteral extends AbstractExpr{
 	@Override
 	String prettyPrintNode() {
 		return "NullLiteral (null)";
+	}
+
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

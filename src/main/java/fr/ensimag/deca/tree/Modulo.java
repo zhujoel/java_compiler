@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -42,5 +43,11 @@ public class Modulo extends AbstractOpArith {
     protected String getOperatorName() {
         return "%";
     }
+
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

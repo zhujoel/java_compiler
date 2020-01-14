@@ -22,7 +22,11 @@ public class StringType extends Type {
 
     @Override
     public boolean sameType(Type otherType) {
+<<<<<<< HEAD
         return this.equals(otherType);
+=======
+        return otherType.isString();
+>>>>>>> d8ad8599a5e3e7b898e2c07101497953c8c715ad
     }
 
 

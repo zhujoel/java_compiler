@@ -36,10 +36,7 @@ public class DecacMain {
         if (options.getPrintBanner() && args.length == 1) {//option -b
             System.out.println(" Équipe gl48");
             
-        }else if(options.getPrintBanner() && args.length > 1){
-            System.out.println("The -b option cannot be used with other options");
         }
-        
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
             System.out.println("\n Options pour le compilateur\n");
             System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
@@ -53,12 +50,15 @@ public class DecacMain {
                     "    lance la compilation des fichiers en parallèle\n");
             //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
+        
         if (options.getParallel() && !options.getVerification()) {//option -P
+            System.out.println("Compilation en parallel");
             // creation d'un ensemble de fils d’exécution travailleurs
             // on utilise getRuntime().availableProcessors() pour obtenir
             // le nombre de processeurs sur la machine et créer le meme
             // nombre de fils d’exécution
             ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
+            try{
             for (File source : options.getSourceFiles()) {
                 // pour chaque fichier à compiler DecacCompiler est instancié
                 DecacCompiler compiler = new DecacCompiler(options, source);
@@ -71,15 +71,15 @@ public class DecacMain {
                 
                 pool.submit(task);
                 
+            } 
+            }catch(ExceptionInInitializerError e) {//Error when the source file path is invalid
+                System.out.println("Error in the file path");
             }
             // DONE! A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
             //throw new UnsupportedOperationException("Parallel build not yet implemented");
-        }else if(options.getParallel() && options.getVerification()){
-            System.err.println("Les options [-p] et [-v] sont incompatibles.");
-            System.exit(0);
         }else {//un seule fichier à compiler
             try {
                 for (File source : options.getSourceFiles()) {
