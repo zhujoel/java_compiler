@@ -50,12 +50,15 @@ public class DecacMain {
                     "    lance la compilation des fichiers en parallèle\n");
             //throw new UnsupportedOperationException("decac without argument not yet implemented");
         }
+        
         if (options.getParallel() && !options.getVerification()) {//option -P
+            System.out.println("Compilation en parallel");
             // creation d'un ensemble de fils d’exécution travailleurs
             // on utilise getRuntime().availableProcessors() pour obtenir
             // le nombre de processeurs sur la machine et créer le meme
             // nombre de fils d’exécution
             ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
+            try{
             for (File source : options.getSourceFiles()) {
                 // pour chaque fichier à compiler DecacCompiler est instancié
                 DecacCompiler compiler = new DecacCompiler(options, source);
@@ -68,6 +71,9 @@ public class DecacMain {
                 
                 pool.submit(task);
                 
+            } 
+            }catch(ExceptionInInitializerError e) {//Error when the source file path is invalid
+                System.out.println("Error in the file path");
             }
             // DONE! A FAIRE : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque

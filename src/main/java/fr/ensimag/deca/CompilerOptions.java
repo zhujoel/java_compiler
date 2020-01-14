@@ -101,10 +101,14 @@ public class CompilerOptions {
             i++;
         }
         
-        if(sourceFiles.isEmpty()){
+        if(sourceFiles.isEmpty() && args.length > 0 && !printBanner){
             System.err.println(" No valid path for the source file was detected");
             System.exit(1);
+        }else if(!sourceFiles.isEmpty() && args.length > 0 && parallel && sourceFiles.size() < 2){
+            System.err.println(" The [-P] option needs at least 2 source files");
+            System.exit(1);
         }
+        
         
         // DONE! A FAIRE : parcourir args pour positionner les options correctement.
         Logger logger = Logger.getRootLogger();
