@@ -1,0 +1,4 @@
+//Tentative d'affectation d'une valeur à une variable de type différent
+{
+	float a = "coucou";
+}

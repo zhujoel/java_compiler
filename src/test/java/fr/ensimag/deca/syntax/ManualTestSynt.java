@@ -14,6 +14,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
  * @date 01/01/2020
  */
 public class ManualTestSynt {
+    
     public static void main(String[] args) throws IOException {
         // Uncomment the following line to activate debug traces
         // unconditionally for test_synt
@@ -33,6 +34,9 @@ public class ManualTestSynt {
         } else {
             prog.prettyPrint(System.out);
             prog.decompile(System.out);
+            prog.codeGenProgram(decacCompiler);
+            String assembleur = decacCompiler.displayIMAProgram(); 
+            System.out.println(assembleur);
         }
     }
 }

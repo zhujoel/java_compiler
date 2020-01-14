@@ -74,5 +74,15 @@ public class EnvironmentExp {
     	}
     }
     
+    /**
+     * Fonction pour verifier si une variable a bien été déclarée dans l'environement
+     * @param name
+     * @return
+     */
+    public boolean isIn(Symbol name) {
+    	//peut etre a modifier plus tard (voir dans les env parents ?)
+    	return env.containsKey(name);
+    }
+    
 
 }

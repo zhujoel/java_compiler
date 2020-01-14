@@ -1,5 +1,5 @@
+//Mauvaise condition dans le while
 {
 	while(3){
-		true;
 	}
 }

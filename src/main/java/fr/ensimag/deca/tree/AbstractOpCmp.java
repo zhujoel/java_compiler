@@ -24,7 +24,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         Type type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         
         if (type1.sameType(type2)) {
-        	this.setType(compiler.getType("boolean"));
+        	this.setType(compiler.getType("bool"));
         	return this.getType();
         } 
         throw new ContextualError("Comparaison entre deux elements de type differents", getLocation());

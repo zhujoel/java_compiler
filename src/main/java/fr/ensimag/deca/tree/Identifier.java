@@ -15,6 +15,11 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 
 import java.io.PrintStream;
@@ -28,7 +33,8 @@ import org.apache.log4j.Logger;
  * @date 01/01/2020
  */
 public class Identifier extends AbstractIdentifier {
-    
+
+	
     @Override
     protected void checkDecoration() {
         if (getDefinition() == null) {
@@ -160,12 +166,26 @@ public class Identifier extends AbstractIdentifier {
         return name;
     }
 
+    /**
+     *  On ajoute un champ location pour savoir dans quelle case de la pile on a stocké l'identifier (par rapport à GB).
+     *  Si l'identifier n'est pas une variable, sa valeur dans le stack est 0 (elle n'est pas présente). 
+     */
+	private int stackLocation;
     private Symbol name;
 
     public Identifier(Symbol name) {
         Validate.notNull(name);
         this.name = name;
+        this.stackLocation = 0;
     }
+    
+    public void setStackLocation(int stackLocation) {
+		this.stackLocation = stackLocation;
+	}
+    
+    public int getStackLocation() {
+		return stackLocation;
+	}
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
@@ -173,15 +193,19 @@ public class Identifier extends AbstractIdentifier {
     	
     	
     	//POUR UNE VARIABLE
-    	
+    	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
+    	if(!localEnv.isIn(s)) {
+    		throw new ContextualError("Utilisation d'une variable non déclarée", this.getLocation());
+    	}
     	Definition d = localEnv.get(s);
     	
+    	//TODO tester si le type existe !
     	this.setType(d.getType());
     	this.setDefinition(d);
     	return this.getType();
     	
-    	//faire pour un field et une class aussi :)
+    	//faire pour un field et une class aussi :) :D
         
     }
 
@@ -192,7 +216,6 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
         setType(compiler.getType(name.getName()));
-        //peut etre a changer (decoration bizarre)
         this.setDefinition(new TypeDefinition(this.getType(), Location.BUILTIN));
         return this.getType();
     }
@@ -231,6 +254,15 @@ public class Identifier extends AbstractIdentifier {
             s.println();
         }
     }
+
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	compiler.addInstruction(new LOAD(new RegisterOffset(stackLocation, Register.GB), reg));
+        System.out.println("Slocation dans identifier : "+ this.stackLocation );
+    	return reg;
+		
+	}
     
     
     
