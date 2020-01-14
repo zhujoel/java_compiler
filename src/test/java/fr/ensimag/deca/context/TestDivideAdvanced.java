@@ -14,7 +14,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.ConvFloat;
 import fr.ensimag.deca.tree.Divide;
-import fr.ensimag.deca.tree.Multiply;
+
+/**
+ * Ce jeu de test verifie que l'operation Divide genere bien une expression entiere ou flottante
+ * @author flichya
+ *
+ */
 
 public class TestDivideAdvanced {
 	final Type INT = new IntType(null);

@@ -14,7 +14,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.ConvFloat;
 import fr.ensimag.deca.tree.Multiply;
-import fr.ensimag.deca.tree.Plus;
+
+/**
+ * Ce jeu de test verifie que l'operateur Multiply genere bien une expression entiere ou flottante
+ * @author flichya
+ *
+ */
 
 public class TestMultAdvanced {
 	final Type INT = new IntType(null);

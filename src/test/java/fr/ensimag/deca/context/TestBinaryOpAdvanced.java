@@ -16,6 +16,12 @@ import fr.ensimag.deca.tree.NotEquals;
 import fr.ensimag.deca.tree.Or;
 import fr.ensimag.deca.tree.And;
 
+/**
+ * On controle dans ce jeu de test que les operations binaires logiques (&&, ||, ==, !=) génèrent bien
+ * une expression booleenne
+ * @author flichya
+ *
+ */
 public class TestBinaryOpAdvanced {
 	final Type BOOLEAN = new BooleanType(null);
 	

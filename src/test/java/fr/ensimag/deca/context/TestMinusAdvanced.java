@@ -14,8 +14,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.ConvFloat;
 import fr.ensimag.deca.tree.Minus;
-import fr.ensimag.deca.tree.Multiply;
 
+/**
+ * Ce jeu de test verifie que l'operation Minus genere bien une expression entiere ou flottante
+ * @author flichya
+ *
+ */
 public class TestMinusAdvanced {
 	final Type INT = new IntType(null);
 	final Type FLOAT = new FloatType(null);

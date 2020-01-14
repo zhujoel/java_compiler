@@ -12,7 +12,11 @@ import org.mockito.MockitoAnnotations;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.Modulo;
-
+/**
+ * Ce jeu de test verifie que le modulo genere bien une expression entiere
+ * @author flichya
+ *
+ */
 public class TestModAdvanced {
 	final Type INT = new IntType(null);
 	final Type FLOAT = new FloatType(null);
