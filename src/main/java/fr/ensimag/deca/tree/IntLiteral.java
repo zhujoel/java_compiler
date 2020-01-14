@@ -32,7 +32,7 @@ public class IntLiteral extends AbstractExpr {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
     	setType(compiler.getType("int"));
-    	return compiler.getType("int");
+    	return this.getType();
     }
 
 

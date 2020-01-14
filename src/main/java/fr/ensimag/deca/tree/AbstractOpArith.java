@@ -21,28 +21,46 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+    	//On recupere les types des deux operandes
         Type type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         Type type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         
-        if (type1.sameType(type2)) {
+        //type := type _ binary _ op(op, type 1 , type 2 )
+        if (!(type1.isInt() || type1.isFloat())) {
+        	throw new ContextualError("Type non supporté par l'operation utilisée", this.getLeftOperand().getLocation());
+        } else if(!(type2.isInt() || type2.isFloat())){
+        	throw new ContextualError("Type non supporté par l'operation utilisée", this.getRightOperand().getLocation());
+        }
+        
+        
+        
+        if (type1.sameType(type2)){
         	this.setType(type1);
         	return this.getType();
         } 
         //Dans le cas d'un convfloat
-        else if (type1.isInt() && type2.isFloat()) {
+        else if (type1.isInt() && type2.isFloat()) //Convfloat si l'un est int et l'autre float
+        {
+        	//Creation d'un nouveau noeud Convfloat
         	ConvFloat c = new ConvFloat(this.getLeftOperand());
+        	//On l'insere
         	this.setLeftOperand(c);
         	type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         	this.setType(type2);
         	return this.getType();
         }
-        else if(type1.isFloat() && type2.isInt()){
+        else if(type1.isFloat() && type2.isInt())//Convfloat si l'un est int et l'autre float
+        {
+        	//Creation d'un nouveau noeud Convfloat
         	ConvFloat c = new ConvFloat(this.getRightOperand());
+        	//On l'insere
         	this.setRightOperand(c);
         	type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         	this.setType(type1);
         	return this.getType();
         }
+        
+        
         throw new ContextualError("Operation entre deux elements de type differents", getLocation());
     	
     }
