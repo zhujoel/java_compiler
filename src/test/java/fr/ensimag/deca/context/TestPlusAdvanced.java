@@ -78,4 +78,14 @@ public class TestPlusAdvanced {
         verify(intexpr1).verifyExpr(compiler, null, null);
         verify(floatexpr1).verifyExpr(compiler, null, null);
     }
+    
+    @Test
+    public void testFloatFloat() throws ContextualError {
+    	Plus t = new Plus(floatexpr1, floatexpr2);
+        // check the result
+        assertTrue(t.verifyExpr(compiler, null, null).isFloat());
+        // check that the mocks have been called properly.
+        verify(floatexpr1).verifyExpr(compiler, null, null);
+        verify(floatexpr2).verifyExpr(compiler, null, null);
+    }
 }

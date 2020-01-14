@@ -1,0 +1,8 @@
+{
+	int a = -1;
+	float b = -1.2;
+	float c = -1;
+	float d = 4.3;
+	c = -d;
+
+}

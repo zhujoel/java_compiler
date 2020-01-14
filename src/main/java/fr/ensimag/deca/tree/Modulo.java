@@ -22,7 +22,20 @@ public class Modulo extends AbstractOpArith {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    	//On recupere les types des deux operandes
+        Type type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        Type type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+        
+        //type _ binary _ op(mod, int, int) = int
+        if (!type1.isInt()) {
+        	throw new ContextualError("Type non supporté pour un modulo (le nombre doit etre entier)", 
+        			this.getLeftOperand().getLocation());
+        } else if (!type2.isInt()) {
+        	throw new ContextualError("Type non supporté pour un modulo (le nombre doit etre entier)", 
+        			this.getRightOperand().getLocation());
+        }
+        this.setType(compiler.getType("int"));
+        return this.getType();
     }
 
 

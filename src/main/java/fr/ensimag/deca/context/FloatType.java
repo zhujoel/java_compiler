@@ -22,7 +22,7 @@ public class FloatType extends Type {
 
     @Override
     public boolean sameType(Type otherType) {
-    	return this.equals(otherType);
+    	return otherType.isFloat();
     }
 
 

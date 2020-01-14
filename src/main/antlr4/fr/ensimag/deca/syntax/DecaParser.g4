@@ -254,7 +254,7 @@ and_expr returns[AbstractExpr tree]
     |  e1=and_expr AND e2=eq_neq_expr {
             assert($e1.tree != null);                         
             assert($e2.tree != null);
-            $tree = new And($tree, $e2.tree);
+            $tree = new And($e1.tree, $e2.tree);
 			setLocation($tree, $e1.start);
         }
     ;

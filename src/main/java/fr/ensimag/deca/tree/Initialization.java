@@ -45,7 +45,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
     	LOG.debug("verify rvalue : start");
-    	expression.verifyRValue(compiler, localEnv, currentClass, t);
+    	expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
     	LOG.debug("verify rvalue : end");
     }
 
