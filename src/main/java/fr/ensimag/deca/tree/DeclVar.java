@@ -64,7 +64,7 @@ public class DeclVar extends AbstractDeclVar {
 			varName.setType(t);
 			
 		} catch (DoubleDefException e) {
-			throw new ContextualError("Declaration d'une variable deja déclarée précédement", getLocation());
+			throw new ContextualError("Declaration d'une variable deja déclarée précédement", varName.getLocation());
 		}
     	
     }
