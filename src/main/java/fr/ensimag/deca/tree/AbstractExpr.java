@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -151,8 +152,11 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
     
-    
-    protected DVal getDVal() {
-    	throw new UnsupportedOperationException("not yet implemented");
-    }
+    /**
+     * Génère le code assembleur quand on utilise l'abstractexpr dans le cas d'une expression binaire
+     * et renvoie le registre associé
+     * @param compiler
+     * @return
+     */
+    protected abstract GPRegister codeGenReg(DecacCompiler compiler);
 }

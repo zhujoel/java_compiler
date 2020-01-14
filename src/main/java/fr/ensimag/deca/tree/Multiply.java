@@ -1,6 +1,8 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
  * @author gl48
@@ -16,4 +18,11 @@ public class Multiply extends AbstractOpArith {
     protected String getOperatorName() {
         return "*";
     }
+
+
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

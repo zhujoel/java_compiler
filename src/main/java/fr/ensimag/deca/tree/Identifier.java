@@ -15,6 +15,7 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 
 import java.io.PrintStream;
@@ -181,7 +182,7 @@ public class Identifier extends AbstractIdentifier {
     	this.setDefinition(d);
     	return this.getType();
     	
-    	//faire pour un field et une class aussi :)
+    	//faire pour un field et une class aussi :) :D
         
     }
 
@@ -231,6 +232,12 @@ public class Identifier extends AbstractIdentifier {
             s.println();
         }
     }
+
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
     
