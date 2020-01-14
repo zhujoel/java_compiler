@@ -26,20 +26,22 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         
         if (type1.sameType(type2)) {
         	this.setType(type1);
-        	return type1;
+        	return this.getType();
         } 
         //Dans le cas d'un convfloat
         else if (type1.isInt() && type2.isFloat()) {
         	ConvFloat c = new ConvFloat(this.getLeftOperand());
         	this.setLeftOperand(c);
         	type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-        	return type2;
+        	this.setType(type2);
+        	return this.getType();
         }
         else if(type1.isFloat() && type2.isInt()){
         	ConvFloat c = new ConvFloat(this.getRightOperand());
         	this.setRightOperand(c);
         	type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
-        	return type1;
+        	this.setType(type1);
+        	return this.getType();
         }
         throw new ContextualError("Operation entre deux elements de type differents", getLocation());
     	
