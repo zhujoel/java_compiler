@@ -20,7 +20,7 @@ public class EnvironmentType {
 	public EnvironmentType(SymbolTable symbolTable) {
 		env = new HashMap<Symbol, Type>();
 		env.put(symbolTable.create("void"), new VoidType(symbolTable.create("void")));
-		env.put(symbolTable.create("boolean"), new BooleanType(symbolTable.create("boolean")));
+		env.put(symbolTable.create("bool"), new BooleanType(symbolTable.create("bool")));
 		env.put(symbolTable.create("float"), new FloatType(symbolTable.create("float")));
 		env.put(symbolTable.create("int"), new IntType(symbolTable.create("int")));
 		env.put(symbolTable.create("string"), new StringType(symbolTable.create("string")));

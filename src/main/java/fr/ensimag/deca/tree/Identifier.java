@@ -173,10 +173,14 @@ public class Identifier extends AbstractIdentifier {
     	
     	
     	//POUR UNE VARIABLE
-    	
+    	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
+    	if(!localEnv.isIn(s)) {
+    		throw new ContextualError("Utilisation d'une variable non déclarée", this.getLocation());
+    	}
     	Definition d = localEnv.get(s);
     	
+    	//TODO tester si le type existe !
     	this.setType(d.getType());
     	this.setDefinition(d);
     	return this.getType();
@@ -192,7 +196,6 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
         setType(compiler.getType(name.getName()));
-        //peut etre a changer (decoration bizarre)
         this.setDefinition(new TypeDefinition(this.getType(), Location.BUILTIN));
         return this.getType();
     }
