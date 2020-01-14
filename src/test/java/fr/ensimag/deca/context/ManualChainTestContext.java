@@ -16,7 +16,12 @@ import fr.ensimag.deca.tree.LocationException;
 
 public class ManualChainTestContext {
 
-	public static void main(String[] args) throws IOException {        
+	public static final String GREEN = "\033[0;32m";
+	public static final String RED = "\033[0;31m"; 
+	public static final String RESET = "\033[0m";
+	
+	
+	public static void main(String[] args) throws IOException {
         Logger.getRootLogger().setLevel(Level.OFF);//Level.OFF pour desactiver les log
         String[] s = new String[1];
         for (String i : args) {
@@ -34,16 +39,13 @@ public class ManualChainTestContext {
 	        try {
 	            prog.verifyProgram(compiler);
 	            System.out.println("Fichier: " + i);
-	            System.out.println("\t status: execution success");
-	        } catch (LocationException e) {
-	            e.display(System.err);
-	            System.exit(1);
+	            System.out.println(GREEN + "\t status: execution success" + RESET);
+	        
 	        }
 	        catch (Exception e) {
 	        	System.out.println("Fichier: " + i);
-	            System.out.println("\t status: execution failure");
+	            System.out.println(RED + "\t status: execution failure" + RESET);
 	        }
-	        //prog.prettyPrint(System.out);
         }
     }
 

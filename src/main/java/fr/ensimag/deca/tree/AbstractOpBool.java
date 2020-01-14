@@ -33,7 +33,7 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         			this.getLeftOperand().getLocation());
         }
         
-        this.setType(compiler.getType("boolean"));
+        this.setType(compiler.getType("bool"));
         return this.getType();        
         
         
