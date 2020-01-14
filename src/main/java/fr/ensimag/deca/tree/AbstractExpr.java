@@ -153,7 +153,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     
     /**
-     * Génère le code assembleur quand on utilise l'abstractexpr dans le cas d'une expression binaire
+     * Génère le code assembleur quand on utilise l'abstractexpr dans le cas d'une expression
      * et renvoie le registre associé
      * @param compiler
      * @return

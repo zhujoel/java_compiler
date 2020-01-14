@@ -24,10 +24,6 @@ public class Plus extends AbstractOpArith {
     protected void codeGenInst(DecacCompiler compiler) {
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	//VariableDefinition varDef = new VariableDefinition(this.getLeftOperand().getType(), this.getLeftOperand().getLocation());
-    	//varDef.setO
-    	//System.out.println("operand:" + varDef.getOperand());
-    	//compiler.addInstruction();
         compiler.addInstruction(new ADD(regGauche, regDroite));
 
     }
@@ -37,11 +33,8 @@ public class Plus extends AbstractOpArith {
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	//VariableDefinition varDef = new VariableDefinition(this.getLeftOperand().getType(), this.getLeftOperand().getLocation());
-    	//varDef.setO
-    	//System.out.println("operand:" + varDef.getOperand());
-    	//compiler.addInstruction();
         compiler.addInstruction(new ADD(regGauche, regDroite));
+        compiler.getRegManager().freeRegistre(regDroite.getNumber());
         return regGauche;
 	}
 }

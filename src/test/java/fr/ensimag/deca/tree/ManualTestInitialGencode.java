@@ -55,7 +55,45 @@ public class ManualTestInitialGencode {
         AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
         Initialization init = new Initialization(new IntLiteral(5));
         lDecl.add(new DeclVar(type, varName, init));
-		
+        
+        AbstractIdentifier type2 = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName2 = new Identifier(compiler.getSymbolTable().create("b"));
+        Initialization init2 = new Initialization(new IntLiteral(2));
+        lDecl.add(new DeclVar(type2, varName2, init2));
+
+        return source;
+    }
+    
+    /**
+     * Test:
+     * int a = 5;
+     * int b = 2;
+     * a + b;
+     * @return
+     */
+    public static AbstractProgram initTestAssignAssignPlus() {
+        ListInst linst = new ListInst();
+        ListDeclVar lDecl = new ListDeclVar();
+        AbstractProgram source =
+            new Program(
+                new ListDeclClass(),
+                new Main(lDecl,linst));
+
+        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
+        Initialization init = new Initialization(new IntLiteral(5));
+        lDecl.add(new DeclVar(type, varName, init));
+        
+        AbstractIdentifier type2 = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName2 = new Identifier(compiler.getSymbolTable().create("b"));
+        Initialization init2 = new Initialization(new IntLiteral(2));
+        lDecl.add(new DeclVar(type2, varName2, init2));
+        
+        Plus plus = new Plus(varName, varName2);
+        Assign ass = new Assign(varName, plus);
+        
+        linst.add(ass);
+
         return source;
     }
     
@@ -88,6 +126,39 @@ public class ManualTestInitialGencode {
         return source;
     }
     
+    /**
+     * Test:
+     * int a = 5;
+     * int b = 2;
+     * a + b;
+     * @return
+     */
+    public static AbstractProgram initTestProgCours() {
+        ListInst linst = new ListInst();
+        ListDeclVar lDecl = new ListDeclVar();
+        AbstractProgram source =
+            new Program(
+                new ListDeclClass(),
+                new Main(lDecl,linst));
+
+        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
+        Initialization init = new Initialization(new IntLiteral(5));
+        lDecl.add(new DeclVar(type, varName, init));
+        
+        AbstractIdentifier type2 = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName2 = new Identifier(compiler.getSymbolTable().create("b"));
+        Initialization init2 = new Initialization(new IntLiteral(2));
+        lDecl.add(new DeclVar(type2, varName2, init2));
+        
+        Plus plus = new Plus(varName, varName2);
+        Assign ass = new Assign(varName, plus);
+        
+        linst.add(ass);
+
+        return source;
+    }
+    
     public static String gencodeSource(AbstractProgram source) {
         compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
@@ -110,11 +181,14 @@ public class ManualTestInitialGencode {
     	AbstractProgram sourceInt = initTestInt();
     	AbstractProgram sourceImm = initTestImm();
     	AbstractProgram sourcePlusPlus = initTestPlusPlus();
+    	AbstractProgram sourceAssAssPlus = initTestAssignAssignPlus();
     	
     	//test(sourcePrint);
-        test(sourceInt);
+        //test(sourceInt);
         //test(sourceImm);
         //test(sourcePrintInt);
     	//test(sourcePlusPlus);
+    	test(sourceAssAssPlus);
     }
 }
+             

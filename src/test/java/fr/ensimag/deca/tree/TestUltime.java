@@ -1,11 +1,15 @@
-package fr.ensimag.deca.syntax;
+package fr.ensimag.deca.tree;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.tree.AbstractProgram;
-import java.io.File;
-import java.io.IOException;
-import org.antlr.v4.runtime.CommonTokenStream;
+import fr.ensimag.deca.syntax.AbstractDecaLexer;
+import fr.ensimag.deca.syntax.DecaLexer;
+import fr.ensimag.deca.syntax.DecaParser;
 
 /**
  * Driver to test the Parser (and lexer).
@@ -13,7 +17,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
  * @author Ensimag
  * @date 01/01/2020
  */
-public class ManualTestSynt {
+public class TestUltime {
     
     public static void main(String[] args) throws IOException {
         // Uncomment the following line to activate debug traces

@@ -6,10 +6,23 @@ import fr.ensimag.ima.pseudocode.Register;
 public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
+	public static int stackCpt = 2;
 	
 	public RegManager(int nbReg) {
 		this.nbRegMax = nbReg;
 		this.registresOccupes = new boolean[nbRegMax];
+	}
+	
+	public void addStackCpt() {
+		stackCpt++;
+	}
+	
+	public void subStackCpt() {
+		stackCpt--;
+	}
+	
+	public int getStackCpt() {
+		return stackCpt;
 	}
 	
 	public GPRegister getRegistreLibre() {
@@ -30,4 +43,6 @@ public class RegManager {
 		}
 		return false;
 	}
+	
+	
 }
