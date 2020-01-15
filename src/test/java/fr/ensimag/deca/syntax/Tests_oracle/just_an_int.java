@@ -18,16 +18,15 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-
 import fr.ensimag.deca.tree.*;
-
 
 public class just_an_int {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
-    
-    
-    /* script pour le test de just-an-int.deca */
+	
+	static String currentUsersDir = System.getProperty("user.dir");
+
+	/* script pour le test de just-an-int.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
         ListDeclVar lDecl = new ListDeclVar();
@@ -73,22 +72,24 @@ public class just_an_int {
         if (prog == null) {
             System.exit(1);
         } else {
-        	PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/obtained/just_an_int.txt", true));
+        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/just_an_int.txt" , true));
             prog.prettyPrint(ps);
             ps.close();
         }
     }
     
     public static void genSyntaxTreeManualFile(AbstractProgram source) throws IOException {        
-        PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/expected/just_an_int.txt", true));
+        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/just_an_int.txt", true));
         source.prettyPrint(ps);
         ps.close();
         
     }
 
     public static void main(String args[]) throws IOException {
+    	
+    	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
-    	String path = "/user/0/cassagth/Documents/gl48/src/test/deca/syntax/valid/created/just-an-int.deca";
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/just-an-int.deca";
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));
@@ -99,12 +100,11 @@ public class just_an_int {
 			  System.out.println (line);
 		}
 		in.close();
-		
 		AbstractProgram source = ProgInit();
+
         genSyntaxTreeManualFile(source);
-        
+
         genSyntaxTreeParserFile(fichier_teste);
-        
     }
         
    

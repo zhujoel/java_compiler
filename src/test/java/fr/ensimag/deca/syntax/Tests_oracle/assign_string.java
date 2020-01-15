@@ -20,13 +20,13 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tree.*;
 
-public class assign {
+public class assign_string {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
 	
 	static String currentUsersDir = System.getProperty("user.dir");
     
-    /* script pour le test de assign.deca */
+    /* script pour le test de assign_string.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
         ListDeclVar lDecl = new ListDeclVar();
@@ -35,13 +35,10 @@ public class assign {
                 new ListDeclClass(),
                 new Main(lDecl,linst));
 
-        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
-        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
-        NoInitialization init = new NoInitialization();
+        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("string"));
+        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("s"));
+        Initialization init = new Initialization(new StringLiteral("hello"));
         lDecl.add(new DeclVar(type, varName, init));
-        AbstractLValue  left_operande = varName;
-        AbstractExpr right_operande = new IntLiteral(5);
-        linst.add(new Assign(left_operande, right_operande));
 		
         return source;
     }
@@ -75,14 +72,14 @@ public class assign {
         if (prog == null) {
             System.exit(1);
         } else {
-        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/assign.txt" , true));
+        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/assign_string.txt" , true));
             prog.prettyPrint(ps);
             ps.close();
         }
     }
     
     public static void genSyntaxTreeManualFile(AbstractProgram source) throws IOException {        
-        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/assign.txt", true));
+        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/assign_string.txt", true));
         source.prettyPrint(ps);
         ps.close();
         
@@ -92,7 +89,7 @@ public class assign {
     	
     	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
-    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/assign.deca";
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/assign_string.deca";
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));

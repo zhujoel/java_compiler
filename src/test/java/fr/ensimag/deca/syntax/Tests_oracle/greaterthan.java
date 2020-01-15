@@ -20,13 +20,13 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tree.*;
 
-public class assign {
+public class greaterthan {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
 	
 	static String currentUsersDir = System.getProperty("user.dir");
     
-    /* script pour le test de assign.deca */
+    /* script pour le test de greaterthan.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
         ListDeclVar lDecl = new ListDeclVar();
@@ -35,13 +35,17 @@ public class assign {
                 new ListDeclClass(),
                 new Main(lDecl,linst));
 
-        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
-        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
-        NoInitialization init = new NoInitialization();
-        lDecl.add(new DeclVar(type, varName, init));
-        AbstractLValue  left_operande = varName;
-        AbstractExpr right_operande = new IntLiteral(5);
-        linst.add(new Assign(left_operande, right_operande));
+        AbstractIdentifier type_a = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName_a = new Identifier(compiler.getSymbolTable().create("a"));
+        Initialization init_a = new Initialization(new IntLiteral(2));
+        AbstractIdentifier type_b = new Identifier(compiler.getSymbolTable().create("int"));
+        AbstractIdentifier varName_b = new Identifier(compiler.getSymbolTable().create("b"));
+        Initialization init_b = new Initialization(new IntLiteral(5));
+        lDecl.add(new DeclVar(type_a, varName_a, init_a));
+        lDecl.add(new DeclVar(type_b, varName_b, init_b));
+        AbstractLValue  left_operande = varName_a;
+        AbstractExpr right_operande = varName_b;
+        linst.add(new GreaterOrEqual(left_operande, right_operande));
 		
         return source;
     }
@@ -75,14 +79,14 @@ public class assign {
         if (prog == null) {
             System.exit(1);
         } else {
-        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/assign.txt" , true));
+        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/greaterthan.txt" , true));
             prog.prettyPrint(ps);
             ps.close();
         }
     }
     
     public static void genSyntaxTreeManualFile(AbstractProgram source) throws IOException {        
-        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/assign.txt", true));
+        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/greaterthan.txt", true));
         source.prettyPrint(ps);
         ps.close();
         
@@ -92,7 +96,7 @@ public class assign {
     	
     	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
-    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/assign.deca";
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/greaterthan.deca";
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));
