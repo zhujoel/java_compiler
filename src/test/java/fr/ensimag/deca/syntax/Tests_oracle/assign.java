@@ -89,10 +89,11 @@ public class assign {
 
     public static void main(String args[]) throws IOException {
     	
-
+    	int userspathlength = currentUsersDir.length();
     	//System.out.println(currentUsersDir);
     	String[] fichier_teste = new String[1];
-    	String path = "../../../../../../deca/syntax/valid/created/assign.deca";
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/assign.deca";
+    	System.out.println("path : " + path);
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));
