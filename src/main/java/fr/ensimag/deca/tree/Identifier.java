@@ -1,30 +1,26 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.TypeDefinition;
-import fr.ensimag.deca.context.ClassType;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
-import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WNL;
-
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
-import org.apache.log4j.Logger;
 
 /**
  * Deca Identifier
@@ -166,27 +162,13 @@ public class Identifier extends AbstractIdentifier {
         return name;
     }
 
-    /**
-     *  On ajoute un champ location pour savoir dans quelle case de la pile on a stocké l'identifier (par rapport à GB).
-     *  Si l'identifier n'est pas une variable, sa valeur dans le stack est 0 (elle n'est pas présente). 
-     */
-	private int stackLocation;
     private Symbol name;
 
     public Identifier(Symbol name) {
         Validate.notNull(name);
         this.name = name;
-        this.stackLocation = 0;
     }
     
-    public void setStackLocation(int stackLocation) {
-		this.stackLocation = stackLocation;
-	}
-    
-    public int getStackLocation() {
-		return stackLocation;
-	}
-
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
@@ -205,7 +187,7 @@ public class Identifier extends AbstractIdentifier {
     	this.setDefinition(d);
     	return this.getType();
     	
-    	//faire pour un field et une class aussi :) :D
+    	//faire pour un field et une class aussi :) :D :X
         
     }
 
@@ -258,13 +240,9 @@ public class Identifier extends AbstractIdentifier {
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
     	GPRegister reg = compiler.getRegManager().getRegistreLibre();
-    	compiler.addInstruction(new LOAD(new RegisterOffset(stackLocation, Register.GB), reg));
-        System.out.println("Slocation dans identifier : "+ this.stackLocation );
-    	return reg;
-		
+    	// on récupère la définition du symbol correspondant à l'identifier dans la stack
+    	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
+    	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
+    	return reg;	
 	}
-    
-    
-    
-
 }

@@ -1,6 +1,18 @@
 package fr.ensimag.deca;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.codegen.EnvironmentDefault;
 import fr.ensimag.deca.codegen.RegManager;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.syntax.DecaLexer;
@@ -14,14 +26,6 @@ import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.apache.log4j.Logger;
 
 /**
  * Decac compiler instance.
@@ -45,6 +49,10 @@ public class DecacCompiler {
     
     private EnvironmentType envType;
     
+    // représente les variables d'environnement du compiler
+    private EnvironmentExp envExp;
+    
+
     
     /**
      * Portable newline character.
@@ -58,6 +66,7 @@ public class DecacCompiler {
         this.symbolTable = new SymbolTable();
         this.regManager = new RegManager(16);
         this.envType = new EnvironmentType(symbolTable);
+        this.envExp = new EnvironmentExp(null);
     }
     
     public DecacCompiler(CompilerOptions compilerOptions, File source,  int nbRegMax) {
@@ -79,6 +88,10 @@ public class DecacCompiler {
     
     public EnvironmentType getEnvironmentType() {
     	return this.envType;
+    }
+    
+    public EnvironmentExp getEnvironmentExp() {
+    	return this.envExp;
     }
     
     public Type getType(String s) {

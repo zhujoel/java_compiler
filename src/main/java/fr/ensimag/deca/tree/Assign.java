@@ -1,16 +1,13 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -56,10 +53,9 @@ public class Assign extends AbstractBinaryExpr {
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
-		
-		int sLocation = ((Identifier)this.getLeftOperand()).getStackLocation();
-		System.out.println("sLoc dans Assign : " + sLocation);
-        compiler.addInstruction(new STORE(reg, new RegisterOffset(sLocation, Register.GB)));
+		Identifier leftOp = (Identifier)getLeftOperand();
+		ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
+        compiler.addInstruction(new STORE(reg, expDef.getOperand()));
 	}
 
 }

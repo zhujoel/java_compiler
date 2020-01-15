@@ -68,13 +68,9 @@ public class Initialization extends AbstractInitialization {
     }
     
     @Override
-    protected int codeGenInit(DecacCompiler compiler) {
+    protected GPRegister codeGenInit(DecacCompiler compiler, Type type) {
     	GPRegister reg = expression.codeGenReg(compiler);
-    	int sLocation = compiler.getRegManager().getStackCpt();
-        compiler.addInstruction(new STORE(reg, new RegisterOffset(sLocation, Register.GB)));
-        compiler.getRegManager().freeRegistre(reg.getNumber());
-        compiler.getRegManager().addStackCpt();
-        return sLocation;
+    	return reg;
     }
 
 }

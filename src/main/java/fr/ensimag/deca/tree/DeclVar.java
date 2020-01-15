@@ -1,23 +1,23 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.VariableDefinition;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.RegManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ImmediateString;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
-import org.apache.log4j.Logger;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * @author gl48
@@ -39,6 +39,14 @@ public class DeclVar extends AbstractDeclVar {
         this.varName = varName;
         this.initialization = initialization;
     }
+    
+    public AbstractIdentifier getVarName() {
+    	return this.varName;
+    }
+    
+    public AbstractInitialization getInitialization() {
+		return initialization;
+	}
 
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
@@ -49,7 +57,7 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Type : end");
     	//condition type != void
     	if (t.isVoid()) {
-    		throw new ContextualError("Variable de type void : ", getLocation());
+    		throw new ContextualError("Variable de type void : ", type.getLocation());
     	}
     	LOG.debug("verify Initialisation : start");
     	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
@@ -97,8 +105,25 @@ public class DeclVar extends AbstractDeclVar {
 
 	@Override
 	protected void codeGenDeclVar(DecacCompiler compiler) {
-		int sLocation = initialization.codeGenInit(compiler);
-        System.out.println("Slocation dans declVar : "+sLocation);
-		varName.setStackLocation(sLocation);
+		// on vérifie que le type existe dans notre environnement
+		this.type.setType(compiler.getEnvironmentType().get(this.type.getName()));
+		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
+		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
+		varDef.setOperand(new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB));
+		try {
+			compiler.getEnvironmentExp().declare(varName.getName(), varDef);
+		}
+		catch(DoubleDefException e) {
+			e.printStackTrace();
+		}
+		// un registre de plus est occupé
+		compiler.getRegManager().addStackCpt();
+		
+		// on génère le code assembleur de l'initialisation
+		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());
+		compiler.addInstruction(new STORE(reg, varDef.getOperand()));
+		
+		// indique que le registre est libre
+		compiler.getRegManager().freeRegistre(reg.getNumber());
 	}
 }
