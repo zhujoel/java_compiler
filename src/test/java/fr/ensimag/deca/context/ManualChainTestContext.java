@@ -12,7 +12,13 @@ import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tree.AbstractProgram;
-import fr.ensimag.deca.tree.LocationException;
+/**
+ * Cette serie de test se lance avec le bash chain_test_context, 
+ * on passe en argument l'ensemble des fichiers à tester
+ * Les fichiers que l'on teste sont ceux de src/test/deca/context/...
+ * @author flichya
+ *
+ */
 
 public class ManualChainTestContext {
 

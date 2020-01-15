@@ -92,9 +92,8 @@ public abstract class AbstractExpr extends AbstractInst {
     	} else if (type.sameType(expectedType)) {
     		return this;
     	}
-    	System.out.println("Affecttation error, "
-    			+ "type: " + type.toString() + ", expected type: " + expectedType.toString());
-    	throw new ContextualError("Affectation illegale !", getLocation());
+    	throw new ContextualError("Affectation error, "
+    			+ "type: " + type.toString() + ", expected type: " + expectedType.toString(), getLocation());
     	
     	
     }

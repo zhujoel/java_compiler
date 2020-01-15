@@ -27,9 +27,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         
         //type := type _ binary _ op(op, type 1 , type 2 )
         if (!(type1.isInt() || type1.isFloat())) {
-        	throw new ContextualError("Type non supporté par l'operation utilisée", this.getLeftOperand().getLocation());
+        	throw new ContextualError("Type " + type1.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getLeftOperand().getLocation());
         } else if(!(type2.isInt() || type2.isFloat())){
-        	throw new ContextualError("Type non supporté par l'operation utilisée", this.getRightOperand().getLocation());
+        	throw new ContextualError("Type " + type2.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getRightOperand().getLocation());
         }
         
         
@@ -61,7 +61,8 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         }
         
         
-        throw new ContextualError("Operation entre deux elements de type differents", getLocation());
+        throw new ContextualError("Operation entre un element de type " + type1.toString()
+        + " et un element de type " + type2.toString(), getLocation());
     	
     }
 }
