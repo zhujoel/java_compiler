@@ -1,12 +1,12 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.REM;
 
 /**
  *
@@ -44,10 +44,23 @@ public class Modulo extends AbstractOpArith {
         return "%";
     }
 
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+        compiler.addInstruction(new REM(regGauche, regDroite));
+
+    }
+
+
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		compiler.addComment(this.getLeftOperand().getType().getName() + this.getOperatorName());
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+        compiler.addInstruction(new REM(regGauche, regDroite));
+        compiler.getRegManager().freeRegistre(regDroite.getNumber());
+        return regGauche;
 	}
 
 }

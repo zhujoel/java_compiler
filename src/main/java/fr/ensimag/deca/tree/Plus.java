@@ -17,7 +17,7 @@ public class Plus extends AbstractOpArith {
 
     @Override
     protected String getOperatorName() {
-        return "+";
+        return "+";	 
     }
     
     @Override
