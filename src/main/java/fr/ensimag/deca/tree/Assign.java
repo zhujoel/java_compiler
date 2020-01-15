@@ -57,9 +57,9 @@ public class Assign extends AbstractBinaryExpr {
 	protected void codeGenInst(DecacCompiler compiler) {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
 		
-		int sLocation = ((Identifier)this.getLeftOperand()).getStackLocation();
-		System.out.println("sLoc dans Assign : " + sLocation);
-        compiler.addInstruction(new STORE(reg, new RegisterOffset(sLocation, Register.GB)));
+		//int sLocation = ((Identifier)this.getLeftOperand()).getStackLocation();
+		//System.out.println("sLoc dans Assign : " + sLocation);
+        //compiler.addInstruction(new STORE(reg, new RegisterOffset(sLocation, Register.GB)));
 	}
 
 }

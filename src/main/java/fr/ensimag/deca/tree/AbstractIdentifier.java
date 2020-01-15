@@ -94,10 +94,4 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      *         (corresponds to the "type" attribute)
      */
     public abstract Type verifyType(DecacCompiler compiler) throws ContextualError;
-    
-    /**
-     * Défini la location de l'identifier dans la pile (par rapport à la base GB).
-     * @param stackLocation Location de l'identifier dans la pile
-     */
-    public abstract void setStackLocation(int stackLocation);
 }

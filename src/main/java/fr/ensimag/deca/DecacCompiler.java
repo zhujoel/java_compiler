@@ -1,6 +1,7 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.codegen.RegManager;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.syntax.DecaLexer;
@@ -45,6 +46,9 @@ public class DecacCompiler {
     
     private EnvironmentType envType;
     
+    // représente les variables d'environnement du compiler
+    public EnvironmentExp envExp;
+    
     
     /**
      * Portable newline character.
@@ -58,6 +62,7 @@ public class DecacCompiler {
         this.symbolTable = new SymbolTable();
         this.regManager = new RegManager(16);
         this.envType = new EnvironmentType(symbolTable);
+        this.envExp = new EnvironmentExp(null);
     }
 
     public SymbolTable getSymbolTable() {
@@ -70,6 +75,10 @@ public class DecacCompiler {
     
     public EnvironmentType getEnvironmentType() {
     	return this.envType;
+    }
+    
+    public EnvironmentExp getEnvironmentExp() {
+    	return this.envExp;
     }
     
     public Type getType(String s) {

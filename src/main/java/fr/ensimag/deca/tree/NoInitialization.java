@@ -54,10 +54,11 @@ public class NoInitialization extends AbstractInitialization {
     }
 
     @Override
-    protected int codeGenInit(DecacCompiler compiler) {
+    protected void codeGenInit(DecacCompiler compiler) {
+    	/**
     	int sLocation = compiler.getRegManager().getStackCpt();
         compiler.getRegManager().addStackCpt();
-        System.out.println("Slocation dans noinit : "+sLocation);
         return sLocation;
+        */
     }
 }
