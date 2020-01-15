@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -21,17 +20,13 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tree.*;
 
-public class assign {
+public class ifthenelse {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
-<<<<<<< HEAD
 	
 	static String currentUsersDir = System.getProperty("user.dir");
-=======
     
->>>>>>> 3d4ec07f213d8ffdcddb873cd08cef5333386596
-    
-    /* script pour le test de just-an-int.deca */
+    /* script pour le test de ifthenelse.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
         ListDeclVar lDecl = new ListDeclVar();
@@ -39,14 +34,20 @@ public class assign {
             new Program(
                 new ListDeclClass(),
                 new Main(lDecl,linst));
-
-        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
-        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
-        Initialization init = new Initialization(new IntLiteral(5));
-        lDecl.add(new DeclVar(type, varName, init));
-        AbstractLValue  left_operande = varName;
-        AbstractExpr right_operande = new IntLiteral(5);
-        linst.add(new Assign(left_operande, right_operande));
+        
+        AbstractExpr condition = new Greater(new IntLiteral(5), new IntLiteral(2));
+        ListInst then = new ListInst();
+        ListExpr then_expr1 = new ListExpr();
+        then_expr1.add(new StringLiteral("if boucle"));
+        ListExpr then_expr2 = new ListExpr();
+        then_expr2.add(new StringLiteral("if boucle2"));
+        then.add(new Print(false, then_expr1));
+        then.add(new Print(false, then_expr2));
+        ListInst els = new ListInst();
+        ListExpr else_expr = new ListExpr();
+        else_expr.add(new StringLiteral("else boucle"));
+        els.add(new Print(false, else_expr));
+        linst.add(new IfThenElse(condition, then, els));
 		
         return source;
     }
@@ -80,29 +81,24 @@ public class assign {
         if (prog == null) {
             System.exit(1);
         } else {
-        	PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/obtained/assign.txt", true));
+        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/ifthenelse.txt" , true));
             prog.prettyPrint(ps);
             ps.close();
         }
     }
     
     public static void genSyntaxTreeManualFile(AbstractProgram source) throws IOException {        
-        PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/expected/assign.txt", true));
+        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/ifthenelse.txt", true));
         source.prettyPrint(ps);
         ps.close();
         
     }
 
     public static void main(String args[]) throws IOException {
-<<<<<<< HEAD
     	
     	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
-    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/assign.deca";
-=======
-    	String[] fichier_teste = new String[1];
-    	String path = "/user/0/cassagth/Documents/gl48/src/test/deca/syntax/valid/created/assign.deca";
->>>>>>> 3d4ec07f213d8ffdcddb873cd08cef5333386596
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/ifthenelse.deca";
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));
@@ -113,10 +109,10 @@ public class assign {
 			  System.out.println (line);
 		}
 		in.close();
-		
 		AbstractProgram source = ProgInit();
+
         genSyntaxTreeManualFile(source);
-        
+
         genSyntaxTreeParserFile(fichier_teste);
     }
         
