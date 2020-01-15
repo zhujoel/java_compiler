@@ -55,12 +55,11 @@ public class Modulo extends AbstractOpArith {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getLeftOperand().getType().getName() + this.getOperatorName());
+		compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
         compiler.addInstruction(new REM(regGauche, regDroite));
         compiler.getRegManager().freeRegistre(regDroite.getNumber());
         return regGauche;
 	}
-
 }

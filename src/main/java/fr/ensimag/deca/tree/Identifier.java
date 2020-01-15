@@ -18,9 +18,13 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
-import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Deca Identifier
@@ -245,4 +249,24 @@ public class Identifier extends AbstractIdentifier {
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
     	return reg;	
 	}
+	
+	@Override
+    protected void codeGenPrint(DecacCompiler compiler) {
+		// On doit sauvegarder la valeur dans le registre R1 pour afficher
+		GPRegister reg = Register.R1;
+		ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
+		compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
+		
+		Type type = expDef.getType();
+		
+		if(type.isFloat()) {
+			compiler.addInstruction(new WFLOAT());
+		}
+		else if(type.isBoolean() || type.isInt()) {
+			compiler.addInstruction(new WINT());
+		}
+		else if(type.isNull()) {
+			compiler.addInstruction(new WSTR(new ImmediateString("null")));
+		}
+    }
 }

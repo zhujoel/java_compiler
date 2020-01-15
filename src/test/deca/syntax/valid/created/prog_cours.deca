@@ -1,6 +1,9 @@
 {
-	int x = 2 + 3;
-    int y = 4 * 5;
-    int z = 6 - 7;
-    int t = 8 % 7;
+    bool a = false;
+    bool b = true;
+    int c = 1;
+    a = a && b;
+    b = b || a;
+    print(c);
+    print(b);
 }
