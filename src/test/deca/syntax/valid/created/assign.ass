@@ -1,0 +1,10 @@
+; start main program
+; Main program
+; On stocke la valeur "null" à la première case de la pile.
+	LOAD #null, R0
+	STORE R0, 1(GB)
+; Beginning of main instructions:
+	LOAD #5, R0
+	STORE R0, 2(GB)
+	HALT
+; end main program
