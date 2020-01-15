@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class oracle{
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
-		Process process = Runtime.getRuntime().exec("/usr/bin/sh /user/0/cassagth/Documents/gl48/src/test/script/launchers/validor_synt");
+		Process process = Runtime.getRuntime().exec("/usr/bin/sh ./src/test/script/launchers/validor_synt");
 		StringBuilder output = new StringBuilder();
 
 		BufferedReader reader = new BufferedReader(

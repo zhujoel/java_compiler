@@ -1,4 +1,5 @@
-#!usr/bin/sh
+#!/bin/sh
+
 
 DECAC_HOME=$(cd "$(dirname "$0")"/../../../../ && pwd)
 CP_FILE="$DECAC_HOME"/target/generated-sources/classpath.txt
@@ -16,12 +17,12 @@ cd $DECAC_HOME/src/test/java/fr/ensimag/deca/syntax/Tests_oracle
 rm expected/*
 rm obtained/*
 
+
 for prog in *.java
 do
     echo "Test de ${prog%.*}..."
-    # On rentre le resultat de la commande java dans un fichier temporaire et on compare avec
-    # Le fichier txt attendu
-    # java -enableassertions -cp "$CP" fr.ensimag.deca.syntax.ManualTestSynt "$prog" > tmpfile
+    
+    gen_expected_synt fr.ensimag.deca.syntax.Tests_oracle.${prog%.*}
     # Si le diff est vide, alors le test est réussi
     DIFF=$(diff -u expected/${prog%.*}.txt obtained/${prog%.*}.txt)
     if [$DIFF == ""]
@@ -33,7 +34,7 @@ do
         echo "${grey}Obtenu                              Attendu${reset}"
         # Affiche les deux fichiers sur deux colonnes
         pr -m -t expected/${prog%.*}.txt obtained/${prog%.*}.txt
-        # diff  ../expected/${prog%.*}.txt $tmpfile
+        # diff  ../expected/${prog%.*}.txt obtained/${prog%.*}.txt
     fi
     ((total++))
 done
