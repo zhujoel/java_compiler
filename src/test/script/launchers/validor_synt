@@ -14,7 +14,10 @@ total=0
 cd $DECAC_HOME
 
 cd $DECAC_HOME/src/test/java/fr/ensimag/deca/syntax/Tests_oracle
+
+mkdir -p expected
 rm expected/*
+mkdir -p obtained
 rm obtained/*
 
 
