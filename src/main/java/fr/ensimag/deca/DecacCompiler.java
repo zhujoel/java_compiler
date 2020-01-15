@@ -45,6 +45,7 @@ public class DecacCompiler {
     private RegManager regManager;
     
     private EnvironmentType envType;
+    private EnvironmentExp envExp;
     
     // représente les variables d'environnement du compiler
     public EnvironmentExp envExp;

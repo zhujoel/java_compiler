@@ -57,7 +57,7 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Type : end");
     	//condition type != void
     	if (t.isVoid()) {
-    		throw new ContextualError("Variable de type void : ", getLocation());
+    		throw new ContextualError("Variable de type void : ", type.getLocation());
     	}
     	LOG.debug("verify Initialisation : start");
     	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
