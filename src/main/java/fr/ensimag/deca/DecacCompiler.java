@@ -68,6 +68,15 @@ public class DecacCompiler {
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
     }
+    
+    public DecacCompiler(CompilerOptions compilerOptions, File source,  int nbRegMax) {
+        super();
+        this.compilerOptions = compilerOptions;
+        this.source = source;
+        this.symbolTable = new SymbolTable();
+        this.regManager = new RegManager(nbRegMax);
+        this.envType = new EnvironmentType(symbolTable);
+    }
 
     public SymbolTable getSymbolTable() {
     	return this.symbolTable;

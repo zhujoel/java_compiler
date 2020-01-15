@@ -37,6 +37,16 @@ public class CompilerOptions {
     public boolean getPrintBanner() {
         return printBanner;
     }
+
+    public boolean getRegisters() {
+        return registers;
+    }
+
+    public int getX() {
+        return x;
+    }
+    
+    
     
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
@@ -48,13 +58,15 @@ public class CompilerOptions {
     private boolean verification = false;
     private boolean noCheck = false;
     private boolean parse = false;
+    private boolean registers = false;
+    private int x;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
     public void parseArgs(String[] args) throws CLIException {
         int i = 0;
         while (i < args.length) {
-            if (args[i].matches("[a-zA-ZÀ-ÿ0-9]+/[a-zA-ZÀ-ÿ0-9]+(.{1}d{1}e{1}c{1}a{1})")) {
+            if (args[i].matches("[/]([a-zA-ZÀ-ÿ0-9_]+[/])+[a-zA-ZÀ-ÿ0-9]+(.{1}d{1}e{1}c{1}a{1})")) {
                 sourceFiles.add(new File(args[i]));
                 //System.out.println("File added");
             } else {
@@ -101,9 +113,11 @@ public class CompilerOptions {
                         break;
                     case "-r":
                         try {
-                            int x = Integer.parseInt(args[i + 1]);
+                            x = Integer.parseInt(args[i + 1]);
                             if (x >= 4 && x <= 16) {// 4 <= X <= 16
                                 System.out.println("X = " + x);
+                                registers = true;
+                                x -= 1;
                             } else {
                                 System.out.println("X must have a value between 4 and 16");
                                 System.exit(1);

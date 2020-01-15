@@ -16,11 +16,12 @@ import org.apache.log4j.Logger;
  * @date 01/01/2020
  */
 public class DecacMain {
+
     private static Logger LOG = Logger.getLogger(DecacMain.class);
-    
+
     public static void main(String[] args) {
         // example log4j message.
-        
+
         LOG.info("Decac compiler started");
         boolean error = false;
         final CompilerOptions options = new CompilerOptions();
@@ -35,21 +36,22 @@ public class DecacMain {
 
         if (options.getPrintBanner() && args.length == 1) {//option -b
             System.out.println("Équipe gl48");
-            
+
         }
+
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
             System.out.println("\n Options pour le compilateur\n");
             System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
-            System.out.println("  -p\n    Arrête decac après l’étape de construction de\n" + 
-                    "    l’arbre, et affiche la décompilation de ce dernier.");
+            System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
+                    + "    l’arbre, et affiche la décompilation de ce dernier.");
             System.out.println("  -v\n    Arrête decac après l’étape de vérifications.");
             System.out.println("  -n\n    Supprime les tests de débordement à l’exécution.");
             System.out.println("  -r\n    Limite les registres banalisés disponibles.");
             System.out.println("  -d\n    Active les traces de debug.");
-            System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n" +
-                    "    lance la compilation des fichiers en parallèle\n");
+            System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n"
+                    + "    lance la compilation des fichiers en parallèle\n");
         }
-        
+
         if (options.getParallel()) {//option -P
             System.out.println("Compilation en parallel");
             // creation d'un ensemble de fils d’exécution travailleurs
@@ -57,21 +59,21 @@ public class DecacMain {
             // le nombre de processeurs sur la machine et créer le meme
             // nombre de fils d’exécution
             ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
-            try{
-            for (File source : options.getSourceFiles()) {
-                // pour chaque fichier à compiler DecacCompiler est instancié
-                DecacCompiler compiler = new DecacCompiler(options, source);
-                
-                Callable<Boolean> task = () -> {
-                    boolean r = compiler.compile();
-                    return r;
-                    
-                };
-                
-                pool.submit(task);
-                
-            } 
-            }catch(ExceptionInInitializerError e) {//Error when the source file path is invalid
+            try {
+                for (File source : options.getSourceFiles()) {
+                    // pour chaque fichier à compiler DecacCompiler est instancié
+                    DecacCompiler compiler = new DecacCompiler(options, source);
+
+                    Callable<Boolean> task = () -> {
+                        boolean r = compiler.compile();
+                        return r;
+
+                    };
+
+                    pool.submit(task);
+
+                }
+            } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
                 System.out.println("Error in the file path");
             }
             // DONE! A FAIRE : instancier DecacCompiler pour chaque fichier à
@@ -79,10 +81,16 @@ public class DecacMain {
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
             //throw new UnsupportedOperationException("Parallel build not yet implemented");
-        }else {//un seule fichier à compiler
+        } else {//un seule fichier à compiler
             try {
                 for (File source : options.getSourceFiles()) {
-                    DecacCompiler compiler = new DecacCompiler(options, source);
+                    DecacCompiler compiler;
+                    if (options.getRegisters()) {//for when the option -r is activated
+                        compiler = new DecacCompiler(options, source, options.getX());
+                    }else{
+                        compiler = new DecacCompiler(options, source);
+
+                    }
                     if (compiler.compile()) {
                         error = true;
                     }
@@ -95,4 +103,3 @@ public class DecacMain {
         System.exit(error ? 1 : 0);
     }
 }
-
