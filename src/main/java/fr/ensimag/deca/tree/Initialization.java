@@ -68,7 +68,7 @@ public class Initialization extends AbstractInitialization {
     }
     
     @Override
-    protected GPRegister codeGenInit(DecacCompiler compiler) {
+    protected GPRegister codeGenInit(DecacCompiler compiler, Type type) {
     	GPRegister reg = expression.codeGenReg(compiler);
     	return reg;
     }

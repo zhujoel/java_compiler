@@ -1,17 +1,18 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
-
-import java.io.PrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  * Absence of initialization (e.g. "int x;" as opposed to "int x =
@@ -54,11 +55,9 @@ public class NoInitialization extends AbstractInitialization {
     }
 
     @Override
-    protected void codeGenInit(DecacCompiler compiler) {
-    	/**
-    	int sLocation = compiler.getRegManager().getStackCpt();
-        compiler.getRegManager().addStackCpt();
-        return sLocation;
-        */
+    protected GPRegister codeGenInit(DecacCompiler compiler, Type type) {
+    	// Pour l'instant on met n'importe quoi dans la case lors de la non-initialisation.
+    	GPRegister reg = Register.getR(0);
+    	return reg;
     }
 }

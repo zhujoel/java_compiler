@@ -119,8 +119,9 @@ public class DeclVar extends AbstractDeclVar {
 		// un registre de plus est occupé
 		compiler.getRegManager().addStackCpt();
 		
-		GPRegister reg = initialization.codeGenInit(compiler);
-		compiler.addInstruction(new STORE(reg, varName.getVariableDefinition().getOperand()));
+		// on génère le code assembleur de l'initialisation
+		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());
+		compiler.addInstruction(new STORE(reg, varDef.getOperand()));
 		
 		// indique que le registre est libre
 		compiler.getRegManager().freeRegistre(reg.getNumber());

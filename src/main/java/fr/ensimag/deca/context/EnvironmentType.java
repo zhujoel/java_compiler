@@ -24,10 +24,6 @@ public class EnvironmentType {
 		env.put(symbolTable.create("float"), new FloatType(symbolTable.create("float")));
 		env.put(symbolTable.create("int"), new IntType(symbolTable.create("int")));
 		env.put(symbolTable.create("string"), new StringType(symbolTable.create("string")));
-		
-		
-		
-
 	}
 	
 	public Type get(Symbol key) {

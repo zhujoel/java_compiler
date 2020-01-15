@@ -1,5 +1,6 @@
 {
 	int x = 1;
 	int y = 2;
-	int z = x;
+	int z;
+	z = 2*x + 3*y;
 }
