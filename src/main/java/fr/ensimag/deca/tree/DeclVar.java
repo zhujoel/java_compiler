@@ -15,8 +15,10 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -107,6 +109,8 @@ public class DeclVar extends AbstractDeclVar {
 	protected void codeGenDeclVar(DecacCompiler compiler) {
 		// on vérifie que le type existe dans notre environnement
 		this.type.setType(compiler.getEnvironmentType().get(this.type.getName()));
+		this.varName.setType(compiler.getEnvironmentType().get(this.type.getName()));
+		
 		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
 		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
 		varDef.setOperand(new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB));
@@ -122,6 +126,7 @@ public class DeclVar extends AbstractDeclVar {
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());
 		compiler.addInstruction(new STORE(reg, varDef.getOperand()));
+		compiler.addInstruction(new ADDSP(new ImmediateInteger(1)));
 		
 		// indique que le registre est libre
 		compiler.getRegManager().freeRegistre(reg.getNumber());

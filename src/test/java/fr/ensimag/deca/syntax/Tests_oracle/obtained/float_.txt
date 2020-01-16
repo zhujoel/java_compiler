@@ -3,8 +3,8 @@
    `> Main
       +> ListDeclVar [List with 1 elements]
       |  []> DeclVar
-      |      +> Identifier (int)
-      |      +> Identifier (a)
+      |      +> Identifier (float)
+      |      +> Identifier (c)
       |      `> Initialization
-      |         `> Int (5)
+      |         `> Float (5.3423424)
       `> ListInst [List with 0 elements]

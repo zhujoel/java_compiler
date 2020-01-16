@@ -1,15 +1,20 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
-
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Single precision, floating-point literal
@@ -61,10 +66,17 @@ public class FloatLiteral extends AbstractExpr {
         // leaf node => nothing to do
     }
 
-	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected GPRegister codeGenReg(DecacCompiler compiler) {
+        //compiler.addInstruction(new ImmediateInteger(this.getValue()));
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	compiler.addInstruction(new LOAD(new ImmediateFloat(value), reg));
+    	return reg;
+    }
+    
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler) {
+        compiler.addInstruction(new WSTR(new ImmediateString(Float.toString(value))));
+    }
 
 }

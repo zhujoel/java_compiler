@@ -17,7 +17,7 @@ public class Plus extends AbstractOpArith {
 
     @Override
     protected String getOperatorName() {
-        return "+";
+        return "+";	 
     }
     
     @Override
@@ -31,6 +31,7 @@ public class Plus extends AbstractOpArith {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
         compiler.addInstruction(new ADD(regGauche, regDroite));

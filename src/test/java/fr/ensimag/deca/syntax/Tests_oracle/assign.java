@@ -24,8 +24,9 @@ import fr.ensimag.deca.tree.*;
 public class assign {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
-    
-    
+	
+	static String currentUsersDir = System.getProperty("user.dir");
+	
     /* script pour le test de just-an-int.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
@@ -39,6 +40,9 @@ public class assign {
         AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
         Initialization init = new Initialization(new IntLiteral(5));
         lDecl.add(new DeclVar(type, varName, init));
+        AbstractLValue  left_operande = varName;
+        AbstractExpr right_operande = new IntLiteral(5);
+        linst.add(new Assign(left_operande, right_operande));
 		
         return source;
     }
@@ -86,6 +90,7 @@ public class assign {
     }
 
     public static void main(String args[]) throws IOException {
+    	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
     	String path = "/user/0/cassagth/Documents/gl48/src/test/deca/syntax/valid/created/assign.deca";
         fichier_teste[0] = path;
