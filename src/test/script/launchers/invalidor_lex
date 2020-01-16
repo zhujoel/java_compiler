@@ -27,7 +27,7 @@ do
     ../../../../script/launchers/cutting-files.py $tmpfile
     # Si le diff est vide, alors le test est réussi
     DIFF=$(diff -u ../alexpected/${prog%.*}.txt $tmpfile)
-    if [$DIFF == ""]
+	if [$DIFF == ""]
     then
         echo "${green}Test réussi${reset}"
         ((reussis++))
