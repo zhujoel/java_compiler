@@ -38,10 +38,10 @@ public class ManualTestSynt {
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);
-            prog.decompile(System.out);
-            prog.codeGenProgram(decacCompiler);
-            String assembleur = decacCompiler.displayIMAProgram(); 
-            System.out.println(assembleur);
+            //prog.decompile(System.out);
+           // prog.codeGenProgram(decacCompiler);
+            //String assembleur = decacCompiler.displayIMAProgram(); 
+            //System.out.println(assembleur);
         }
     }
 }
