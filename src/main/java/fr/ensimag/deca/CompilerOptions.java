@@ -73,15 +73,7 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         int i = 0;
         while (i < args.length) {
-<<<<<<< HEAD
-            if (args[i].matches("[/]([a-zA-ZÀ-ÿ0-9/+_/-/.]+[/])+[a-zA-ZÀ-ÿ0-9/+_/-/.]+(.{1}d{1}e{1}c{1}a{1})")) {
-                sourceFiles.add(new File(args[i]));
-            	System.err.println("<CompilerOptions> file : " + args[1]);
-                //System.out.println("File added");
-            } else {
-=======
->>>>>>> 82d8adda64af4efcfa2b3c33aa77292a43b8e4a9
-                switch (args[i]) {
+        	switch (args[i]) {
                     //option pour faire toute la compilation et 
                     //generer et montrer le fichier .ass
                     case "-a":
@@ -189,8 +181,8 @@ public class CompilerOptions {
             logger.info("Java assertions enabled");
         } else {
             logger.info("Java assertions disabled");
-        }
-
+        	}
+        
     }
 
     protected void displayUsage(){//what should it do?
