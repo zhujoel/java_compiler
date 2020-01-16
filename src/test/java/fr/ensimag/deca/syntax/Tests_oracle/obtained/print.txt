@@ -1,0 +1,8 @@
+`> Program
+   +> ListDeclClass [List with 0 elements]
+   `> Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> Println
+             `> ListExpr [List with 1 elements]
+                []> StringLiteral ("Alex le Boss")
