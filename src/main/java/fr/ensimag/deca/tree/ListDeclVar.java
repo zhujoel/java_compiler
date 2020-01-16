@@ -4,12 +4,12 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.IntType;
-import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.deca.tools.SymbolTable.Symbol;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * List of declarations (e.g. int x; float y,z).
@@ -47,6 +47,13 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     }
 
     public void codeGenListDeclVar(DecacCompiler compiler) {
+    	// On prend met le pointeur au bon endroit
+    	int nbDecl = this.size();
+    	compiler.addComment("Test pour savoir si la pile est pleine");
+    	compiler.addInstruction(new TSTO(new ImmediateInteger(nbDecl + 2)));
+    	compiler.addInstruction(new BOV(new Label("pile_pleine")));
+    	compiler.addInstruction(new ADDSP(new ImmediateInteger(nbDecl + 2)));
+    	compiler.addComment("Declaration des variables");
         for (AbstractDeclVar i : getList()) {
             i.codeGenDeclVar(compiler);
         }

@@ -9,9 +9,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ImmediateString;
-import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 import java.io.PrintStream;
@@ -67,6 +65,12 @@ public class IntLiteral extends AbstractExpr {
     	GPRegister reg = compiler.getRegManager().getRegistreLibre();
     	compiler.addInstruction(new LOAD(new ImmediateInteger(value), reg));
     	return reg;
+    }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	compiler.addInstruction(new LOAD(new ImmediateInteger(value), reg));
     }
     
     @Override

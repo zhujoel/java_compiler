@@ -1,9 +1,9 @@
 {
-    bool a = false;
-    bool b = true;
-    int c = 1;
-    a = a && b;
-    b = b || a;
-    print(c);
-    print(b);
+    int a =  2;
+    if( a == 2){
+        print("dans l'un");
+    }
+    else{
+        print("dans l'autre");
+    }
 }

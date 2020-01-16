@@ -15,10 +15,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -126,7 +124,6 @@ public class DeclVar extends AbstractDeclVar {
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());
 		compiler.addInstruction(new STORE(reg, varDef.getOperand()));
-		compiler.addInstruction(new ADDSP(new ImmediateInteger(1)));
 		
 		// indique que le registre est libre
 		compiler.getRegManager().freeRegistre(reg.getNumber());

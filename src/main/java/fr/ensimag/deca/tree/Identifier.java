@@ -19,8 +19,13 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
@@ -248,6 +253,26 @@ public class Identifier extends AbstractIdentifier {
     	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
     	return reg;	
+	}
+	
+	@Override
+	protected void codeGenInst(DecacCompiler compiler) {
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	// on récupère la définition du symbol correspondant à l'identifier dans la stack
+    	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
+    	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
+	}
+	
+	
+	protected void codeGenBool(DecacCompiler compiler,Label label, boolean b) {
+		GPRegister reg = this.codeGenReg(compiler);
+        compiler.addInstruction(new CMP(new ImmediateInteger(1), reg));
+        if(b) {
+            compiler.addInstruction(new BEQ(label));
+        }
+        else {
+            compiler.addInstruction(new BNE(label));
+        }
 	}
 	
 	@Override
