@@ -563,9 +563,10 @@ class_body returns[ListDeclField lfields, ListDeclMethod lmethods]
 	$lfields = new ListDeclField();
 }
     : (m=decl_method {
+    		$lmethods.add($m.tree);
         }
       // passe la liste en paramètre pour que les fils le remplisse
-      | f=decl_field_set[$lfields]
+      | decl_field_set[$lfields]
       )*
     ;
 
@@ -612,20 +613,28 @@ decl_field[AbstractIdentifier t, Visibility v] returns[AbstractDeclField tree]
         })
     ;
 
-decl_method
+decl_method returns[AbstractDeclMethod tree]
 @init {
+	ListDeclParam params = new ListDeclParam();
 }
-    : type ident OPARENT params=list_params CPARENT (block {
+	// déclaration d'une méthode
+    : type ident OPARENT params=list_params[params] CPARENT (block {
+    		$tree = new DeclMethod($type.tree, $ident.tree, params,
+    			$block.decls, $block.insts);
         }
-      | ASM OPARENT code=multi_line_string CPARENT SEMI {
+      |
+      // TODO: faire l'ASM pour mettre de l'assembleur en tant que méthode de la classe 
+      ASM OPARENT code=multi_line_string CPARENT SEMI {
         }
       ) {
         }
     ;
 
-list_params
+list_params[ListDeclParam params]
     : (p1=param {
+    		params.add($p1.tree);
         } (COMMA p2=param {
+        	params.add($p2.tree);
         }
       )*)?
     ;
@@ -641,7 +650,8 @@ multi_line_string returns[String text, Location location]
         }
     ;
 
-param
+param returns[AbstractDeclParam tree]
     : type ident {
+    	$tree = new DeclParam($type.tree, $ident.tree);
         }
     ;
