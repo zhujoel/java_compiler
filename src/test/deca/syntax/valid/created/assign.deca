@@ -1,3 +1,4 @@
 {
-	print("bjr");
+	int a;
+	a = 5;
 }
