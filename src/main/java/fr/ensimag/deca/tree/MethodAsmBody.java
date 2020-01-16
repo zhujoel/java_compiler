@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: docu
+ * Corps d'une méthode ASM (assembleur).
  * @author zhujo
  *
  */

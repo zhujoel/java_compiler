@@ -12,7 +12,7 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.SymbolTable;
 
 /**
- *
+ * Identifier (ex: int, a, b, string, float, etc).
  * @author gl48
  * @date 01/01/2020
  */

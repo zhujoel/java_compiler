@@ -3,7 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: ECRIRE LA DOCU
+ * Liste des paramètres d'une méthode d'une classe.
  * @author zhujo
  *
  */

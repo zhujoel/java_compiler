@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: COMPLETE THIS MOTHERFUCKERRRRRRRRRRRRRRR
+ * Déclaration d'un attribut d'une classe.
  * @author zhujo
  *
  */

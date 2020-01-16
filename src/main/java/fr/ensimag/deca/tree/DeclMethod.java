@@ -7,6 +7,12 @@ import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.tools.IndentPrintStream;
 
+/**
+ * Déclaration d'une méthode d'une classe.
+ * Ex: int methName(int param1, int param2){ corps }
+ * @author zhujo
+ *
+ */
 public class DeclMethod extends AbstractDeclMethod {
 	private static final Logger LOG = Logger.getLogger(DeclVar.class);
 	
