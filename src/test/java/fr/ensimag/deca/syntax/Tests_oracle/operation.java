@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -21,13 +20,13 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tree.*;
 
-public class assign {
+public class operation {
 	
 	private static DecacCompiler compiler = new DecacCompiler(null,null);
 	
 	static String currentUsersDir = System.getProperty("user.dir");
-	
-    /* script pour le test de just-an-int.deca */
+    
+    /* script pour le test de operation.deca */
     public static AbstractProgram ProgInit() {
         ListInst linst = new ListInst();
         ListDeclVar lDecl = new ListDeclVar();
@@ -35,14 +34,12 @@ public class assign {
             new Program(
                 new ListDeclClass(),
                 new Main(lDecl,linst));
+        
 
-        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("int"));
-        AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("a"));
-        NoInitialization init = new NoInitialization();
-        lDecl.add(new DeclVar(type, varName, init));
-        AbstractLValue  left_operande = varName;
-        AbstractExpr right_operande = new IntLiteral(5);
-        linst.add(new Assign(left_operande, right_operande));
+        AbstractExpr left = new IntLiteral(5);
+        AbstractExpr right = new IntLiteral(2);
+        AbstractExpr expr = new Plus(left, right);
+        linst.add(expr);
 		
         return source;
     }
@@ -76,23 +73,24 @@ public class assign {
         if (prog == null) {
             System.exit(1);
         } else {
-        	PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/obtained/assign.txt", true));
+        	PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/obtained/operation.txt" , true));
             prog.prettyPrint(ps);
             ps.close();
         }
     }
     
     public static void genSyntaxTreeManualFile(AbstractProgram source) throws IOException {        
-        PrintStream ps = new PrintStream(new FileOutputStream("/user/0/cassagth/Documents/gl48/src/test/java/fr/ensimag/deca/syntax/Tests_oracle/expected/assign.txt", true));
+        PrintStream ps = new PrintStream(new FileOutputStream(currentUsersDir + "/expected/operation.txt", true));
         source.prettyPrint(ps);
         ps.close();
         
     }
 
     public static void main(String args[]) throws IOException {
+    	
     	int userspathlength = currentUsersDir.length();
     	String[] fichier_teste = new String[1];
-    	String path = "/user/0/cassagth/Documents/gl48/src/test/deca/syntax/valid/created/assign.deca";
+    	String path = currentUsersDir.substring(0, userspathlength - 41) + "/deca/syntax/valid/created/operation.deca";
         fichier_teste[0] = path;
         
         BufferedReader in = new BufferedReader(new FileReader(fichier_teste[0]));
@@ -103,10 +101,10 @@ public class assign {
 			  System.out.println (line);
 		}
 		in.close();
-		
 		AbstractProgram source = ProgInit();
+
         genSyntaxTreeManualFile(source);
-        
+
         genSyntaxTreeParserFile(fichier_teste);
     }
         

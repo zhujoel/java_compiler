@@ -4,17 +4,23 @@
       +> ListDeclVar [List with 0 elements]
       `> ListInst [List with 1 elements]
          []> IfThenElse
-             +> Greater
-             |  +> Int (5)
-             |  `> Int (2)
-             +> ListInst [List with 2 elements]
-             |  []> Print
-             |  ||  `> ListExpr [List with 1 elements]
-             |  ||     []> StringLiteral (if boucle)
+             +> GreaterOrEqual
+             |  +> Identifier (b)
+             |  `> Identifier (a)
+             +> ListInst [List with 1 elements]
              |  []> Print
              |      `> ListExpr [List with 1 elements]
-             |         []> StringLiteral (if boucle2)
+             |         []> StringLiteral (if branch)
              `> ListInst [List with 1 elements]
-                []> Print
-                    `> ListExpr [List with 1 elements]
-                       []> StringLiteral (else boucle)
+                []> IfThenElse
+                    +> Equals
+                    |  +> Identifier (a)
+                    |  `> Identifier (b)
+                    +> ListInst [List with 1 elements]
+                    |  []> Print
+                    |      `> ListExpr [List with 1 elements]
+                    |         []> StringLiteral (else if branch)
+                    `> ListInst [List with 1 elements]
+                       []> Print
+                           `> ListExpr [List with 1 elements]
+                              []> StringLiteral (else branch)
