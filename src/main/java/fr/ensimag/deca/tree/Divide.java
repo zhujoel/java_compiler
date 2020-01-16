@@ -1,8 +1,8 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.DIV;
 
 /**
  *
@@ -21,10 +21,23 @@ public class Divide extends AbstractOpArith {
     }
 
 
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+        compiler.addInstruction(new DIV(regGauche, regDroite));
+
+    }
+
+
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		compiler.addComment(this.getOperatorName());
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+        compiler.addInstruction(new DIV(regGauche, regDroite));
+        compiler.getRegManager().freeRegistre(regDroite.getNumber());
+        return regGauche;
 	}
 
 }

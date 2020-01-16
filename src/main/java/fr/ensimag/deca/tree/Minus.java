@@ -31,6 +31,7 @@ public class Minus extends AbstractOpArith {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
         compiler.addInstruction(new SUB(regGauche, regDroite));

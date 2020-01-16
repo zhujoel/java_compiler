@@ -1,0 +1,20 @@
+`> Program
+   +> ListDeclClass [List with 0 elements]
+   `> Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> DeclVar
+      |  ||  +> Identifier (int)
+      |  ||  +> Identifier (a)
+      |  ||  `> Initialization
+      |  ||     `> Int (5)
+      |  []> DeclVar
+      |      +> Identifier (int)
+      |      +> Identifier (b)
+      |      `> Initialization
+      |         `> Int (2)
+      `> ListInst [List with 1 elements]
+         []> Assign
+             +> Identifier (a)
+             `> Plus
+                +> Identifier (a)
+                `> Identifier (b)

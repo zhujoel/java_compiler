@@ -1,8 +1,8 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.MUL;
 
 /**
  *
@@ -19,11 +19,15 @@ public class And extends AbstractOpBool {
     protected String getOperatorName() {
         return "&&";
     }
-
+    
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		compiler.addComment(this.getOperatorName());
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+    	// Le AND équivaut à un MUL
+        compiler.addInstruction(new MUL(regGauche, regDroite));
+        compiler.getRegManager().freeRegistre(regDroite.getNumber());
+        return regGauche;
 	}
-
 }

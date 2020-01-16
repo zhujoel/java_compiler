@@ -7,6 +7,10 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 import java.io.PrintStream;
 
@@ -55,10 +59,28 @@ public class BooleanLiteral extends AbstractExpr {
         return "BooleanLiteral (" + value + ")";
     }
 
-	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    @Override
+    protected GPRegister codeGenReg(DecacCompiler compiler) {
+        //compiler.addInstruction(new ImmediateInteger(this.getValue()));
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	// Le booléen a pour valeur 1
+    	if(value) {
+    		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
+    		return reg;
+    	}	
+    	// Le booléen a pour valeur 0
+    	compiler.addInstruction(new LOAD(new ImmediateInteger(0), reg));
+		return reg;
+    	
+    }
+    
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler) {
+    	if(value) {
+            compiler.addInstruction(new WSTR(new ImmediateString("true")));
+    	}
+    	else {
+            compiler.addInstruction(new WSTR(new ImmediateString("false")));
+    	}
+    }
 }

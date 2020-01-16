@@ -1,0 +1,26 @@
+`> Program
+   +> ListDeclClass [List with 0 elements]
+   `> Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> IfThenElse
+             +> GreaterOrEqual
+             |  +> Identifier (b)
+             |  `> Identifier (a)
+             +> ListInst [List with 1 elements]
+             |  []> Print
+             |      `> ListExpr [List with 1 elements]
+             |         []> StringLiteral ("if branch")
+             `> ListInst [List with 1 elements]
+                []> IfThenElse
+                    +> Equals
+                    |  +> Identifier (a)
+                    |  `> Identifier (b)
+                    +> ListInst [List with 1 elements]
+                    |  []> Print
+                    |      `> ListExpr [List with 1 elements]
+                    |         []> StringLiteral ("else if branch")
+                    `> ListInst [List with 1 elements]
+                       []> Print
+                           `> ListExpr [List with 1 elements]
+                              []> StringLiteral ("else branch")
