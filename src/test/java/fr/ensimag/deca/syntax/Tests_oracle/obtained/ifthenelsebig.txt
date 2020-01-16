@@ -25,17 +25,17 @@
              |      |  []> Print
              |      |      `> ListExpr [List with 1 elements]
              |      |         []> StringLiteral ("if")
-             |      `> ListInst [List with 2 elements]
+             |      `> ListInst [List with 1 elements]
              |         []> IfThenElse
-             |         ||  +> Lower
-             |         ||  |  +> Int (2)
-             |         ||  |  `> Int (5)
-             |         ||  +> ListInst [List with 0 elements]
-             |         ||  `> ListInst [List with 0 elements]
-             |         []> IfThenElse
-             |             +> Equals
+             |             +> Lower
              |             |  +> Int (2)
              |             |  `> Int (5)
              |             +> ListInst [List with 0 elements]
-             |             `> ListInst [List with 0 elements]
+             |             `> ListInst [List with 1 elements]
+             |                []> IfThenElse
+             |                    +> Equals
+             |                    |  +> Int (2)
+             |                    |  `> Int (5)
+             |                    +> ListInst [List with 0 elements]
+             |                    `> ListInst [List with 0 elements]
              `> ListInst [List with 0 elements]
