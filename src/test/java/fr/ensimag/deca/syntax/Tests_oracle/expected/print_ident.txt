@@ -1,0 +1,13 @@
+`> Program
+   +> ListDeclClass [List with 0 elements]
+   `> Main
+      +> ListDeclVar [List with 1 elements]
+      |  []> DeclVar
+      |      +> Identifier (int)
+      |      +> Identifier (a)
+      |      `> Initialization
+      |         `> Int (5)
+      `> ListInst [List with 1 elements]
+         []> Print
+             `> ListExpr [List with 1 elements]
+                []> Identifier (a)

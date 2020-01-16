@@ -1,6 +1,5 @@
 {
 	if(5 > 2){
-		print("if");
 		print("of");
 	}
 	else{
@@ -8,9 +7,7 @@
 	if(2 < 5){
 		if(3 < 2){
 			print("if");
-			print("of");
-			print("if");
-			print("of");
+
 		}
 		else if(2 < 5){
 		}
