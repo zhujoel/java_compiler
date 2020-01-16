@@ -8,7 +8,8 @@ import org.apache.log4j.Logger;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: COMPLETE THIS MOTHERFUCKER
+ * Déclaration d'un attribut d'une classe.
+ * Ex: public int attrName [ = 3];
  * @author zhujo
  *
  */

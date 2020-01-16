@@ -7,6 +7,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import org.apache.log4j.Logger;
 
 /**
+ * Liste des classes d'un programme.
  *
  * @author gl48
  * @date 01/01/2020

@@ -11,7 +11,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * TODO: compléter et docu
+ * Appel d'une méthode.
  * @author zhujo
  *
  */

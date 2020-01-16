@@ -1,7 +1,7 @@
 package fr.ensimag.deca.tree;
 
 /**
- * TODO: comment
+ * Corps d'une méthode.
  * @author zhujo
  *
  */

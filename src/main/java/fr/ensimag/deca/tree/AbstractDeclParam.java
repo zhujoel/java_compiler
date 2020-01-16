@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: docu
+ * Déclaration d'un paramètre d'une méthode.
  * @author zhujo
  *
  */

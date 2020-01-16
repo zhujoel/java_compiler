@@ -3,7 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: ECRIRE LA DOCU
+ * Liste des attributs d'une classe.
  * @author zhujo
  *
  */
