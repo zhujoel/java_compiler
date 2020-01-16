@@ -35,19 +35,30 @@ public class ifthenelse {
                 new ListDeclClass(),
                 new Main(lDecl,linst));
         
-        AbstractExpr condition = new Greater(new IntLiteral(5), new IntLiteral(2));
-        ListInst then = new ListInst();
+        //boucle if
+        AbstractExpr condition1 = new GreaterOrEqual(new Identifier(compiler.getSymbolTable().create("b")), new Identifier(compiler.getSymbolTable().create("a")));
+        ListInst then1 = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("if boucle"));
+        then_expr1.add(new StringLiteral("if branch"));
+        then1.add(new Print(false, then_expr1));
+        
+        //boucle else
+        ListInst elsif = new ListInst();
+        //    sous boucle if
+        AbstractExpr condition2 = new Equals(new Identifier(compiler.getSymbolTable().create("a")), new Identifier(compiler.getSymbolTable().create("b")));
+        ListInst then2 = new ListInst();
         ListExpr then_expr2 = new ListExpr();
-        then_expr2.add(new StringLiteral("if boucle2"));
-        then.add(new Print(false, then_expr1));
-        then.add(new Print(false, then_expr2));
+        then_expr2.add(new StringLiteral("else if branch"));
+        then2.add(new Print(false, then_expr2));
+        //    sous boucle else
         ListInst els = new ListInst();
         ListExpr else_expr = new ListExpr();
-        else_expr.add(new StringLiteral("else boucle"));
+        else_expr.add(new StringLiteral("else branch"));
         els.add(new Print(false, else_expr));
-        linst.add(new IfThenElse(condition, then, els));
+        
+        elsif.add(new IfThenElse(condition2, then2, els));
+        
+        linst.add(new IfThenElse(condition1, then1, elsif));
 		
         return source;
     }

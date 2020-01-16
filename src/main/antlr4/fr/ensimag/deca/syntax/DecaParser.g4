@@ -92,13 +92,15 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
     : i=ident {
         }
       ((EQUALS e=expr {
-      		$tree = new DeclVar($t, $i.tree, new Initialization($e.tree));
+      		Initialization init = new Initialization($e.tree);
+      		$tree = new DeclVar($t, $i.tree, init);
+      		setLocation(init, $e.start);
       		setLocation($tree, $EQUALS);
         }
       ) | {
 			// nouvelle déclaration
 			$tree = new DeclVar($t, $i.tree, new NoInitialization());
-                        setLocation($tree, $i.start);
+    		setLocation($tree, $i.start);
         })
     ;
 
@@ -164,13 +166,23 @@ if_then_else returns[IfThenElse tree]
 @init {
 	ListInst elseBranch = new ListInst();
 	ListInst elseIfElseBranch = new ListInst();
+	boolean hasIfElse = false;
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
     		$tree = new IfThenElse($condition.tree, $li_if.tree, elseBranch);
             setLocation($tree, $if1);
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
-        	elseBranch.add(new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseIfElseBranch));
+      		if(!hasIfElse){
+        		elseBranch.add(new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseIfElseBranch));
+        		hasIfElse = true;
+        	}
+        	else{
+        		// on ajoute les else if en + récursivement dans la boucle else du else if précédent
+        		ListInst elseIfElseRecBranch = new ListInst();
+        		elseIfElseBranch.add(new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseIfElseRecBranch));
+        		
+        	}
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
