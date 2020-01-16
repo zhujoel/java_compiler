@@ -73,7 +73,7 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         int i = 0;
         while (i < args.length) {
-                switch (args[i]) {
+        	switch (args[i]) {
                     //option pour faire toute la compilation et 
                     //generer et montrer le fichier .ass
                     case "-a":
@@ -181,8 +181,8 @@ public class CompilerOptions {
             logger.info("Java assertions enabled");
         } else {
             logger.info("Java assertions disabled");
-        }
-
+        	}
+        
     }
 
     protected void displayUsage(){//what should it do?

@@ -63,14 +63,17 @@ public class DecacMain {
                 for (File source : options.getSourceFiles()) {
                     // pour chaque fichier à compiler DecacCompiler est instancié
                     DecacCompiler compiler = new DecacCompiler(options, source);
-
+                    
+                    //TODO: decomment this avec les threads (-m decac)
+                    /**
                     Callable<Boolean> task = () -> {
                         boolean r = compiler.compile();
                         return r;
 
                     };
+                    */
 
-                    pool.submit(task);
+                    //pool.submit(task);
 
                 }
             } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
@@ -90,7 +93,7 @@ public class DecacMain {
                         compiler = new DecacCompiler(options, source);
                     }
                     if (options.getParse()) {//option -p is activated
-                        if (compiler.compileDecompile()) {
+                        if (compiler.compile()) {
                             error = true;
                         }
                     } else if(options.getAllCompilation()){//option -a activated

@@ -3,7 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * TODO: COMPLETE THIS MOTHERFUCKER
+ * Liste des méthodes d'une classe.
  * @author zhujo
  *
  */

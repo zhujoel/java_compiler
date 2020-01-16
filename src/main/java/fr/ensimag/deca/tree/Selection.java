@@ -10,6 +10,11 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
+/**
+ * 
+ * @author zhujo
+ *
+ */
 public class Selection extends AbstractLValue {
 	
 	private AbstractExpr expr;
