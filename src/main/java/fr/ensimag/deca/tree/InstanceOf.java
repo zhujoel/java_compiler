@@ -10,42 +10,42 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
-public class NullLiteral extends AbstractExpr{
+/**
+ * TODO: compléter et docu
+ * @author zhujo
+ *
+ */
+public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
 		// TODO Auto-generated method stub
-			throw new UnsupportedOperationException("not yet implemented");
-	}
-
-	@Override
-	public void decompile(IndentPrintStream s) {
-		s.print("null");
-		
-	}
-
-	@Override
-	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// leaf node
-		
-	}
-
-	@Override
-	protected void iterChildren(TreeFunction f) {
-		// leaf node
-		
-	}
-	
-	@Override
-	String prettyPrintNode() {
-		return "NullLiteral (null)";
+		return null;
 	}
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void decompile(IndentPrintStream s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void prettyPrintChildren(PrintStream s, String prefix) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void iterChildren(TreeFunction f) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

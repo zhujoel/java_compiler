@@ -191,6 +191,12 @@
         <predecessor id="1" predecessor-id="54" type="FS"/>
       </predecessors>
     </task>
+    <task id="56" name="Implementation du command decac" note="" work="259200" duration="230400" start="20200110T000000Z" end="20200121T170000Z" work-start="20200110T080000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-duration">
+      <constraint type="must-start-on" time="20200110T000000Z"/>
+    </task>
+    <task id="57" name="Cobertura" note="" work="28800" duration="57600" start="20200115T000000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
+      <constraint type="must-start-on" time="20200115T000000Z"/>
+    </task>
   </tasks>
   <resource-groups/>
   <resources>
@@ -217,6 +223,7 @@
     <allocation task-id="12" resource-id="3" units="20"/>
     <allocation task-id="11" resource-id="3" units="20"/>
     <allocation task-id="2" resource-id="3" units="100"/>
+    <allocation task-id="56" resource-id="4" units="113"/>
     <allocation task-id="1" resource-id="4" units="20"/>
     <allocation task-id="12" resource-id="4" units="20"/>
     <allocation task-id="11" resource-id="4" units="20"/>

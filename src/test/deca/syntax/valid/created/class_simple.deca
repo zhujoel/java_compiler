@@ -1,0 +1,20 @@
+class A{
+	protected int a;
+
+	int method1(){
+		int b;
+	}
+
+	protected int b;
+
+	float method2(int param1, boolean param2){
+		int b;
+		int c;
+		b = b + c;
+		c = true;
+	}
+}
+{
+	int a;
+	a = a + 2;
+}

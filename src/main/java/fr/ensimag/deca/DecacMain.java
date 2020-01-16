@@ -93,7 +93,8 @@ public class DecacMain {
                         if (compiler.compileDecompile()) {
                             error = true;
                         }
-                    } else {
+                    } else if(options.getAllCompilation()){//option -a activated
+                        //pour faire tout la compilation et generer le fichier .ass
                         if(compiler.compile()){
                             error = true;
                         }
