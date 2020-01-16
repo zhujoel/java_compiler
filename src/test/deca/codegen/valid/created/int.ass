@@ -1,0 +1,23 @@
+; start main program
+; Main program
+; On stocke la valeur "null" à la première case de la pile.
+	LOAD #null, R0
+	STORE R0, 1(GB)
+; Beginning of main instructions:
+; Test pour savoir si la pile est pleine
+	TSTO #3
+	ADDSP #3
+; Declaration des variables
+; +
+	LOAD #5, R0
+	LOAD #2, R1
+	ADD R0, R1
+	STORE R0, 2(GB)
+; Instructions
+	WSTR "5"
+; +
+	LOAD #5, R0
+	LOAD #2, R1
+	ADD R0, R1
+	HALT
+; end main program

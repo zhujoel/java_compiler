@@ -51,7 +51,7 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     	int nbDecl = this.size();
     	compiler.addComment("Test pour savoir si la pile est pleine");
     	compiler.addInstruction(new TSTO(new ImmediateInteger(nbDecl + 2)));
-    	compiler.addInstruction(new BOV(new Label("pile_pleine")));
+    	//compiler.addInstruction(new BOV(new Label("pile_pleine")));
     	compiler.addInstruction(new ADDSP(new ImmediateInteger(nbDecl + 2)));
     	compiler.addComment("Declaration des variables");
         for (AbstractDeclVar i : getList()) {

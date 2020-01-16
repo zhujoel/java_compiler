@@ -7,6 +7,8 @@ public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
 	public static int stackCpt = 2;
+    private int nWhile = 0;
+    private int nIf = 0;
 	
 	public RegManager(int nbReg) {
 		this.nbRegMax = nbReg;
@@ -24,6 +26,23 @@ public class RegManager {
 	public int getStackCpt() {
 		return stackCpt;
 	}
+	
+	public int getNWhile() {
+		return nWhile;
+	}
+	
+	public int getNIf() {
+		return nIf;
+	}
+	
+	public void addNWhile() {
+		nWhile++;
+	}
+	
+	public void addNIf() {
+		nIf++;
+	}
+	
 	
 	public GPRegister getRegistreLibre() {
 		for(int i = 0; i < nbRegMax; ++i) {

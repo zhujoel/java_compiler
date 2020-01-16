@@ -90,7 +90,7 @@ public class DecacMain {
                         compiler = new DecacCompiler(options, source);
                     }
                     if (options.getParse()) {//option -p is activated
-                        if (compiler.compileDecompile()) {
+                        if (compiler.compile()) {
                             error = true;
                         }
                     } else if(options.getAllCompilation()){//option -a activated
