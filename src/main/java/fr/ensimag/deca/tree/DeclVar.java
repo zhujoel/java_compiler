@@ -28,7 +28,6 @@ import fr.ensimag.ima.pseudocode.instructions.STORE;
 public class DeclVar extends AbstractDeclVar {
 	private static final Logger LOG = Logger.getLogger(DeclVar.class);
 
-    
     final private AbstractIdentifier type;
     final private AbstractIdentifier varName;
     final private AbstractInitialization initialization;

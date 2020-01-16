@@ -518,60 +518,98 @@ ident returns[AbstractIdentifier tree]
 
 /****     Class related rules     ****/
 
+// Liste de classes
 list_classes returns[ListDeclClass tree]
 @init{
 	$tree = new ListDeclClass();
 }
     :
       (c1=class_decl {
+      		assert($c1.tree != null);
+      		$tree.add($c1.tree);
         }
       )*
     ;
 
-class_decl
+// Déclaration d'une classe
+class_decl returns[AbstractDeclClass tree]
     : CLASS name=ident superclass=class_extension OBRACE class_body CBRACE {
+            assert($ident.tree != null);
+            assert($superclass.tree != null);
+            assert($class_body.lfields != null);
+            assert($class_body.lmethods != null);
+    		$tree = new DeclClass($ident.tree, $superclass.tree, 
+    			$class_body.lfields, $class_body.lmethods);
         }
     ;
 
+// Extension d'une classe
 class_extension returns[AbstractIdentifier tree]
     : EXTENDS ident {
+    		assert($ident.tree != null);
+    		// si la classe étend une autre
+    		$tree = $ident.tree;
         }
     | /* epsilon */ {
+    		// si elle étend rien, bah elle étend quand meme Object
+    		$tree = new Identifier(super.getDecacCompiler().getSymbolTable().create("Object"));
         }
     ;
 
-class_body
+// Corps de la classe, avec des attributs et des méthodes
+class_body returns[ListDeclField lfields, ListDeclMethod lmethods]
+@init{
+	$lmethods = new ListDeclMethod();
+	$lfields = new ListDeclField();
+}
     : (m=decl_method {
         }
-      | decl_field_set
+      // passe la liste en paramètre pour que les fils le remplisse
+      | f=decl_field_set[$lfields]
       )*
     ;
 
-decl_field_set
-    : v=visibility t=type list_decl_field
-      SEMI
+// Un attribut de la classe
+decl_field_set[ListDeclField lfields]
+    : v=visibility t=type list_decl_field[$lfields, $v.tree, $t.tree] SEMI
     ;
 
-visibility
+// visibilité d'un attribut ou méthode
+visibility returns[Visibility tree]
     : /* epsilon */ {
+    		// par défaut c'est public
+    		$tree = Visibility.PUBLIC;
         }
     | PROTECTED {
+    		$tree = Visibility.PROTECTED;
         }
     ;
 
-list_decl_field
-    : dv1=decl_field
-        (COMMA dv2=decl_field
+// on ajoute l'attribut dans la liste d'attributs de la classe
+list_decl_field[ListDeclField lfields, Visibility v, AbstractIdentifier t]
+    : dv1=decl_field[$t, $v]{
+    	$lfields.add($dv1.tree);
+    }
+        (COMMA dv2=decl_field[$t, $v]{
+        	$lfields.add($dv2.tree);
+        }
       )*
     ;
 
-decl_field
+// déclaration de l'attribut de la classe avec initialisation ou non
+decl_field[AbstractIdentifier t, Visibility v] returns[AbstractDeclField tree]
     : i=ident {
         }
-      (EQUALS e=expr {
+       // si il y a une initialisation à l'attribut
+      ((EQUALS e=expr {
+      		Initialization init = new Initialization($e.tree);
+      		$tree = new DeclField($v, $t, $i.tree, init);
         }
-      )? {
-        }
+      )
+      // pas d'initialisation 
+      | {
+      		$tree = new DeclField($v, $t, $i.tree, new NoInitialization());
+        })
     ;
 
 decl_method
