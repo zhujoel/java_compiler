@@ -45,7 +45,6 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        //throw new UnsupportedOperationException("not yet implemented");
     	return env.get(key);
     }
 
@@ -65,8 +64,7 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	if (env.containsKey(name)) {
+        if (env.containsKey(name)) {
     		throw new DoubleDefException();
     	}
     	else {
@@ -83,6 +81,21 @@ public class EnvironmentExp {
     	//peut etre a modifier plus tard (voir dans les env parents ?)
     	return env.containsKey(name);
     }
-    
+    /**
+     * Ajoute la définition la définition associé à un symbol dans l'environnement.
+     * Si le symbole existe déjà, change sa définition si les deux définitions sont différentes,
+     * sinon, lance une exception
+     * @param name Nom du symbole
+     * @param def Definition du symbole
+     * @throws DoubleDefException Si le symbole est déjà défini et est identique
+     */
+    public void declareOrSet(Symbol name, ExpDefinition def) throws DoubleDefException{
+    	if(env.containsKey(name)) {
+    		if(env.get(name).equals(def)) {
+    			throw new DoubleDefException();
+    		}
+    	}
+    	env.put(name, def);
+    }
 
 }

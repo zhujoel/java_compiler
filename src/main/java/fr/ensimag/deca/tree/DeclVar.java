@@ -110,12 +110,12 @@ public class DeclVar extends AbstractDeclVar {
 		// on vérifie que le type existe dans notre environnement
 		this.type.setType(compiler.getEnvironmentType().get(this.type.getName()));
 		this.varName.setType(compiler.getEnvironmentType().get(this.type.getName()));
-		
+				
 		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
 		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
 		varDef.setOperand(new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB));
 		try {
-			compiler.getEnvironmentExp().declare(varName.getName(), varDef);
+			compiler.getEnvironmentExp().declareOrSet(varName.getName(), varDef);
 		}
 		catch(DoubleDefException e) {
 			e.printStackTrace();
