@@ -5,5 +5,6 @@
 	STORE R0, 1(GB)
 ; Beginning of main instructions:
 	STORE R0, 2(GB)
+	ADDSP #1
 	HALT
 ; end main program

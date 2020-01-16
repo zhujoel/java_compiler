@@ -80,7 +80,6 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-            //throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {//un seule fichier à compiler
             try {
                 for (File source : options.getSourceFiles()) {
@@ -89,10 +88,15 @@ public class DecacMain {
                         compiler = new DecacCompiler(options, source, options.getX());
                     }else{
                         compiler = new DecacCompiler(options, source);
-
                     }
-                    if (compiler.compile()) {
-                        error = true;
+                    if (options.getParse()) {//option -p is activated
+                        if (compiler.compileDecompile()) {
+                            error = true;
+                        }
+                    } else {
+                        if(compiler.compile()){
+                            error = true;
+                        }
                     }
                 }
             } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
