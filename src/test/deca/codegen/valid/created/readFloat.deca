@@ -1,0 +1,7 @@
+{
+    float x = readFloat();
+    print(x);
+    float y;
+    y = readFloat();
+    print(y);
+}

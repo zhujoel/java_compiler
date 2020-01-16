@@ -1,0 +1,15 @@
+{
+    bool a = true;
+    bool b = false;
+    a == b;
+    a = a == b;
+    print(a == b);
+    b = true;
+    a == b;
+    int c = 5;
+    int d = 2;
+    c == d;
+    print(c == d);
+    d = 5;
+    c == d;
+    print(c == d);
