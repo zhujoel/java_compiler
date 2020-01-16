@@ -7,16 +7,43 @@
       |      +> Identifier (a)
       |      `> Initialization
       |         `> Int (2)
-      `> ListInst [List with 1 elements]
-         []> IfThenElse
-             +> Equals
+      `> ListInst [List with 3 elements]
+         []> While
+         ||  +> Lower
+         ||  |  +> Identifier (a)
+         ||  |  `> Int (5)
+         ||  `> ListInst [List with 2 elements]
+         ||     []> Assign
+         ||     ||  +> Identifier (a)
+         ||     ||  `> Plus
+         ||     ||     +> Identifier (a)
+         ||     ||     `> Int (1)
+         ||     []> Print
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> Identifier (a)
+         []> While
+         ||  +> Lower
+         ||  |  +> Identifier (a)
+         ||  |  `> Int (10)
+         ||  `> ListInst [List with 2 elements]
+         ||     []> Assign
+         ||     ||  +> Identifier (a)
+         ||     ||  `> Plus
+         ||     ||     +> Identifier (a)
+         ||     ||     `> Int (1)
+         ||     []> Print
+         ||         `> ListExpr [List with 1 elements]
+         ||            []> Identifier (a)
+         []> While
+             +> Lower
              |  +> Identifier (a)
-             |  `> Int (2)
-             +> ListInst [List with 1 elements]
-             |  []> Print
-             |      `> ListExpr [List with 1 elements]
-             |         []> StringLiteral ("dans l'un")
-             `> ListInst [List with 1 elements]
+             |  `> Int (15)
+             `> ListInst [List with 2 elements]
+                []> Assign
+                ||  +> Identifier (a)
+                ||  `> Plus
+                ||     +> Identifier (a)
+                ||     `> Int (1)
                 []> Print
                     `> ListExpr [List with 1 elements]
-                       []> StringLiteral ("dans l'autre")
+                       []> Identifier (a)

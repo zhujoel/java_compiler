@@ -22,7 +22,6 @@ import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
-import fr.ensimag.deca.tree.Program;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
@@ -212,46 +211,6 @@ public class DecacCompiler {
             return true;
         }
     }
-    
-    /**
-     * Run the compiler (parse source file, arrête decac après 
-     * l’étape de construction de l’arbre, et affiche la décompilation 
-     * de ce dernier)
-     *
-     * @return true on error
-     */
-    public boolean compileDecompile() {
-        String sourceFile = source.getAbsolutePath();
-        String destFile = sourceFile.replace(".deca", ".ass");
-        // DONE! A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // DONE! A FAIRE: fichier .deca.
-        
-        PrintStream err = System.err;
-        PrintStream out = System.out;
-        try {
-            return doCompileDecompile(sourceFile, destFile, out, err);
-        } catch (LocationException e) {
-            e.display(err);
-            return true;
-        } catch (DecacFatalError e) {
-            err.println(e.getMessage());
-            return true;
-        } catch (StackOverflowError e) {
-            LOG.debug("stack overflow", e);
-            err.println("Stack overflow while compiling file " + sourceFile + ".");
-            return true;
-        } catch (Exception e) {
-            LOG.fatal("Exception raised while compiling file " + sourceFile
-                    + ":", e);
-            err.println("Internal compiler error while compiling file " + sourceFile + ", sorry.");
-            return true;
-        } catch (AssertionError e) {
-            LOG.fatal("Assertion failed while compiling file " + sourceFile
-                    + ":", e);
-            err.println("Internal compiler error while compiling file " + sourceFile + ", sorry.");
-            return true;
-        }
-    }
 
     /**
      * Internal function that does the job of compiling (i.e. calling lexer,
@@ -273,17 +232,13 @@ public class DecacCompiler {
             LOG.info("Parsing failed");
             return true;
         }
-
         assert(prog.checkAllLocations());
         
         
         prog.verifyProgram(this);
-        //Program p = (Program) prog;
-        //p.decompile(out);
         assert(prog.checkAllDecorations());
 
         addComment("start main program");
-
         prog.codeGenProgram(this);
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
@@ -300,38 +255,6 @@ public class DecacCompiler {
 
         program.display(new PrintStream(fstream));
         LOG.info("Compilation of " + sourceName + " successful.");
-        return false;
-    }
-    
-    /**
-     * Internal function that does the job of compiling and stops
-     * after decompiling (decac -p)
-     *
-     * @param sourceName name of the source (deca) file
-     * @param destName name of the destination (assembly) file
-     * @param out stream to use for standard output (output of decac -p)
-     * @param err stream to use to display compilation errors
-     *
-     * @return true on error
-     */
-    
-        private boolean doCompileDecompile(String sourceName, String destName,
-            PrintStream out, PrintStream err)
-            throws DecacFatalError, LocationException {
-        AbstractProgram prog = doLexingAndParsing(sourceName, err);
-        
-        if (prog == null) {
-            LOG.info("Parsing failed");
-            return true;
-        }
-
-        assert(prog.checkAllLocations());
-        
-        
-        prog.verifyProgram(this);
-        Program p = (Program) prog;
-        p.decompile(out);
-        
         return false;
     }
 
