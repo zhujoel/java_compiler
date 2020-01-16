@@ -49,9 +49,10 @@ public class CompilerOptions {
     public boolean getParse() {
         return parse;
     }
-    
-    
-    
+
+    public boolean getAllCompilation() {
+        return allCompilation;
+    }
     
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
@@ -64,6 +65,7 @@ public class CompilerOptions {
     private boolean noCheck = false;
     private boolean parse = false;
     private boolean registers = false;
+    private boolean allCompilation = false;
     private int x;
     private List<File> sourceFiles = new ArrayList<File>();
 
@@ -71,12 +73,12 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         int i = 0;
         while (i < args.length) {
-            if (args[i].matches("[/]([a-zA-ZÀ-ÿ0-9/+_/-]+[/])+[a-zA-ZÀ-ÿ0-9/+_/-]+(.{1}d{1}e{1}c{1}a{1})")) {
-                sourceFiles.add(new File(args[i]));
-            	//System.err.println("<CompilerOptions> file : " + args[1]);
-                //System.out.println("File added");
-            } else {
                 switch (args[i]) {
+                    //option pour faire toute la compilation et 
+                    //generer et montrer le fichier .ass
+                    case "-a":
+                        allCompilation = true; 
+                        break;
                     case "-b":
                         if (i == 0 && args.length == 1) {
                             printBanner = true;
@@ -136,10 +138,10 @@ public class CompilerOptions {
                             System.exit(1);
                         }
                         break;
-
+                    default: sourceFiles.add(new File(args[i]));
                 }
             
-        }
+        
             i++;
         }
         
