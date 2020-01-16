@@ -53,6 +53,7 @@ public class Program extends AbstractProgram {
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
+        
     }
 
     @Override

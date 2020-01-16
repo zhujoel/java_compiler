@@ -71,7 +71,19 @@ public class BooleanLiteral extends AbstractExpr {
     	// Le booléen a pour valeur 0
     	compiler.addInstruction(new LOAD(new ImmediateInteger(0), reg));
 		return reg;
-    	
+    }
+    
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        //compiler.addInstruction(new ImmediateInteger(this.getValue()));
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	// Le booléen a pour valeur 1
+    	if(value) {
+    		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
+    		return;
+    	}	
+    	// Le booléen a pour valeur 0
+    	compiler.addInstruction(new LOAD(new ImmediateInteger(0), reg));
     }
     
     @Override
