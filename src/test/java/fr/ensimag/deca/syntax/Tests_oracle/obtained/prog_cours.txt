@@ -1,36 +1,22 @@
 `> Program
    +> ListDeclClass [List with 0 elements]
    `> Main
-      +> ListDeclVar [List with 3 elements]
-      |  []> DeclVar
-      |  ||  +> Identifier (bool)
-      |  ||  +> Identifier (a)
-      |  ||  `> Initialization
-      |  ||     `> BooleanLiteral (false)
-      |  []> DeclVar
-      |  ||  +> Identifier (bool)
-      |  ||  +> Identifier (b)
-      |  ||  `> Initialization
-      |  ||     `> BooleanLiteral (true)
+      +> ListDeclVar [List with 1 elements]
       |  []> DeclVar
       |      +> Identifier (int)
-      |      +> Identifier (c)
+      |      +> Identifier (a)
       |      `> Initialization
-      |         `> Int (1)
-      `> ListInst [List with 4 elements]
-         []> Assign
-         ||  +> Identifier (a)
-         ||  `> And
-         ||     +> Identifier (a)
-         ||     `> Identifier (b)
-         []> Assign
-         ||  +> Identifier (b)
-         ||  `> Or
-         ||     +> Identifier (b)
-         ||     `> Identifier (a)
-         []> Print
-         ||  `> ListExpr [List with 1 elements]
-         ||     []> Identifier (c)
-         []> Print
-             `> ListExpr [List with 1 elements]
-                []> Identifier (b)
+      |         `> Int (2)
+      `> ListInst [List with 1 elements]
+         []> IfThenElse
+             +> Equals
+             |  +> Identifier (a)
+             |  `> Int (2)
+             +> ListInst [List with 1 elements]
+             |  []> Print
+             |      `> ListExpr [List with 1 elements]
+             |         []> StringLiteral ("dans l'un")
+             `> ListInst [List with 1 elements]
+                []> Print
+                    `> ListExpr [List with 1 elements]
+                       []> StringLiteral ("dans l'autre")

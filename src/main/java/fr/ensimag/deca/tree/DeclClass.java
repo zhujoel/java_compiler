@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
- * Représente une déclaration d'une classe.
  * 
  * @author gl48
  * @date 01/01/2020

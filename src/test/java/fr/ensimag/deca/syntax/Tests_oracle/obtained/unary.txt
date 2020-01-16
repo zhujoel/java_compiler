@@ -1,0 +1,11 @@
+`> Program
+   +> ListDeclClass [List with 0 elements]
+   `> Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 2 elements]
+         []> UnaryMinus
+         ||  `> Int (1)
+         []> Assign
+             +> Identifier (a)
+             `> Not
+                `> Float (8.7)

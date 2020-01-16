@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 DECAC_HOME=$(cd "$(dirname "$0")"/../../../../ && pwd)
 CP_FILE="$DECAC_HOME"/target/generated-sources/classpath.txt
 
@@ -11,7 +10,6 @@ grey=`tput setaf 8`
 reset=`tput sgr0`
 reussis=0
 total=0
-cd $DECAC_HOME
 
 cd $DECAC_HOME/src/test/java/fr/ensimag/deca/syntax/Tests_oracle
 

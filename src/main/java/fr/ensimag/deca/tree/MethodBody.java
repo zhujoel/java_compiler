@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * Corps d'une méthode
+ * Corps d'une méthode. Composé de déclaration de variables locales et d'instructions.
  * @author zhujo
  *
  */
