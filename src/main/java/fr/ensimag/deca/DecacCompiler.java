@@ -232,6 +232,7 @@ public class DecacCompiler {
             LOG.info("Parsing failed");
             return true;
         }
+
         assert(prog.checkAllLocations());
 
 
@@ -239,6 +240,8 @@ public class DecacCompiler {
         assert(prog.checkAllDecorations());
 
         addComment("start main program");
+
+    	out.println("wtfff brooooooo????????????????????????????????");
         prog.codeGenProgram(this);
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());

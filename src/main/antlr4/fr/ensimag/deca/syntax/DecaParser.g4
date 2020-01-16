@@ -98,6 +98,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       ) | {
 			// nouvelle déclaration
 			$tree = new DeclVar($t, $i.tree, new NoInitialization());
+    		setLocation($tree, $i.start);
         })
     ;
 
