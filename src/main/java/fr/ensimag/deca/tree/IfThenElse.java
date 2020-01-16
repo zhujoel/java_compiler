@@ -1,13 +1,17 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 
 /**
  * Full if/else if/else statement.
@@ -39,10 +43,6 @@ public class IfThenElse extends AbstractInst {
     	this.elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
-    }
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -73,5 +73,19 @@ public class IfThenElse extends AbstractInst {
         condition.prettyPrint(s, prefix, false);
         thenBranch.prettyPrint(s, prefix, false);
         elseBranch.prettyPrint(s, prefix, true);
+    }
+    
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.addComment("Début du if");
+    	Label labElse = new Label("else");
+    	Label labEndif = new Label("endif");
+    	condition.codeGenBool(compiler, labElse, true);
+    	thenBranch.codeGenListInst(compiler);
+    	compiler.addInstruction(new BRA(labEndif));
+    	compiler.addLabel(labElse);
+    	elseBranch.codeGenListInst(compiler);
+    	compiler.addLabel(labEndif);
     }
 }
