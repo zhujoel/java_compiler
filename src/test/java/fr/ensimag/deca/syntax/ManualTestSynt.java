@@ -3,8 +3,13 @@ package fr.ensimag.deca.syntax;
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractProgram;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import org.antlr.v4.runtime.CommonTokenStream;
 
 /**

@@ -1,5 +1,5 @@
 {
 	while(true){
-		print("while boucle");
+		5+2;
 	}
 }

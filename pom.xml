@@ -133,15 +133,17 @@
         <executions>
           <!-- One <execution> per executable to launch. Execution
                failure (exit status != 0) will stop the tests. -->
+          <!-- 
           <execution>
-            <id>basic-lex</id>
+            <id>all-test</id>
             <configuration>
-              <executable>./src/test/script/basic-lex.sh</executable>
+              <executable>./src/test/script/all-test.sh</executable>
+          -->
               <!-- If we need to pass arguments :
                    <arguments>
                    <argument>...</argument>
                    </arguments>
-              -->
+              --> <!--
             </configuration>
             <phase>test</phase>
             <goals><goal>exec</goal></goals>
@@ -153,9 +155,9 @@
             <goals><goal>exec</goal></goals>
           </execution>
           <execution>
-            <!-- run a unit test by defining our own class with a main
+            --><!-- run a unit test by defining our own class with a main
                  function -->
-            <!-- warning: java assertions are not enabled -->
+            <!-- warning: java assertions are not enabled --><!-- 
             <id>unit-test-symbol</id>
             <configuration>
               <mainClass>fr.ensimag.deca.tools.ManualTestSymbol</mainClass>
@@ -188,6 +190,7 @@
             <phase>test</phase>
             <goals><goal>exec</goal></goals>
           </execution>
+          -->
         </executions>
       </plugin>
 
