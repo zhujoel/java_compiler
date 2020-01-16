@@ -1,0 +1,12 @@
+{
+    int a = 2;
+    int b = 5;
+    bool c = false;
+    a != b;
+    print(a != b);
+    c = a != b;
+    b = 2;
+    a != b;
+    print(a != b);
+    c = a != b;
+}

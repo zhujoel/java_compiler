@@ -1,0 +1,10 @@
+{
+    bool a = true;
+    bool b = false;
+    a = a || b;
+    a = a || true;
+    a = true || a;
+    a = true || false;
+    a || b;
+    print(a || b);
+}
