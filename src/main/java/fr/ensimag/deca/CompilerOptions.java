@@ -138,12 +138,26 @@ public class CompilerOptions {
                             System.exit(1);
                         }
                         break;
-                    default: sourceFiles.add(new File(args[i]));
-                }
-            
-        
+                default:
+                    if (!args[i].matches("[0-9]|1[0-2]")) {//dans le cas où on met la valeur de X pour la option -r
+                        //Si un fichier apparaît plusieurs fois sur la ligne de commande, ne le ajouter que une seule fois
+                        if (!sourceFiles.isEmpty()) {
+                            boolean isIn = false;
+                            for (File file : sourceFiles) {
+                                if (file.getPath().matches(args[i])) {
+                                    isIn = true;
+                                }
+                            }
+                            if (!isIn) {//if the file is not already in sourceFiles we add it
+                                sourceFiles.add(new File(args[i]));
+                            }
+                        } else {//if sourceFiles is empty, just add it
+                            sourceFiles.add(new File(args[i]));
+                        }
+                    }
+            }
             i++;
-        }
+    }
         
         if(sourceFiles.isEmpty() && args.length > 0 && !printBanner){
             System.err.println("No valid path for the source file was detected");

@@ -1,0 +1,8 @@
+class A{
+	int b = 22;
+}
+{
+	A classA = new A();
+	int a = A.b;
+
+}
