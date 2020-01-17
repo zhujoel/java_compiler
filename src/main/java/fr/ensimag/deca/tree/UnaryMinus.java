@@ -6,6 +6,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 
 /**
@@ -51,7 +53,8 @@ public class UnaryMinus extends AbstractUnaryExpr {
 		compiler.addComment(this.getOperatorName());
 		GPRegister regDroite = this.getOperand().codeGenReg(compiler);
 		GPRegister regGauche = compiler.getRegManager().getRegistreLibre();
-        compiler.addInstruction(new SUB(regGauche, regDroite));
+		compiler.addInstruction(new LOAD(new ImmediateInteger(0), regGauche));
+        compiler.addInstruction(new SUB(regDroite, regGauche));
         compiler.getRegManager().freeRegistre(regDroite.getNumber());
         return regGauche;
 	}

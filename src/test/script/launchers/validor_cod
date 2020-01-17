@@ -17,15 +17,16 @@ ABSOPATH=$(pwd);
 
 cd $DECAC_HOME/src/test/deca/codegen/valid/created
 
-tmpfile=$(mktemp /tmp/temp.XXX)
-
+: '
 for prog in *.deca
 do
     echo "Test de ${prog%.*}..."
     decac -a $ABSOPATH/src/test/deca/codegen/valid/created/$prog
     ima $ABSOPATH/src/test/deca/codegen/valid/created/${prog%.*}.ass
 done
-
+'
+decac -a $ABSOPATH/src/test/deca/codegen/valid/created/assign.deca
+ima $ABSOPATH/src/test/deca/codegen/valid/created/assign.ass
 
 
 exit

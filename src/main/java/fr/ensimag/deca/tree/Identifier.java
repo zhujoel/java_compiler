@@ -248,8 +248,9 @@ public class Identifier extends AbstractIdentifier {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		this.setType(compiler.getEnvironmentExp().get(this.getName()).getType());
     	GPRegister reg = compiler.getRegManager().getRegistreLibre();
-    	// on récupère la définition du symbol correspondant à l'identifier dans la stack
+    	// on récupère la définition du symbole correspondant à l'identifier dans la stack
     	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
     	return reg;	

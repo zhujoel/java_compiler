@@ -44,23 +44,33 @@ public class Modulo extends AbstractOpArith {
         return "%";
     }
 
+    /**
+     * Génère le code dans le cas ou l'on a pas besoin de stocker l'opération
+     */
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
     	compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+    	
         compiler.addInstruction(new REM(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
+        
+        compiler.getRegManager().freeRegistre(regGauche.getNumber());
     }
 
-
+    /**
+     * Génère le code correspondant à l'opération, et renvoie le registre dans lequel
+     * le résultat est stocké.
+     */
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
 		compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+    	
         compiler.addInstruction(new REM(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
+        
+        compiler.getRegManager().freeRegistre(regGauche.getNumber());
+        return regDroite;
 	}
 }
