@@ -42,7 +42,7 @@
       </task>
       <task id="11" name="Etape B" note="" work="115200" start="20200107T170000Z" end="20200109T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
         <task id="12" name="Analyseur contextuel" note="" work="57600" duration="57600" start="20200107T170000Z" end="20200109T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
-        <task id="13" name="Tests" note="" work="57600" duration="28800" start="20200108T000000Z" end="20200108T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration">
+        <task id="13" name="Tests" note="" work="57600" duration="57600" start="20200108T000000Z" end="20200109T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration">
           <constraint type="must-start-on" time="20200108T000000Z"/>
         </task>
       </task>
@@ -152,7 +152,7 @@
     <allocation task-id="37" resource-id="3" units="20"/>
     <allocation task-id="36" resource-id="3" units="33"/>
     <allocation task-id="25" resource-id="3" units="100"/>
-    <allocation task-id="13" resource-id="3" units="200"/>
+    <allocation task-id="13" resource-id="3" units="100"/>
     <allocation task-id="12" resource-id="3" units="100"/>
     <allocation task-id="24" resource-id="3" units="100"/>
     <allocation task-id="1" resource-id="3" units="20"/>
