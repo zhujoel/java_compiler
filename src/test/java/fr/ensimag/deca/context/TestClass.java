@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import fr.ensimag.deca.tree.Location;
+
 
 public class TestClass {
 	
@@ -26,6 +28,8 @@ public class TestClass {
 	@Mock
 	ClassType classTypeB;
 	
+	ClassType classTypeC;
+	
 	@Mock
 	EnvironmentExp envExp;
 	
@@ -36,9 +40,9 @@ public class TestClass {
 		MockitoAnnotations.initMocks(this);
 		classDefB = new ClassDefinition(null, null, classDefA);
 		classTypeA = new ClassType(null);
+		classTypeC = new ClassType(null, null, classDefB);
 		when(classDefA.getType()).thenReturn(t);
 		when(classTypeB.isClass()).thenReturn(true);
-		
 
 	}
 	
@@ -67,21 +71,65 @@ public class TestClass {
 	//faire les tests classtype
 	
 	@Test
-	public void testIsClass() {
+	public void testClassTypeIsClass() {
 		assertTrue(classTypeA.isClass());
 	}
 	
 	@Test
-	public void testIsClassOrNull() {
+	public void testClassTypeIsClassOrNull() {
 		assertTrue(classTypeA.isClassOrNull());
 	}
 	
 	@Test
-	public void testSameType() {
-		assertTrue(classTypeA.sameType(classTypeB));
+	public void testClassTypeSameType() {
+		assertTrue(classTypeC.sameType(classTypeB));
 	}
 	
-
+	@Test
+	public void testClassTypeDefintion() {
+		assertTrue(classTypeC.getDefinition().getSuperClass().equals(classDefB));
+	}
 	
+	@Test
+	public void testAssertType() {
+		assertEquals((ClassType) classTypeA, classTypeA.asClassType(null, null));
+	}
+	
+	@Test
+	public void testDefLocation() {
+		classDefB.setLocation(Location.BUILTIN);
+		assertEquals(classDefB.getLocation(), Location.BUILTIN);
+	}
+	
+	@Test
+	public void testDefIsField() {
+		assertFalse(classDefB.isField());
+	}
+	
+	@Test
+	public void testDefIsMethod() {
+		assertFalse(classDefB.isMethod());
+	}
+	
+	@Test
+	public void testDefIsClass() {
+		assertTrue(classDefB.isClass());
+	}
+	
+	
+	@Test
+	public void testDefIsParam() {
+		assertFalse(classDefB.isParam());
+	}
+	
+	@Test(expected = ContextualError.class)
+	public void testAsMethodDefintion() throws ContextualError {
+		classDefB.asMethodDefinition(null, null);
+	}
+	
+	@Test(expected = ContextualError.class)
+	public void testAdFieldDefintion() throws ContextualError{
+		classDefB.asFieldDefinition(null, null);
+	}
 
 }
