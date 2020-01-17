@@ -1,0 +1,6 @@
+class A{
+	int a = 5;
+	boolean methbody(){
+		a = a + 5;
+	}
+}
