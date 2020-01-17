@@ -80,7 +80,7 @@
         <task id="28" name="Tests" note="" work="86400" duration="86400" start="20200108T170000Z" end="20200113T170000Z" work-start="20200109T080000Z" percent-complete="60" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
     </task>
-    <task id="29" name="Avec Objet" note="" work="464400" start="20200114T170000Z" end="20200122T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-work">
+    <task id="29" name="Avec Objet" note="" work="493200" start="20200114T170000Z" end="20200124T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
@@ -93,15 +93,15 @@
         <task id="33" name="D&#xE9;compilateur" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-duration"/>
         <task id="34" name="Tests" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
-      <task id="35" name="Etape B" note="" work="144000" start="20200119T000000Z" end="20200122T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="35" name="Etape B" note="" work="172800" start="20200119T000000Z" end="20200124T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="23" type="FS"/>
         </predecessors>
-        <task id="36" name="Analyseur contextuel" note="" work="57600" start="20200119T000000Z" end="20200121T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="36" name="Analyseur contextuel" note="" work="86400" start="20200119T000000Z" end="20200122T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20200119T000000Z"/>
         </task>
-        <task id="37" name="Tests" note="" work="86400" start="20200119T000000Z" end="20200122T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20200119T000000Z"/>
+        <task id="37" name="Tests" note="" work="86400" start="20200122T000000Z" end="20200124T170000Z" work-start="20200122T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20200122T000000Z"/>
         </task>
       </task>
       <task id="38" name="Etape C" note="" work="144000" start="20200114T170000Z" end="20200117T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
