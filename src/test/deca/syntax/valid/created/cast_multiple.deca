@@ -1,0 +1,5 @@
+{
+	int a = 5;
+	a = (float)a;
+	a = (string)a;
+}
