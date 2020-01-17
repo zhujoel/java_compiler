@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -11,16 +13,21 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * 
+ * Déclaration d'une selection (i.e, on prend l'attribut d'un objet).
+ * Ex: obj.attr;
  * @author zhujo
  *
  */
 public class Selection extends AbstractLValue {
-	
+
+	// l'expression à gauche de la selection (dans l'exemple 'obj')
 	private AbstractExpr expr;
-	private Identifier ident;
+	// l'attribut à droite de la selection (dans l'exemple 'attr')
+	private AbstractIdentifier ident;
 	
-	public Selection(AbstractExpr expr, Identifier ident) {
+	public Selection(AbstractExpr expr, AbstractIdentifier ident) {
+		Validate.notNull(expr);
+		Validate.notNull(ident);
 		this.expr = expr;
 		this.ident = ident;
 	}
@@ -39,7 +46,8 @@ public class Selection extends AbstractLValue {
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		this.expr.prettyPrint(s, prefix, false);
+		this.ident.prettyPrint(s, prefix, true);
 		
 	}
 

@@ -407,13 +407,16 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
-            // TODO: compléter
+			$tree = new Selection($e1.tree, $i.tree);
+			setLocation($tree, $e1.start);
             
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
+            // on fait appel à une méthode
             assert($args.tree != null);
-            // TODO: compléter
+			$tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+			setLocation($tree, $o);
         }
         | /* epsilon */ {
             // we matched "e.i"
