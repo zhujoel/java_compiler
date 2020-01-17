@@ -81,7 +81,7 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
     	assert($dv1.tree != null);
         $l.add($dv1.tree);
         } (COMMA dv2=decl_var[$t] {
-        	assert($dv2.tree);
+        	assert($dv2.tree != null);
         	// on ajoute dans la liste 
         	$l.add($dv2.tree);
         }
@@ -99,6 +99,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
       		Initialization init = new Initialization($e.tree);
       		$tree = new DeclVar($t, $i.tree, init);
       		setLocation($tree, $EQUALS);
+      		setLocation(init, $e.start);
         }
       ) | {
 			// nouvelle déclaration
