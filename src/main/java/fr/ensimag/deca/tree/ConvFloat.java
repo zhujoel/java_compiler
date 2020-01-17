@@ -1,10 +1,11 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
 
 /**
  * Conversion of an int into a float. Used for implicit conversions.
@@ -32,8 +33,13 @@ public class ConvFloat extends AbstractUnaryExpr {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	protected static GPRegister convert(DecacCompiler compiler, AbstractExpr expr) {
+		GPRegister reg = expr.codeGenReg(compiler);
+		compiler.addInstruction(new FLOAT(reg, reg));
+		return reg;
 	}
 
 }

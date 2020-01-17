@@ -1,0 +1,7 @@
+#include "inclu_multiple1.deca"
+#include "inclu_multiple2.deca"
+
+{
+	int a;
+	a = 5;
+}

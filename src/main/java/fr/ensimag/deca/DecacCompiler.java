@@ -212,6 +212,19 @@ public class DecacCompiler {
             return true;
         }
     }
+    
+    public boolean verify(){
+        String sourceFile = source.getAbsolutePath();
+        PrintStream err = System.err;
+        LOG.debug("Compiling and verifying file " + sourceFile);
+        try{
+            return doVerify(sourceFile, err);
+        }catch(DecacFatalError e){
+            return true;
+        }catch(LocationException e){
+            return true;
+        }
+    }
 
     /**
      * Internal function that does the job of compiling (i.e. calling lexer,
@@ -234,8 +247,6 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-        
-        
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
 
@@ -256,6 +267,31 @@ public class DecacCompiler {
 
         program.display(new PrintStream(fstream));
         LOG.info("Compilation of " + sourceName + " successful.");
+        return false;
+    }
+    
+    /**
+     * Internal function used for the verification (-v) option (i.e. 
+     * calling lexer and verification.
+     *
+     * @param sourceName name of the source (deca) file
+     * @param destName name of the destination (assembly) file
+     * @param out stream to use for standard output (output of decac -p)
+     * @param err stream to use to display compilation errors
+     *
+     * @return true on error
+     */
+    private boolean doVerify(String sourceName,PrintStream err)
+            throws DecacFatalError, LocationException {
+        AbstractProgram prog = doLexingAndParsing(sourceName, err);
+        
+        if (prog == null) {
+            LOG.info("Parsing failed");
+            return true;
+        }
+        assert(prog.checkAllLocations());
+        prog.verifyProgram(this); //decac must stop after doing the verification
+        assert(prog.checkAllDecorations());
         return false;
     }
     

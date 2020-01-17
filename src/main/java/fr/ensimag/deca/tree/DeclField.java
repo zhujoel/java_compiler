@@ -47,7 +47,6 @@ public class DeclField extends AbstractDeclField {
         type.prettyPrint(s, prefix, false);
         varName.prettyPrint(s, prefix, false);
         initialization.prettyPrint(s, prefix, true);
-		
 	}
 
 	@Override

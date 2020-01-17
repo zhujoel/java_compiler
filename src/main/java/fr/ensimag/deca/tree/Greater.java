@@ -36,6 +36,7 @@ public class Greater extends AbstractOpIneq {
         return regGauche;
 	}
 	
+   
 	@Override
 	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());

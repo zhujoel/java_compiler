@@ -1,0 +1,32 @@
+#!/bin/sh
+
+DECAC_HOME=$(cd "$(dirname "$0")"/../../../../ && pwd)
+
+CP_FILE="$DECAC_HOME"/target/generated-sources/classpath.txt
+
+CP="$DECAC_HOME"/target/generated-classes/cobertura:"$DECAC_HOME"/target/test-classes/:"$DECAC_HOME"/target/classes/:$(cat "$CP_FILE")
+
+cd $DECAC_HOME
+
+decac src/test/deca/syntax/valid/created/assign.deca
+
+decac -b
+
+decac -p "$DECAC_HOME"/src/test/deca/syntax/valid/created/divide.deca
+
+decac -v "$DECAC_HOME"/src/test/deca/syntax/valid/created/different.deca
+
+decac -n "$DECAC_HOME"/src/test/deca/syntax/valid/created/eq_neq.deca
+
+decac -r 9 "$DECAC_HOME"/src/test/deca/syntax/valid/created/float.deca
+
+decac -w "$DECAC_HOME"/src/test/deca/syntax/valid/created/moitie.deca
+
+decac -d "$DECAC_HOME"/src/test/deca/syntax/valid/created/greaterthan.deca
+
+decac -P "$DECAC_HOME"/src/test/deca/syntax/valid/created/ifelse.deca "$DECAC_HOME"/src/test/deca/syntax/valid/created/ifthenelse.deca
+
+decac -p -v "$DECAC_HOME"/src/test/deca/syntax/valid/created/just-an-int.deca
+
+decac -p -n "$DECAC_HOME"/src/test/deca/syntax/valid/created/minus.deca
+
