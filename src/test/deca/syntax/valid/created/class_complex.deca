@@ -3,9 +3,15 @@ class A extends B{
 	float c;
 	float g = 5.2;
 
-	float meth1(){
+	float meth1(int a, float b){
 		return 5.2;
 	}
+	boolean bool;
+
+	void meth2(){
+		bool = false;
+	}
 }
+
 {
 }

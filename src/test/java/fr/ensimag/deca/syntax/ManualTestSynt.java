@@ -2,6 +2,7 @@ package fr.ensimag.deca.syntax;
 
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tree.AbstractProgram;
 
 import java.io.BufferedWriter;
@@ -20,7 +21,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
  */
 public class ManualTestSynt {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ContextualError {
         // Uncomment the following line to activate debug traces
         // unconditionally for test_synt
         // Logger.getRootLogger().setLevel(Level.DEBUG);
@@ -38,6 +39,8 @@ public class ManualTestSynt {
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);
+            prog.checkAllLocations();
+            prog.verifyProgram(decacCompiler);
             prog.decompile(System.out);
             prog.codeGenProgram(decacCompiler);
             String assembleur = decacCompiler.displayIMAProgram(); 
