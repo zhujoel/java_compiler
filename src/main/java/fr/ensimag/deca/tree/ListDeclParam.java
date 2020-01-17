@@ -11,8 +11,15 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		s.print("(");
+		for(int i = 0; i < getList().size()-1; ++i) {
+			getList().get(i).decompile(s);
+			s.print(", ");
+		}
+		if(getList().size() != 0) {
+			getList().get(getList().size()-1).decompile(s);
+		}
+		s.print(")");
 	}
 
 }
