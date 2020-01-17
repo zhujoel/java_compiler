@@ -95,4 +95,4 @@ SEPAR : ( ' ' | '\t' | '\n' | '\r' ) { skip(); } ;
 
 // Inclusion de fichier
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+ ;
-INCLUDE : '#include' (' ')* '"' FILENAME '"' { doInclude("\"" + "yoooo.deca" + "\"") ;};
+INCLUDE : '#include' (' ')* '"' FILENAME '"' { doInclude(getText()); };
