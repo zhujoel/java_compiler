@@ -157,7 +157,7 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
-            $tree = $expr.tree;
+            $tree = new Return($expr.tree);
             setLocation($tree, $RETURN);
         }
     ;
@@ -327,6 +327,7 @@ inequality_expr returns[AbstractExpr tree]
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
             assert($type.tree != null);
+            $tree = new InstanceOf($e1.tree, $type.tree);
 			setLocation($tree, $e1.start);
         }
     ;
@@ -406,17 +407,20 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
-            // TODO: compléter
-            
+            // soit on a l'appel d'une méthode, soit on prend l'attribut
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
+            // on fait appel à une méthode
             assert($args.tree != null);
-            // TODO: compléter
+			$tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+			setLocation($tree, $o);
         }
         | /* epsilon */ {
             // we matched "e.i"
-            // TODO: compléter
+            // on prend l'attribut'
+			$tree = new Selection($e1.tree, $i.tree);
+			setLocation($tree, $e1.start);
         }
         )
     ;
@@ -430,7 +434,8 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
-            // TODO: compléter
+			$tree = new MethodCall($m.tree, $args.tree);
+			setLocation($tree, $m.start);
             
         }
     | OPARENT expr CPARENT {
@@ -494,18 +499,17 @@ literal returns[AbstractExpr tree]
 			setLocation($tree, $FALSE);
         }
     | THIS {
-            // TODO: compléter
-    		//if ($THIS.text.equals("this")){
-    		//	$tree = new BooleanLiteral(false);
-    		//}
-    		//else{
-    		//	$tree = new BooleanLiteral(true);
-    		//}
+    		if ($THIS.text.equals("this")){
+    			$tree = new This(true);
+    		}
+    		else{
+    			$tree = new This(false);
+    		}
+    		setLocation($tree, $THIS);
         }
     | NULL {
-            // TODO: compléter
-    		//$tree = new NullLiteral();
-    		//$tree.text = 'null';
+    		$tree = new Null();
+			setLocation($tree, $NULL);
     		}
     ;
 
@@ -656,3 +660,4 @@ param returns[AbstractDeclParam tree]
     	$tree = new DeclParam($type.tree, $ident.tree);
         }
     ;
+    

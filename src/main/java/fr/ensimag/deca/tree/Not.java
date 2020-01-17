@@ -58,7 +58,8 @@ public class Not extends AbstractUnaryExpr {
     	GPRegister regTemp = compiler.getRegManager().getRegistreLibre();
         compiler.addInstruction(new LOAD(new ImmediateInteger(1), regTemp));
         compiler.addInstruction(new SUB(regTemp, reg));
-        return regTemp;
+        compiler.getRegManager().freeRegistre(regTemp.getNumber());
+        return reg;
 	}
 	
 	@Override
