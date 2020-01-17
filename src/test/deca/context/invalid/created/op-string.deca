@@ -1,0 +1,5 @@
+{
+	String s = "salut";
+	int a = 3;
+	s = a + s;
+}

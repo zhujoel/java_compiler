@@ -35,7 +35,7 @@ do
         echo "${grey}Obtenu                              Attendu${reset}"
         # Affiche les deux fichiers sur deux colonnes
         pr -m -t expected/${prog%.*}.txt obtained/${prog%.*}.txt
-        # diff  ../expected/${prog%.*}.txt obtained/${prog%.*}.txt
+        # diff expected/${prog%.*}.txt obtained/${prog%.*}.txt
     fi
     ((total++))
 done
