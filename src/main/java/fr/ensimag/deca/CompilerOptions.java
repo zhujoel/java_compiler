@@ -200,8 +200,7 @@ public class CompilerOptions {
     }
 
     protected void displayUsage(){//what should it do?
-        //throw new UnsupportedOperationException("not yet implemented");
-        System.out.println("");
+        System.out.println("wtvr");
     }
 }
 
