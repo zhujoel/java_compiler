@@ -2,11 +2,15 @@ package fr.ensimag.deca;
 
 import java.io.File;
 import static java.lang.Runtime.getRuntime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import static java.util.concurrent.Executors.newFixedThreadPool;
+import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 
 /**
@@ -19,7 +23,7 @@ public class DecacMain {
 
     private static Logger LOG = Logger.getLogger(DecacMain.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // example log4j message.
 
         LOG.info("Decac compiler started");
@@ -59,23 +63,29 @@ public class DecacMain {
             // le nombre de processeurs sur la machine et créer le meme
             // nombre de fils d’exécution
             ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
+            List<Callable<Boolean>> taskList = new ArrayList();
+            
             try {
                 for (File source : options.getSourceFiles()) {
                     // pour chaque fichier à compiler DecacCompiler est instancié
                     DecacCompiler compiler = new DecacCompiler(options, source);
-                    
                     //TODO: decomment this avec les threads (-m decac)
-                    /**
+                    
                     Callable<Boolean> task = () -> {
-                        boolean r = compiler.compile();
+                        boolean r = false;
+                        if(options.getParse()){//arrête decac après l’étape de construction del’arbre
+                           r = compiler.compileDecompile(); 
+                        }else if(options.getAllCompilation()){//faire tout la compilation et generer le fichier .ass
+                            r = compiler.compile();
+                        }
                         return r;
-
                     };
-                    */
-
+                    
+                    taskList.add(task);
                     //pool.submit(task);
 
                 }
+                List<Future<Boolean>> results = pool.invokeAll(taskList);
             } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
                 System.out.println("Error in the file path");
             }
@@ -83,7 +93,7 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-        } else {//un seule fichier à compiler
+        } else {//one or more files to compile but not in paralell
             try {
                 for (File source : options.getSourceFiles()) {
                     DecacCompiler compiler;
@@ -93,7 +103,7 @@ public class DecacMain {
                         compiler = new DecacCompiler(options, source);
                     }
                     if (options.getParse()) {//option -p is activated
-                        if (compiler.compile()) {
+                        if (compiler.compileDecompile()) {
                             error = true;
                         }
                     } else if(options.getAllCompilation()){//option -a activated

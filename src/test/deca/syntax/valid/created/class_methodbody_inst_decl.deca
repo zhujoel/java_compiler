@@ -1,0 +1,6 @@
+class A{
+	int methbody(){
+		int a = 5;
+		print("hehe");
+	}
+}

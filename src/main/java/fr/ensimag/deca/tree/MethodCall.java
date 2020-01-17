@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
@@ -13,16 +14,37 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * Appel d'une méthode.
+ * Appel d'une méthode de classe ou fonction globale.
+ * Ex: a.z.meth(b, c);
+ * Ex: func(a);
  * @author zhujo
  *
  */
 public class MethodCall extends AbstractExpr{
 	
-	//TODO: je sais pas trop a quoi servent ces parametres
+	// expression à gauche du point (dans l'exemple 'a.z')
     private AbstractExpr expr;
-    private AbstractIdentifier ident;
+    // nom de la méthode (dans l'exemple 'meth')
+    private AbstractIdentifier nomMethode;
+    // parametres de la méthode (dans l'exemple (b, c)
     private ListExpr listExpr;
+    
+    public MethodCall(AbstractExpr expr, AbstractIdentifier nomMethode, ListExpr list) {
+    	Validate.notNull(expr);
+    	Validate.notNull(nomMethode);
+    	Validate.notNull(list);
+    	this.expr = expr;
+    	this.nomMethode = nomMethode;
+    	this.listExpr = list;
+    }
+    
+    public MethodCall(AbstractIdentifier nomMethode, ListExpr list) {
+    	Validate.notNull(nomMethode);
+    	Validate.notNull(list);
+    	this.expr = null;
+    	this.nomMethode = nomMethode;
+    	this.listExpr = list;
+    }
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
@@ -45,8 +67,11 @@ public class MethodCall extends AbstractExpr{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
-		
+		if(this.expr != null) {
+			this.expr.prettyPrint(s, prefix, false);
+		}
+		this.nomMethode.prettyPrint(s, prefix, false);
+		this.listExpr.prettyPrint(s, prefix, true);
 	}
 
 	@Override

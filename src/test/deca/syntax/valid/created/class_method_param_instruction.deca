@@ -1,0 +1,5 @@
+class A{
+	int methodA(int a){
+		int a = 5;
+	}
+}

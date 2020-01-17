@@ -8,42 +8,23 @@ red=`tput setaf 1`
 green=`tput setaf 2`
 grey=`tput setaf 8`
 reset=`tput sgr0`
-reussis=0
+effectues=0
 total=0
 
-cd $DECAC_HOME/src/test/deca/lex/invalid/created
+cd $DECAC_HOME/src/test/deca/syntax/invalid/created
 
-tmpfile=$(mktemp /tmp/temp.XXX)
+
 
 for prog in *.deca
 do
     echo "Test de ${prog%.*}..."
-
-    # On rentre le resultat de la commande java dans un fichier temporaire et on compare avec
-    # Le fichier txt attendu
-    # java -enableassertions -cp "$CP" fr.ensimag.deca.syntax.ManualTestLex "$prog" > tmpfile
-    test_lex $prog > $tmpfile
-    # On utilise le script python pour couper le fichier tmp pour faire une bonne comparaison
-    ../../../../script/launchers/cutting-files.py $tmpfile
-    # Si le diff est vide, alors le test est réussi
-    DIFF=$(diff -u ../alexpected/${prog%.*}.txt $tmpfile)
-    if [$DIFF == ""]
-    then
-        echo "${green}Test réussi${reset}"
-        ((reussis++))
-    else
-        echo "${red}Test échoué${reset}"
-        echo "${grey}Obtenu                              Attendu${reset}"
-        # Affiche les deux fichiers sur deux colonnes
-        pr -m -t $tmpfile ../alexpected/${prog%.*}.txt
-        # diff  ../alexpected/${prog%.*}.txt $tmpfile
-    fi
-    tmpfile=$(mktemp /tmp/temp.XXX)
     ((total++))
+    test-synt $prog
+    echo "Test effectué"
+	((effectues++))
 done
 
-echo "$reussis tests réussis sur $total"
+echo "$effectues tests effectués sur $total"
 
 
-rm "$tmpfile"
 exit
