@@ -407,9 +407,7 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
-			$tree = new Selection($e1.tree, $i.tree);
-			setLocation($tree, $e1.start);
-            
+            // soit on a l'appel d'une méthode, soit on prend l'attribut
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
@@ -420,7 +418,9 @@ select_expr returns[AbstractExpr tree]
         }
         | /* epsilon */ {
             // we matched "e.i"
-            // TODO: compléter
+            // on prend l'attribut'
+			$tree = new Selection($e1.tree, $i.tree);
+			setLocation($tree, $e1.start);
         }
         )
     ;
@@ -434,7 +434,8 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
-            // TODO: compléter
+			$tree = new MethodCall($m.tree, $args.tree);
+			setLocation($tree, $m.start);
             
         }
     | OPARENT expr CPARENT {

@@ -14,8 +14,9 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * Appel d'une méthode.
+ * Appel d'une méthode de classe ou fonction globale.
  * Ex: a.z.meth(b, c);
+ * Ex: func(a);
  * @author zhujo
  *
  */
@@ -33,6 +34,14 @@ public class MethodCall extends AbstractExpr{
     	Validate.notNull(nomMethode);
     	Validate.notNull(list);
     	this.expr = expr;
+    	this.nomMethode = nomMethode;
+    	this.listExpr = list;
+    }
+    
+    public MethodCall(AbstractIdentifier nomMethode, ListExpr list) {
+    	Validate.notNull(nomMethode);
+    	Validate.notNull(list);
+    	this.expr = null;
     	this.nomMethode = nomMethode;
     	this.listExpr = list;
     }
@@ -58,7 +67,9 @@ public class MethodCall extends AbstractExpr{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		this.expr.prettyPrint(s, prefix, false);
+		if(this.expr != null) {
+			this.expr.prettyPrint(s, prefix, false);
+		}
 		this.nomMethode.prettyPrint(s, prefix, false);
 		this.listExpr.prettyPrint(s, prefix, true);
 	}
