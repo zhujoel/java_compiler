@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -10,6 +11,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.RFLOAT;
 
 /**
@@ -47,12 +49,14 @@ public class ReadFloat extends AbstractReadExpr {
     protected GPRegister codeGenReg(DecacCompiler compiler) {
     	GPRegister reg = Register.R1;
     	compiler.addInstruction(new RFLOAT());
+    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[4]));
     	return reg;
     }
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
     	compiler.addInstruction(new RFLOAT());
+    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[4]));
     }
 
 }

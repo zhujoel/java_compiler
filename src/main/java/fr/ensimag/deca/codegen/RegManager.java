@@ -45,7 +45,7 @@ public class RegManager {
 	
 	
 	public GPRegister getRegistreLibre() {
-		for(int i = 0; i < nbRegMax; ++i) {
+		for(int i = 2; i < nbRegMax; ++i) {
 			if(!registresOccupes[i]) {
 				registresOccupes[i] = true;
 				return Register.getR(i);

@@ -55,6 +55,10 @@ public class Assign extends AbstractBinaryExpr {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
 		Identifier leftOp = (Identifier)getLeftOperand();
 		ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
+		if(expDef.getType() == compiler.getType("float")) {
+			compiler.addInstruction(new STORE(ConvFloat.convert(compiler, getRightOperand()), expDef.getOperand()));
+			return;
+		}
         compiler.addInstruction(new STORE(reg, expDef.getOperand()));
 	}
 

@@ -45,6 +45,7 @@ public class DecacMain {
 
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
             System.out.println("\n Options pour le compilateur\n");
+            System.out.println("  -a\n    Compiler le fichier source et generer le fichier .ass");
             System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
             System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
                     + "    l’arbre, et affiche la décompilation de ce dernier.");
@@ -77,6 +78,8 @@ public class DecacMain {
                            r = compiler.compileDecompile(); 
                         }else if(options.getAllCompilation()){//faire tout la compilation et generer le fichier .ass
                             r = compiler.compile();
+                        }else if(options.getVerification()){
+                            r = compiler.verify();
                         }
                         return r;
                     };
@@ -89,26 +92,26 @@ public class DecacMain {
             } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
                 System.out.println("Error in the file path");
             }
-            // DONE! A FAIRE : instancier DecacCompiler pour chaque fichier à
-            // compiler, et lancer l'exécution des méthodes compile() de chaque
-            // instance en parallèle. Il est conseillé d'utiliser
-            // java.util.concurrent de la bibliothèque standard Java.
-        } else {//one or more files to compile but not in paralell
+        } else {//one or more files to compile but NOT in paralell
             try {
                 for (File source : options.getSourceFiles()) {
                     DecacCompiler compiler;
                     if (options.getRegisters()) {//for when the option -r is activated
                         compiler = new DecacCompiler(options, source, options.getX());
-                    }else{
+                    } else {
                         compiler = new DecacCompiler(options, source);
                     }
                     if (options.getParse()) {//option -p is activated
                         if (compiler.compileDecompile()) {
                             error = true;
                         }
-                    } else if(options.getAllCompilation()){//option -a activated
+                    } else if (options.getAllCompilation()) {//option -a is activated
                         //pour faire tout la compilation et generer le fichier .ass
-                        if(compiler.compile()){
+                        if (compiler.compile()) {
+                            error = true;
+                        }
+                    } else if (options.getVerification()) {//option -v is activated
+                        if(compiler.verify()){
                             error = true;
                         }
                     }
