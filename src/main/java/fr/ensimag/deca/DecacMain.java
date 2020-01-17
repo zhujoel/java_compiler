@@ -2,11 +2,15 @@ package fr.ensimag.deca;
 
 import java.io.File;
 import static java.lang.Runtime.getRuntime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import static java.util.concurrent.Executors.newFixedThreadPool;
+import java.util.concurrent.Future;
 import org.apache.log4j.Logger;
 
 /**
@@ -19,7 +23,7 @@ public class DecacMain {
 
     private static Logger LOG = Logger.getLogger(DecacMain.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // example log4j message.
 
         LOG.info("Decac compiler started");
@@ -59,23 +63,22 @@ public class DecacMain {
             // le nombre de processeurs sur la machine et créer le meme
             // nombre de fils d’exécution
             ExecutorService pool = newFixedThreadPool(getRuntime().availableProcessors());
+            List<Callable<Boolean>> taskList = new ArrayList();
+            
             try {
                 for (File source : options.getSourceFiles()) {
                     // pour chaque fichier à compiler DecacCompiler est instancié
                     DecacCompiler compiler = new DecacCompiler(options, source);
-                    
                     //TODO: decomment this avec les threads (-m decac)
-                    /**
+                    
                     Callable<Boolean> task = () -> {
-                        boolean r = compiler.compile();
-                        return r;
-
+                        return compiler.compile();
                     };
-                    */
-
-                    //pool.submit(task);
+                    
+                    taskList.add(task);
 
                 }
+                List<Future<Boolean>> results = pool.invokeAll(taskList);
             } catch (ExceptionInInitializerError e) {//Error when the source file path is invalid
                 System.out.println("Error in the file path");
             }
