@@ -10,39 +10,33 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * Déclaration d'un instanceof.
- * Ex: a + b instanceof int;
+ * Instruction de retour d'une méthode.
  * @author zhujo
  *
  */
-public class InstanceOf extends AbstractExpr{
+public class Return extends AbstractInst {
 	
-	// expression à gauche du instanceof
+	// valeur de retour
 	private AbstractExpr expr;
-	// type à droite du instanceof
-	private AbstractIdentifier type;
-	
-	public InstanceOf(AbstractExpr expr, AbstractIdentifier type) {
+
+	public Return(AbstractExpr expr) {
 		Validate.notNull(expr);
-		Validate.notNull(type);
 		this.expr = expr;
-		this.type = type;
 	}
 	
 	@Override
-	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
-			throws ContextualError {
+	protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass,
+			Type returnType) throws ContextualError {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
+	protected void codeGenInst(DecacCompiler compiler) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
@@ -53,8 +47,7 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		this.expr.prettyPrint(s, prefix, false);
-		this.type.prettyPrint(s, prefix, true);
+		this.expr.prettyPrint(s, prefix, true);
 		
 	}
 

@@ -1,3 +1,9 @@
+class A{
+	int a;
+
+	int meth(){
+		this.a = b;
+	}
+}
 {
-	int a = 5;
 }

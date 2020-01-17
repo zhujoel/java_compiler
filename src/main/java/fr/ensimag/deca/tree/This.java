@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -10,7 +12,22 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
+/**
+ * Déclaration de this.
+ * Ex: this.attr;
+ * Ex: this.meth();
+ * @author zhujo
+ *
+ */
 public class This extends AbstractExpr {
+	
+	// indique si la déclaration de this est explicit ou pas
+	private boolean estExplicit;
+	
+	public This(boolean estExplicit) {
+		Validate.notNull(estExplicit);
+		this.estExplicit = estExplicit;
+	}
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
@@ -33,7 +50,12 @@ public class This extends AbstractExpr {
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		if(this.estExplicit) {
+			s.println(prefix+"true");
+		}
+		else {
+			s.println(prefix+"false");
+		}
 		
 	}
 
@@ -42,5 +64,6 @@ public class This extends AbstractExpr {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
