@@ -13,13 +13,11 @@ total=0
 
 cd $DECAC_HOME/src/test/deca/syntax/valid/created
 
-
-
 for prog in *.deca
 do
     echo "Test de ${prog%.*}..."
     ((total++))
-    test-synt $prog
+    test_synt $prog
     echo "Test effectué"
 	((effectues++))
 done
