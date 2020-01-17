@@ -499,18 +499,17 @@ literal returns[AbstractExpr tree]
 			setLocation($tree, $FALSE);
         }
     | THIS {
-            // TODO: compléter
-    		//if ($THIS.text.equals("this")){
-    		//	$tree = new BooleanLiteral(false);
-    		//}
-    		//else{
-    		//	$tree = new BooleanLiteral(true);
-    		//}
+    		if ($THIS.text.equals("this")){
+    			$tree = new This(true);
+    		}
+    		else{
+    			$tree = new This(false);
+    		}
+    		setLocation($tree, $THIS);
         }
     | NULL {
-            // TODO: compléter
-    		//$tree = new NullLiteral();
-    		//$tree.text = 'null';
+    		$tree = new Null();
+			setLocation($tree, $NULL);
     		}
     ;
 

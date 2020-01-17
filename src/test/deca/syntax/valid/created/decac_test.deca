@@ -1,4 +1,9 @@
-{
+class A{
 	int a;
-	func(a, b);
+
+	int meth(){
+		this.a = b;
+	}
+}
+{
 }
