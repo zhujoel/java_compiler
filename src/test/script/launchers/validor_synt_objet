@@ -11,7 +11,7 @@ reset=`tput sgr0`
 effectues=0
 total=0
 
-cd $DECAC_HOME/src/test/deca/syntax/invalid/created
+cd $DECAC_HOME/src/test/deca/syntax/valid/created
 
 
 
