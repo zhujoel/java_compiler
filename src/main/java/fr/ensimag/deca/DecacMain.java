@@ -72,10 +72,17 @@ public class DecacMain {
                     //TODO: decomment this avec les threads (-m decac)
                     
                     Callable<Boolean> task = () -> {
-                        return compiler.compile();
+                        boolean r = false;
+                        if(options.getParse()){//arrête decac après l’étape de construction del’arbre
+                           r = compiler.compileDecompile(); 
+                        }else if(options.getAllCompilation()){//faire tout la compilation et generer le fichier .ass
+                            r = compiler.compile();
+                        }
+                        return r;
                     };
                     
                     taskList.add(task);
+                    //pool.submit(task);
 
                 }
                 List<Future<Boolean>> results = pool.invokeAll(taskList);
@@ -86,7 +93,7 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-        } else {//un seule fichier à compiler
+        } else {//one or more files to compile but not in paralell
             try {
                 for (File source : options.getSourceFiles()) {
                     DecacCompiler compiler;
@@ -96,7 +103,7 @@ public class DecacMain {
                         compiler = new DecacCompiler(options, source);
                     }
                     if (options.getParse()) {//option -p is activated
-                        if (compiler.compile()) {
+                        if (compiler.compileDecompile()) {
                             error = true;
                         }
                     } else if(options.getAllCompilation()){//option -a activated
