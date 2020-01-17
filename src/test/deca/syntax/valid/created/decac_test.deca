@@ -1,9 +1,5 @@
-class A{
-	int a;
+#include "yoooo.deca"
 
-	int meth(){
-		this.a = b;
-	}
-}
 {
+;
 }

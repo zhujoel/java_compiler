@@ -21,7 +21,8 @@ import fr.ensimag.ima.pseudocode.GPRegister;
  */
 public class This extends AbstractExpr {
 	
-	// indique si la déclaration de this est explicit ou pas
+	// indique si la déclaration de this est explicit ou pas (e.g. si il n'y a pas d'ambiguité
+	// alors on a pas forcément besoin de this pour désigner l'attr/methode de classe)
 	private boolean estExplicit;
 	
 	public This(boolean estExplicit) {

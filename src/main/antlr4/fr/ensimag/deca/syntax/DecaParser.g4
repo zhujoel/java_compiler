@@ -660,3 +660,4 @@ param returns[AbstractDeclParam tree]
     	$tree = new DeclParam($type.tree, $ident.tree);
         }
     ;
+    
