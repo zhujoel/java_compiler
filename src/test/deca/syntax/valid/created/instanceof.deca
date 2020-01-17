@@ -1,0 +1,15 @@
+class B{
+
+}
+class C extends B{
+
+}
+{
+	int a = 44;
+	if(a instanceof B){
+		a = 22;
+	}
+	else if(a instanceof C){
+
+	}
+}

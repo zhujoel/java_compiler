@@ -1,0 +1,7 @@
+class A{
+	int methodB(int a, float b){
+
+	}
+}
+
+{}

@@ -1,0 +1,12 @@
+class A{
+	int a = 5;
+	int b = 2;
+	void methA(int a, boolean b){
+
+	}
+	int c;
+
+	int methCC(){
+
+	}
+}
