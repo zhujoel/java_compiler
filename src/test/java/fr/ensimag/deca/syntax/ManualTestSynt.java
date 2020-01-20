@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  * Driver to test the Parser (and lexer).
@@ -24,7 +26,7 @@ public class ManualTestSynt {
     public static void main(String[] args) throws IOException, ContextualError {
         // Uncomment the following line to activate debug traces
         // unconditionally for test_synt
-        // Logger.getRootLogger().setLevel(Level.DEBUG);
+        Logger.getRootLogger().setLevel(Level.OFF);
         DecaLexer lex = AbstractDecaLexer.createLexerFromArgs(args);
         CommonTokenStream tokens = new CommonTokenStream(lex);
         DecaParser parser = new DecaParser(tokens);
