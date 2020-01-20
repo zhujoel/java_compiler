@@ -246,6 +246,10 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    /**
+     * Génère le code pour prendre la valeur correspondant à l'indentifier, ainsi que le type,
+     * et renvoie le registre dans lequel la valeur est chargée.
+     */
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
 		this.setType(compiler.getEnvironmentExp().get(this.getName()).getType());
@@ -256,6 +260,9 @@ public class Identifier extends AbstractIdentifier {
     	return reg;	
 	}
 	
+	/**
+	 * Génère le code dans le cas ou l'instruction est juste a; (par exemple)
+	 */
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) {
     	GPRegister reg = compiler.getRegManager().getRegistreLibre();
@@ -264,18 +271,23 @@ public class Identifier extends AbstractIdentifier {
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
 	}
 	
-	
+	/**
+	 * Génère le code pour dans le cas ou l'identifier est booléen.
+	 */
 	protected void codeGenBool(DecacCompiler compiler,Label label, boolean b) {
 		GPRegister reg = this.codeGenReg(compiler);
-        compiler.addInstruction(new CMP(new ImmediateInteger(1), reg));
+        compiler.addInstruction(new CMP(new ImmediateInteger(0), reg));
         if(b) {
-            compiler.addInstruction(new BEQ(label));
+            compiler.addInstruction(new BNE(label));
         }
         else {
-            compiler.addInstruction(new BNE(label));
+            compiler.addInstruction(new BEQ(label));
         }
 	}
 	
+	/**
+	 * Génère le code pour afficher ce qu'il y a dans l'indentifier.
+	 */
 	@Override
     protected void codeGenPrint(DecacCompiler compiler) {
 		// On doit sauvegarder la valeur dans le registre R1 pour afficher
@@ -288,7 +300,7 @@ public class Identifier extends AbstractIdentifier {
 		if(type.isFloat()) {
 			compiler.addInstruction(new WFLOAT());
 		}
-		else if(type.isBoolean() || type.isInt()) {
+		else if(type.isInt()) {
 			compiler.addInstruction(new WINT());
 		}
 		else if(type.isNull()) {

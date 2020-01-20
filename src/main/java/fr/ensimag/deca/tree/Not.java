@@ -8,9 +8,6 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.BEQ;
-import fr.ensimag.ima.pseudocode.instructions.BNE;
-import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 
@@ -62,8 +59,8 @@ public class Not extends AbstractUnaryExpr {
         return reg;
 	}
 	
-	@Override
-	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
-		this.getOperand().codeGenBool(compiler, label, !b);
+	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+		
+		this.getOperand().codeGenBool(compiler, label, labelFin, !b);
 	}
 }

@@ -7,8 +7,8 @@ public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
 	public static int stackCpt = 2;
-    private int nWhile = 0;
-    private int nIf = 0;
+    private int nWhile = 1;
+    private int nIf = 1;
 	
 	public RegManager(int nbReg) {
 		this.nbRegMax = nbReg;
