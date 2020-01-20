@@ -23,7 +23,10 @@ public class LowerOrEqual extends AbstractOpIneq {
         return "<=";
     }
 
-
+    /**
+     * Génère le code pour l'opération booléenne correspondante, lorsque celle ci est appelée
+     * hors d'un if et d'un while. Il n'y a donc pas de saut.
+     */
     @Override
    	protected GPRegister codeGenReg(DecacCompiler compiler) {
    		compiler.addComment(this.getOperatorName());
@@ -35,18 +38,22 @@ public class LowerOrEqual extends AbstractOpIneq {
            return regGauche;
    	}
    	
+    /**
+     * Génère le code pour l'opération booléenne correspondante. Lorsque b vaut vrai,
+     * on jump si le résultat est faux.
+     */
    	@Override
-   	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
+   	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
    		compiler.addComment(this.getOperatorName());
        	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
        	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
        	
-        compiler.addInstruction(new CMP(regGauche, regDroite));
+        compiler.addInstruction(new CMP(regDroite, regGauche));
         if(b) {
-            compiler.addInstruction(new BGT(label));
+            compiler.addInstruction(new BLE(label));
         }
         else {
-            compiler.addInstruction(new BLE(label));
+            compiler.addInstruction(new BGT(label));
         }
         compiler.getRegManager().freeRegistre(regDroite.getNumber());
         //return regGauche;
