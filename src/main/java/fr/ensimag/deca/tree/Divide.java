@@ -58,6 +58,9 @@ public class Divide extends AbstractOpArith {
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
     	Type typeLeft = this.getLeftOperand().getType();
+    	System.out.println("/********/");
+    	System.out.println("type : " + typeLeft);
+    	System.out.println("/********/");
     	Type typeRight = this.getRightOperand().getType();
     	
     	// Cas des entiers
