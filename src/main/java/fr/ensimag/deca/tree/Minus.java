@@ -31,9 +31,14 @@ public class Minus extends AbstractOpArith {
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
     	
-    	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
-        compiler.addInstruction(new SUB(regGauche, regDroite));
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        // On génère le code correspondant à l'opération 
+            compiler.addInstruction(new SUB(regGauche, regDroite));
+    	//Si la option -n (noCheck) n'est pas activée
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
+        
     	
         compiler.getRegManager().freeRegistre(regGauche.getNumber());
     }
@@ -50,7 +55,11 @@ public class Minus extends AbstractOpArith {
     	
     	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
         compiler.addInstruction(new SUB(regGauche, regDroite));
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        //Si la option -n (noCheck) n'est pas activée
+    	if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     	
         compiler.getRegManager().freeRegistre(regGauche.getNumber());
         return regDroite;

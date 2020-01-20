@@ -32,7 +32,11 @@ public class Multiply extends AbstractOpArith {
     	
     	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
         compiler.addInstruction(new MUL(regGauche, regDroite));
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	//Si la option -n (noCheck) n'est pas activée
+    	if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     	
         compiler.getRegManager().freeRegistre(regGauche.getNumber());
     }
@@ -49,7 +53,11 @@ public class Multiply extends AbstractOpArith {
     	
     	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
         compiler.addInstruction(new MUL(regGauche, regDroite));
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	//Si la option -n (noCheck) n'est pas activée
+    	if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     	
         compiler.getRegManager().freeRegistre(regGauche.getNumber());
         return regDroite;

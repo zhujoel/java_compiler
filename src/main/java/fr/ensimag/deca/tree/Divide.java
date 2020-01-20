@@ -45,7 +45,11 @@ public class Divide extends AbstractOpArith {
     		compiler.addInstruction(new DIV(regGauche, regDroite));	
     	}
     	compiler.getRegManager().freeRegistre(regGauche.getNumber());
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	//Si la option -n (noCheck) n'est pas activée
+    	if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     }
 
     /**
@@ -70,7 +74,11 @@ public class Divide extends AbstractOpArith {
     		compiler.addInstruction(new DIV(regGauche, regDroite));	
     	}
     	compiler.getRegManager().freeRegistre(regGauche.getNumber());
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        //Si la option -n (noCheck) n'est pas activée
+    	if (!compiler.getCompilerOptions().getNoCheck()) {
+            //on fait un test en cas de debordement
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     	return regDroite;
     	
 	}
