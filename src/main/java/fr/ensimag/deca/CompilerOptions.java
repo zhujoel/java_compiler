@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.sun.tools.javac.resources.compiler;
+
 /**
  * User-specified options influencing the compilation.
  *
