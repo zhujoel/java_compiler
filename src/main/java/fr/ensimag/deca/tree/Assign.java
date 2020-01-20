@@ -32,7 +32,6 @@ public class Assign extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-    	//TODO gerer les convfloat
         Type type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         this.setType(type1);
         this.setRightOperand(this.getRightOperand().verifyRValue(compiler, localEnv, currentClass, type1));
@@ -56,10 +55,6 @@ public class Assign extends AbstractBinaryExpr {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
 		Identifier leftOp = (Identifier)getLeftOperand();
 		ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
-		if(expDef.getType() == compiler.getType("float")) {
-			compiler.addInstruction(new STORE(ConvFloat.convert(compiler, getRightOperand()), expDef.getOperand()));
-			return;
-		}
         compiler.addInstruction(new STORE(reg, expDef.getOperand()));
         compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
 	}

@@ -33,19 +33,15 @@ public class ConvFloat extends AbstractUnaryExpr {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		return null;
+    	GPRegister reg = this.getOperand().codeGenReg(compiler);
+		compiler.addInstruction(new FLOAT(reg, reg));
+    	return reg;
 	}
 	
-	protected static GPRegister convert(DecacCompiler compiler, AbstractExpr expr) {
-		GPRegister reg = expr.codeGenReg(compiler);
-		compiler.addInstruction(new FLOAT(reg, reg));
-		return reg;
-	}
 
 	@Override
 	protected void codeGenUnary(DecacCompiler compiler, GPRegister reg) {
-		// TODO Auto-generated method stub
-		
+		//compiler.addInstruction(new FLOAT(reg, reg));
 	}
 
 }

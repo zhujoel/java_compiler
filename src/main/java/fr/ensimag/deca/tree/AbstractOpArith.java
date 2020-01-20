@@ -32,8 +32,6 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         	throw new ContextualError("Type " + type2.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getRightOperand().getLocation());
         }
         
-        
-        
         if (type1.sameType(type2)){
         	this.setType(type1);
         	return this.getType();

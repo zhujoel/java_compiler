@@ -1,13 +1,4 @@
 {
-    int a = -4;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
-    -a;
+	int a = 2;
+    float b = a;
 }
