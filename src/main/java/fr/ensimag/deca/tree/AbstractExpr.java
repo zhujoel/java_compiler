@@ -169,8 +169,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected abstract GPRegister codeGenReg(DecacCompiler compiler);
 
-	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
-		// TODO Auto-generated method stub
-		//return null;
-	}
+   	protected void codeGenBool(DecacCompiler compiler, Label label,Label labelFin, boolean b) {
+   		//return null;
+   	}
 }

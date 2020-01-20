@@ -80,10 +80,12 @@ public class IfThenElse extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) {
 
     	compiler.addComment("Début du if_"+ compiler.getRegManager().getNIf());
+    	Label labIf = new Label("if_"+ compiler.getRegManager().getNIf());
     	Label labElse = new Label("else_"+ compiler.getRegManager().getNIf());
     	Label labEndif = new Label("endif_"+ compiler.getRegManager().getNIf());
     	compiler.getRegManager().addNIf();
-    	condition.codeGenBool(compiler, labElse, true);
+    	condition.codeGenBool(compiler, labIf, labElse, true);
+    	compiler.addLabel(labIf);
     	thenBranch.codeGenListInst(compiler);
     	compiler.addInstruction(new BRA(labEndif));
     	compiler.addLabel(labElse);
