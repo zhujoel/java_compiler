@@ -10,7 +10,7 @@
          ||  +> ListInst [List with 1 elements]
          ||  |  []> Print
          ||  |      `> ListExpr [List with 1 elements]
-         ||  |         []> StringLiteral (of)
+         ||  |         []> StringLiteral ("of")
          ||  `> ListInst [List with 0 elements]
          []> IfThenElse
              +> Lower
@@ -24,7 +24,7 @@
              |      +> ListInst [List with 1 elements]
              |      |  []> Print
              |      |      `> ListExpr [List with 1 elements]
-             |      |         []> StringLiteral (if)
+             |      |         []> StringLiteral ("if")
              |      `> ListInst [List with 1 elements]
              |         []> IfThenElse
              |             +> Lower

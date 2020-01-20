@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -30,6 +31,5 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         throw new ContextualError("Comparaison entre deux elements de type differents (" 
         + type1.toString() + " & " + type2.toString() + ")", getLocation());
     }
-
-
+    
 }

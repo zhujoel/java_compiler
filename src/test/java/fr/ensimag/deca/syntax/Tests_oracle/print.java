@@ -36,7 +36,7 @@ public class print {
                 new Main(lDecl,linst));
 
         ListExpr lexpr = new ListExpr();
-        lexpr.add(new StringLiteral("Alex le Boss"));
+        lexpr.add(new StringLiteral("\"Alex le Boss\""));
 		linst.add(new Println(false, lexpr));
         
         return source;

@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import com.sun.tools.javac.resources.compiler;
+
 /**
  * User-specified options influencing the compilation.
  *
@@ -105,7 +107,7 @@ public class CompilerOptions {
                         break;
                     case "-P":
                             parallel = true;
-                            System.out.println("Option -P");
+                            //System.out.println("Option -P");
                         
                         break;
                     case "-d":
@@ -118,7 +120,7 @@ public class CompilerOptions {
                             System.exit(1);
                         } else {
                             verification = true;
-                            System.out.println("Option -v");
+                            //System.out.println("Option -v");
                         }
                         break;
                     case "-n":
@@ -160,6 +162,8 @@ public class CompilerOptions {
                             sourceFiles.add(new File(args[i]));
                         }
                     }
+                   allCompilation = true; 
+                
             }
             i++;
     }

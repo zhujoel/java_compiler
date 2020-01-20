@@ -1,3 +1,9 @@
 {
-    print(5 + 2);
+    bool a = false;
+    bool b = true;
+    int c = 1;
+    a = a && b;
+    b = b || a;
+    print(c);
+    print(b);
 }
