@@ -5,6 +5,8 @@
       |  []> DeclVar
       |      +> Identifier (int)
       |      +> Identifier (a)
-      |      `> Initialization
-      |         `> Int (5)
-      `> ListInst [List with 0 elements]
+      |      `> NoInitialization
+      `> ListInst [List with 1 elements]
+         []> Assign
+             +> Identifier (a)
+             `> Int (5)

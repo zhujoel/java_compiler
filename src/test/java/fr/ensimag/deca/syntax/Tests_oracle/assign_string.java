@@ -37,7 +37,7 @@ public class assign_string {
 
         AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("String"));
         AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("s"));
-        Initialization init = new Initialization(new StringLiteral("hello"));
+        Initialization init = new Initialization(new StringLiteral("\"hello\""));
         lDecl.add(new DeclVar(type, varName, init));
 		
         return source;
