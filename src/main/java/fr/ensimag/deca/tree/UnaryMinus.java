@@ -7,7 +7,6 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 
 /**
@@ -37,25 +36,9 @@ public class UnaryMinus extends AbstractUnaryExpr {
     protected String getOperatorName() {
         return "-";
     }
-
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-		GPRegister regDroite = this.getOperand().codeGenReg(compiler);
-		GPRegister regGauche = compiler.getRegManager().getRegistreLibre();
-        compiler.addInstruction(new SUB(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-    }
-
-
+	
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getOperatorName());
-		GPRegister regDroite = this.getOperand().codeGenReg(compiler);
-		GPRegister regGauche = compiler.getRegManager().getRegistreLibre();
-		compiler.addInstruction(new LOAD(new ImmediateInteger(0), regGauche));
-        compiler.addInstruction(new SUB(regDroite, regGauche));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
+	protected void codeGenUnary(DecacCompiler compiler, GPRegister reg) {
+		compiler.addInstruction(new SUB(new ImmediateInteger(0), reg));
 	}
 }

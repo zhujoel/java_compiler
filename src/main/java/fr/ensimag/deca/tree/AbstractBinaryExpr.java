@@ -69,10 +69,48 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         leftOperand.prettyPrint(s, prefix, false);
         rightOperand.prettyPrint(s, prefix, true);
     }
+	
+	/**
+     * Génère le code dans le cas ou l'on a pas besoin de stocker l'opération
+     */
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+    	compiler.addComment(this.getOperatorName());
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+    	
+    	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
+    	codeGenAssemblyInst(compiler, regGauche, regDroite);
+    	//compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	
+        compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
+    }
 
-	protected void codeGenFact(DecacCompiler compiler, DVal regGauche, GPRegister regDroite) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("not yet implemented"); 
+    /**
+     * Génère le code correspondant à l'opération, et renvoie le registre dans lequel
+     * le résultat est stocké.
+     */
+	@Override
+	protected GPRegister codeGenReg(DecacCompiler compiler) {
+		compiler.addComment(this.getOperatorName());
+    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
+    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
+    	
+    	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
+    	codeGenAssemblyInst(compiler, regGauche, regDroite);
+    	//compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	
+        compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
+        return regDroite;
 	}
+
+	/**
+	 * Génère le code assembleur en fonction de l'instruction
+	 * @param compiler
+	 * @param op1
+	 * @param op2
+	 */
+	protected abstract void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2);
+
 
 }

@@ -42,4 +42,10 @@ public class ConvFloat extends AbstractUnaryExpr {
 		return reg;
 	}
 
+	@Override
+	protected void codeGenUnary(DecacCompiler compiler, GPRegister reg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

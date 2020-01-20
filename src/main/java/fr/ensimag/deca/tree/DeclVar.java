@@ -124,6 +124,6 @@ public class DeclVar extends AbstractDeclVar {
 		compiler.addInstruction(new STORE(reg, varDef.getOperand()));
 		
 		// indique que le registre est libre
-		compiler.getRegManager().freeRegistre(reg.getNumber());
+		compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
 	}
 }
