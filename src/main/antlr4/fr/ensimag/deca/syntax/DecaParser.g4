@@ -191,8 +191,9 @@ if_then_else returns[IfThenElse tree]
         	else{
         		// on ajoute les else if en + récursivement dans la boucle else du else if précédent
         		ListInst elseIfElseRecBranch = new ListInst();
-        		elseIfElseBranch.add(new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseIfElseRecBranch));
-        		
+        		IfThenElse recElse = new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseIfElseRecBranch);
+        		elseIfElseBranch.add(recElse);
+        		setLocation(recElse, $ELSE);
         	}
         }
       )*

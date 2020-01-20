@@ -70,6 +70,7 @@ public class DecacMain {
                 for (File source : options.getSourceFiles()) {
                     // pour chaque fichier à compiler DecacCompiler est instancié
                     DecacCompiler compiler = new DecacCompiler(options, source);
+                    compiler.getRegManager().setNbRegistreMax(options.getX());
                     //TODO: decomment this avec les threads (-m decac)
                     
                     Callable<Boolean> task = () -> {

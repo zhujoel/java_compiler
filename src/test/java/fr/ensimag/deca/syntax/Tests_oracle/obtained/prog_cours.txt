@@ -1,10 +1,36 @@
 `> Program
    +> ListDeclClass [List with 0 elements]
    `> Main
-      +> ListDeclVar [List with 0 elements]
-      `> ListInst [List with 1 elements]
+      +> ListDeclVar [List with 3 elements]
+      |  []> DeclVar
+      |  ||  +> Identifier (bool)
+      |  ||  +> Identifier (a)
+      |  ||  `> Initialization
+      |  ||     `> BooleanLiteral (false)
+      |  []> DeclVar
+      |  ||  +> Identifier (bool)
+      |  ||  +> Identifier (b)
+      |  ||  `> Initialization
+      |  ||     `> BooleanLiteral (true)
+      |  []> DeclVar
+      |      +> Identifier (int)
+      |      +> Identifier (c)
+      |      `> Initialization
+      |         `> Int (1)
+      `> ListInst [List with 4 elements]
+         []> Assign
+         ||  +> Identifier (a)
+         ||  `> And
+         ||     +> Identifier (a)
+         ||     `> Identifier (b)
+         []> Assign
+         ||  +> Identifier (b)
+         ||  `> Or
+         ||     +> Identifier (b)
+         ||     `> Identifier (a)
+         []> Print
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> Identifier (c)
          []> Print
              `> ListExpr [List with 1 elements]
-                []> Plus
-                    +> Int (5)
-                    `> Int (2)
+                []> Identifier (b)

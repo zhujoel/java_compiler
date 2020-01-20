@@ -38,14 +38,14 @@ public class ifelse {
         AbstractExpr condition = new Greater(new IntLiteral(5), new IntLiteral(2));
         ListInst then = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("if boucle"));
+        then_expr1.add(new StringLiteral("\"if boucle\""));
         ListExpr then_expr2 = new ListExpr();
-        then_expr2.add(new StringLiteral("if boucle2"));
+        then_expr2.add(new StringLiteral("\"if boucle2\""));
         then.add(new Print(false, then_expr1));
         then.add(new Print(false, then_expr2));
         ListInst els = new ListInst();
         ListExpr else_expr = new ListExpr();
-        else_expr.add(new StringLiteral("else boucle"));
+        else_expr.add(new StringLiteral("\"else boucle\""));
         els.add(new Print(false, else_expr));
         linst.add(new IfThenElse(condition, then, els));
 		

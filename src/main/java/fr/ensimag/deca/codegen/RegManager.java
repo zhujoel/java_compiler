@@ -7,8 +7,8 @@ public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
 	public static int stackCpt = 2;
-    private int nWhile = 0;
-    private int nIf = 0;
+    private int nWhile = 1;
+    private int nIf = 1;
 	
 	public RegManager(int nbReg) {
 		this.nbRegMax = nbReg;
@@ -43,6 +43,9 @@ public class RegManager {
 		nIf++;
 	}
 	
+	public void setNbRegistreMax(int nb) {
+		this.nbRegMax = nb;
+	}
 	
 	public GPRegister getRegistreLibre() {
 		for(int i = 2; i < nbRegMax; ++i) {
@@ -53,6 +56,15 @@ public class RegManager {
 		}
 		// Penser au cas où l'on utilise la pile
 		return null;
+	}
+	
+	public boolean allAreBusy() {
+		for(int i = 2; i < nbRegMax; ++i) {
+			if(!registresOccupes[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean freeRegistre(int i) {
