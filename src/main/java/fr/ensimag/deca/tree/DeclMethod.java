@@ -41,7 +41,11 @@ public class DeclMethod extends AbstractDeclMethod {
     
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		this.returnType.decompile(s);
+		s.print(" ");
+		this.methName.decompile(s);
+		this.params.decompile(s);
+		this.corps.decompile(s);
 		
 	}
 
