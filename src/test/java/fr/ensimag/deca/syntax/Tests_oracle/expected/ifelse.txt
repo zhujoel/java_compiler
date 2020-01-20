@@ -10,11 +10,11 @@
              +> ListInst [List with 2 elements]
              |  []> Print
              |  ||  `> ListExpr [List with 1 elements]
-             |  ||     []> StringLiteral (if boucle)
+             |  ||     []> StringLiteral ("if boucle")
              |  []> Print
              |      `> ListExpr [List with 1 elements]
-             |         []> StringLiteral (if boucle2)
+             |         []> StringLiteral ("if boucle2")
              `> ListInst [List with 1 elements]
                 []> Print
                     `> ListExpr [List with 1 elements]
-                       []> StringLiteral (else boucle)
+                       []> StringLiteral ("else boucle")
