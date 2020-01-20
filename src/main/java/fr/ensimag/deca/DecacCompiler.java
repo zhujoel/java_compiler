@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.codegen.EnvironmentDefault;
 import fr.ensimag.deca.codegen.RegManager;
+import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
@@ -220,8 +221,10 @@ public class DecacCompiler {
         try{
             return doVerify(sourceFile, err);
         }catch(DecacFatalError e){
+        	e.printStackTrace();
             return true;
         }catch(LocationException e){
+        	e.display(err);
             return true;
         }
     }
@@ -282,7 +285,7 @@ public class DecacCompiler {
      * @return true on error
      */
     private boolean doVerify(String sourceName,PrintStream err)
-            throws DecacFatalError, LocationException {
+            throws DecacFatalError, LocationException{
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
         
         if (prog == null) {
@@ -360,7 +363,6 @@ public class DecacCompiler {
         assert(prog.checkAllLocations());
         
         
-        prog.verifyProgram(this);
         Program p = (Program) prog;
         p.decompile(out);
         

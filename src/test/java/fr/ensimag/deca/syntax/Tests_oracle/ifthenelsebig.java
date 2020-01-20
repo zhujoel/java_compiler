@@ -39,7 +39,7 @@ public class ifthenelsebig {
         AbstractExpr condition1 = new Greater(new IntLiteral(5), new IntLiteral(2));
         ListInst then1 = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("of"));
+        then_expr1.add(new StringLiteral("\"of\""));
         then1.add(new Print(false, then_expr1));
         //boucle else1
         ListInst else1 = new ListInst();
@@ -52,7 +52,7 @@ public class ifthenelsebig {
         
         AbstractExpr condition3 = new Lower(new IntLiteral(3), new IntLiteral(2));
         ListExpr then3_expr = new ListExpr();
-        then3_expr.add(new StringLiteral("if"));
+        then3_expr.add(new StringLiteral("\"if\""));
         ListInst then3 = new ListInst();
         then3.add(new Print(false, then3_expr));
         ListInst else3 = new ListInst();
