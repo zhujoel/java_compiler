@@ -5,6 +5,11 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -19,20 +24,29 @@ public class DeclField extends AbstractDeclField {
 	// la visibilité du field
     final private Visibility visibility;
     final private AbstractIdentifier type;
-    final private AbstractIdentifier varName;
+    final private AbstractIdentifier fieldName;
     final private AbstractInitialization initialization;
     
     public DeclField(Visibility visibility, AbstractIdentifier type,
-    		AbstractIdentifier varName, AbstractInitialization initialization) {
+    		AbstractIdentifier fieldName, AbstractInitialization initialization) {
     	Validate.notNull(visibility);
         Validate.notNull(type);
-        Validate.notNull(varName);
+        Validate.notNull(fieldName);
         Validate.notNull(initialization);
         this.visibility = visibility;
         this.type = type;
-        this.varName = varName;
+        this.fieldName = fieldName;
         this.initialization = initialization;
     }
+    
+    public Visibility getVisibility() {
+    	return visibility;
+    }
+    
+    public AbstractIdentifier getFieldName() {
+    	return fieldName;
+    }
+    
     
     
 	@Override
@@ -40,7 +54,7 @@ public class DeclField extends AbstractDeclField {
 		s.print(this.visibility.getAffichage() + " ");
 		this.type.decompile(s);
 		s.print(" ");
-		this.varName.decompile(s);
+		this.fieldName.decompile(s);
 		this.initialization.decompile(s);
 		s.print(";");
 	}
@@ -49,7 +63,7 @@ public class DeclField extends AbstractDeclField {
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
 		s.println(prefix + "visibility="+visibility);
         type.prettyPrint(s, prefix, false);
-        varName.prettyPrint(s, prefix, false);
+        fieldName.prettyPrint(s, prefix, false);
         initialization.prettyPrint(s, prefix, true);
 	}
 
@@ -58,5 +72,15 @@ public class DeclField extends AbstractDeclField {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+		Type t = this.type.verifyType(compiler);
+		if(t.isVoid()) {
+			throw new ContextualError("Variable de type void", type.getLocation());
+		}
+		//TODO ajouter la condition difficile de la 2.5
+	}
+	
 
 }

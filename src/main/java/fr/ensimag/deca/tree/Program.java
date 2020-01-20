@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
+import java.util.Iterator;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -43,7 +44,20 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-
+        
+        //PASSE 1
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClass(compiler);
+        }
+        //PASSE 2
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClassMembers(compiler);
+        }
+        /*//PASSE 3
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClassBody(compiler);
+        }*/
+        
         //on ne met pas liste_decl pour le hello world mais il faudra l'ajouter
         main.verifyMain(compiler);
         LOG.debug("verify program: end");
