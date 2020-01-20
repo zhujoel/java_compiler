@@ -25,8 +25,8 @@ public class DecacMain {
 
     public static void main(String[] args) throws InterruptedException {
         // example log4j message.
-
-        LOG.info("Decac compiler started");
+    	
+        //LOG.info("Decac compiler started");
         boolean error = false;
         final CompilerOptions options = new CompilerOptions();
         try {

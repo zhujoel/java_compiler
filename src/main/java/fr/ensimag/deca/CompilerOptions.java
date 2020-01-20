@@ -95,7 +95,7 @@ public class CompilerOptions {
                             System.exit(1);
                         } else {
                         parse = true;
-                        System.out.println("Option -p ");
+                        //System.out.println("Option -p ");
                         }
                         break;
                     case "-P":
@@ -173,6 +173,7 @@ public class CompilerOptions {
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
             case QUIET:
+            	logger.setLevel(Level.OFF);
                 break; // keep default
             case INFO:
                 logger.setLevel(Level.INFO);
