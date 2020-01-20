@@ -100,7 +100,7 @@ public class CompilerOptions {
                         break;
                     case "-P":
                             parallel = true;
-                            System.out.println("Option -P");
+                            //System.out.println("Option -P");
                         
                         break;
                     case "-d":
@@ -113,7 +113,7 @@ public class CompilerOptions {
                             System.exit(1);
                         } else {
                             verification = true;
-                            System.out.println("Option -v");
+                            //System.out.println("Option -v");
                         }
                         break;
                     case "-n":
@@ -155,6 +155,8 @@ public class CompilerOptions {
                             sourceFiles.add(new File(args[i]));
                         }
                     }
+                   allCompilation = true; 
+                
             }
             i++;
     }
