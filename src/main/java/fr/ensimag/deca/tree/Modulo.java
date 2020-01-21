@@ -5,6 +5,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.REM;
 
@@ -44,33 +45,8 @@ public class Modulo extends AbstractOpArith {
         return "%";
     }
 
-    /**
-     * Génère le code dans le cas ou l'on a pas besoin de stocker l'opération
-     */
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	
-        compiler.addInstruction(new REM(regGauche, regDroite));
-        
-        compiler.getRegManager().freeRegistre(regGauche.getNumber());
-    }
-
-    /**
-     * Génère le code correspondant à l'opération, et renvoie le registre dans lequel
-     * le résultat est stocké.
-     */
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	
-        compiler.addInstruction(new REM(regGauche, regDroite));
-        
-        compiler.getRegManager().freeRegistre(regGauche.getNumber());
-        return regDroite;
+	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+		compiler.addInstruction(new REM(op1, op2));
 	}
 }

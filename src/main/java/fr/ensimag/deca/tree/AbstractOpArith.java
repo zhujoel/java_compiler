@@ -1,10 +1,10 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 
 /**
  * Arithmetic binary operations (+, -, /, ...)
@@ -31,8 +31,6 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         } else if(!(type2.isInt() || type2.isFloat())){
         	throw new ContextualError("Type " + type2.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getRightOperand().getLocation());
         }
-        
-        
         
         if (type1.sameType(type2)){
         	this.setType(type1);
@@ -65,4 +63,6 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         + " et un element de type " + type2.toString(), getLocation());
     	
     }
+    
+   
 }

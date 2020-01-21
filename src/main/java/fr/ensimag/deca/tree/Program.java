@@ -57,6 +57,7 @@ public class Program extends AbstractProgram {
         compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
         main.codeGenMain(compiler);
+        compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
         ErrorManager.addErrorLabels(compiler);
     }
