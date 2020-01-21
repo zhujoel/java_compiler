@@ -102,13 +102,10 @@ public class CompilerOptions {
                             System.exit(1);
                         } else {
                         parse = true;
-                        //System.out.println("Option -p ");
                         }
                         break;
                     case "-P":
                             parallel = true;
-                            //System.out.println("Option -P");
-                        
                         break;
                     case "-d":
                         debug++;
@@ -120,7 +117,6 @@ public class CompilerOptions {
                             System.exit(1);
                         } else {
                             verification = true;
-                            //System.out.println("Option -v");
                         }
                         break;
                     case "-n":
@@ -162,8 +158,7 @@ public class CompilerOptions {
                             sourceFiles.add(new File(args[i]));
                         }
                     }
-                   allCompilation = true; 
-                
+                   //allCompilation = true; 
             }
             i++;
     }
@@ -210,7 +205,7 @@ public class CompilerOptions {
     }
 
     protected void displayUsage(){//what should it do?
-        System.out.println("wtvr");
+        //System.out.println("wtvr");
     }
 }
 

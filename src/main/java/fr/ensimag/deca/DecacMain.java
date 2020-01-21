@@ -40,7 +40,6 @@ public class DecacMain {
 
         if (options.getPrintBanner() && args.length == 1) {//option -b
             System.out.println("Équipe gl48");
-
         }
 
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
