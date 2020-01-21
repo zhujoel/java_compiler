@@ -9,30 +9,19 @@
 	BOV pile_pleine
 	ADDSP #3
 ; Declaration des variables
-	LOAD #0, R2
+	LOAD #2, R2
 	STORE R2, 2(GB)
 ; Instructions
 ; Début du if_1
-; ||
-; &&
-; &&
-; &&
-	LOAD 2(GB), R2
-	CMP #1, R2
-	BNE Fin_or_1
-; &&
-	BRA Fin_or_1
-Fin_or_1:
+	BRA else_1
 ; Contenu du if_1
-	WSTR "dans le if"
-	WNL
+	LOAD #5, R2
+	STORE R2, 2(GB)
 	BRA endif_1
 else_1:
-	WSTR "dans le else"
-	WNL
 endif_1:
-	WSTR "fin"
-	WNL
+	LOAD 2(GB), R1
+	WINT
 	HALT
 pile_pleine:
 	WSTR "Erreur : Pile pleine."

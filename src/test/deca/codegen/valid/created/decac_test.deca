@@ -1,11 +1,4 @@
-{
-    bool a = false;
 
-    if( !(((a && true) && (false && true) ) && true) || true){
-	println("dans le if");
-    }
-    else{
-	println("dans le else");
-    }
-    println("fin");
+{
+
 }

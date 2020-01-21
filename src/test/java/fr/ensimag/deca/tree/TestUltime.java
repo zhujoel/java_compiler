@@ -42,6 +42,7 @@ public class TestUltime {
             prog.verifyProgram(decacCompiler);
             prog.prettyPrint(System.out);
             prog.codeGenProgram(decacCompiler);
+            System.out.println("\nCode assembleur :\n");
             String assembleur = decacCompiler.displayIMAProgram(); 
             System.out.println(assembleur);
         }
