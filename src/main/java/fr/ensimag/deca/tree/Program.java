@@ -8,7 +8,13 @@ import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.ErrorManager;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -44,6 +50,25 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
+        
+        //Construction de la classe object
+        ClassType o = compiler.getEnvironmentType().get(compiler.getSymbolTable()
+        		.create("Object")).asClassType("Object n'est pas une classe", Location.BUILTIN);
+        ClassDefinition oDef = o.getDefinition();
+        
+        
+        //methode equals
+        oDef.incNumberOfMethods();
+        Signature s = new Signature();
+        s.add(compiler.getType("Object"));
+        MethodDefinition equalsDef = new MethodDefinition(compiler.getType("bool"), Location.BUILTIN, s, oDef.getNumberOfMethods());
+        try {
+        	o.getDefinition().getMembers().declare(compiler.getSymbolTable()
+        			.create("equals"), equalsDef);
+        }catch(DoubleDefException e) {
+        	throw new ContextualError("Equals a deja été declaré", Location.BUILTIN);
+        }
+        
         
         //PASSE 1
         for(AbstractDeclClass c : classes.getList()) {

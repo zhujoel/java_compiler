@@ -4,6 +4,11 @@ import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -45,5 +50,17 @@ public class DeclParam extends AbstractDeclParam{
 		// TODO Auto-generated method stub
 		
 	}
+
+	//TODO surement a finir !!
+	@Override
+	public Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+			throws ContextualError {
+		Type t = this.type.verifyType(compiler);
+		if(t.isVoid()) {
+			throw new ContextualError("Parametre de type void", this.parametre.getLocation());
+		}
+		return t;
+	}
+	
 
 }

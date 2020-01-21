@@ -9,6 +9,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
@@ -79,7 +81,20 @@ public class DeclField extends AbstractDeclField {
 		if(t.isVoid()) {
 			throw new ContextualError("Variable de type void", type.getLocation());
 		}
-		//TODO ajouter la condition difficile de la 2.5
+		
+		//On incremente le nombre de champs
+		currentClass.incNumberOfFields();
+		//On cree sa definition
+		FieldDefinition fDef = new FieldDefinition(t, fieldName.getLocation(), visibility, currentClass, currentClass.getNumberOfFields());
+		
+		try {
+			//On declare le champ
+			localEnv.declare(this.fieldName.getName(), fDef);
+			fieldName.setDefinition(fDef);
+			fieldName.setType(t);
+		}catch(DoubleDefException e) {
+			throw new ContextualError("Champ deja defini", this.fieldName.getLocation());
+		}
 	}
 	
 

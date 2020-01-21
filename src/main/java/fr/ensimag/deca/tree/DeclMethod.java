@@ -5,6 +5,14 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.Signature;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -62,6 +70,46 @@ public class DeclMethod extends AbstractDeclMethod {
 	protected void iterChildren(TreeFunction f) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//TODO surement a finir
+	@Override
+	public void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
+		Type t = this.returnType.verifyType(compiler);
+		Signature s = new Signature();
+		
+		//incrementation du nombre de methode dans la classe courrante
+		currentClass.incNumberOfMethods();
+		
+		//creation de la signature
+		for (AbstractDeclParam p : params.getList()) {
+			s.add(p.verifyDeclParam(compiler, localEnv, currentClass));
+		}
+		
+		//TODO
+		//si la methode est definie dans la superclasse et si la methode de la superclasse a une signature differente
+		//System.out.println(currentClass.toString());
+		//		if (currentClass.getSuperClass().getMembers().isIn(methName.getName()) 
+//				&& !currentClass.getSuperClass().getMembers().get(methName.getName())
+//				.asMethodDefinition(methName.getName().toString() + " n'est pas une methode", methName.getLocation())
+//				.getSignature().equals(s)) {
+//			throw new ContextualError("Redefinition de methode avec deux signatures differentes", methName.getLocation());
+//			
+//		}
+		
+		//definition de la methode
+		MethodDefinition methDef = new MethodDefinition(t, methName.getLocation(), s, currentClass.getNumberOfMethods());
+		
+		//declaration de la methode dans l'environement local
+		try {
+			
+			localEnv.declare(this.methName.getName(), methDef);
+			methName.setDefinition(methDef);
+			methName.setType(t);
+			
+		}catch(DoubleDefException e) {
+			throw new ContextualError("Methode deja definie", this.methName.getLocation());
+		}
 	}
 
 }
