@@ -187,8 +187,9 @@ public class Identifier extends AbstractIdentifier {
     	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
     	if(!localEnv.isIn(s)) {
-    		throw new ContextualError("Utilisation d'une variable non déclarée", this.getLocation());
+    		throw new ContextualError("Utilisation d'un identificateur non déclarée", this.getLocation());
     	}
+    	
     	Definition d = localEnv.get(s);
     	
     	//TODO tester si le type existe !

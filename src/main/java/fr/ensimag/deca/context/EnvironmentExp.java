@@ -81,6 +81,8 @@ public class EnvironmentExp {
     	//peut etre a modifier plus tard (voir dans les env parents ?)
     	return env.containsKey(name);
     }
+    
+    
     /**
      * Ajoute la définition la définition associé à un symbol dans l'environnement.
      * Si le symbole existe déjà, change sa définition si les deux définitions sont différentes,

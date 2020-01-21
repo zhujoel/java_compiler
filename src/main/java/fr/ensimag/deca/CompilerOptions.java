@@ -55,6 +55,11 @@ public class CompilerOptions {
     public boolean getAllCompilation() {
         return allCompilation;
     }
+
+    public boolean getNoCheck() {
+        return noCheck;
+    }
+    
     
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
@@ -127,7 +132,7 @@ public class CompilerOptions {
                             if (x >= 4 && x <= 16) {// 4 <= X <= 16
                                 System.out.println("X = " + x);
                                 registers = true;
-                                x -= 1;
+                                x = x - 1;
                             } else {
                                 System.out.println("X must have a value between 4 and 16");
                                 System.exit(1);

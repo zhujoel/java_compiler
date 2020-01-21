@@ -72,7 +72,7 @@ public class RegManager {
 		this.nbRegMax = nb;
 	}
 	
-	public GPRegister getRegistreLibre(DecacCompiler compiler) {
+	public synchronized GPRegister getRegistreLibre(DecacCompiler compiler) {
 		for(int i = 2; i < nbRegMax; ++i) {
 			if(!registresOccupes[i]) {
 				registresOccupes[i] = true;

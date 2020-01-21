@@ -40,6 +40,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
     	LOG.debug("verify rvalue : start");
+    	//on modifie le contenu de expression au cas où on veut un convfloat au lieu d'un float
     	expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
     	LOG.debug("verify rvalue : end");
     }
