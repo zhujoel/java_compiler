@@ -66,7 +66,7 @@ public class DecacCompiler {
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
-        this.regManager = new RegManager(16);
+        this.regManager = new RegManager(12);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
     }

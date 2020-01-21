@@ -25,8 +25,8 @@ do
     ima $ABSOPATH/src/test/deca/codegen/valid/created/${prog%.*}.ass
 done
 '
-decac -a $ABSOPATH/src/test/deca/codegen/valid/created/assign.deca
-ima $ABSOPATH/src/test/deca/codegen/valid/created/assign.ass
+decac -a $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.deca
+ima $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.ass
 
 
 exit

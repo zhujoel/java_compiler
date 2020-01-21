@@ -62,7 +62,7 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     protected GPRegister codeGenReg(DecacCompiler compiler) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	// Le booléen a pour valeur 1
     	if(value) {
     		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
@@ -76,7 +76,7 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	// Le booléen a pour valeur 1
     	if(value) {
     		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
@@ -87,7 +87,7 @@ public class BooleanLiteral extends AbstractExpr {
     }
     
     @Override
-    protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+    protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
     	// Le booléen a pour valeur 1
     	if((value && b) || (!value && !b)) {
