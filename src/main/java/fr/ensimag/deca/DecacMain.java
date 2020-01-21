@@ -69,9 +69,12 @@ public class DecacMain {
             try {
                 for (File source : options.getSourceFiles()) {
                     // pour chaque fichier à compiler DecacCompiler est instancié
-                    DecacCompiler compiler = new DecacCompiler(options, source);
-                    compiler.getRegManager().setNbRegistreMax(options.getX());
-                    //TODO: decomment this avec les threads (-m decac)
+                    DecacCompiler compiler;
+                    if (options.getRegisters()) {//for when the option -r is activated
+                        compiler = new DecacCompiler(options, source, options.getX());
+                    } else {//when the option -r is not activated
+                        compiler = new DecacCompiler(options, source);
+                    }
                     
                     Callable<Boolean> task = () -> {
                         boolean r = false;
@@ -86,7 +89,6 @@ public class DecacMain {
                     };
                     
                     taskList.add(task);
-                    //pool.submit(task);
 
                 }
                 List<Future<Boolean>> results = pool.invokeAll(taskList);

@@ -37,7 +37,7 @@ public class Register extends DVal {
     /**
      * General Purpose Registers
      */
-    public static GPRegister getR(int i) {
+    public synchronized static GPRegister getR(int i) {
         return R[i];
     }
     /**
