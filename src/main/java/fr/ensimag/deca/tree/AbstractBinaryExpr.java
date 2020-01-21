@@ -81,7 +81,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     	
     	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
     	codeGenAssemblyInst(compiler, regGauche, regDroite);
-    	//compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+    	
     	
         compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
     }

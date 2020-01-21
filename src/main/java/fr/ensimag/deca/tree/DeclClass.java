@@ -1,12 +1,15 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -86,4 +89,9 @@ public class DeclClass extends AbstractDeclClass {
     	this.methods.iter(f);
     }
 
+    
+    @Override
+	protected void codeGenDeclClass(DecacCompiler compiler) {
+    	compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
+	}
 }

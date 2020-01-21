@@ -1,8 +1,18 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 import org.apache.log4j.Logger;
 
@@ -46,5 +56,23 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
      */
     public void verifyListClassBody(DecacCompiler compiler) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
+    }
+    
+    public void codeGenListClass(DecacCompiler compiler) {
+    	// On prend met le pointeur au bon endroit
+
+        compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
+        compiler.getRegManager().addStackCpt();
+        
+        //Label ObjEq0 = new Label();
+        
+
+        
+        for (AbstractDeclClass i : getList()) {
+            i.codeGenDeclClass(compiler);
+        }
+        
     }
 }

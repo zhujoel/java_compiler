@@ -9,7 +9,7 @@ import fr.ensimag.ima.pseudocode.instructions.PUSH;
 public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
-	public static int stackCpt = 2;
+	public static int stackCpt = 1;
 	
 	// Compteur des labels pour avoir des noms différents dans la génération
 	// de label lors de codeGen
