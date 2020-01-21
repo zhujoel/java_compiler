@@ -126,7 +126,7 @@ public class CompilerOptions {
                         try {
                             x = Integer.parseInt(args[i + 1]);
                             if (x >= 4 && x <= 16) {// 4 <= X <= 16
-                                System.out.println("X = " + x);
+                                //  System.out.println("X = " + x);
                                 registers = true;
                                 x = x - 1;
                             } else {
@@ -158,7 +158,6 @@ public class CompilerOptions {
                             sourceFiles.add(new File(args[i]));
                         }
                     }
-                   //allCompilation = true; 
             }
             i++;
     }
@@ -204,8 +203,18 @@ public class CompilerOptions {
         
     }
 
-    protected void displayUsage(){//what should it do?
-        //System.out.println("wtvr");
+    protected void displayUsage() {
+        System.out.println("\n Options pour le compilateur\n");
+        System.out.println("  -a\n    Compiler le fichier source et generer le fichier .ass");
+        System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
+        System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
+                + "    l’arbre, et affiche la décompilation de ce dernier.");
+        System.out.println("  -v\n    Arrête decac après l’étape de vérifications.");
+        System.out.println("  -n\n    Supprime les tests de débordement à l’exécution.");
+        System.out.println("  -r\n    Limite les registres banalisés disponibles.");
+        System.out.println("  -d\n    Active les traces de debug.");
+        System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n"
+                + "    lance la compilation des fichiers en parallèle.\n");
     }
 }
 
