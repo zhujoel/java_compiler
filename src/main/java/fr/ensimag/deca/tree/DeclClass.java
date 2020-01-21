@@ -1,24 +1,14 @@
 package fr.ensimag.deca.tree;
 
-<<<<<<< HEAD
-=======
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.tools.IndentPrintStream;
-
->>>>>>> f2816afa596015fee599f454415fcda68e861c71
 import java.io.PrintStream;
-
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
-
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
@@ -143,6 +133,7 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
+    	//this.extension.codeGenBool(compiler);
     	compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
 	}
 }
