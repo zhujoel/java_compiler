@@ -60,13 +60,13 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
 
         //compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
         compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB)));
-        compiler.getRegManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
         
         Label objEq0 = new Label("code.Object.equals");
         compiler.addInstruction(new LOAD(new LabelOperand(objEq0), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB)));
-        compiler.getRegManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
         
         
 

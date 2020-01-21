@@ -10,9 +10,8 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
-import fr.ensimag.deca.codegen.EnvironmentDefault;
 import fr.ensimag.deca.codegen.RegManager;
-import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.codegen.StackManager;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
@@ -47,14 +46,17 @@ import fr.ensimag.ima.pseudocode.Label;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     private SymbolTable symbolTable;
+    
+    // gère les registres
     private RegManager regManager;
+    // gère la stack
+    private StackManager stackManager;
     
     private EnvironmentType envType;
     
     // représente les variables d'environnement du compiler
     private EnvironmentExp envExp;
     
-
     
     /**
      * Portable newline character.
@@ -69,6 +71,7 @@ public class DecacCompiler {
         this.regManager = new RegManager(12);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
+        this.stackManager = new StackManager();
     }
     
     public DecacCompiler(CompilerOptions compilerOptions, File source,  int nbRegMax) {
@@ -79,6 +82,7 @@ public class DecacCompiler {
         this.regManager = new RegManager(nbRegMax);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
+        this.stackManager = new StackManager();
     }
 
     public SymbolTable getSymbolTable() {
@@ -88,6 +92,10 @@ public class DecacCompiler {
     public RegManager getRegManager() {
     	return this.regManager;
     }
+    
+    public StackManager getStackManager() {
+		return stackManager;
+	}
     
     public EnvironmentType getEnvironmentType() {
     	return this.envType;
