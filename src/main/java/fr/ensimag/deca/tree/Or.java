@@ -26,17 +26,21 @@ public class Or extends AbstractOpBool {
 
 
 	@Override
-	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());
-    	
         //compiler.addInstruction(new CMP(new ImmediateInteger(1), regDroite));
+		
+		Label labFin = new Label("Fin_or_"+ compiler.getRegManager().getNOr());
+		compiler.getRegManager().addNOr();
+		
         if(b) {
-        	this.getLeftOperand().codeGenBool(compiler, label, labelFin, b);
-        	this.getRightOperand().codeGenBool(compiler, labelFin, label, !b); 
+        	this.getLeftOperand().codeGenBool(compiler, label, b);
+        	this.getRightOperand().codeGenBool(compiler, label, !b); 
         }
         else {
-        	this.getLeftOperand().codeGenBool(compiler, labelFin, label, !b);
-        	this.getRightOperand().codeGenBool(compiler, label, labelFin, b);
+        	this.getLeftOperand().codeGenBool(compiler, labFin, !b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
+        	compiler.addLabel(labFin);
         }
         //return regGauche;
 	}

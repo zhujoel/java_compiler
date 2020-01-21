@@ -187,8 +187,9 @@ public class Identifier extends AbstractIdentifier {
     	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
     	if(!localEnv.isIn(s)) {
-    		throw new ContextualError("Utilisation d'une variable non déclarée", this.getLocation());
+    		throw new ContextualError("Utilisation d'un identificateur non déclarée", this.getLocation());
     	}
+    	
     	Definition d = localEnv.get(s);
     	
     	//TODO tester si le type existe !
@@ -274,14 +275,14 @@ public class Identifier extends AbstractIdentifier {
 	/**
 	 * Génère le code pour dans le cas ou l'identifier est booléen.
 	 */
-	protected void codeGenBool(DecacCompiler compiler,Label label, boolean b) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		GPRegister reg = this.codeGenReg(compiler);
-        compiler.addInstruction(new CMP(new ImmediateInteger(0), reg));
+        compiler.addInstruction(new CMP(new ImmediateInteger(1), reg));
         if(b) {
-            compiler.addInstruction(new BNE(label));
+            compiler.addInstruction(new BEQ(label));
         }
         else {
-            compiler.addInstruction(new BEQ(label));
+            compiler.addInstruction(new BNE(label));
         }
 	}
 	

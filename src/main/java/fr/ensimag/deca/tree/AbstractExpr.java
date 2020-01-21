@@ -87,11 +87,13 @@ public abstract class AbstractExpr extends AbstractInst {
             Type expectedType)
             throws ContextualError {
     	type = this.verifyExpr(compiler, localEnv, currentClass);
-    	if(type.isInt() && expectedType.isFloat()) {
+    	
+    	
+    	if(type.isInt() && expectedType.isFloat()) {//si on stocke un int dans un nombre flottant
     		ConvFloat c = new ConvFloat(this);
     		c.verifyExpr(compiler, localEnv, currentClass);
     		return c;
-    	} else if (type.sameType(expectedType)) {
+    	} else if (type.sameType(expectedType)) {//sinon si les types sont bien identiques
     		return this;
     	}
     	throw new ContextualError("Affectation error, "
@@ -169,7 +171,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected abstract GPRegister codeGenReg(DecacCompiler compiler);
 
-   	protected void codeGenBool(DecacCompiler compiler, Label label,Label labelFin, boolean b) {
+   	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
    		//return null;
    	}
 }

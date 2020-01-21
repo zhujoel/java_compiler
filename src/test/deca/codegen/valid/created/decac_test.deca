@@ -1,4 +1,11 @@
 {
-	int a = 2;
-    float b = a;
+    bool a = false;
+
+    if( !(((a && true) && (false && true) ) && true) || true){
+	println("dans le if");
+    }
+    else{
+	println("dans le else");
+    }
+    println("fin");
 }

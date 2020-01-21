@@ -12,24 +12,26 @@
 	LOAD #0, R2
 	STORE R2, 2(GB)
 ; Instructions
-Begin_While_1:
-; >
+; Début du if_1
+; ||
+; &&
+; &&
+; &&
 	LOAD 2(GB), R2
-	LOAD #10, R3
-	CMP R3, R2
-	BGT In_While_1
-In_While_1:
-; +
-	LOAD 2(GB), R2
-	LOAD #1, R3
-	ADD R2, R3
-	STORE R3, 2(GB)
-	LOAD 2(GB), R1
-	WINT
+	CMP #1, R2
+	BNE Fin_or_1
+; &&
+	BRA Fin_or_1
+Fin_or_1:
+; Contenu du if_1
+	WSTR "dans le if"
 	WNL
-	BRA Begin_While_1
-End_While_1:
-	WSTR "fin du while"
+	BRA endif_1
+else_1:
+	WSTR "dans le else"
+	WNL
+endif_1:
+	WSTR "fin"
 	WNL
 	HALT
 pile_pleine:

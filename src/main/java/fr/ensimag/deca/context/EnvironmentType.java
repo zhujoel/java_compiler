@@ -5,6 +5,7 @@ import java.util.HashMap;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.Location;
 /**
  * Dictionnaire qui associe les TypeDefinition à leurs types
  * @author flichya
@@ -24,6 +25,7 @@ public class EnvironmentType {
 		env.put(symbolTable.create("float"), new FloatType(symbolTable.create("float")));
 		env.put(symbolTable.create("int"), new IntType(symbolTable.create("int")));
 		env.put(symbolTable.create("String"), new StringType(symbolTable.create("String")));
+		env.put(symbolTable.create("Object"), new ClassType(symbolTable.create("Object"), Location.BUILTIN, null));
 	}
 	
 	public Type get(Symbol key) {
@@ -38,5 +40,9 @@ public class EnvironmentType {
     	else {
     		env.put(name,  type);
     	}
+	}
+	
+	public boolean isIn(Symbol key) {
+		return env.containsKey(key);
 	}
 }
