@@ -39,8 +39,8 @@ public class Not extends AbstractUnaryExpr {
     }
 
 	
-	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
-		this.getOperand().codeGenBool(compiler, label, labelFin, !b);
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
+		this.getOperand().codeGenBool(compiler, label, !b);
 	}
 
 	@Override

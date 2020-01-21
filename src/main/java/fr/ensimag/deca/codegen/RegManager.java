@@ -3,7 +3,6 @@ package fr.ensimag.deca.codegen;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
@@ -11,8 +10,13 @@ public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
 	public static int stackCpt = 2;
+	
+	// Compteur des labels pour avoir des noms différents dans la génération
+	// de label lors de codeGen
     private int nWhile = 1;
     private int nIf = 1;
+    private int nOr = 1;
+    private int nAnd = 1;
     private int pushed = 0;
 	
 	public RegManager(int nbReg) {
@@ -40,12 +44,28 @@ public class RegManager {
 		return nIf;
 	}
 	
+	public int getNAnd() {
+		return nAnd;
+	}
+	
+	public int getNOr() {
+		return nOr;
+	}
+	
 	public void addNWhile() {
 		nWhile++;
 	}
 	
 	public void addNIf() {
 		nIf++;
+	}
+	
+	public void addNAnd() {
+		nAnd++;
+	}
+	
+	public void addNOr() {
+		nOr++;
 	}
 	
 	public void setNbRegistreMax(int nb) {

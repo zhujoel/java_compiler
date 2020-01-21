@@ -169,7 +169,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected abstract GPRegister codeGenReg(DecacCompiler compiler);
 
-   	protected void codeGenBool(DecacCompiler compiler, Label label,Label labelFin, boolean b) {
+   	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
    		//return null;
    	}
 }

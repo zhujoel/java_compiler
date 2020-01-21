@@ -87,16 +87,11 @@ public class BooleanLiteral extends AbstractExpr {
     }
     
     @Override
-    protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+    protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
     	// Le booléen a pour valeur 1
-    	System.out.println(b);
-    	System.out.println(value);
     	if((value && b) || (!value && !b)) {
     		compiler.addInstruction(new BRA(label));
-    	}
-    	else {
-    		compiler.addInstruction(new BRA(labelFin));
     	}
     }
 }
