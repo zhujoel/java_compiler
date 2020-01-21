@@ -87,6 +87,8 @@ public class DeclField extends AbstractDeclField {
 		//On cree sa definition
 		FieldDefinition fDef = new FieldDefinition(t, fieldName.getLocation(), visibility, currentClass, currentClass.getNumberOfFields());
 		
+		
+		
 		try {
 			//On declare le champ
 			localEnv.declare(this.fieldName.getName(), fDef);
