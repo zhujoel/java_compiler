@@ -1,5 +1,6 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -15,7 +16,13 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
 			m.decompile(s);
 			s.println();
 		}
-		
 	}
+	
+	public void codeGenListMethod(DecacCompiler compiler) {
+		for (AbstractDeclMethod m : getList()) {
+			m.codeGenDeclMethod(compiler);
+		}
+	}
+	
 
 }

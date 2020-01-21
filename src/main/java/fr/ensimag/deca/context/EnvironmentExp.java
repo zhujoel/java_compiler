@@ -22,10 +22,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
  * @date 01/01/2020
  */
 public class EnvironmentExp {
-    // A FAIRE : implémenter la structure de donnée représentant un
-    // environnement (association nom -> définition, avec possibilité
-    // d'empilement).
-
+	
     EnvironmentExp parentEnvironment;
     
     private HashMap<Symbol, ExpDefinition> env;//Ici je met ExpDefinition et pas Definition car le dictionnaire n'est

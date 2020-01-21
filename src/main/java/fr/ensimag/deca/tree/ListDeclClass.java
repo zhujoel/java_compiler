@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
@@ -68,7 +69,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
         compiler.getStackManager().addStackCpt();
         
-        
+        compiler.getEnvironmentClass().put(compiler.getType("Object").getName(), new RegisterOffset(1, Register.GB));
 
         
         for (AbstractDeclClass i : getList()) {
