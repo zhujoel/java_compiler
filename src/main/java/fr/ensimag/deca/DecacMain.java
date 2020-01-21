@@ -40,21 +40,10 @@ public class DecacMain {
 
         if (options.getPrintBanner() && args.length == 1) {//option -b
             System.out.println("Équipe gl48");
-
         }
 
         if (options.getSourceFiles().isEmpty() && args.length == 0) {//sans arguments
-            System.out.println("\n Options pour le compilateur\n");
-            System.out.println("  -a\n    Compiler le fichier source et generer le fichier .ass");
-            System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
-            System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
-                    + "    l’arbre, et affiche la décompilation de ce dernier.");
-            System.out.println("  -v\n    Arrête decac après l’étape de vérifications.");
-            System.out.println("  -n\n    Supprime les tests de débordement à l’exécution.");
-            System.out.println("  -r\n    Limite les registres banalisés disponibles.");
-            System.out.println("  -d\n    Active les traces de debug.");
-            System.out.println("  -P\n    S’il y a plusieurs fichiers sources,\n"
-                    + "    lance la compilation des fichiers en parallèle\n");
+            options.displayUsage();
         }
 
         if (options.getParallel()) {//option -P
