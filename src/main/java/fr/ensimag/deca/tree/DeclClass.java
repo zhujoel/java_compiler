@@ -1,17 +1,22 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ClassType;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
-import fr.ensimag.deca.tools.IndentPrintStream;
-
 import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -91,9 +96,6 @@ public class DeclClass extends AbstractDeclClass {
         	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
         }
         
-        
-        
-        
     }
 
     @Override
@@ -128,4 +130,17 @@ public class DeclClass extends AbstractDeclClass {
     	this.methods.iter(f);
     }
 
+    
+    @Override
+	protected void codeGenDeclClass(DecacCompiler compiler) {
+        compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+        compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
+        compiler.getStackManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
+        
+        
+        this.methods.codeGenListMethod(compiler);
+        
+        compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
+	}
 }

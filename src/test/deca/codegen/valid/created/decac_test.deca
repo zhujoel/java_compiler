@@ -1,11 +1,10 @@
-{
-    bool a = false;
 
-    if( !(((a && true) && (false && true) ) && true) || true){
-	println("dans le if");
+class A extends Object{
+    void meth1(){
+
     }
-    else{
-	println("dans le else");
-    }
-    println("fin");
+}
+class B extends A{}
+{
+
 }

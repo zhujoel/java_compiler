@@ -14,6 +14,12 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Déclaration d'une méthode d'une classe.
@@ -133,6 +139,13 @@ public class DeclMethod extends AbstractDeclMethod {
 		}catch(DoubleDefException e) {
 			throw new ContextualError("Methode deja definie", this.methName.getLocation());
 		}
+	}
+	
+	@Override
+	protected void codeGenDeclMethod(DecacCompiler compiler) {
+		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code." + this.methName.getName().getName())), Register.R0));
+		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+		compiler.getStackManager().addStackCpt();
 	}
 
 }

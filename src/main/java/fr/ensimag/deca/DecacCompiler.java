@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
-import fr.ensimag.deca.codegen.EnvironmentDefault;
 import fr.ensimag.deca.codegen.RegManager;
-import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.codegen.StackManager;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
@@ -25,6 +25,7 @@ import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.deca.tree.Program;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
@@ -47,14 +48,19 @@ import fr.ensimag.ima.pseudocode.Label;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     private SymbolTable symbolTable;
+    
+    // gère les registres
     private RegManager regManager;
+    // gère la stack
+    private StackManager stackManager;
     
     private EnvironmentType envType;
     
     // représente les variables d'environnement du compiler
     private EnvironmentExp envExp;
     
-
+    // associe une classe avec son emplacement dans le stack
+    private HashMap<Symbol, DAddr> envClass;
     
     /**
      * Portable newline character.
@@ -66,9 +72,11 @@ public class DecacCompiler {
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
-        this.regManager = new RegManager(12);
+        this.regManager = new RegManager(16);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
+        this.envClass = new HashMap<Symbol, DAddr>();
+        this.stackManager = new StackManager();
     }
     
     public DecacCompiler(CompilerOptions compilerOptions, File source,  int nbRegMax) {
@@ -78,6 +86,9 @@ public class DecacCompiler {
         this.symbolTable = new SymbolTable();
         this.regManager = new RegManager(nbRegMax);
         this.envType = new EnvironmentType(symbolTable);
+        this.envExp = new EnvironmentExp(null);
+        this.envExp = new EnvironmentExp(null);
+        this.stackManager = new StackManager();
     }
 
     public SymbolTable getSymbolTable() {
@@ -88,12 +99,20 @@ public class DecacCompiler {
     	return this.regManager;
     }
     
+    public StackManager getStackManager() {
+		return stackManager;
+	}
+    
     public EnvironmentType getEnvironmentType() {
     	return this.envType;
     }
     
     public EnvironmentExp getEnvironmentExp() {
     	return this.envExp;
+    }
+    
+    public HashMap<Symbol, DAddr> getEnvironmentClass() {
+    	return this.envClass;
     }
     
     public Type getType(String s) {

@@ -9,7 +9,6 @@ import fr.ensimag.ima.pseudocode.instructions.PUSH;
 public class RegManager {
 	private int nbRegMax;
 	private boolean registresOccupes[];
-	public static int stackCpt = 2;
 	
 	// Compteur des labels pour avoir des noms différents dans la génération
 	// de label lors de codeGen
@@ -22,18 +21,6 @@ public class RegManager {
 	public RegManager(int nbReg) {
 		this.nbRegMax = nbReg;
 		this.registresOccupes = new boolean[nbRegMax];
-	}
-	
-	public void addStackCpt() {
-		stackCpt++;
-	}
-	
-	public void subStackCpt() {
-		stackCpt--;
-	}
-	
-	public int getStackCpt() {
-		return stackCpt;
 	}
 	
 	public int getNWhile() {
@@ -72,7 +59,7 @@ public class RegManager {
 		this.nbRegMax = nb;
 	}
 	
-	public GPRegister getRegistreLibre(DecacCompiler compiler) {
+	public synchronized GPRegister getRegistreLibre(DecacCompiler compiler) {
 		for(int i = 2; i < nbRegMax; ++i) {
 			if(!registresOccupes[i]) {
 				registresOccupes[i] = true;

@@ -91,10 +91,10 @@ public class Program extends AbstractProgram {
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
-        compiler.addComment("Main program");
-        compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
-        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
+
+        compiler.addComment("Class Declaration");
+    	classes.codeGenListClass(compiler);
+        compiler.addComment("Main Function");
         main.codeGenMain(compiler);
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
