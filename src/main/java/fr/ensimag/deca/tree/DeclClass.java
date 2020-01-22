@@ -1,15 +1,20 @@
 package fr.ensimag.deca.tree;
 
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
+
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
-import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
@@ -71,30 +76,24 @@ public class DeclClass extends AbstractDeclClass {
     		throw new ContextualError("Classe non définie", extension.getLocation());
     	}
     	
-    	
     	//On recupere le type de la superclasse
     	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hériter d'une classe existante", extension.getLocation());
+        this.extension.setType(superC.getDefinition().getType());
+        this.extension.setDefinition(superC.getDefinition());
+    	
     	
     	//declaration du type de la classe
         ClassType c = new ClassType(compiler.getSymbolTable().create(this.className.getName().toString()),
         		this.className.getLocation(), superC.getDefinition());
         
-        //decoration de l'arbre (generation de la definition)
-        ClassDefinition cDef = new ClassDefinition(c, this.className.getLocation(), extension.getClassDefinition());
-        
-        
         try {
         	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
         			.create(this.className.getName().toString()),c);
-        	this.className.setDefinition(cDef);
+        	this.className.setDefinition(c.getDefinition());
             this.className.setType(c);
-            this.extension.setDefinition(superC.getDefinition());
         } catch (DoubleDefException e) { //pas de double definition possible
         	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
         }
-        
-        
-        
         
     }
 
@@ -133,7 +132,14 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
-    	//this.extension.codeGenBool(compiler);
-    	compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
+        compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+        compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
+        compiler.getStackManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
+        
+        
+        this.methods.codeGenListMethod(compiler);
+        
+        compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
 	}
 }

@@ -87,6 +87,17 @@ public class DeclField extends AbstractDeclField {
 		//On cree sa definition
 		FieldDefinition fDef = new FieldDefinition(t, fieldName.getLocation(), visibility, currentClass, currentClass.getNumberOfFields());
 		
+		//On controle si le champ est defini dans une superclasse
+		ClassDefinition cSuperDef = currentClass.getFirstSuperClassWithDef(this.fieldName.getName());
+		//si oui cSuperDef est non null
+		if(cSuperDef != null) {
+			//dans ce cas si la superDefinition n est pas un champ c est une erreur
+			if(!cSuperDef.getMembers().get(fieldName.getName()).isField()) {
+				throw new ContextualError(this.fieldName.getName().toString() + 
+						" n'est pas un champ dans l'une des classes parente", this.fieldName.getLocation());
+			}
+		}
+		
 		try {
 			//On declare le champ
 			localEnv.declare(this.fieldName.getName(), fDef);

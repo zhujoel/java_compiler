@@ -109,7 +109,7 @@ public class DeclVar extends AbstractDeclVar {
 		this.varName.setType(compiler.getEnvironmentType().get(this.type.getName()));
 		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
 		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
-		varDef.setOperand(new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB));
+		varDef.setOperand(new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
 		try {
 			compiler.getEnvironmentExp().declareOrSet(varName.getName(), varDef);
 		}
@@ -117,7 +117,7 @@ public class DeclVar extends AbstractDeclVar {
 			e.printStackTrace();
 		}
 		// un registre de plus est occupé
-		compiler.getRegManager().addStackCpt();
+		compiler.getStackManager().addStackCpt();
 		
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());

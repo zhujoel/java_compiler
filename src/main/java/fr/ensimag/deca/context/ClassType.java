@@ -50,10 +50,16 @@ public class ClassType extends Type {
         super(className);
     }
     
-
+/*AVANT
     @Override
     public boolean sameType(Type otherType) {
         return otherType.isClass();
+    }
+    */
+    /*APRES:*/
+    @Override
+    public boolean sameType(Type otherType) {
+    	return this.getName().equals(otherType.getName());
     }
 
     /**

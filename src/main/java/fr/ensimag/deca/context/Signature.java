@@ -23,5 +23,15 @@ public class Signature {
     public int size() {
         return args.size();
     }
+    
+    /**
+     * Deux signatures sont egales si les arguments des listes de ces signatures sont 2 a 2 identiques
+     */
+    public boolean equals(Object o) {
+    	if (o != null && o instanceof Signature) {
+    		return args.equals(((Signature) o).args);
+    	}
+    	return false;
+    }
 
 }

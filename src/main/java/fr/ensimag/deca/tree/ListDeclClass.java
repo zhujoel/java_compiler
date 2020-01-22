@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
@@ -60,15 +61,15 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
 
         //compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
         compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB)));
-        compiler.getRegManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
         
         Label objEq0 = new Label("code.Object.equals");
         compiler.addInstruction(new LOAD(new LabelOperand(objEq0), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB)));
-        compiler.getRegManager().addStackCpt();
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
         
-        
+        compiler.getEnvironmentClass().put(compiler.getType("Object").getName(), new RegisterOffset(1, Register.GB));
 
         
         for (AbstractDeclClass i : getList()) {

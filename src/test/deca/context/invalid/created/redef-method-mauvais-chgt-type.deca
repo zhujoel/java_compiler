@@ -1,0 +1,17 @@
+class A{}
+class B extends A{}
+class C{
+	A fonction(){
+		A a;
+		return a;
+	}
+}
+class D extends C{
+	E fonction(){
+		E e;
+		return e;
+	}
+}
+class E{
+
+}

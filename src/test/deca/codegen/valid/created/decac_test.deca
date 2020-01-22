@@ -1,4 +1,10 @@
 
+class A extends Object{
+    void meth1(){
+
+    }
+}
+class B extends A{}
 {
 
 }
