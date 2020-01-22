@@ -42,6 +42,11 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
+    	if(this.parentEnvironment == null) {
+    		return env.get(key);
+    	} else if (env.get(key) == null) {
+    		return this.parentEnvironment.get(key);
+    	} 
     	return env.get(key);
     }
 

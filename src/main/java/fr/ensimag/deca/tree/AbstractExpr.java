@@ -95,6 +95,12 @@ public abstract class AbstractExpr extends AbstractInst {
     		return c;
     	} else if (type.sameType(expectedType)) {//sinon si les types sont bien identiques
     		return this;
+    	} else if(type.isClass() && expectedType.isClass()) {//si les types sont des classes
+    		if(type.asClassType(type.toString() + " n'est pas une classe", this.getLocation())
+    				.isSubClassOf(expectedType.asClassType(expectedType.toString() + 
+    						" n'est pas une classe", this.getLocation()))) {//si la rvalue est un type qui herite de <type>
+    			return this;
+    		}
     	}
     	throw new ContextualError("Affectation error, "
     			+ "type: " + type.toString() + ", expected type: " + expectedType.toString(), getLocation());
