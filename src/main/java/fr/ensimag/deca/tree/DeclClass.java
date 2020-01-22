@@ -144,16 +144,10 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
-    	// Construction de la table des méthodes
-    	/**
-    	if(this.extension == null) {
-            compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-    	}
-    	else {
-    	*/
-            compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
-    	//}
     	
+    	
+    	
+    	compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
