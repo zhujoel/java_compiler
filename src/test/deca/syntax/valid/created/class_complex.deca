@@ -9,10 +9,11 @@ class A extends B{
 	float meth1(int a, float b){
 		return 5.2;
 	}
-	boolean bool;
+
+	bool bool1;
 
 	void meth2(){
-		bool = false;
+		bool1 = false;
 	}
 }
 
