@@ -497,7 +497,6 @@ literal returns[AbstractExpr tree]
 			setLocation($tree, $INT);
         }
     | fd=FLOAT {
-				//TODO (?) changer pour "émettre un message d'erreur" en cas d'overflow ou underflow 
     			$tree = new FloatLiteral(Float.parseFloat($fd.text));
 				setLocation($tree, $fd);
     		}
@@ -682,7 +681,6 @@ list_params[ListDeclParam params]
       )*)?
     ;
     
-// TODO: compléter ça?
 multi_line_string returns[String text, Location location]
     : s=STRING {
             $text = $s.text;
