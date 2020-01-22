@@ -1,0 +1,6 @@
+class A {
+	int a;
+	void fonction(){
+		this.a = 3;
+	}
+}
