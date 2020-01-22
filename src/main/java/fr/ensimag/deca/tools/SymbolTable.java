@@ -50,5 +50,14 @@ public class SymbolTable {
         }
 
         private String name;
+        
+        @Override
+        public boolean equals(Object o) {
+        	if(o instanceof Symbol) {
+        		return this.name.equals(((Symbol) o).getName());
+        	}else {
+        		return false;
+        	}
+        }
     }
 }

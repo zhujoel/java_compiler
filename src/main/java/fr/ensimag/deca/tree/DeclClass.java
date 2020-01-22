@@ -77,24 +77,21 @@ public class DeclClass extends AbstractDeclClass {
     		throw new ContextualError("Classe non définie", extension.getLocation());
     	}
     	
-    	
     	//On recupere le type de la superclasse
     	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hériter d'une classe existante", extension.getLocation());
+        this.extension.setType(superC.getDefinition().getType());
+        this.extension.setDefinition(superC.getDefinition());
+    	
     	
     	//declaration du type de la classe
         ClassType c = new ClassType(compiler.getSymbolTable().create(this.className.getName().toString()),
         		this.className.getLocation(), superC.getDefinition());
         
-        //decoration de l'arbre (generation de la definition)
-        ClassDefinition cDef = new ClassDefinition(c, this.className.getLocation(), extension.getClassDefinition());
-        
-        
         try {
         	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
         			.create(this.className.getName().toString()),c);
-        	this.className.setDefinition(cDef);
+        	this.className.setDefinition(c.getDefinition());
             this.className.setType(c);
-            this.extension.setDefinition(superC.getDefinition());
         } catch (DoubleDefException e) { //pas de double definition possible
         	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
         }
