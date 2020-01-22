@@ -1,0 +1,9 @@
+{
+    bool a = true;
+    if(a && false){
+        println("Dans le if");
+    }
+    else{
+        println("Dans le else");
+    }
+}

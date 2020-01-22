@@ -1,0 +1,6 @@
+{
+    float a = 2.3;
+    float b = 1.2;
+    a = a * 5;
+    print(a);
+}
