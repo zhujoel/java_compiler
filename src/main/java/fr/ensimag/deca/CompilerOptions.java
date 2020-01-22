@@ -166,7 +166,7 @@ public class CompilerOptions {
             System.err.println("No valid path for the source file was detected");
             System.exit(1);
         }else if(!sourceFiles.isEmpty() && args.length > 0 && parallel && sourceFiles.size() < 2){
-            System.err.println("The [-P] option needs at least 2 source files");
+            System.err.println("The -P option needs at least 2 source files");
             System.exit(1);
         }
         
