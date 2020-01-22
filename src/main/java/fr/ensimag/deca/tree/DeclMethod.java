@@ -16,6 +16,7 @@ import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -39,7 +40,7 @@ public class DeclMethod extends AbstractDeclMethod {
     // paramètres de la méthode
     final private ListDeclParam params;
     // corps de la méthode
-    final private MethodBody corps;
+    final private AbstractMethodBody corps;
     
     public DeclMethod(AbstractIdentifier returnType, AbstractIdentifier methName,
     		ListDeclParam params, ListDeclVar decls, ListInst insts) {
@@ -54,6 +55,17 @@ public class DeclMethod extends AbstractDeclMethod {
         this.corps = new MethodBody(decls, insts);
     }
     
+    public DeclMethod(AbstractIdentifier returnType, AbstractIdentifier methName,
+    		ListDeclParam params, AbstractMethodBody body) {
+    	Validate.notNull(returnType);
+        Validate.notNull(methName);
+        Validate.notNull(params);
+        Validate.notNull(body);
+        this.returnType = returnType;
+        this.methName = methName;
+        this.params = params;
+        this.corps = body;
+    }
     
 	@Override
 	public void decompile(IndentPrintStream s) {
@@ -143,8 +155,8 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	@Override
-	protected void codeGenDeclMethod(DecacCompiler compiler) {
-		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code." + this.methName.getName().getName())), Register.R0));
+	protected void codeGenDeclMethod(DecacCompiler compiler, Symbol symbol) {
+		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code."+symbol.getName() +"." + this.methName.getName().getName())), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 		compiler.getStackManager().addStackCpt();
 	}

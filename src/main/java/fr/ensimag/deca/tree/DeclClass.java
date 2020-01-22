@@ -6,17 +6,17 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -48,6 +48,19 @@ public class DeclClass extends AbstractDeclClass {
     	Validate.notNull(fields);
     	Validate.notNull(methods);
     	this.extension = extension;
+    	this.className = className;
+    	this.fields = fields;
+    	this.methods = methods;
+    }
+    
+    
+    // Constructeur pour la classe Object
+    public DeclClass(AbstractIdentifier className, 
+    		ListDeclField fields, ListDeclMethod methods) {
+    	Validate.notNull(className);
+    	Validate.notNull(fields);
+    	Validate.notNull(methods);
+    	this.extension = null;
     	this.className = className;
     	this.fields = fields;
     	this.methods = methods;
@@ -138,14 +151,25 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
-        compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+    	// Construction de la table des méthodes
+    	if(this.extension == null) {
+            compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+    	}
+    	else {
+            compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+    	}
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
         
+        ClassType classType;
         
-        this.methods.codeGenListMethod(compiler);
+        if(this.extension != null) {
+        	classType = (ClassType) this.extension.getType();
+        	/*classType.getDefinition().getMembers().get("equals");
+        	classType.getDefinition().getMembers().codeGenListMethod(compiler, this.extension.getName());*/
+        }
+        this.methods.codeGenListMethod(compiler, this.className.getName());
         
-        compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
 	}
 }

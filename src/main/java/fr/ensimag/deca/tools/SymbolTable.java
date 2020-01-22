@@ -30,6 +30,10 @@ public class SymbolTable {
         this.map.putIfAbsent(name, new Symbol(name));
         return this.map.get(name);
     }
+    
+    public Symbol getSymbol(String s) {
+    	return this.map.get(s);
+    }
 
     public static class Symbol {
         // Constructor is private, so that Symbol instances can only be created

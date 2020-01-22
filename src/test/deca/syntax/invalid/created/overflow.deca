@@ -1,0 +1,4 @@
+// test qu'un overflow émet un message d'erreur
+{
+	float b = 1.9999999999999999999999999999999;
+}
