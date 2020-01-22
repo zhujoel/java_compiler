@@ -92,36 +92,35 @@ public class DeclMethod extends AbstractDeclMethod {
 			s.add(p.verifyDeclParam(compiler, localEnv, currentClass));
 		}
 		
-//		si la methode est definie dans la superclasse et si la methode de la superclasse a une signature differente
-		if (currentClass.checkFirstSuperDefinition(methName.getName())) {
+		
 			
-			//recuperation de la premiere classe parent qui contient la definition de la methode (en partant de currentClass)
-			ClassDefinition sC = currentClass.getFirstSuperClassWithDef(methName.getName());
-			
+		//recuperation de la premiere classe parent qui contient la definition de la methode (en partant de currentClass)
+		ClassDefinition sC = currentClass.getFirstSuperClassWithDef(methName.getName());
+		
+		//si la methode est bien definie dans une superClasse, sc n'est pas null
+		if (sC != null) {
 			//recuperation de la methode dans cette classe parent
-			if (sC != null) {
-				MethodDefinition methSuperC = sC.getMembers()
-						.get(methName.getName()).asMethodDefinition(methName.getName().toString()
-								+ " n'est pas une methode", methName.getLocation());
-				//On compare les deux signatures
-				if(!methSuperC.getSignature().equals(s)) {
-					throw new ContextualError("Redefinition de methode avec deux signatures differentes", methName.getLocation());
-				}
+			MethodDefinition methSuperC = sC.getMembers()
+					.get(methName.getName()).asMethodDefinition(methName.getName().toString()
+							+ " n'est pas une methode", methName.getLocation());
+			//On compare les deux signatures
+			if(!methSuperC.getSignature().equals(s)) {
+				throw new ContextualError("Redefinition de methode avec deux signatures differentes", methName.getLocation());
+			}
 				
 				
-				//on s'assure que le type de retour de la fonction parent est un parent du type de retour de la nouvelle fonction
-				if(t.isClass()) {
-					//on recupere la ClassDefinition du type de retour de la methode fille
-					ClassDefinition cDefThis = compiler.getEnvironmentType().get(t.getName())
-							.asClassType(t.getName().toString() + " n'est pas une classe", this.returnType.getLocation()).getDefinition();
-					//on recupere la ClassDefinition du type de retour de la methode mere
-					ClassDefinition cDefSuper = compiler.getEnvironmentType().get(methSuperC.getType().getName())
-							.asClassType(methSuperC.getType().getName().toString() + " n'est pas une classe", methSuperC.getLocation()).getDefinition();
-					//on les compares
-					if(!cDefThis.hasForParent(cDefSuper)) {
-						throw new ContextualError("Le type de retour de la fonction " + cDefThis.getType().toString() 
-								+ " doit etre herite de " + cDefSuper.getType().toString(), this.returnType.getLocation());
-					}
+			//on s'assure que le type de retour de la fonction parent est un parent du type de retour de la nouvelle fonction
+			if(t.isClass()) {
+				//on recupere la ClassDefinition du type de retour de la methode fille
+				ClassDefinition cDefThis = compiler.getEnvironmentType().get(t.getName())
+						.asClassType(t.getName().toString() + " n'est pas une classe", this.returnType.getLocation()).getDefinition();
+				//on recupere la ClassDefinition du type de retour de la methode mere
+				ClassDefinition cDefSuper = compiler.getEnvironmentType().get(methSuperC.getType().getName())
+						.asClassType(methSuperC.getType().getName().toString() + " n'est pas une classe", methSuperC.getLocation()).getDefinition();
+				//on les compares
+				if(!cDefThis.hasForParent(cDefSuper)) {
+					throw new ContextualError("Le type de retour de la fonction " + cDefThis.getType().toString() 
+							+ " doit etre herite de " + cDefSuper.getType().toString(), this.returnType.getLocation());
 				}
 			}
 		}

@@ -1,0 +1,5 @@
+{
+    bool a = (0 <= 1);
+    bool b = true;
+    a = b && a;
+}
