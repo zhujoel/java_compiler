@@ -41,7 +41,9 @@ public class Return extends AbstractInst {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		s.print("return ");
+		this.expr.decompile(s);
+		s.print(";");
 		
 	}
 
