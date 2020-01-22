@@ -1,5 +1,6 @@
 {
 	int a = 5;
-	a = (float)a;
-	a = (string)a;
+	float b;
+	b = (float) (a);
+	a = (int)(b);
 }
