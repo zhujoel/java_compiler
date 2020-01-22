@@ -648,22 +648,26 @@ decl_field[AbstractIdentifier t, Visibility v] returns[AbstractDeclField tree]
 decl_method returns[AbstractDeclMethod tree]
 @init {
 	ListDeclParam params = new ListDeclParam();
+	AbstractMethodBody body;
 }
 	// déclaration d'une méthode
     : type ident OPARENT params=list_params[params] CPARENT (block {
-    		assert($type.tree != null);
-    		assert($ident.tree != null);
     		assert($block.decls != null);
     		assert($block.insts != null);
-    		$tree = new DeclMethod($type.tree, $ident.tree, params,
-    			$block.decls, $block.insts);
-    		setLocation($tree, $type.start);
+    		body = new MethodBody($block.decls, $block.insts);
         }
       |
-      // TODO: faire l'ASM pour mettre de l'assembleur en tant que méthode de la classe 
       ASM OPARENT code=multi_line_string CPARENT SEMI {
+      		assert($code.text != null);
+      		assert($code.location != null);
+      		body = new MethodAsmBody(new StringLiteral($code.text));
+      		setLocation(body, $ASM);
         }
       ) {
+    		assert($type.tree != null);
+    		assert($ident.tree != null);
+    		$tree = new DeclMethod($type.tree, $ident.tree, params, body);
+    		setLocation($tree, $type.start);
         }
     ;
 

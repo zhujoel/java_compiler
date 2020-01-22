@@ -37,7 +37,7 @@ public class DeclMethod extends AbstractDeclMethod {
     // paramètres de la méthode
     final private ListDeclParam params;
     // corps de la méthode
-    final private MethodBody corps;
+    final private AbstractMethodBody corps;
     
     public DeclMethod(AbstractIdentifier returnType, AbstractIdentifier methName,
     		ListDeclParam params, ListDeclVar decls, ListInst insts) {
@@ -52,6 +52,17 @@ public class DeclMethod extends AbstractDeclMethod {
         this.corps = new MethodBody(decls, insts);
     }
     
+    public DeclMethod(AbstractIdentifier returnType, AbstractIdentifier methName,
+    		ListDeclParam params, AbstractMethodBody body) {
+    	Validate.notNull(returnType);
+        Validate.notNull(methName);
+        Validate.notNull(params);
+        Validate.notNull(body);
+        this.returnType = returnType;
+        this.methName = methName;
+        this.params = params;
+        this.corps = body;
+    }
     
 	@Override
 	public void decompile(IndentPrintStream s) {
