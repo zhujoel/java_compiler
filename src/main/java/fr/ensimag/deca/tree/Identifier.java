@@ -186,18 +186,16 @@ public class Identifier extends AbstractIdentifier {
     	//POUR UNE VARIABLE
     	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
-    	if(!localEnv.isIn(s)) {
+    	Definition d = localEnv.get(s);
+    	if(d == null) {
     		throw new ContextualError("Utilisation d'un identificateur non déclarée", this.getLocation());
     	}
-    	
-    	Definition d = localEnv.get(s);
     	
     	//TODO tester si le type existe !
     	this.setType(d.getType());
     	this.setDefinition(d);
     	return this.getType();
     	
-    	//faire pour un field et une class aussi :) :D :X
         
     }
 

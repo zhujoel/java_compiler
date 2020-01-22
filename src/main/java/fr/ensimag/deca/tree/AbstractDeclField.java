@@ -24,6 +24,21 @@ public abstract class AbstractDeclField extends Tree{
 	@Override
 	protected abstract void iterChildren(TreeFunction f);
 	
+	/**
+	 * Initialisation des champs dans la passe 2
+	 * @param compiler
+	 * @param localEnv
+	 * @param currentClass
+	 * @throws ContextualError
+	 */
 	public abstract void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError;
 
+	/**
+	 * Instanciation des champs dans la passe 3
+	 * @param compiler
+	 * @param lovalEnv
+	 * @param currentClass
+	 * @throws ContextualError
+	 */
+	public abstract void verifyField(DecacCompiler compiler, EnvironmentExp lovalEnv, ClassDefinition currentClass) throws ContextualError;
 }
