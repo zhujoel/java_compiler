@@ -66,7 +66,7 @@ public class Program extends AbstractProgram {
         	o.getDefinition().getMembers().declare(compiler.getSymbolTable()
         			.create("equals"), equalsDef);
         }catch(DoubleDefException e) {
-        	throw new ContextualError("Equals a deja été declaré", Location.BUILTIN);
+        	throw new ContextualError("equals a deja été declaré", Location.BUILTIN);
         }
         
         
