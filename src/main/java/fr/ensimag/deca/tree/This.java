@@ -45,8 +45,9 @@ public class This extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		if(estExplicit) {
+			s.print("this.");
+		}
 	}
 
 	@Override

@@ -40,7 +40,8 @@ public class Selection extends AbstractLValue {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		this.expr.decompile(s);
+		this.ident.decompile(s);
 		
 	}
 
