@@ -29,7 +29,10 @@ public class Return extends AbstractInst {
 	@Override
 	protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass,
 			Type returnType) throws ContextualError {
-		// TODO Auto-generated method stub
+		this.expr = this.expr.verifyRValue(compiler, localEnv, currentClass, returnType);
+		if(this.expr.getType().isVoid()) {
+			throw new ContextualError("Retour void", this.expr.getLocation());
+		}
 		
 	}
 

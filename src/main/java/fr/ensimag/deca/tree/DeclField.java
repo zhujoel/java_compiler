@@ -111,7 +111,7 @@ public class DeclField extends AbstractDeclField {
 	
 	public void verifyField(DecacCompiler compiler, EnvironmentExp localEnv
 			, ClassDefinition currentClass) throws ContextualError{
-		Type t = type.verifyType(compiler);
+		Type t = type.getType();
 		initialization.verifyInitialization(compiler, t, localEnv, currentClass);
 	}
 

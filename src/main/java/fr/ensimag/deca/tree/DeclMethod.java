@@ -10,9 +10,11 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
@@ -145,6 +147,30 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code." + this.methName.getName().getName())), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 		compiler.getStackManager().addStackCpt();
+	}
+
+
+	@Override
+	public void verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
+			throws ContextualError {
+		Type t = this.returnType.getType();
+		//instanciation de l'environement de la methode
+		EnvironmentExp envParam = new EnvironmentExp(localEnv);
+		
+		//declaration des parametre et ajout dans la methode
+		for (AbstractDeclParam p : this.params.getList()) {
+			try {
+				//TODO a changer
+				envParam.declare(p.getName(), p.getExpDefinition());
+			}catch(DoubleDefException e) {
+				throw new ContextualError("Parametre deja déclaré", p.getLocation());
+			}
+		}
+		
+		this.corps.verifyMethodBody(compiler, envParam, currentClass, t);
+		
+		
+		
 	}
 
 }

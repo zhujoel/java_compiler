@@ -1,0 +1,6 @@
+class A{
+
+	void fonction(int a, float b){
+	}
+	
+}

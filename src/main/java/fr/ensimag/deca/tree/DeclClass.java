@@ -114,9 +114,10 @@ public class DeclClass extends AbstractDeclClass {
     	for (AbstractDeclField f : fields.getList()) {
     		f.verifyField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
         }
-    	//TODO finir:
-    	//for (AbstractDeclMethod m : methods.getList()) {
-        //}
+    	
+    	for (AbstractDeclMethod m : methods.getList()) {
+    		m.verifyMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
     }
 
 

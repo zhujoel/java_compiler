@@ -5,6 +5,12 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -49,6 +55,12 @@ public class MethodBody extends AbstractMethodBody {
 	protected void iterChildren(TreeFunction f) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void verifyMethodBody(DecacCompiler compiler, EnvironmentExp envParam,
+			ClassDefinition currentClass, Type returnType) throws ContextualError {
+		decls.verifyListDeclVariable(compiler, envParam, currentClass);
+		insts.verifyListInst(compiler, envParam, currentClass, returnType);
 	}
 
 
