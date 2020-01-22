@@ -6,16 +6,14 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -147,24 +145,26 @@ public class DeclClass extends AbstractDeclClass {
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
     	// Construction de la table des méthodes
+    	/**
     	if(this.extension == null) {
             compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
     	}
     	else {
+    	*/
             compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
-    	}
+    	//}
+    	
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
         
-        ClassType classType;
+        System.out.println("/*******************/");
+        ClassType objType = (ClassType)compiler.getEnvironmentType().get(compiler.getSymbolTable().create("Object"));
+        ClassDefinition objDef = objType.getDefinition();
+        System.out.println(objDef.getSuperClass());
         
-        if(this.extension != null) {
-        	classType = (ClassType) this.extension.getType();
-        	/*classType.getDefinition().getMembers().get("equals");
-        	classType.getDefinition().getMembers().codeGenListMethod(compiler, this.extension.getName());*/
-        }
-        this.methods.codeGenListMethod(compiler, this.className.getName());
+        System.out.println("/*******************/");
         
+        //this.methods.codeGenListMethod(compiler, this.className.getName());
 	}
 }
