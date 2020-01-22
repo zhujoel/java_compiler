@@ -31,14 +31,13 @@ public class This extends AbstractExpr {
 		this.estExplicit = estExplicit;
 	}
 
-	//TODO : a modfier (pas fini)
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		if(currentClass == null) {
+		if(!this.getType().isClass()) {
 			throw new ContextualError("Appel de l'identificateur this hors d'une classe", this.getLocation());
 		}
-		return null;
+		return this.getType();
 		
 	}
 
