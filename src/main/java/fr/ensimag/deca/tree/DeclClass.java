@@ -105,14 +105,18 @@ public class DeclClass extends AbstractDeclClass {
         	f.verifyDeclField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
         }
         for (AbstractDeclMethod m : methods.getList()) {
-        	//TODO a finir
         	m.verifyDeclMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
         }
     }
     
     @Override
     protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    	for (AbstractDeclField f : fields.getList()) {
+    		f.verifyField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
+    	//TODO finir:
+    	//for (AbstractDeclMethod m : methods.getList()) {
+        //}
     }
 
 
