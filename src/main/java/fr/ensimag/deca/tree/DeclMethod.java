@@ -155,11 +155,9 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	@Override
-	protected void codeGenDeclMethod(DecacCompiler compiler, Symbol symbol) {
-		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code."+symbol.getName() +"." + this.methName.getName().getName())), Register.R0));
-		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
-		compiler.getStackManager().addStackCpt();
+	protected void codeGenDeclMethod(DecacCompiler compiler) {
 	}
+
 
 
 	@Override
