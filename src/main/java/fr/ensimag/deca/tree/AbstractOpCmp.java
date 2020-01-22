@@ -40,13 +40,13 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
      * on jump si le résultat est faux.
      */
 	@Override
-	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());
     	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
     	
     	codeGenAssemblyInst(compiler, regDroite, regGauche);
-        codeGenOpCmp(compiler, labelFin, !b);
+        codeGenOpCmp(compiler, label, b);
         compiler.getRegManager().freeRegistre(regDroite.getNumber(), compiler);
         compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
 	}

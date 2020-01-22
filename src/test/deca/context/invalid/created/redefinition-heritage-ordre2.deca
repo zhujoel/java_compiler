@@ -1,0 +1,7 @@
+class A{
+	void salut(int a){}
+}
+class B extends A{}
+class C extends B{
+	void salut(int a, int b){}
+}

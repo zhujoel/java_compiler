@@ -1,0 +1,7 @@
+class A{
+	int x = 0;
+	int meth1(){
+		this.x = 5;
+	}
+}
+

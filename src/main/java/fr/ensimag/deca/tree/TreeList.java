@@ -83,5 +83,11 @@ public abstract class TreeList<TreeType extends Tree> extends Tree {
             i.iter(f);
         }
     }
-
+    
+    /**
+     * Met l'élément au début de liste
+     */
+    public void putAtBeginning(TreeType elem) {
+    	this.list.add(0, elem);
+    }
 }

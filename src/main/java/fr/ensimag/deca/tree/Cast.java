@@ -31,11 +31,21 @@ public class Cast extends AbstractExpr {
 		this.var = var;
 	}
 
+	//TODO : ne fonctionne pas
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		Type type1 = type.verifyType(compiler);
+		Type type2 = var.verifyExpr(compiler, localEnv, currentClass);
+		//que se passe-t-il si on cast un null / en null ??
+		if(type1.isClass() && type2.isClass()) {
+			if(!type1.asClassType(type1.toString() + " n'est pas une classe", 
+					this.getLocation()).isSubClassOf(type2.asClassType(type2.toString() 
+							+ " n'est pas une classe", this.getLocation()))) {
+				throw new ContextualError("La classe de l'identifier à cast n'est pas une classe parente", this.getLocation());
+			}
+		}
+		return type1;
 	}
 
 	@Override
@@ -46,8 +56,10 @@ public class Cast extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		s.print("(");
+		type.decompile(s);
+		s.print(") ");
+		var.decompile(s);
 	}
 
 	@Override

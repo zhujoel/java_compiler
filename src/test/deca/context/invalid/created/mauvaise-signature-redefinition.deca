@@ -1,0 +1,11 @@
+class A {
+	int salut(int a){
+		return a;
+	}
+}
+class B extends A{}
+class C extends B{
+	int salut(int a, int b){
+		return a;
+	}
+}

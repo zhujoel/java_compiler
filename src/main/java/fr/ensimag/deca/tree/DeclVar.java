@@ -56,20 +56,23 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Type : end");
     	//condition type != void
     	if (t.isVoid()) {
-    		throw new ContextualError("Variable de type void : ", type.getLocation());
+    		throw new ContextualError("Variable de type void", type.getLocation());
     	}
+    	
+    	//generation de la definition pour la decoration de l'arbre
+    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
+		//decoration de l'arbre :
+		varName.setDefinition(d);
+		varName.setType(t);
+		
     	LOG.debug("verify Initialisation : start");
     	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
     	LOG.debug("verify Initialisation : end");
     	
-    	//generation de la definition pour la decoration de l'arbre
-    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
+    	
     	try {
     		//declaration de la variable dans l'environement des expressions
 			localEnv.declare(this.varName.getName(), d);
-			//decoration de l'arbre :
-			varName.setDefinition(d);
-			varName.setType(t);
 			
 		} catch (DoubleDefException e) {
 			throw new ContextualError("Declaration d'une variable deja déclarée précédement", varName.getLocation());
@@ -109,7 +112,7 @@ public class DeclVar extends AbstractDeclVar {
 		this.varName.setType(compiler.getEnvironmentType().get(this.type.getName()));
 		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
 		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
-		varDef.setOperand(new RegisterOffset(compiler.getRegManager().getStackCpt(), Register.GB));
+		varDef.setOperand(new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
 		try {
 			compiler.getEnvironmentExp().declareOrSet(varName.getName(), varDef);
 		}
@@ -117,7 +120,7 @@ public class DeclVar extends AbstractDeclVar {
 			e.printStackTrace();
 		}
 		// un registre de plus est occupé
-		compiler.getRegManager().addStackCpt();
+		compiler.getStackManager().addStackCpt();
 		
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());

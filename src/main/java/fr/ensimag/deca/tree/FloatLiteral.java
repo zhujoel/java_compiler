@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -53,7 +54,7 @@ public class FloatLiteral extends AbstractExpr {
 
     @Override
     String prettyPrintNode() {
-        return "Float (" + getValue() + ")";
+        return "FloatLiteral (" + getValue() + ")";
     }
 
     @Override

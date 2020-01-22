@@ -27,19 +27,22 @@ public class And extends AbstractOpBool {
      * on jump si le résultat est faux.
      */
 	@Override
-	protected void codeGenBool(DecacCompiler compiler, Label label, Label labelFin, boolean b) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());
-    	
         //compiler.addInstruction(new CMP(new ImmediateInteger(1), regDroite));
+		
+		Label labFin = new Label("Fin_and_"+ compiler.getRegManager().getNAnd());
+		compiler.getRegManager().addNAnd();
+		
         if(b) {
-        	this.getLeftOperand().codeGenBool(compiler, labelFin, label, !b);
-        	this.getRightOperand().codeGenBool(compiler, labelFin, label, !b);
+        	this.getLeftOperand().codeGenBool(compiler, labFin, !b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
+        	compiler.addLabel(labFin);
         }
         else {
-        	this.getLeftOperand().codeGenBool(compiler, label, labelFin, b);
-        	this.getRightOperand().codeGenBool(compiler, label, labelFin, b);
+        	this.getLeftOperand().codeGenBool(compiler, label, b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
         }
-        //return regGauche;
 	}
 
 	@Override

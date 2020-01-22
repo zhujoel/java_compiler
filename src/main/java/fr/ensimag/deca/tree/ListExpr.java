@@ -13,8 +13,10 @@ public class ListExpr extends TreeList<AbstractExpr> {
 
     @Override
     public void decompile(IndentPrintStream s) {
-    	for(AbstractExpr e: this.getList()) {
-    		e.decompile(s);
+    	for(int i = 0; i < getList().size()-1; ++i) {
+    		getList().get(i).decompile(s);
+    		s.print(", ");
     	}
+    	getList().get(getList().size()-1).decompile(s);
     }
 }

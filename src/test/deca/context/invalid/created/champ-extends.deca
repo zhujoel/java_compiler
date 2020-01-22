@@ -1,0 +1,6 @@
+class A{
+	void x(){}
+}
+class B extends A{
+	int x;
+}

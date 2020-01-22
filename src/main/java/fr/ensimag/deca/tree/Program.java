@@ -1,13 +1,20 @@
 package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
+import java.util.Iterator;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.ErrorManager;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -43,7 +50,39 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-
+        
+        //Construction de la classe object
+        ClassType o = compiler.getEnvironmentType().get(compiler.getSymbolTable()
+        		.create("Object")).asClassType("Object n'est pas une classe", Location.BUILTIN);
+        ClassDefinition oDef = o.getDefinition();
+        
+        
+        //methode equals
+        oDef.incNumberOfMethods();
+        Signature s = new Signature();
+        s.add(compiler.getType("Object"));
+        MethodDefinition equalsDef = new MethodDefinition(compiler.getType("bool"), Location.BUILTIN, s, oDef.getNumberOfMethods());
+        try {
+        	o.getDefinition().getMembers().declare(compiler.getSymbolTable()
+        			.create("equals"), equalsDef);
+        }catch(DoubleDefException e) {
+        	throw new ContextualError("Equals a deja été declaré", Location.BUILTIN);
+        }
+        
+        
+        //PASSE 1
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClass(compiler);
+        }
+        //PASSE 2
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClassMembers(compiler);
+        }
+        //PASSE 3
+        for(AbstractDeclClass c : classes.getList()) {
+        	c.verifyClassBody(compiler);
+        }
+        
         //on ne met pas liste_decl pour le hello world mais il faudra l'ajouter
         main.verifyMain(compiler);
         LOG.debug("verify program: end");
@@ -52,10 +91,10 @@ public class Program extends AbstractProgram {
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
-        compiler.addComment("Main program");
-        compiler.addComment("On stocke la valeur \"null\" à la première case de la pile.");
-        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(1, Register.GB)));
+
+        compiler.addComment("Class Declaration");
+    	classes.codeGenListClass(compiler);
+        compiler.addComment("Main Function");
         main.codeGenMain(compiler);
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
