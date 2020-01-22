@@ -34,13 +34,16 @@ public class Selection extends AbstractLValue {
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+//TODO a completer
+
+		expr.verifyExpr(compiler, localEnv, currentClass);
+		return ident.verifyExpr(compiler, localEnv, currentClass);
 	}
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		this.expr.decompile(s);
+		this.ident.decompile(s);
 		
 	}
 

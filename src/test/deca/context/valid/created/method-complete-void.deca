@@ -1,0 +1,18 @@
+class A{
+	
+	void fonction(int a, float b){
+		
+		int c = 3;
+		float d = 1.2;
+		
+		println("salut");
+		print(c);
+	
+	}
+	
+}
+
+{
+	int x = 3;
+	float y = 2.3;
+}

@@ -58,18 +58,21 @@ public class DeclVar extends AbstractDeclVar {
     	if (t.isVoid()) {
     		throw new ContextualError("Variable de type void", type.getLocation());
     	}
+    	
+    	//generation de la definition pour la decoration de l'arbre
+    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
+		//decoration de l'arbre :
+		varName.setDefinition(d);
+		varName.setType(t);
+		
     	LOG.debug("verify Initialisation : start");
     	initialization.verifyInitialization(compiler, t, localEnv, currentClass);
     	LOG.debug("verify Initialisation : end");
     	
-    	//generation de la definition pour la decoration de l'arbre
-    	ExpDefinition d = new VariableDefinition(t, varName.getLocation());
+    	
     	try {
     		//declaration de la variable dans l'environement des expressions
 			localEnv.declare(this.varName.getName(), d);
-			//decoration de l'arbre :
-			varName.setDefinition(d);
-			varName.setType(t);
 			
 		} catch (DoubleDefException e) {
 			throw new ContextualError("Declaration d'une variable deja déclarée précédement", varName.getLocation());

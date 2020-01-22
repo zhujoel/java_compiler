@@ -78,10 +78,10 @@ public class Program extends AbstractProgram {
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassMembers(compiler);
         }
-        /*//PASSE 3
+        //PASSE 3
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassBody(compiler);
-        }*/
+        }
         
         //on ne met pas liste_decl pour le hello world mais il faudra l'ajouter
         main.verifyMain(compiler);
