@@ -5,33 +5,24 @@
 	STORE R0, 1(GB)
 ; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
-	TSTO #3
+	TSTO #2
 	BOV pile_pleine
-	ADDSP #3
+	ADDSP #2
 ; Declaration des variables
-	LOAD #0, R2
-	STORE R2, 2(GB)
 ; Instructions
-Begin_While_1:
+; Début du if_1
 ; >
-	LOAD 2(GB), R2
-	LOAD #10, R3
+	LOAD #5, R2
+	LOAD #2, R3
 	CMP R3, R2
-	BLE End_While_1
-In_While_1:
-; +
-	LOAD 2(GB), R3
-	LOAD #1, R4
-	ADD R3, R4
-	BOV debordement
-	STORE R4, 2(GB)
-	LOAD 2(GB), R1
-	WINT
-	WNL
-	BRA Begin_While_1
-End_While_1:
-	WSTR "fin du while"
-	WNL
+	BGT if_1
+if_1:
+	WSTR "if boucle"
+	WSTR "if boucle2"
+	BRA endif_1
+else_1:
+	WSTR "else boucle"
+endif_1:
 	HALT
 pile_pleine:
 	WSTR "Erreur : Pile pleine."
