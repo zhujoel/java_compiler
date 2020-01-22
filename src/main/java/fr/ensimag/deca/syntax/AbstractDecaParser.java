@@ -51,6 +51,9 @@ public abstract class AbstractDecaParser extends Parser {
         } catch (DecaRecognitionException e) {
             e.display(err);
             return null;
+        } catch (NumberFormatException e){
+            err.append("Underflow/Overflow problem, parsing cancelled.\n");
+            return null;
         }
     }
 

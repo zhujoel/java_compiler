@@ -47,7 +47,7 @@ public class DecacMain {
         }
 
         if (options.getParallel()) {//option -P
-            System.out.println("Compilation en parallel");
+            //System.out.println("Compilation en parallel");
             // creation d'un ensemble de fils d’exécution travailleurs
             // on utilise getRuntime().availableProcessors() pour obtenir
             // le nombre de processeurs sur la machine et créer le meme
