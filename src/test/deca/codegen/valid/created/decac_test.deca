@@ -1,10 +1,17 @@
 
 class A extends Object{
-    void meth1(){
+    void ajoute(){
+
+    }
+
+    void supprimeElement(){
 
     }
 }
-class B extends A{}
+class B extends A
 {
+    void delete(){
+
+    }
 
 }

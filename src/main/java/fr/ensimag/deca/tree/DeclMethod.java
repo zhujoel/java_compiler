@@ -14,6 +14,7 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -142,8 +143,8 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	@Override
-	protected void codeGenDeclMethod(DecacCompiler compiler) {
-		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code." + this.methName.getName().getName())), Register.R0));
+	protected void codeGenDeclMethod(DecacCompiler compiler, Symbol symbol) {
+		compiler.addInstruction(new LOAD(new LabelOperand(new Label("code."+symbol.getName() +"." + this.methName.getName().getName())), Register.R0));
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 		compiler.getStackManager().addStackCpt();
 	}

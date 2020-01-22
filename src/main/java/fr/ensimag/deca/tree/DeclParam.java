@@ -62,5 +62,9 @@ public class DeclParam extends AbstractDeclParam{
 		return t;
 	}
 	
+	
+	public void codeGenDeclParam(DecacCompiler compiler) {
+		//TODO (ça veut dire à faire en anglais)
+	}
 
 }

@@ -25,4 +25,6 @@ public abstract class AbstractDeclParam extends Tree{
 	protected abstract void iterChildren(TreeFunction f);
 	
 	public abstract Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition CurrentClass) throws ContextualError;
+
+	public abstract void codeGenDeclParam(DecacCompiler compiler);
 }

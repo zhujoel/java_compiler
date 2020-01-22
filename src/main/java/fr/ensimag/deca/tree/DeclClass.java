@@ -53,6 +53,19 @@ public class DeclClass extends AbstractDeclClass {
     	this.methods = methods;
     }
     
+    
+    // Constructeur pour la classe Object
+    public DeclClass(AbstractIdentifier className, 
+    		ListDeclField fields, ListDeclMethod methods) {
+    	Validate.notNull(className);
+    	Validate.notNull(fields);
+    	Validate.notNull(methods);
+    	this.extension = null;
+    	this.className = className;
+    	this.fields = fields;
+    	this.methods = methods;
+    }
+    
 
 
     @Override
@@ -133,14 +146,15 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
+    	// Construction de la table des méthodes
         compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
         
+        this.methods.codeGenListMethod(compiler, this.extension.getName());
+        this.methods.codeGenListMethod(compiler, this.className.getName());
         
-        this.methods.codeGenListMethod(compiler);
-        
-        compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
+        //compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
 	}
 }
