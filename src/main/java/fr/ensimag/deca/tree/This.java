@@ -7,6 +7,7 @@ import org.apache.commons.lang.Validate;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
@@ -30,11 +31,15 @@ public class This extends AbstractExpr {
 		this.estExplicit = estExplicit;
 	}
 
+	//TODO : a modfier (pas fini)
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
+		if(currentClass == null) {
+			throw new ContextualError("Appel de l'identificateur this hors d'une classe", this.getLocation());
+		}
 		return null;
+		
 	}
 
 	@Override
