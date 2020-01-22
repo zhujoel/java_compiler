@@ -1,0 +1,6 @@
+{
+    int a = 3;
+    int b = 2;
+    a = a % b;
+    println(a);
+}

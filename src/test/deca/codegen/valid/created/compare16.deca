@@ -1,0 +1,10 @@
+{
+    int a = 0;
+    int b = 2;
+    if((a >= 0) && (b <= 2)){
+        println("dans le if");
+    }
+    else{
+        println("dans le else");
+    }
+}

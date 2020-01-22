@@ -1,0 +1,6 @@
+{
+    int a = readInt();
+    int b = 5;
+    a = a * b;
+    print(a);
+}
