@@ -9,13 +9,14 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -146,14 +147,24 @@ public class DeclClass extends AbstractDeclClass {
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
     	// Construction de la table des méthodes
-        compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+    	if(this.extension == null) {
+            compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+    	}
+    	else {
+            compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
+    	}
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
         
-        this.methods.codeGenListMethod(compiler, this.extension.getName());
+        ClassType classType;
+        
+        if(this.extension != null) {
+        	classType = (ClassType) this.extension.getType();
+        	/*classType.getDefinition().getMembers().get("equals");
+        	classType.getDefinition().getMembers().codeGenListMethod(compiler, this.extension.getName());*/
+        }
         this.methods.codeGenListMethod(compiler, this.className.getName());
         
-        //compiler.addInstruction(new WSTR(new ImmediateString("Je suis une classe")));
 	}
 }

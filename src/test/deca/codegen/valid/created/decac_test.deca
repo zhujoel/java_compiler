@@ -1,17 +1,3 @@
-
-class A extends Object{
-    void ajoute(){
-
-    }
-
-    void supprimeElement(){
-
-    }
-}
-class B extends A
-{
-    void delete(){
-
-    }
+class Voiture{
 
 }

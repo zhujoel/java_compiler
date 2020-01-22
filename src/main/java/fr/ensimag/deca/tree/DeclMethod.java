@@ -158,5 +158,4 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 		compiler.getStackManager().addStackCpt();
 	}
-
 }
