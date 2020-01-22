@@ -497,9 +497,10 @@ literal returns[AbstractExpr tree]
 			setLocation($tree, $INT);
         }
     | fd=FLOAT {
-    		$tree = new FloatLiteral(Float.parseFloat($fd.text));
-			setLocation($tree, $fd);
-        }
+				//TODO (?) changer pour "émettre un message d'erreur" en cas d'overflow ou underflow 
+    			$tree = new FloatLiteral(Float.parseFloat($fd.text));
+				setLocation($tree, $fd);
+    		}
     | STRING {
     		$tree = new StringLiteral($STRING.text);
 			setLocation($tree, $STRING);

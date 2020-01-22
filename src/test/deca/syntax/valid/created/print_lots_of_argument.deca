@@ -1,0 +1,6 @@
+{
+	int a = 0;
+	int b = 2;
+	float c = 3.5;
+	print("OFKDSOFKDS", a, "OJFOGG", b, "OGJFOGFD", "FDSOFKJSDOK", c);
+}
