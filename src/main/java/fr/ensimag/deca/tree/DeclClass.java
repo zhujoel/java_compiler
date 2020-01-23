@@ -57,6 +57,18 @@ public class DeclClass extends AbstractDeclClass {
 		this.fields = fields;
 		this.methods = methods;
 	}
+	
+	public DeclClass(AbstractIdentifier className, AbstractIdentifier extension,
+			ListDeclField fields, ListDeclMethod methods) {
+		Validate.notNull(className);
+		Validate.notNull(extension);
+		Validate.notNull(fields);
+		Validate.notNull(methods);
+		this.extension = extension;
+		this.className = className;
+		this.fields = fields;
+		this.methods = methods;
+	}
     
     
 
