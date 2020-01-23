@@ -1,12 +1,15 @@
 package fr.ensimag.deca.context;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.Plus;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.*;
 
 /**
  * Test for the Plus node using mockito, without using advanced features.

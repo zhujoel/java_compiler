@@ -1,11 +1,13 @@
 package fr.ensimag.deca.tree;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.apache.log4j.Logger;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import org.apache.log4j.Logger;
 
 /**
  * Base class for any node in the Deca abstract syntax tree.
