@@ -87,7 +87,7 @@ public class DecacCompiler {
         this.regManager = new RegManager(nbRegMax);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
-        this.envExp = new EnvironmentExp(null);
+        this.envClass = new HashMap<Symbol, DAddr>();
         this.stackManager = new StackManager();
     }
 
