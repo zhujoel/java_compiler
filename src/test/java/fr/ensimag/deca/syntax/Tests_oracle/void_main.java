@@ -18,7 +18,15 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class void_main {
 	

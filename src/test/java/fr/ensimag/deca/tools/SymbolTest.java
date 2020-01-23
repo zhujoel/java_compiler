@@ -1,8 +1,12 @@
 package fr.ensimag.deca.tools;
 
-import fr.ensimag.deca.tools.SymbolTable.Symbol;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
+
 import org.junit.Test;
+
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * Example JUnit class. A JUnit class must be named TestXXX or YYYTest. JUnit
