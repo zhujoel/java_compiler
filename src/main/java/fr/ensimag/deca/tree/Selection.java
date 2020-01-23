@@ -31,6 +31,7 @@ public class Selection extends AbstractLValue {
 		this.expr = expr;
 		this.ident = ident;
 	}
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
