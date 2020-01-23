@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -11,12 +13,20 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
- * TODO: compléter 
+ * Déclaration d'une classe.
+ * attribut ident est le nom de la classe
  * @author zhujo
  *
  */
 public class New extends AbstractExpr{
+	
+	private AbstractIdentifier ident;
 
+	public New(AbstractIdentifier ident) {
+		Validate.notNull(ident);
+		this.ident = ident;
+	}
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
@@ -32,13 +42,14 @@ public class New extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		s.print("new ");
+		this.ident.decompile(s);
 		
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
+		this.ident.prettyPrint(s, prefix, true);
 		
 	}
 

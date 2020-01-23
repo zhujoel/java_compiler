@@ -1,9 +1,9 @@
 package fr.ensimag.deca.context;
 
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.Location;
-import fr.ensimag.ima.pseudocode.Label;
-import org.apache.commons.lang.Validate;
 
 /**
  * Definition of a class.
@@ -117,6 +117,17 @@ public class ClassDefinition extends TypeDefinition {
     	}else{
     		return c.getType().sameType(this.getType()) ;
     	}
+    }
+    
+    /**
+     * Indique si la définition à une classe mère
+     * @return vrai si oui, sinon faux
+     */
+    public boolean hasSuperclass() {
+    	if(this.superClass != null) {
+    		return true;
+    	}
+    	return false;
     }
     
     

@@ -11,10 +11,10 @@ import org.mockito.MockitoAnnotations;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.And;
 import fr.ensimag.deca.tree.Equals;
 import fr.ensimag.deca.tree.NotEquals;
 import fr.ensimag.deca.tree.Or;
-import fr.ensimag.deca.tree.And;
 
 /**
  * On controle dans ce jeu de test que les operations binaires logiques (&&, ||, ==, !=) génèrent bien

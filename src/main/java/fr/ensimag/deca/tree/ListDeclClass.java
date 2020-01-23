@@ -54,38 +54,23 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     public void verifyListClassBody(DecacCompiler compiler) throws ContextualError {
         throw new UnsupportedOperationException("not yet implemented");
     }
-    
-    public void initListDeclClass(DecacCompiler compiler) {
-    	
-    	// Ajout et construction de la classe Object
-    	ListDeclParam paramObject = new ListDeclParam();
-    	// Nom du paramètre
-    	compiler.getSymbolTable().create("Obj1");
-    	
-    	// Création des paramètres de la fonction equals
-    	paramObject.add(new DeclParam(new Identifier(compiler.getSymbolTable().getSymbol("Object")), new Identifier(compiler.getSymbolTable().getSymbol("Obj1"))));
-    	
-    	// Création de la déclaration de la méthode equals
-    	Identifier returnType = new Identifier(compiler.getSymbolTable().getSymbol("bool"));
-    	Identifier methName = new Identifier(compiler.getSymbolTable().getSymbol("equals"));
-    	MethodBody body = new MethodBody(new ListDeclVar(), new ListInst());
-    	DeclMethod declEquals = new DeclMethod(returnType, methName, paramObject, body);
-    	ListDeclMethod listMethodObject = new ListDeclMethod();
-    	listMethodObject.add(declEquals);
-    	
-    	
-    	DeclClass ObjectDeclClass = new DeclClass(new Identifier(compiler.getSymbolTable().getSymbol("Object")), new ListDeclField(), listMethodObject);
-    	this.putAtBeginning(ObjectDeclClass);
-    
-    }
-    
     public void codeGenListClass(DecacCompiler compiler) {
-    	// On ajoute la classe Object en début de liste
-    	initListDeclClass(compiler);
+        
+    	// on génère le code pour la classe Object à la main car celle-ci n'est pas déclaré
+        compiler.addComment("Code de la table des méthodes de Object");
+        compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
+        
+        Label objEq0 = new Label("code.Object.equals");
+        compiler.addInstruction(new LOAD(new LabelOperand(objEq0), Register.getR(0)));
+        compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
+        compiler.getStackManager().addStackCpt();
+		
+        compiler.addLabel(objEq0);
         
         compiler.getEnvironmentClass().put(compiler.getType("Object").getName(), new RegisterOffset(1, Register.GB));
 
-        
         for (AbstractDeclClass i : getList()) {
             i.codeGenDeclClass(compiler);
         }
