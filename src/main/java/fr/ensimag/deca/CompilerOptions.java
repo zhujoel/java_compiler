@@ -1,17 +1,12 @@
 package fr.ensimag.deca;
 
-import fr.ensimag.ima.pseudocode.Register;
 import java.io.File;
-import java.io.PrintStream;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import com.sun.tools.javac.resources.compiler;
 
 /**
  * User-specified options influencing the compilation.

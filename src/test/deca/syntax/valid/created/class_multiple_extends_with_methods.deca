@@ -1,0 +1,17 @@
+class A{
+	bool equals(Object o){
+	}
+	int methA(){}
+
+}
+class B extends A{
+	int methB(){}
+}
+
+class C extends B{
+	int methB(){}
+}
+
+{
+
+}
