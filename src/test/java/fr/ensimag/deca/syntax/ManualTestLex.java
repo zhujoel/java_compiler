@@ -1,6 +1,7 @@
 package fr.ensimag.deca.syntax;
 
 import java.io.IOException;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

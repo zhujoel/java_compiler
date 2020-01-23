@@ -1,6 +1,6 @@
 {
     bool a = true;
-    if(!(a && true))){
+    if(!(a && true)){
         println("Dans le if");
     }
     else{

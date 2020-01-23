@@ -1,6 +1,7 @@
 package fr.ensimag.ima.pseudocode;
 
 import java.io.PrintStream;
+
 import org.apache.commons.lang.Validate;
 
 /**

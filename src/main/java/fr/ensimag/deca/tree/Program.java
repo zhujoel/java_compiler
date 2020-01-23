@@ -1,7 +1,6 @@
 package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -11,17 +10,11 @@ import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.NullOperand;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Deca complete program (class definition plus main block)
