@@ -82,10 +82,6 @@ public class TestClass {
 		assertTrue(classTypeA.isClassOrNull());
 	}
 	
-	@Test
-	public void testClassTypeSameType() {
-		assertTrue(classTypeC.sameType(classTypeB));
-	}
 	
 	@Test
 	public void testClassTypeDefintion() {

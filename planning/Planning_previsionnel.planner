@@ -51,89 +51,89 @@
         <task id="16" name="Tests" note="" work="28800" start="20200107T170000Z" end="20200108T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
       </task>
     </task>
-    <task id="17" name="Sans Objet" note="" work="410400" start="20200108T170000Z" end="20200114T170000Z" work-start="20200109T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
-      <task id="18" name="Etape A" note="" work="151200" start="20200109T170000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="95" priority="0" type="normal" scheduling="fixed-work">
+    <task id="17" name="Sans Objet" note="" work="410400" start="20200108T170000Z" end="20200114T170000Z" work-start="20200109T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <task id="18" name="Etape A" note="" work="151200" start="20200109T170000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="6" type="FS"/>
         </predecessors>
         <task id="19" name="Analyseur lexicale" note="" work="7200" duration="7200" start="20200109T170000Z" end="20200110T100000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
         <task id="20" name="Analyseur syntaxique" note="" work="57600" duration="57600" start="20200109T170000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
         <task id="21" name="D&#xE9;compilateur" note="" work="28800" duration="28800" start="20200109T170000Z" end="20200110T170000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
-        <task id="22" name="Tests" note="" work="57600" duration="57600" start="20200109T170000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="22" name="Tests" note="" work="57600" duration="57600" start="20200109T170000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
-      <task id="23" name="Etape B" note="" work="115200" start="20200110T000000Z" end="20200114T170000Z" work-start="20200110T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
+      <task id="23" name="Etape B" note="" work="115200" start="20200110T000000Z" end="20200114T170000Z" work-start="20200110T080000Z" percent-complete="97" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="11" type="FS"/>
         </predecessors>
         <task id="24" name="Analyse contextuel" note="" work="57600" duration="57600" start="20200110T000000Z" end="20200113T170000Z" work-start="20200110T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration">
           <constraint type="must-start-on" time="20200110T000000Z"/>
         </task>
-        <task id="25" name="Tests" note="" work="57600" start="20200112T000000Z" end="20200114T170000Z" work-start="20200113T080000Z" percent-complete="70" priority="0" type="normal" scheduling="fixed-work">
+        <task id="25" name="Tests" note="" work="57600" start="20200112T000000Z" end="20200114T170000Z" work-start="20200113T080000Z" percent-complete="95" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20200112T000000Z"/>
         </task>
       </task>
-      <task id="26" name="Etape C" note="" work="144000" start="20200108T170000Z" end="20200113T170000Z" work-start="20200109T080000Z" percent-complete="85" priority="0" type="normal" scheduling="fixed-work">
+      <task id="26" name="Etape C" note="" work="144000" start="20200108T170000Z" end="20200113T170000Z" work-start="20200109T080000Z" percent-complete="95" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="14" type="FS"/>
         </predecessors>
-        <task id="27" name="G&#xE9;n&#xE9;ration code assembleur" note="" work="57600" duration="57600" start="20200108T170000Z" end="20200110T170000Z" work-start="20200109T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-duration"/>
-        <task id="28" name="Tests" note="" work="86400" duration="86400" start="20200108T170000Z" end="20200113T170000Z" work-start="20200109T080000Z" percent-complete="60" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="27" name="G&#xE9;n&#xE9;ration code assembleur" note="" work="57600" duration="57600" start="20200108T170000Z" end="20200110T170000Z" work-start="20200109T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="28" name="Tests" note="" work="86400" duration="86400" start="20200108T170000Z" end="20200113T170000Z" work-start="20200109T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
     </task>
     <task id="29" name="Avec Objet" note="" work="493200" start="20200114T170000Z" end="20200124T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
-      <task id="30" name="Etape A" note="" work="176400" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
+      <task id="30" name="Etape A" note="" work="176400" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="6" type="FS"/>
         </predecessors>
         <task id="31" name="Analyseur lexicale" note="" work="3600" start="20200114T170000Z" end="20200115T090000Z" work-start="20200115T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="32" name="Analyseur syntaxique" note="" work="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="33" name="D&#xE9;compilateur" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-duration"/>
-        <task id="34" name="Tests" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="32" name="Analyseur syntaxique" note="" work="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="33" name="D&#xE9;compilateur" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="34" name="Tests" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
-      <task id="35" name="Etape B" note="" work="172800" start="20200119T000000Z" end="20200124T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="35" name="Etape B" note="" work="172800" start="20200119T000000Z" end="20200124T170000Z" work-start="20200120T080000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="23" type="FS"/>
         </predecessors>
-        <task id="36" name="Analyseur contextuel" note="" work="86400" start="20200119T000000Z" end="20200122T170000Z" work-start="20200120T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="36" name="Analyseur contextuel" note="" work="86400" start="20200119T000000Z" end="20200122T170000Z" work-start="20200120T080000Z" percent-complete="80" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20200119T000000Z"/>
         </task>
-        <task id="37" name="Tests" note="" work="86400" start="20200122T000000Z" end="20200124T170000Z" work-start="20200122T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="37" name="Tests" note="" work="86400" start="20200122T000000Z" end="20200124T170000Z" work-start="20200122T080000Z" percent-complete="35" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="must-start-on" time="20200122T000000Z"/>
         </task>
       </task>
-      <task id="38" name="Etape C" note="" work="144000" start="20200114T170000Z" end="20200117T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="38" name="Etape C" note="" work="144000" start="20200114T170000Z" end="20200117T170000Z" work-start="20200115T080000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="14" type="FS"/>
         </predecessors>
-        <task id="39" name="G&#xE9;n&#xE9;ration code assembleur" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration"/>
-        <task id="40" name="Tests" note="" work="86400" duration="86400" start="20200114T170000Z" end="20200117T170000Z" work-start="20200115T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="39" name="G&#xE9;n&#xE9;ration code assembleur" note="" work="57600" duration="57600" start="20200114T170000Z" end="20200116T170000Z" work-start="20200115T080000Z" percent-complete="35" priority="0" type="normal" scheduling="fixed-duration"/>
+        <task id="40" name="Tests" note="" work="86400" duration="86400" start="20200114T170000Z" end="20200117T170000Z" work-start="20200115T080000Z" percent-complete="30" priority="0" type="normal" scheduling="fixed-duration"/>
       </task>
     </task>
-    <task id="41" name="Impl&#xE9;mentation decac" note="" work="259200" duration="259200" start="20200107T170000Z" end="20200120T170000Z" work-start="20200108T080000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="41" name="Impl&#xE9;mentation decac" note="" work="259200" duration="259200" start="20200107T170000Z" end="20200120T170000Z" work-start="20200108T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration">
       <predecessors>
         <predecessor id="1" predecessor-id="4" type="FS"/>
       </predecessors>
     </task>
-    <task id="42" name="Cobertura" note="" work="28800" duration="28800" start="20200114T170000Z" end="20200115T170000Z" work-start="20200115T080000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="42" name="Cobertura" note="" work="28800" duration="28800" start="20200114T170000Z" end="20200115T170000Z" work-start="20200115T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-duration">
       <predecessors>
         <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
     </task>
-    <task id="43" name="Extension TRIGO" note="" work="201600" duration="201600" start="20200114T170000Z" end="20200123T170000Z" work-start="20200115T080000Z" percent-complete="20" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="43" name="Extension TRIGO" note="" work="201600" duration="201600" start="20200114T170000Z" end="20200123T170000Z" work-start="20200115T080000Z" percent-complete="40" priority="0" type="normal" scheduling="fixed-duration">
       <predecessors>
         <predecessor id="1" predecessor-id="17" type="FS"/>
       </predecessors>
     </task>
-    <task id="44" name="Ecriture de la documentation" note="" work="28800" duration="28800" start="20200123T170000Z" end="20200124T170000Z" work-start="20200124T080000Z" percent-complete="30" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="44" name="Ecriture de la documentation" note="" work="28800" duration="28800" start="20200123T170000Z" end="20200124T170000Z" work-start="20200124T080000Z" percent-complete="40" priority="0" type="normal" scheduling="fixed-duration">
       <constraint type="start-no-earlier-than" time="20200122T000000Z"/>
       <predecessors>
         <predecessor id="1" predecessor-id="43" type="FS"/>
       </predecessors>
     </task>
-    <task id="45" name="Soutenance" note="" work="28800" duration="28800" start="20200124T170000Z" end="20200127T170000Z" work-start="20200127T080000Z" percent-complete="10" priority="0" type="normal" scheduling="fixed-duration">
+    <task id="45" name="Soutenance" note="" work="28800" duration="28800" start="20200124T170000Z" end="20200127T170000Z" work-start="20200127T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-duration">
       <predecessors>
         <predecessor id="1" predecessor-id="44" type="FS"/>
       </predecessors>
