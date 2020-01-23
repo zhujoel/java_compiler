@@ -6,6 +6,7 @@
 	STORE R0, 2(GB)
 	LEA 1(GB), R0
 	STORE R0, 3(GB)
+	WSTR "Je suis une classe"
 ; Main Function
 	HALT
 pile_pleine:
