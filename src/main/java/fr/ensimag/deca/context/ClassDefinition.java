@@ -119,5 +119,16 @@ public class ClassDefinition extends TypeDefinition {
     	}
     }
     
+    /**
+     * Indique si la définition à une classe mère
+     * @return vrai si oui, sinon faux
+     */
+    public boolean hasSuperclass() {
+    	if(this.superClass != null) {
+    		return true;
+    	}
+    	return false;
+    }
+    
     
 }

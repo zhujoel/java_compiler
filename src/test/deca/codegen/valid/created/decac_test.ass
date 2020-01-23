@@ -6,20 +6,7 @@
 	STORE R0, 2(GB)
 	LEA 1(GB), R0
 	STORE R0, 3(GB)
-	LOAD code.meth1, R0
-	STORE R0, 4(GB)
-	WSTR "Je suis une classe"
-	LEA 3(GB), R0
-	STORE R0, 5(GB)
-	WSTR "Je suis une classe"
 ; Main Function
-; Beginning of main instructions:
-; Test pour savoir si la pile est pleine
-	TSTO #2
-	BOV pile_pleine
-	ADDSP #2
-; Declaration des variables
-; Instructions
 	HALT
 pile_pleine:
 	WSTR "Erreur : Pile pleine."

@@ -1,0 +1,14 @@
+class A{
+	int methA(){}
+}
+class B extends A{
+	int methB(){}
+}
+
+class C extends B{
+	int methB(){}
+}
+
+{
+
+}

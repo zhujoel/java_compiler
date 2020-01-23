@@ -1,21 +1,24 @@
 package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -91,7 +94,7 @@ public class DeclClass extends AbstractDeclClass {
     	}
     	
     	//On recupere le type de la superclasse
-    	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hériter d'une classe existante", extension.getLocation());
+    	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hérité d'une classe existante", extension.getLocation());
         this.extension.setType(superC.getDefinition().getType());
         this.extension.setDefinition(superC.getDefinition());
     	
@@ -147,29 +150,43 @@ public class DeclClass extends AbstractDeclClass {
     	this.fields.iter(f);
     	this.methods.iter(f);
     }
+    
+    
+    public void iterMethodsParent(Symbol className, DecacCompiler compiler) {
 
+        ClassType clType = (ClassType)compiler.getEnvironmentType().get(className);
+    	
+    	if(clType.getDefinition().hasSuperclass()) {
+        	Symbol superclass = clType.getDefinition().getSuperClass().getType().getName();
+    		iterMethodsParent(superclass, compiler);
+    	}
+    	
+    	ClassType clType2 = (ClassType)compiler.getEnvironmentType().get(className);
+    	EnvironmentExp clEnv = clType2.getDefinition().getMembers();
+    	
+    	for(Map.Entry<Symbol, ExpDefinition> entry : clEnv.getEnv().entrySet()) {
+    		if(entry.getValue() instanceof MethodDefinition) {
+    			System.out.println(entry.getKey().getName());
+    		}
+    	}
+    	
+    }
+    
     
     @Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
-    	// Construction de la table des méthodes
-    	if(this.extension == null) {
-            compiler.addInstruction(new LOAD(new NullOperand(), Register.getR(0)));
-    	}
-    	else {
-            compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
-    	}
+    	
+    	
+    	
+    	compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
         compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
         compiler.getStackManager().addStackCpt();
         compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
         
-        ClassType classType;
+        System.out.println("Nom de la classe : " + this.className.getName().getName());
+        System.out.println("Ses fonctions : ");
+        iterMethodsParent(this.className.getName(), compiler);
         
-        if(this.extension != null) {
-        	classType = (ClassType) this.extension.getType();
-        	/*classType.getDefinition().getMembers().get("equals");
-        	classType.getDefinition().getMembers().codeGenListMethod(compiler, this.extension.getName());*/
-        }
-        this.methods.codeGenListMethod(compiler, this.className.getName());
-        
+        //this.methods.codeGenListMethod(compiler, this.className.getName());
 	}
 }

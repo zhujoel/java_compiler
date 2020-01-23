@@ -70,5 +70,4 @@ public class ClassType extends Type {
         //return this.getClass().getSuperclass().equals(potentialSuperClass.getClass());
     }
 
-
 }
