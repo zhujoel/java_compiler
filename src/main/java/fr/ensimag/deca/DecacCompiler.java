@@ -202,8 +202,6 @@ public class DecacCompiler {
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
         String destFile = sourceFile.replace(".deca", ".ass");
-        // DONE! A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // DONE! A FAIRE: fichier .deca.
         
         PrintStream err = System.err;
         PrintStream out = System.out;
@@ -327,8 +325,6 @@ public class DecacCompiler {
     public boolean compileDecompile() {
         String sourceFile = source.getAbsolutePath();
         String destFile = sourceFile.replace(".deca", ".ass");
-        // DONE! A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // DONE! A FAIRE: fichier .deca.
         
         PrintStream err = System.err;
         PrintStream out = System.out;

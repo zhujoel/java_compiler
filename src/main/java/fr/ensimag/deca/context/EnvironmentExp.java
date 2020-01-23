@@ -101,5 +101,9 @@ public class EnvironmentExp {
     	}
     	env.put(name, def);
     }
+    
+    public HashMap<Symbol, ExpDefinition> getEnv(){
+    	return this.env;
+    }
 
 }

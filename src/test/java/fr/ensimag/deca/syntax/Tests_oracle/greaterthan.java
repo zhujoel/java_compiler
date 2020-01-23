@@ -18,7 +18,23 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.AbstractIdentifier;
+import fr.ensimag.deca.tree.AbstractLValue;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.DeclVar;
+import fr.ensimag.deca.tree.GreaterOrEqual;
+import fr.ensimag.deca.tree.Identifier;
+import fr.ensimag.deca.tree.Initialization;
+import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class greaterthan {
 	
