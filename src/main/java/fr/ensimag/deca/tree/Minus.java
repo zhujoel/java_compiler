@@ -22,10 +22,13 @@ public class Minus extends AbstractOpArith {
         return "-";
     }
 
-	@Override
-	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
-		compiler.addInstruction(new SUB(op1, op2));
-		compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
-	}
+    @Override
+    protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+        compiler.addInstruction(new SUB(op1, op2));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            //if the noCheck option isn't activated, the line for the test is added 
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
+    }
     
 }
