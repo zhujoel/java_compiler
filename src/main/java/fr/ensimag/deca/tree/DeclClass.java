@@ -99,12 +99,12 @@ public class DeclClass extends AbstractDeclClass {
     	//declaration du type de la classe
         ClassType c = new ClassType(compiler.getSymbolTable().create(this.className.getName().toString()),
         		this.className.getLocation(), superC.getDefinition());
+    	this.className.setDefinition(c.getDefinition());
+        this.className.setType(c);
         
         try {
         	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
         			.create(this.className.getName().toString()),c);
-        	this.className.setDefinition(c.getDefinition());
-            this.className.setType(c);
         } catch (DoubleDefException e) { //pas de double definition possible
         	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
         }

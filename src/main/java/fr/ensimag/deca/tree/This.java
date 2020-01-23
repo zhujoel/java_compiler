@@ -37,7 +37,7 @@ public class This extends AbstractExpr {
 		if(!this.getType().isClass()) {
 			throw new ContextualError("Appel de l'identificateur this hors d'une classe", this.getLocation());
 		}
-		return this.getType();
+		return currentClass.getType();
 		
 	}
 
