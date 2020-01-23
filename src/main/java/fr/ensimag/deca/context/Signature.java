@@ -1,6 +1,7 @@
 package fr.ensimag.deca.context;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +33,10 @@ public class Signature {
     		return args.equals(((Signature) o).args);
     	}
     	return false;
+    }
+    
+    public List<Type> getList() {
+    	return this.args;
     }
 
 }

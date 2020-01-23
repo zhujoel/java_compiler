@@ -1,0 +1,15 @@
+class A{
+	
+	
+}
+class B{
+	
+	void fonction(A a, int b){
+	}
+	
+}
+{
+	B b = new B();
+	A c = new A();
+	b.fonction(c, 3);
+}
