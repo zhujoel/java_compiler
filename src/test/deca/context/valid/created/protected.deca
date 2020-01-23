@@ -1,0 +1,6 @@
+class A{
+	protected int a = 3;
+}
+class B extends A{
+	int b = a;	
+}

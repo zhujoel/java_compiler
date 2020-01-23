@@ -30,8 +30,12 @@ public class New extends AbstractExpr{
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		//TODO : parser complet ??? il manque des parametres ici
-		return null;
+		Type t = this.ident.verifyType(compiler);
+		if(!t.isClass()) {
+			throw new ContextualError("Tentative d'instancier un type qui n'est pas une classe", this.ident.getLocation());
+		}
+		this.setType(t);
+		return t;
 	}
 
 	@Override

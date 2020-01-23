@@ -1,0 +1,7 @@
+class A{
+	protected int a = 3;
+}
+class B{
+	A c = new A();
+	int b = c.a;	
+}

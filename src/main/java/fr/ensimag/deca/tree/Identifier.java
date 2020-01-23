@@ -182,9 +182,6 @@ public class Identifier extends AbstractIdentifier {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
     	
-    	
-    	//POUR UNE VARIABLE
-    	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
     	Definition d = localEnv.get(s);
     	if(d == null) {
