@@ -208,7 +208,7 @@ public class DeclClass extends AbstractDeclClass {
 		compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
 
 		codeGenPrototypeMethod(this.className.getName(), compiler, new EnvironmentExp(null));
-
+		this.fields.codeGenListField(compiler, this.className.getName());
 		//this.methods.codeGenListMethod(compiler, this.className.getName());
 	}
 }
