@@ -44,5 +44,26 @@ decac -p plus1.deca plus2.deca plus3.deca plus4.deca mult6.deca
 decac -a -P -r 4 readint1.deca readint2.deca readint3.deca plus10.deca
 decac -a -r 16 readfloat1.deca readfloat2.deca readfloat3.deca compare4.deca compare5.deca compare6.deca divide.deca
 decac -a -P -r 12 float8.deca float9.deca divide.deca compare15.deca class2.deca boolean.deca mult5.deca plus3.deca
-decac -b
+decac -a -P -r 16 compare4.deca bool6.deca inst16.deca readint3.deca mult9.deca
+decac -a -r 16 compare5.deca float8.deca inst1.deca inst21.deca int6.deca plus8.deca
+decac -a -r 8 compare10.deca bool9.deca bool1.deca bool7.deca plus.deca
+decac -a -r 5 plus.deca int3.deca mult4.deca mult6.deca voidMain.deca minus.deca
+decac -P -r 6 -a float13.deca float9.deca inst12.deca while.deca plus.deca
+decac -r 4 -a float9.deca float7.deca inst21.deca plus4.deca plus5.deca plus6.deca while.deca assign.deca bool10.deca bool11.deca mult5.deca
+decac -r 4 -a -P class8.deca compare8.deca float8.deca inst8.deca plus8.deca
+decac -a class8.deca compare8.deca float8.deca inst8.deca plus5.deca
+decac -a boolassign1.deca boolassign2.deca boolassign3.deca boolassign4.deca
+decac -p float7.deca float8.deca bool7.deca
+decac -a -r 4 class5.deca
+decac -a -r 5 class5.deca
+decac -a -r 6 class5.decac
+decac -a -r 6 class5.deca class5.deca
+decac -a -P -r 4 abc1.deca abc.deca
+decac -a abc1.deca abc.deca
+decac -v abc1.deca abc.deca
+decac -a -n -r 4 abc1.deca abc.deca
+decac -a -r 4 -P abc1.deca abc.deca plus10.deca plus1.deca plus2.deca plus3.deca plus4.deca mult8.deca
+decac -a -n -r 4 multiply.deca
+decac -a -n -r 5 multiply.deca plus10.deca plus3.deca
+decac -a -n -r 5 -P multiply.deca plus10.deca plus3.deca
 decac
