@@ -1,13 +1,15 @@
 {
     int a = 5;
     int b = 2;
+    float c;
+    float d;
     a - b;
     6 - 1;
     print(a - b);
     a = a - b;
     print(5 - 2);
-    float c = 5;
-    float d = 2;
+    c = 5;
+    d = 2;
     c - d;
     6.0 - 1.0;
     print(c - d);

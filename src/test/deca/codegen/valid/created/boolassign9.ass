@@ -2,12 +2,10 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 2(GB)
+	STORE R0, 3(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 4(GB)
-code.Object.equals:
 ; Main Function
-; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
 	TSTO #4
 	BOV pile_pleine
@@ -19,36 +17,16 @@ code.Object.equals:
 	LOAD #1, R2
 	CMP R2, R2
 	POP R2
-	STORE R2, 5(GB)
+	STORE R2, 12(GB)
 	LOAD #0, R2
-	STORE R2, 6(GB)
-; Instructions
+	STORE R2, 13(GB)
+; Beginning of main instructions:
 ; &&
-	LOAD 5(GB), R2
+	LOAD 12(GB), R2
 	PUSH R2
-	LOAD 6(GB), R2
+	LOAD 13(GB), R2
 	MUL R2, R2
 	POP R2
-	STORE R2, 5(GB)
+	STORE R2, 12(GB)
 	HALT
-pile_pleine:
-	WSTR "Erreur : Pile pleine."
-	WNL
-	ERROR
-dereferencement_null:
-	WSTR "Erreur : dereferencement null."
-	WNL
-	ERROR
-tas_plein:
-	WSTR "Erreur : Tas plein."
-	WNL
-	ERROR
-debordement:
-	WSTR "Erreur : debordement durant une operation arithmétique"
-	WNL
-	ERROR
-io_error:
-	WSTR "Erreur : input ou output"
-	WNL
-	ERROR
 ; end main program

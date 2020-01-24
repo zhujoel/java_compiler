@@ -4,51 +4,43 @@
 	LOAD #null, R0
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
-code.Object.equals:
+	STORE R0, 5(GB)
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
-	STORE R0, 3(GB)
+	STORE R0, 10(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 4(GB)
+	STORE R0, 15(GB)
 	LOAD code.A.methA, R0
-	STORE R0, 5(GB)
+	STORE R0, 22(GB)
 ; Code de la table des méthodes de B
-	LEA 3(GB), R0
-	STORE R0, 6(GB)
+	LEA 10(GB), R0
+	STORE R0, 28(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 7(GB)
+	STORE R0, 31(GB)
 	LOAD code.A.methA, R0
-	STORE R0, 8(GB)
+	STORE R0, 33(GB)
 	LOAD code.B.methB, R0
-	STORE R0, 9(GB)
+	STORE R0, 37(GB)
 ; Main Function
-; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
 	TSTO #2
 	BOV pile_pleine
 	ADDSP #2
 ; Declaration des variables
-; Instructions
+; Beginning of main instructions:
 	HALT
-pile_pleine:
-	WSTR "Erreur : Pile pleine."
-	WNL
-	ERROR
-dereferencement_null:
-	WSTR "Erreur : dereferencement null."
-	WNL
-	ERROR
-tas_plein:
-	WSTR "Erreur : Tas plein."
-	WNL
-	ERROR
-debordement:
-	WSTR "Erreur : debordement durant une operation arithmétique"
-	WNL
-	ERROR
-io_error:
-	WSTR "Erreur : input ou output"
-	WNL
-	ERROR
+code.A.methA:
+	BOV pile_pleine
+; Sauvegarde des registres
+; Declaration des variables
+fin.A.methA:
+; Restauration des registres
+	RTS
+code.B.methB:
+	BOV pile_pleine
+; Sauvegarde des registres
+; Declaration des variables
+fin.B.methB:
+; Restauration des registres
+	RTS
 ; end main program
