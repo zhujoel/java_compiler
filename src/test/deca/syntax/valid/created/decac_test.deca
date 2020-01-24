@@ -1,6 +1,6 @@
 class P{
-
-	int move(int a, int b){
+	int x;
+	void move(int a, int b){
 	}
 }
 

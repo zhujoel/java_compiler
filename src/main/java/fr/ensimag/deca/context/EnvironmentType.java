@@ -1,10 +1,12 @@
 package fr.ensimag.deca.context;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.AbstractIdentifier;
 import fr.ensimag.deca.tree.Location;
 /**
  * Dictionnaire qui associe les TypeDefinition à leurs types
@@ -43,5 +45,24 @@ public class EnvironmentType {
 	
 	public boolean isIn(Symbol key) {
 		return env.containsKey(key);
+	}
+	
+	/**
+	 * Récupère le numéro de offset d'un attribut pour l'accès avec assembleur
+	 * @return
+	 */
+	public int getAttributeOffset(AbstractIdentifier className, AbstractIdentifier attr) {
+		ClassType clType = (ClassType)this.get(className.getName());
+		EnvironmentExp env = clType.getDefinition().getMembers();
+		int offset = 1;
+		for(Map.Entry<Symbol, ExpDefinition> entry : env.getEnv().entrySet()) {
+			if(entry.getValue() instanceof FieldDefinition) {
+				if(entry.getKey().getName().equals(attr.getName().getName())) {
+					return offset;
+				}
+				++offset;
+			}
+		}
+		return -1;
 	}
 }
