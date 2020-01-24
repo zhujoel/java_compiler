@@ -182,7 +182,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		
 		this.params.codeGenListParamIn(compiler);
 		
-		this.corps.codeGenMethodBody(compiler);
+		this.corps.codeGenMethodBody(compiler, className);
 		
 		// bloc de fin de méthode
 		compiler.addIMABloc();

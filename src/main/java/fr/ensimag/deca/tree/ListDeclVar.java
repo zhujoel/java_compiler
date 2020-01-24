@@ -49,5 +49,14 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
             i.codeGenDeclVar(compiler);
         }
     }
+    
+    /**
+     * Déclaration de variables dans une méthode
+     */
+    public void codeGenListDeclVarLocale(DecacCompiler compiler) {
+    	for(AbstractDeclVar i : getList()) {
+    		i.codeGenDeclVar(compiler);
+    	}
+    }
 
 }
