@@ -91,7 +91,8 @@ public class Program extends AbstractProgram {
         main.codeGenMain(compiler);
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
-        ErrorManager.addErrorLabels(compiler);
+        compiler.appendAllBlocs();
+        //ErrorManager.addErrorLabels(compiler);
     }
 
     @Override

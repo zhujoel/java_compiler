@@ -68,7 +68,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
         compiler.getStackManager().addStackCpt();
 		
-        compiler.addLabel(objEq0);
+        //compiler.addLabel(objEq0);
         
         compiler.getEnvironmentClass().put(compiler.getType("Object").getName(), new RegisterOffset(1, Register.GB));
 
