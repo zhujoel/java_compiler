@@ -36,7 +36,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 		compiler.addLabel(init);
 		
 		compiler.addInstruction(new TSTO(new ImmediateInteger(getList().size())));
-		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
+		compiler.addInstruction(new BOV(ErrorManager.tabLabel[2]));
 		compiler.addInstruction(new NEW(new ImmediateInteger(getList().size()), reg));
 		
 		for (AbstractDeclField i : getList()) {
