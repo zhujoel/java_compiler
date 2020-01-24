@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -66,7 +68,7 @@ public class DecacCompiler {
      * Portable newline character.
      */
     private static final String nl = System.getProperty("line.separator", "\n");
-
+    
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
@@ -87,7 +89,7 @@ public class DecacCompiler {
         this.regManager = new RegManager(nbRegMax);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
-        this.envExp = new EnvironmentExp(null);
+        this.envClass = new HashMap<Symbol, DAddr>();
         this.stackManager = new StackManager();
     }
 
@@ -143,14 +145,24 @@ public class DecacCompiler {
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
      */
     public void add(AbstractLine line) {
-        program.add(line);
+    	if(!isStoring) {
+            program.add(line);
+    	}
+    	else {
+    		this.getLastBloc().add(line);
+    	}
     }
 
     /**
      * @see fr.ensimag.ima.pseudocode.IMAProgram#addComment(java.lang.String)
      */
     public void addComment(String comment) {
-        program.addComment(comment);
+    	if(!isStoring) {
+            program.addComment(comment);
+    	}
+    	else {
+    		this.getLastBloc().addComment(comment);
+    	}
     }
 
     /**
@@ -158,7 +170,12 @@ public class DecacCompiler {
      * fr.ensimag.ima.pseudocode.IMAProgram#addLabel(fr.ensimag.ima.pseudocode.Label)
      */
     public void addLabel(Label label) {
-        program.addLabel(label);
+    	if(!isStoring) {
+            program.addLabel(label);
+    	}
+    	else {
+    		this.getLastBloc().addLabel(label);
+    	}
     }
 
     /**
@@ -166,7 +183,21 @@ public class DecacCompiler {
      * fr.ensimag.ima.pseudocode.IMAProgram#addInstruction(fr.ensimag.ima.pseudocode.Instruction)
      */
     public void addInstruction(Instruction instruction) {
-        program.addInstruction(instruction);
+    	if(!isStoring) {
+            program.addInstruction(instruction);    	
+    	}
+    	else {
+    		this.getLastBloc().addInstruction(instruction);
+    	}
+    }
+    
+    public void append(IMAProgram prog) {
+    	if(!isStoring) {
+        	program.append(prog);	
+    	}
+    	else {
+    		this.getLastBloc().append(prog);
+    	}
     }
 
     /**
@@ -175,7 +206,12 @@ public class DecacCompiler {
      * java.lang.String)
      */
     public void addInstruction(Instruction instruction, String comment) {
-        program.addInstruction(instruction, comment);
+    	if(!isStoring) {
+            program.addInstruction(instruction, comment);	
+    	}
+    	else {
+    		this.getLastBloc().addInstruction(instruction, comment);
+    	}
     }
     
     /**
@@ -192,6 +228,49 @@ public class DecacCompiler {
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
+    
+    /**
+     * Blocs de code. On fait ça pour pouvoir manipuler plus finement l'emplacement des blocs de code.
+     */
+    private List<IMAProgram> listPrograms = new ArrayList<>();
+    /**
+     * Flag pour indiquer si on ajoute une instruction dans le program principale ou dans un 
+     * des blocs de code
+     */
+    private boolean isStoring = false;
+    
+    /**
+     * On commence à stocker les blocs
+     */
+    public void activateStoring() {
+    	this.isStoring = true;
+    }
+    
+    public void deactivateStoring() {
+    	this.isStoring = false;
+    }
+    
+    /**
+     * Créer une nouveau bloc de code IMA
+     */
+    public void addIMABloc() {
+    	this.listPrograms.add(new IMAProgram());
+    }
+    /**
+     * Récupère le dernier bloc IMA de la liste
+     */
+    public IMAProgram getLastBloc() {
+    	return this.listPrograms.get(this.listPrograms.size()-1);
+    }
+    
+    /**
+     * Ajoute les différents blocs de code à la fin du programme principale
+     */
+    public void appendAllBlocs() {
+    	for(IMAProgram ima : this.listPrograms) {
+    		this.program.append(ima);
+    	}
+    }
  
 
     /**

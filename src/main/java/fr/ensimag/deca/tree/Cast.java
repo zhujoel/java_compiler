@@ -42,9 +42,10 @@ public class Cast extends AbstractExpr {
 			if(!type1.asClassType(type1.toString() + " n'est pas une classe", 
 					this.getLocation()).isSubClassOf(type2.asClassType(type2.toString() 
 							+ " n'est pas une classe", this.getLocation()))) {
-				throw new ContextualError("La classe de l'identifier à cast n'est pas une classe parente", this.getLocation());
+				throw new ContextualError("La classe demandée pour le cast n'est pas une classe parente de l'identifier", this.getLocation());
 			}
 		}
+		this.setType(type1);
 		return type1;
 	}
 

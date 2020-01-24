@@ -15,6 +15,7 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -38,26 +39,13 @@ public class DeclClass extends AbstractDeclClass {
 	final private AbstractIdentifier className;
 	// extension de la classe
 	// elle étend Object par défaut
-	final private AbstractIdentifier extension;
-	// attributs de la classe
-	final private ListDeclField fields;
-	// méthodes de la classe
-	final private ListDeclMethod methods;
-
-
-
-	public DeclClass(AbstractIdentifier className, AbstractIdentifier extension,
-			ListDeclField fields, ListDeclMethod methods) {
-		Validate.notNull(className);
-		Validate.notNull(extension);
-		Validate.notNull(fields);
-		Validate.notNull(methods);
-		this.extension = extension;
-		this.className = className;
-		this.fields = fields;
-		this.methods = methods;
-	}
-
+    final private AbstractIdentifier extension;
+    // attributs de la classe
+    final private ListDeclField fields;
+    // méthodes de la classe
+    final private ListDeclMethod methods;
+    
+    
 
 	// Constructeur pour la classe Object
 	public DeclClass(AbstractIdentifier className, 
@@ -70,88 +58,106 @@ public class DeclClass extends AbstractDeclClass {
 		this.fields = fields;
 		this.methods = methods;
 	}
-
-
-
-	@Override
-	public void decompile(IndentPrintStream s) {
-		s.print("class ");
-		this.className.decompile(s);
-		s.print(" extends ");
-		this.extension.decompile(s);
-		s.println("{");
-		s.indent();
-		this.fields.decompile(s);
-		this.methods.decompile(s);
-		s.unindent();
-		s.print("}");
+	
+	public DeclClass(AbstractIdentifier className, AbstractIdentifier extension,
+			ListDeclField fields, ListDeclMethod methods) {
+		Validate.notNull(className);
+		Validate.notNull(extension);
+		Validate.notNull(fields);
+		Validate.notNull(methods);
+		this.extension = extension;
+		this.className = className;
+		this.fields = fields;
+		this.methods = methods;
 	}
-
-	@Override
-	protected void verifyClass(DecacCompiler compiler) throws ContextualError {
-
-		//On verifie que la classe herite d'une classe existante
-		if (!compiler.getEnvironmentType().isIn(extension.getName())) {
-			throw new ContextualError("Classe non définie", extension.getLocation());
-		}
-
-		//On recupere le type de la superclasse
-		ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hérité d'une classe existante", extension.getLocation());
-		this.extension.setType(superC.getDefinition().getType());
-		this.extension.setDefinition(superC.getDefinition());
+    
+    
 
 
-		//declaration du type de la classe
-		ClassType c = new ClassType(compiler.getSymbolTable().create(this.className.getName().toString()),
-				this.className.getLocation(), superC.getDefinition());
-
-		try {
-			compiler.getEnvironmentType().declare(compiler.getSymbolTable()
-					.create(this.className.getName().toString()),c);
-			this.className.setDefinition(c.getDefinition());
-			this.className.setType(c);
-		} catch (DoubleDefException e) { //pas de double definition possible
-			throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
-		}
-
-	}
-
-	@Override
-	protected void verifyClassMembers(DecacCompiler compiler)
-			throws ContextualError {
-		for (AbstractDeclField f : fields.getList()) {
-			f.verifyDeclField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
-		}
-		for (AbstractDeclMethod m : methods.getList()) {
-			m.verifyDeclMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
-		}
-	}
-
-	@Override
-	protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
-		for (AbstractDeclField f : fields.getList()) {
-			f.verifyField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
-		}
-
-		for (AbstractDeclMethod m : methods.getList()) {
-			m.verifyMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
-		}
-	}
+    @Override
+    public void decompile(IndentPrintStream s) {
+        s.print("class ");
+        this.className.decompile(s);
+        s.print(" extends ");
+        this.extension.decompile(s);
+        s.println("{");
+        s.indent();
+        this.fields.decompile(s);
+        this.methods.decompile(s);
+        s.unindent();
+        s.print("}");
+    }
 
 
-	@Override
-	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		this.className.prettyPrint(s, prefix, false);
-		this.extension.prettyPrint(s, prefix, false);
-		this.fields.prettyPrint(s, prefix, false);
-		this.methods.prettyPrint(s, prefix, true);
-	}
+    @Override
+    protected void verifyClass(DecacCompiler compiler) throws ContextualError {
+        
+    	//On verifie que la classe herite d'une classe existante
+    	if (!compiler.getEnvironmentType().isIn(extension.getName())) {
+    		throw new ContextualError("Classe non définie", extension.getLocation());
+    	}
+    	
+    	//On recupere le type de la superclasse
+    	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hériter d'une classe existante", extension.getLocation());
+        this.extension.setType(superC.getDefinition().getType());
+        this.extension.setDefinition(superC.getDefinition());
+    	
+    	
+    	//declaration du type de la classe
+        ClassType c = new ClassType(compiler.getSymbolTable().create(this.className.getName().toString()),
+        		this.className.getLocation(), superC.getDefinition());
+    	this.className.setDefinition(c.getDefinition());
+        this.className.setType(c);
+        
+        try {
+        	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
+        			.create(this.className.getName().toString()),c);
+        } catch (DoubleDefException e) { //pas de double definition possible
+        	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
+        }
+        
+    }
+    
 
-	@Override
-	protected void iterChildren(TreeFunction f) {
-		this.fields.iter(f);
-		this.methods.iter(f);
-	}
+    @Override
+    protected void verifyClassMembers(DecacCompiler compiler)
+            throws ContextualError {
+        for (AbstractDeclField f : fields.getList()) {
+        	f.verifyDeclField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
+        for (AbstractDeclMethod m : methods.getList()) {
+        	m.verifyDeclMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
+    }
+    
+    
+    @Override
+    protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
+    	for (AbstractDeclField f : fields.getList()) {
+    		f.verifyField(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
+    	
+    	for (AbstractDeclMethod m : methods.getList()) {
+    		m.verifyMethod(compiler, this.className.getClassDefinition().getMembers(), this.className.getClassDefinition());
+        }
+    }
+
+
+    @Override
+    protected void prettyPrintChildren(PrintStream s, String prefix) {
+    	this.className.prettyPrint(s, prefix, false);
+    	this.extension.prettyPrint(s, prefix, false);
+    	this.fields.prettyPrint(s, prefix, false);
+    	this.methods.prettyPrint(s, prefix, true);
+    }
+
+    @Override
+    protected void iterChildren(TreeFunction f) {
+    	this.fields.iter(f);
+    	this.methods.iter(f);
+    }
+
+    
 
 	/**
 	 * Génère le code assembleur des prototypes des méthodes.
@@ -185,8 +191,6 @@ public class DeclClass extends AbstractDeclClass {
 				compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
 				compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 				compiler.getStackManager().addStackCpt();
-				
-				//compiler.addLabel(label);
 			}
 		}
 	}
@@ -195,15 +199,20 @@ public class DeclClass extends AbstractDeclClass {
 	@Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
 
-		// Passe 1 de l'étape C avec objet
+		// Passe 1 : on génère le prototype des méthodes
 		compiler.addComment("Code de la table des méthodes de " + this.className.getName().getName());
 		compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
 		compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
 		compiler.getStackManager().addStackCpt();
 		compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
 
+		// génération du code des prototypes des méthodes
 		codeGenPrototypeMethod(this.className.getName(), compiler, new EnvironmentExp(null));
-
-		//this.methods.codeGenListMethod(compiler, this.className.getName());
+		
+		// Passe 2 : on génère le corps des méthodes
+		// on donne le className pour générer le bon label
+		compiler.activateStoring();
+		this.methods.codeGenListMethod(compiler, this.className);
+		compiler.deactivateStoring();
 	}
 }

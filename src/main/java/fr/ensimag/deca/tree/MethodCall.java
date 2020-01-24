@@ -8,6 +8,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -48,7 +49,34 @@ public class MethodCall extends AbstractExpr{
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
+		
+		Type retourType;
+		//si on fait une selection (appel d'une methode dans un objet)
+		if(expr != null) {
+			//On recupere la definition de l'objet duquel on veut appeler la methode
+			ClassDefinition cDef = expr.verifyExpr(compiler, localEnv, currentClass).asClassType(expr
+				.getType() + " n'est pas une classe", expr.getLocation()).getDefinition();
+			
+			retourType = nomMethode.verifyExpr(compiler, cDef.getMembers(), currentClass);
+			
+			//Si l'objet n est pas declaré : on renvoie une erreur
+			if(cDef.getMembers().get(nomMethode.getName()) == null) {
+				throw new ContextualError(nomMethode.getName() + " n'est pas une methode de " + expr.getType().getName(), expr.getLocation());
+			}
+		}else {//Si on ne fait pas de selection (appel dans l'objet)
+			retourType = nomMethode.verifyExpr(compiler, localEnv, currentClass);
+			if (localEnv.get(nomMethode.getName()) == null) {
+				throw new ContextualError("La methode " + nomMethode.getName() + " n'est pas definie", nomMethode.getLocation());
+			}
+		}
+		//On controle que l'appel se fait avec le bon nombre d'arguments et que leurs types sont corrects
+		Signature s = nomMethode.getMethodDefinition().getSignature();
+		for (int i = 0 ; i < s.getList().size() ; i++) {
+			this.listExpr.getList().get(i).verifyRValue(compiler, localEnv, currentClass, s.paramNumber(i));
+		}
+		
+		
+		
 		return null;
 	}
 

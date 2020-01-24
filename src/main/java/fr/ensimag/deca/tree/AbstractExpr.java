@@ -92,14 +92,17 @@ public abstract class AbstractExpr extends AbstractInst {
     	
     	if(type.isInt() && expectedType.isFloat()) {//si on stocke un int dans un nombre flottant
     		ConvFloat c = new ConvFloat(this);
-    		c.verifyExpr(compiler, localEnv, currentClass);
+    		//c.verifyExpr(compiler, localEnv, currentClass);
+    		c.setType(type);
     		return c;
     	} else if (type.sameType(expectedType)) {//sinon si les types sont bien identiques
+    		this.setType(type);
     		return this;
     	} else if(type.isClass() && expectedType.isClass()) {//si les types sont des classes
     		if(type.asClassType(type.toString() + " n'est pas une classe", this.getLocation())
     				.isSubClassOf(expectedType.asClassType(expectedType.toString() + 
     						" n'est pas une classe", this.getLocation()))) {//si la rvalue est un type qui herite de <type>
+    			this.setType(type);
     			return this;
     		}
     	}

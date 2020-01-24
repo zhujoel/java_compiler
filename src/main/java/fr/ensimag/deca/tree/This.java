@@ -33,9 +33,10 @@ public class This extends AbstractExpr {
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		if(!this.getType().isClass()) {
+		if(currentClass == null) {
 			throw new ContextualError("Appel de l'identificateur this hors d'une classe", this.getLocation());
 		}
+		this.setType(currentClass.getType());
 		return this.getType();
 		
 	}
