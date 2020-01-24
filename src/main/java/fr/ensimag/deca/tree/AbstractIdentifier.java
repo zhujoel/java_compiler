@@ -11,6 +11,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * Identifier (ex: int, a, b, string, float, etc).
@@ -98,5 +99,5 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      * Génère le code de retour pour une méthode
      * @param compiler
      */
-	protected abstract void codeGenReturn(DecacCompiler compiler);
+	protected abstract void codeGenReturn(IMAProgram ima);
 }

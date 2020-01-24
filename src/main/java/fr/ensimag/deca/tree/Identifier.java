@@ -19,6 +19,7 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.Label;
@@ -306,7 +307,7 @@ public class Identifier extends AbstractIdentifier {
     }
 	
 	@Override
-	protected void codeGenReturn(DecacCompiler compiler) {
-		compiler.addInstruction(new RTS());
+	protected void codeGenReturn(IMAProgram ima) {
+		ima.addInstruction(new RTS());
 	}
 }

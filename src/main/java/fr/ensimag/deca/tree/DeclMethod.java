@@ -185,16 +185,18 @@ public class DeclMethod extends AbstractDeclMethod {
 		
 		this.params.codeGenListParamIn(methodIMA);
 		
-		this.corps.codeGenMethodBody(methodIMA);
+		this.corps.codeGenMethodBody(compiler);
 		
 
 		// label de la fin de la méthode
 		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
-		compiler.addLabel(methLabelFin);
+		methodIMA.addLabel(methLabelFin);
 
-		this.params.codeGenListParamOut(compiler);
+		this.params.codeGenListParamOut(methodIMA);
 		
-		this.returnType.codeGenReturn(compiler);
+		this.returnType.codeGenReturn(methodIMA);
+		
+		compiler.append(methodIMA);
 	}
 
 }
