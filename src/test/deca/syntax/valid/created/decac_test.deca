@@ -1,6 +1,8 @@
-class B{
+class P{
+
+	int move(int a, int b){
+	}
 }
 
 {
-	int a;
 }

@@ -6,8 +6,13 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * @author gl48
@@ -38,9 +43,12 @@ public class Main extends AbstractMain {
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
         // A FAIRE: traiter les déclarations de variables.
-        compiler.addComment("Beginning of main instructions:");
+    	compiler.addComment("Test pour savoir si la pile est pleine");
+    	compiler.addInstruction(new TSTO(new ImmediateInteger(this.declVariables.getList().size() + 2)));
+    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
+    	compiler.addInstruction(new ADDSP(new ImmediateInteger(this.declVariables.getList().size() + 2)));
         declVariables.codeGenListDeclVar(compiler);
-        compiler.addComment("Instructions");
+        compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);
     }
     

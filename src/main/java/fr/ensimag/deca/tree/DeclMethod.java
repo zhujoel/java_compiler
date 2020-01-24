@@ -6,6 +6,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -14,6 +15,10 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 /**
  * Déclaration d'une méthode d'une classe.
@@ -144,12 +149,6 @@ public class DeclMethod extends AbstractDeclMethod {
 			throw new ContextualError("Methode deja definie", this.methName.getLocation());
 		}
 	}
-	
-	@Override
-	protected void codeGenDeclMethod(DecacCompiler compiler) {
-	}
-
-
 
 	@Override
 	public void verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
@@ -169,8 +168,31 @@ public class DeclMethod extends AbstractDeclMethod {
 		}
 		
 		this.corps.verifyMethodBody(compiler, envParam, currentClass, t);
+	}
+	
+	@Override
+	protected void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className) {
+		//bloc de début de méthode
+		compiler.addIMABloc();
 		
+		// label du corps de la méthode
+		Label methLabel = new Label("code."+className.getName()+"."+this.methName.getName().getName());
+		compiler.addLabel(methLabel);
+		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
 		
+		this.params.codeGenListParamIn(compiler);
+		
+		this.corps.codeGenMethodBody(compiler);
+		
+		// bloc de fin de méthode
+		compiler.addIMABloc();
+		// label de la fin de la méthode
+		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
+		compiler.addLabel(methLabelFin);
+
+		this.params.codeGenListParamOut(compiler);
+		
+		this.returnType.codeGenReturn(compiler);
 		
 	}
 
