@@ -15,10 +15,10 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Déclaration d'une méthode d'une classe.
@@ -183,6 +183,8 @@ public class DeclMethod extends AbstractDeclMethod {
 		this.params.codeGenListParamIn(compiler);
 		
 		this.corps.codeGenMethodBody(compiler, className);
+
+		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size())));
 		
 		// bloc de fin de méthode
 		compiler.addIMABloc();
@@ -191,6 +193,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addLabel(methLabelFin);
 
 		this.params.codeGenListParamOut(compiler);
+		
 		
 		this.returnType.codeGenReturn(compiler);
 		

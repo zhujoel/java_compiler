@@ -191,6 +191,15 @@ public class DecacCompiler {
     	}
     }
     
+    public void addSecond(Instruction instruction) {
+    	if(!isStoring) {
+            program.addSecond(instruction);    	
+    	}
+    	else {
+    		this.getLastBloc().addSecond(instruction);
+    	}
+    }
+    
     public void append(IMAProgram prog) {
     	if(!isStoring) {
         	program.append(prog);	

@@ -1,8 +1,6 @@
 class P{
 	int x;
-	void move(){
-		this.x = 5;
-		this.x = 22;
+	void move(int a, int b){
 	}
 }
 
