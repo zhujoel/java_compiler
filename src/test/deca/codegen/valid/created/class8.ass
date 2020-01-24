@@ -2,44 +2,44 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 9(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 10(GB)
 code.Object.equals:
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
-	STORE R0, 3(GB)
-	LOAD code.Object.equals, R0
-	STORE R0, 4(GB)
-	LOAD code.A.methA, R0
-	STORE R0, 5(GB)
-; Code de la table des méthodes de B
-	LEA 3(GB), R0
-	STORE R0, 6(GB)
-	LOAD code.Object.equals, R0
-	STORE R0, 7(GB)
-	LOAD code.A.methA, R0
-	STORE R0, 8(GB)
-	LOAD code.B.methB, R0
-	STORE R0, 9(GB)
-; Code de la table des méthodes de C
-	LEA 6(GB), R0
-	STORE R0, 10(GB)
-	LOAD code.Object.equals, R0
 	STORE R0, 11(GB)
-	LOAD code.A.methA, R0
+	LOAD code.Object.equals, R0
 	STORE R0, 12(GB)
-	LOAD code.C.methB, R0
+	LOAD code.A.methA, R0
 	STORE R0, 13(GB)
-; Code de la table des méthodes de D
-	LEA 6(GB), R0
+; Code de la table des méthodes de B
+	LEA 11(GB), R0
 	STORE R0, 14(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 15(GB)
 	LOAD code.A.methA, R0
 	STORE R0, 16(GB)
-	LOAD code.D.methB, R0
+	LOAD code.B.methB, R0
 	STORE R0, 17(GB)
+; Code de la table des méthodes de C
+	LEA 14(GB), R0
+	STORE R0, 18(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 19(GB)
+	LOAD code.A.methA, R0
+	STORE R0, 20(GB)
+	LOAD code.C.methB, R0
+	STORE R0, 21(GB)
+; Code de la table des méthodes de D
+	LEA 14(GB), R0
+	STORE R0, 22(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 23(GB)
+	LOAD code.A.methA, R0
+	STORE R0, 24(GB)
+	LOAD code.D.methB, R0
+	STORE R0, 25(GB)
 ; Main Function
 ; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine

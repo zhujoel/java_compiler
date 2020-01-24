@@ -137,7 +137,7 @@ public class CompilerOptions {
                         }
                         break;
                 default:
-                    if (!args[i].matches("[0-9]|1[0-2]")) {//dans le cas où on met la valeur de X pour la option -r
+                    if (!args[i].matches("[0-9]|1[0-6]")) {//dans le cas où on met la valeur de X pour la option -r
                         //Si un fichier apparaît plusieurs fois sur la ligne de commande, ne le ajouter que une seule fois
                         if (!sourceFiles.isEmpty()) {
                             boolean isIn = false;

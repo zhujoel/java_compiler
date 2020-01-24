@@ -2,9 +2,9 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 7(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 8(GB)
 code.Object.equals:
 ; Main Function
 ; Beginning of main instructions:
@@ -16,7 +16,7 @@ code.Object.equals:
 ; -
 	LOAD #1, R2
 	SUB #0, R2
-	STORE R2, 3(GB)
+	STORE R2, 9(GB)
 ; Instructions
 	HALT
 pile_pleine:

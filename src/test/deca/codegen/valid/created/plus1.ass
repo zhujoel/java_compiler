@@ -18,7 +18,6 @@ code.Object.equals:
 	LOAD #5, R2
 	LOAD #3, R3
 	ADD R2, R3
-	BOV debordement
 	HALT
 pile_pleine:
 	WSTR "Erreur : Pile pleine."

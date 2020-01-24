@@ -2,9 +2,9 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
-	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
 code.Object.equals:
 ; Main Function
 ; Beginning of main instructions:
@@ -15,17 +15,21 @@ code.Object.equals:
 ; Declaration des variables
 ; <=
 	LOAD #0, R2
-	LOAD #1, R3
-	CMP R2, R3
-	STORE R3, 3(GB)
+	PUSH R2
+	LOAD #1, R2
+	CMP R2, R2
+	POP R2
+	STORE R2, 5(GB)
 	LOAD #0, R2
-	STORE R2, 4(GB)
+	STORE R2, 6(GB)
 ; Instructions
 ; &&
-	LOAD 3(GB), R2
-	LOAD 4(GB), R3
-	MUL R2, R3
-	STORE R3, 3(GB)
+	LOAD 5(GB), R2
+	PUSH R2
+	LOAD 6(GB), R2
+	MUL R2, R2
+	POP R2
+	STORE R2, 5(GB)
 	HALT
 pile_pleine:
 	WSTR "Erreur : Pile pleine."

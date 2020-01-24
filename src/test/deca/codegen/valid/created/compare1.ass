@@ -2,9 +2,9 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 18(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 19(GB)
 code.Object.equals:
 ; Main Function
 ; Beginning of main instructions:
@@ -14,11 +14,11 @@ code.Object.equals:
 	ADDSP #3
 ; Declaration des variables
 	LOAD #0, R2
-	STORE R2, 3(GB)
+	STORE R2, 20(GB)
 ; Instructions
 ; Début du if_1
 ; ==
-	LOAD 3(GB), R2
+	LOAD 20(GB), R2
 	LOAD #0, R3
 	CMP R3, R2
 	BNE else_1

@@ -1,13 +1,16 @@
 {
+    int a;
+    float b;
+    bool c;
     println("Hello");
     println(5);
-    int a = 4;
+    a = 4;
     println(a);
     println(2.0);
-    float b = 1.2;
+    b = 1.2;
     println(b);
     println(true);
     println(false);
-    bool c = true;
+    c = true;
     println(c);
 }

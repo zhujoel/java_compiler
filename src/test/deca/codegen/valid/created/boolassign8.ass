@@ -4,7 +4,7 @@
 	LOAD #null, R0
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 3(GB)
 code.Object.equals:
 ; Main Function
 ; Beginning of main instructions:
@@ -15,9 +15,11 @@ code.Object.equals:
 ; Declaration des variables
 ; <=
 	LOAD #0, R2
-	LOAD #1, R3
-	CMP R2, R3
-	STORE R3, 3(GB)
+	PUSH R2
+	LOAD #1, R2
+	CMP R2, R2
+	POP R2
+	STORE R2, 7(GB)
 ; Instructions
 	HALT
 pile_pleine:

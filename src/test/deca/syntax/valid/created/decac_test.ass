@@ -1,12 +1,16 @@
 ; start main program
 ; Class Declaration
+; Code de la table des méthodes de Object
 	LOAD #null, R0
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
+code.Object.equals:
+; Code de la table des méthodes de B
 	LEA 1(GB), R0
 	STORE R0, 3(GB)
-	WSTR "Je suis une classe"
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
 ; Main Function
 ; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
@@ -14,7 +18,7 @@
 	BOV pile_pleine
 	ADDSP #3
 ; Declaration des variables
-	STORE R0, 4(GB)
+	STORE R0, 5(GB)
 ; Instructions
 	HALT
 pile_pleine:

@@ -2,9 +2,9 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
-	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
 code.Object.equals:
 ; Main Function
 ; Beginning of main instructions:
@@ -13,14 +13,14 @@ code.Object.equals:
 	BOV pile_pleine
 	ADDSP #3
 ; Declaration des variables
-	STORE R0, 3(GB)
+	STORE R0, 15(GB)
 ; Instructions
 ; /
-	LOAD 3(GB), R2
+	LOAD 15(GB), R2
 	LOAD #0x1.b33334p1, R3
 	DIV R2, R3
-	STORE R3, 3(GB)
-	LOAD 3(GB), R1
+	STORE R3, 15(GB)
+	LOAD 15(GB), R1
 	WFLOAT
 	HALT
 pile_pleine:
