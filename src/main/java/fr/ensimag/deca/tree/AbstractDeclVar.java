@@ -34,4 +34,10 @@ public abstract class AbstractDeclVar extends Tree {
      * @param compiler
      */
     protected abstract void codeGenDeclVar(DecacCompiler compiler);
+    
+    /**
+     * Génère le code assembleur lors de la déclaration d'une variable locale
+     * @param compiler
+     */
+    protected abstract void codeGenDeclVarLocale(DecacCompiler compiler);
 }

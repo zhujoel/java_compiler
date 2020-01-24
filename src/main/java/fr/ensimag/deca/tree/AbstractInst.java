@@ -44,4 +44,11 @@ public abstract class AbstractInst extends Tree {
     protected void decompileInst(IndentPrintStream s) {
         decompile(s);
     }
+    
+    /**
+     * Pour les instructions locales HOHOHO
+     * @param compiler
+     * @param className
+     */
+    protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className) {}
 }

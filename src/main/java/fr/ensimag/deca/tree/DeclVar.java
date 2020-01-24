@@ -129,4 +129,9 @@ public class DeclVar extends AbstractDeclVar {
 		// indique que le registre est libre
 		compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
 	}
+	
+
+    protected void codeGenDeclVarLocale(DecacCompiler compiler) {
+    	
+    }
 }
