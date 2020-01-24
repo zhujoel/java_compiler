@@ -168,6 +168,10 @@ public class DecacCompiler {
     public void addInstruction(Instruction instruction) {
         program.addInstruction(instruction);
     }
+    
+    public void append(IMAProgram prog) {
+    	program.append(prog);
+    }
 
     /**
      * @see

@@ -13,6 +13,10 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
 /**
  * Déclaration d'un paramètre de méthode.
@@ -79,12 +83,16 @@ public class DeclParam extends AbstractDeclParam{
 		this.parametre.setDefinition(pDef);
 		return t;
 	}
-	
-	
 
-	public void codeGenDeclParam(DecacCompiler compiler) {
-		//TODO (ça veut dire à faire en anglais)
+	@Override
+	public void codeGenDeclParamIn(IMAProgram ima, int offset) {
+		ima.addInstruction(new PUSH(GPRegister.getR(offset)));
+		
 	}
 
+	@Override
+	public void codeGenDeclParamOut(IMAProgram ima, int offset) {
+		ima.addInstruction(new POP(GPRegister.getR(offset)));
+	}
 
 }

@@ -10,6 +10,7 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * Déclaration d'un paramètre d'une méthode.
@@ -34,8 +35,13 @@ public abstract class AbstractDeclParam extends Tree{
 	public abstract Symbol getName();
 	
 	public abstract ExpDefinition getExpDefinition();
-
-
-	public abstract void codeGenDeclParam(DecacCompiler compiler);
+	
+	/**
+	 * Génère un push pour chaque paramètre
+	 * @param compiler
+	 * @param offset numéro du registre à push
+	 */
+	public abstract void codeGenDeclParamIn(IMAProgram ima, int offset);
+	public abstract void codeGenDeclParamOut(IMAProgram ima, int offset);
 
 }

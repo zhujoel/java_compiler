@@ -27,6 +27,7 @@ import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
@@ -303,4 +304,9 @@ public class Identifier extends AbstractIdentifier {
 			compiler.addInstruction(new WSTR(new ImmediateString("null")));
 		}
     }
+	
+	@Override
+	protected void codeGenReturn(DecacCompiler compiler) {
+		compiler.addInstruction(new RTS());
+	}
 }

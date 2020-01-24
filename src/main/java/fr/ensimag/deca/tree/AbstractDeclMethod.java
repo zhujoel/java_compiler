@@ -30,7 +30,12 @@ public abstract class AbstractDeclMethod extends Tree {
 
 	public abstract void verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError;
 	
-	protected abstract void codeGenDeclMethod(DecacCompiler compiler);
+	/**
+	 * Génère le code du label pour le corps de la méthode
+	 * @param compiler
+	 * @param className
+	 */
+	protected abstract void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className);
 	
 
 
