@@ -99,5 +99,5 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      * Génère le code de retour pour une méthode
      * @param compiler
      */
-	protected abstract void codeGenReturn(IMAProgram ima);
+	protected abstract void codeGenReturn(DecacCompiler compiler);
 }

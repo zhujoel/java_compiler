@@ -28,20 +28,20 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 	 * Sauvegarde les registres avant d'entrer dans le code de la méthode
 	 * @param compiler
 	 */
-	public void codeGenListParamIn(IMAProgram ima) {
-		ima.addComment("Sauvegarde des registres");
+	public void codeGenListParamIn(DecacCompiler compiler) {
+		compiler.addComment("Sauvegarde des registres");
         for (int i = 0 ; i < this.getList().size(); ++i) {
-            this.getList().get(i).codeGenDeclParamIn(ima, 2+i);
+            this.getList().get(i).codeGenDeclParamIn(compiler, 2+i);
         }
     }
 	
 	/**
 	 * Restore les registres avant de sortir de la méthode
 	 */
-	public void codeGenListParamOut(IMAProgram ima) {
-		ima.addComment("Restauration des registres");
+	public void codeGenListParamOut(DecacCompiler compiler) {
+		compiler.addComment("Restauration des registres");
         for (int i = 0 ; i < this.getList().size(); ++i) {
-            this.getList().get(i).codeGenDeclParamOut(ima, 2+i);
+            this.getList().get(i).codeGenDeclParamOut(compiler, 2+i);
         }
 	}
 }

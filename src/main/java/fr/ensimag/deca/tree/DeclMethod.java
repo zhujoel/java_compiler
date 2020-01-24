@@ -172,31 +172,28 @@ public class DeclMethod extends AbstractDeclMethod {
 	
 	@Override
 	protected void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className) {
-		// Pour chaque méthode, on crée un nouveau bloc de code
-		// cela est nécessaire pour pouvoir manipuler plus facilement les lignes du bloc de code
-		// (on en a notamment besoin pour insérer TSTO en tête de bloc)
-		IMAProgram methodIMA = new IMAProgram();
+		//bloc de début de méthode
+		compiler.addIMABloc();
 		
 		// label du corps de la méthode
 		Label methLabel = new Label("code."+className.getName()+"."+this.methName.getName().getName());
-		methodIMA.addLabel(methLabel);
-		methodIMA.addInstruction(new BOV(ErrorManager.tabLabel[0]));
-		methodIMA.addInstruction(new ADDSP(5));
+		compiler.addLabel(methLabel);
+		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
 		
-		this.params.codeGenListParamIn(methodIMA);
+		this.params.codeGenListParamIn(compiler);
 		
 		this.corps.codeGenMethodBody(compiler);
 		
-
+		// bloc de fin de méthode
+		compiler.addIMABloc();
 		// label de la fin de la méthode
 		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
-		methodIMA.addLabel(methLabelFin);
+		compiler.addLabel(methLabelFin);
 
-		this.params.codeGenListParamOut(methodIMA);
+		this.params.codeGenListParamOut(compiler);
 		
-		this.returnType.codeGenReturn(methodIMA);
+		this.returnType.codeGenReturn(compiler);
 		
-		compiler.append(methodIMA);
 	}
 
 }

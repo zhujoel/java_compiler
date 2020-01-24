@@ -85,14 +85,14 @@ public class DeclParam extends AbstractDeclParam{
 	}
 
 	@Override
-	public void codeGenDeclParamIn(IMAProgram ima, int offset) {
-		ima.addInstruction(new PUSH(GPRegister.getR(offset)));
+	public void codeGenDeclParamIn(DecacCompiler compiler, int offset) {
+		compiler.addInstruction(new PUSH(GPRegister.getR(offset)));
 		
 	}
 
 	@Override
-	public void codeGenDeclParamOut(IMAProgram ima, int offset) {
-		ima.addInstruction(new POP(GPRegister.getR(offset)));
+	public void codeGenDeclParamOut(DecacCompiler compiler, int offset) {
+		compiler.addInstruction(new POP(GPRegister.getR(offset)));
 	}
 
 }

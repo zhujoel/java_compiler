@@ -211,6 +211,8 @@ public class DeclClass extends AbstractDeclClass {
 		
 		// Passe 2 : on génère le corps des méthodes
 		// on donne le className pour générer le bon label
+		compiler.activateStoring();
 		this.methods.codeGenListMethod(compiler, this.className);
+		compiler.deactivateStoring();
 	}
 }

@@ -307,7 +307,7 @@ public class Identifier extends AbstractIdentifier {
     }
 	
 	@Override
-	protected void codeGenReturn(IMAProgram ima) {
-		ima.addInstruction(new RTS());
+	protected void codeGenReturn(DecacCompiler compiler) {
+		compiler.addInstruction(new RTS());
 	}
 }

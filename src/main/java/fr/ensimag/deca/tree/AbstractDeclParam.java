@@ -41,7 +41,7 @@ public abstract class AbstractDeclParam extends Tree{
 	 * @param compiler
 	 * @param offset numéro du registre à push
 	 */
-	public abstract void codeGenDeclParamIn(IMAProgram ima, int offset);
-	public abstract void codeGenDeclParamOut(IMAProgram ima, int offset);
+	public abstract void codeGenDeclParamIn(DecacCompiler compiler, int offset);
+	public abstract void codeGenDeclParamOut(DecacCompiler compiler, int offset);
 
 }

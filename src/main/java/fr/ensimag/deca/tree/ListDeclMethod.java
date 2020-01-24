@@ -21,7 +21,6 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod>{
 	}
 	
 	public void codeGenListMethod(DecacCompiler compiler, AbstractIdentifier className) {
-		
 		for (AbstractDeclMethod m : getList()) {
 			m.codeGenDeclMethod(compiler, className);
 		}
