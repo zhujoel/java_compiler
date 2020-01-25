@@ -2,9 +2,9 @@
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 5(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 6(GB)
 ; Main Function
 ; Test pour savoir si la pile est pleine
 	TSTO #4
@@ -12,9 +12,29 @@
 	ADDSP #4
 ; Declaration des variables
 	LOAD #1, R2
-	STORE R2, 3(GB)
+	STORE R2, 7(GB)
 	LOAD #0, R2
-	STORE R2, 4(GB)
+	STORE R2, 8(GB)
 ; Beginning of main instructions:
 	HALT
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
 ; end main program

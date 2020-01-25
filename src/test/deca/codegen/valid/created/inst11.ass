@@ -14,4 +14,24 @@
 ; Beginning of main instructions:
 	LOAD #1, R2
 	HALT
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
 ; end main program

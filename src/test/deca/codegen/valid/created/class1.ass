@@ -4,15 +4,21 @@
 	LOAD #null, R0
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 4(GB)
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
-	STORE R0, 3(GB)
+	STORE R0, 6(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 4(GB)
+	STORE R0, 9(GB)
 init.A:
 	TSTO #0
-	BOV pile_pleine
+	BOV tas_plein
+	NEW #0, R2
+	RTS
+	PUSH R2
+init.A:
+	TSTO #0
+	BOV tas_plein
 	NEW #0, R2
 	RTS
 ; Main Function
@@ -22,5 +28,26 @@ init.A:
 	ADDSP #2
 ; Declaration des variables
 ; Beginning of main instructions:
+	POP R2
 	HALT
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
 ; end main program
