@@ -50,5 +50,5 @@ public abstract class AbstractInst extends Tree {
      * @param compiler
      * @param className
      */
-    protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className) {}
+    protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv) {}
 }

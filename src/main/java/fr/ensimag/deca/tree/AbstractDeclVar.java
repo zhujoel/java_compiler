@@ -40,5 +40,5 @@ public abstract class AbstractDeclVar extends Tree {
      * @param compiler
      * @param cptLB Compteur de la base locale
      */
-    protected abstract void codeGenDeclVarLocale(DecacCompiler compiler, int cptLB);
+    protected abstract void codeGenDeclVarLocale(DecacCompiler compiler, int cptLB, EnvironmentExp localEnv);
 }

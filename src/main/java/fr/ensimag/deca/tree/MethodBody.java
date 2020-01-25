@@ -64,8 +64,8 @@ public class MethodBody extends AbstractMethodBody {
 	}
 
 	@Override
-	public void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className) {
-		this.decls.codeGenListDeclVarLocale(compiler);
-		//this.insts.codeGenListInst(compiler, className);
+	public void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv) {
+		this.decls.codeGenListDeclVarLocale(compiler, localEnv);
+		this.insts.codeGenListInst(compiler, className, localEnv);
 	}
 }

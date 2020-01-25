@@ -1,10 +1,7 @@
 class P{
 	int x;
-	void move(){
-		int a = 4;
-		int b = 3;
-		int c;
-		bool d;
+	void move(int b){
+		this.x = 5;
 	}
 }
 

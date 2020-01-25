@@ -5,7 +5,6 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * List of declarations (e.g. int x; float y,z).
@@ -53,11 +52,11 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     /**
      * Déclaration de variables dans une méthode
      */
-    public void codeGenListDeclVarLocale(DecacCompiler compiler) {
+    public void codeGenListDeclVarLocale(DecacCompiler compiler, EnvironmentExp localEnv) {
     	compiler.addComment("Declaration des variables locales");
     	int cptLB = 1;
     	for(AbstractDeclVar i : getList()) {
-    		i.codeGenDeclVarLocale(compiler, cptLB++);
+    		i.codeGenDeclVarLocale(compiler, cptLB++, localEnv);
     	}
     }
 

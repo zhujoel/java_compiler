@@ -14,6 +14,7 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -131,21 +132,17 @@ public class DeclVar extends AbstractDeclVar {
 	}
 	
 
-    protected void codeGenDeclVarLocale(DecacCompiler compiler, int cptLB) {
-    	
-    	// On défini un nouveau environnement pour les variables locales
-    	EnvironmentExp localEnv = new EnvironmentExp(compiler.getEnvironmentExp());
+    protected void codeGenDeclVarLocale(DecacCompiler compiler, int cptLB, EnvironmentExp localEnv) {
 		
 		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
 		VariableDefinition varDef = new VariableDefinition(this.type.getType(), varName.getLocation());
 		varDef.setOperand(new RegisterOffset(cptLB++, Register.LB));
 		try {
-			compiler.getEnvironmentExp().declareOrSet(varName.getName(), varDef);
+			localEnv.declareOrSet(varName.getName(), varDef);
 		}
 		catch(DoubleDefException e) {
 			e.printStackTrace();
 		}
-		
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg = initialization.codeGenInit(compiler, this.type.getType());
 		compiler.addInstruction(new STORE(reg, varDef.getOperand()));

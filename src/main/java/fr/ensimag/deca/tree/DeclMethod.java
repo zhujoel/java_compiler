@@ -172,6 +172,9 @@ public class DeclMethod extends AbstractDeclMethod {
 	
 	@Override
 	protected void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className) {
+    	// On défini un nouveau environnement pour les variables locales
+    	EnvironmentExp localEnv = new EnvironmentExp(compiler.getEnvironmentExp());
+		
 		//bloc de début de méthode
 		compiler.addIMABloc();
 		
@@ -180,9 +183,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addLabel(methLabel);
 		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
 		
-		this.params.codeGenListParamIn(compiler);
+		this.params.codeGenListParamIn(compiler, localEnv);
 		
-		this.corps.codeGenMethodBody(compiler, className);
+		this.corps.codeGenMethodBody(compiler, className, localEnv);
 
 		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size())));
 		
@@ -192,7 +195,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
 		compiler.addLabel(methLabelFin);
 
-		this.params.codeGenListParamOut(compiler);
+		this.params.codeGenListParamOut(compiler, localEnv);
 		
 		
 		this.returnType.codeGenReturn(compiler);
