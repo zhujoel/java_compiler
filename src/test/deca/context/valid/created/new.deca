@@ -1,0 +1,6 @@
+Class A {
+	protected int a;
+}
+{
+	A b = new A()
+}

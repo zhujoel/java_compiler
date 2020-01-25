@@ -1,0 +1,37 @@
+; start main program
+; Main program
+; On stocke la valeur "null" à la première case de la pile.
+	LOAD #null, R0
+	STORE R0, 1(GB)
+<<<<<<< HEAD:src/test/deca/codegen/valid/created/inst5.ass
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main Function
+=======
+; Beginning of main instructions:
+>>>>>>> e267ff4444b053d28c9367a60da5857b9404eda1:src/test/deca/syntax/valid/created/ifelse.ass
+; Test pour savoir si la pile est pleine
+	TSTO #2
+	BOV pile_pleine
+	ADDSP #2
+; Declaration des variables
+<<<<<<< HEAD:src/test/deca/codegen/valid/created/inst5.ass
+; Beginning of main instructions:
+=======
+; Instructions
+; Début du if_1
+>>>>>>> e267ff4444b053d28c9367a60da5857b9404eda1:src/test/deca/syntax/valid/created/ifelse.ass
+; >
+	LOAD #5, R2
+	LOAD #2, R3
+	CMP R3, R2
+	BGT if_1
+if_1:
+	WSTR "if boucle"
+	WSTR "if boucle2"
+	BRA endif_1
+else_1:
+	WSTR "else boucle"
+endif_1:
+	HALT
+; end main program
