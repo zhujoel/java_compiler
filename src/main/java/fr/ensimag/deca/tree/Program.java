@@ -83,8 +83,6 @@ public class Program extends AbstractProgram {
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-
         compiler.addComment("Class Declaration");
     	classes.codeGenListClass(compiler);
         compiler.addComment("Main Function");
@@ -92,7 +90,7 @@ public class Program extends AbstractProgram {
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
         compiler.appendAllBlocs();
-        ErrorManager.addErrorLabels(compiler);
+        //ErrorManager.addErrorLabels(compiler);
     }
 
     @Override

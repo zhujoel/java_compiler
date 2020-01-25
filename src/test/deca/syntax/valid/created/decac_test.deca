@@ -1,6 +1,10 @@
 class P{
 	int x;
-	void move(int a, int b){
+	void move(){
+		int a = 4;
+		int b = 3;
+		int c;
+		bool d;
 	}
 }
 

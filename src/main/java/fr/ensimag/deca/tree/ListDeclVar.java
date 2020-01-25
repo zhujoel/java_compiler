@@ -43,7 +43,7 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     }
 
     public void codeGenListDeclVar(DecacCompiler compiler) {
-    	// On prend met le pointeur au bon endroit
+    	// On met le pointeur au bon endroit
     	compiler.addComment("Declaration des variables");
         for (AbstractDeclVar i : getList()) {
             i.codeGenDeclVar(compiler);
@@ -54,8 +54,10 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
      * Déclaration de variables dans une méthode
      */
     public void codeGenListDeclVarLocale(DecacCompiler compiler) {
+    	compiler.addComment("Declaration des variables locales");
+    	int cptLB = 1;
     	for(AbstractDeclVar i : getList()) {
-    		i.codeGenDeclVar(compiler);
+    		i.codeGenDeclVarLocale(compiler, cptLB++);
     	}
     }
 
