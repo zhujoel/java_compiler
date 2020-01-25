@@ -54,6 +54,10 @@ public class IMAProgram {
         lines.addFirst(l);
     }
 
+    public void addSecond(Instruction i) {
+        lines.add(1, new Line(i));
+    }
+    
     /**
      * Display the program in a textual form readable by IMA to stream s.
      */

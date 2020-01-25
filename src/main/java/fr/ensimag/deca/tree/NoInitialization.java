@@ -9,7 +9,11 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  * Absence of initialization (e.g. "int x;" as opposed to "int x =
@@ -55,6 +59,15 @@ public class NoInitialization extends AbstractInitialization {
     protected GPRegister codeGenInit(DecacCompiler compiler, Type type) {
     	// Pour l'instant on met n'importe quoi dans la case lors de la non-initialisation.
     	GPRegister reg = Register.getR(0);
+    	if(type == compiler.getType("int") || type == compiler.getType("bool")) {
+        	compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
+    	}
+    	else if(type == compiler.getType("float")){
+        	compiler.addInstruction(new LOAD(new ImmediateFloat(0), Register.R0));
+    	}
+    	else {
+    		compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    	}
     	return reg;
     }
 }

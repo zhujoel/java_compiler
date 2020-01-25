@@ -8,6 +8,8 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -53,12 +55,37 @@ public class Assign extends AbstractBinaryExpr {
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
-		Identifier leftOp = (Identifier)getLeftOperand();
-		ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
-        compiler.addInstruction(new STORE(reg, expDef.getOperand()));
-        compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+		if(getLeftOperand() instanceof Identifier) {
+			Identifier leftOp = (Identifier)getLeftOperand();
+			ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
+	        compiler.addInstruction(new STORE(reg, expDef.getOperand()));
+	        compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+		}
+		else if(getLeftOperand() instanceof Selection){
+			Selection leftOp = (Selection)getLeftOperand();
+			leftOp.codeGenReg(compiler);
+		}
 	}
-
+	
+	@Override
+	protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className) {
+		GPRegister reg = getRightOperand().codeGenReg(compiler);
+		if(getLeftOperand() instanceof Identifier) {
+			Identifier leftOp = (Identifier)getLeftOperand();
+			ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
+	        compiler.addInstruction(new STORE(reg, expDef.getOperand()));
+	        compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+		}
+		else if(getLeftOperand() instanceof Selection){
+			Selection leftOp = (Selection)getLeftOperand();
+			GPRegister reg2 = leftOp.codeGenReg(compiler, className);
+			int offset = compiler.getEnvironmentType().getAttributeOffset(className, leftOp.getIdent());
+			compiler.addInstruction(new STORE(reg, new RegisterOffset(offset, reg2)));
+			compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+			compiler.getRegManager().freeRegistre(reg2.getNumber(), compiler);
+		}
+	}
+	
 	@Override
 	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
 		// Normalement cette fonction n'est pas appelée.

@@ -92,7 +92,7 @@ public class Program extends AbstractProgram {
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
         compiler.appendAllBlocs();
-        //ErrorManager.addErrorLabels(compiler);
+        ErrorManager.addErrorLabels(compiler);
     }
 
     @Override

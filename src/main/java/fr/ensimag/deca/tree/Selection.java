@@ -12,6 +12,10 @@ import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Déclaration d'une selection (i.e, on prend l'attribut d'un objet).
@@ -69,10 +73,25 @@ public class Selection extends AbstractLValue {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		GPRegister reg = this.expr.codeGenReg(compiler);
+
+		return reg;
+	}
+
+	protected GPRegister codeGenReg(DecacCompiler compiler, AbstractIdentifier className) {
+		GPRegister reg = this.expr.codeGenReg(compiler);
+		int offset = compiler.getEnvironmentType().getAttributeOffset(className, this.ident);
+		GPRegister regLibre = compiler.getRegManager().getRegistreLibre(compiler);
+		compiler.addInstruction(new LOAD(new RegisterOffset(offset, reg), regLibre));
+		compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+		return regLibre;
+	}
+	
+	public AbstractIdentifier getIdent() {
+		return this.ident;
 	}
 
 }
