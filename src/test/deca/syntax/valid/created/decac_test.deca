@@ -1,7 +1,6 @@
 class P{
-	int x;
-	void move(int b){
-		int c = 5;
+	bool equals(Object o){
+
 	}
 }
 
