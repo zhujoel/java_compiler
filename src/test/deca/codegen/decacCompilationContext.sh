@@ -1,0 +1,30 @@
+#! /bin/sh
+
+decac -a ../context/valid/created/affectation.deca
+decac -a ../context/valid/created/bin-op-simple.deca
+decac -a ../context/valid/created/bonne-signature-redefinition.deca
+decac -a ../context/valid/created/champ-extends.deca
+decac -a ../context/valid/created/class-meth-field.deca
+decac -a ../context/valid/created/class-remplie.deca
+decac -a ../context/valid/created/comparaisons.deca
+decac -a ../context/valid/created/convfloat.deca
+decac -a ../context/valid/created/convfloat-simple.deca
+decac -a ../context/valid/created/empty-classe.deca
+decac -a ../context/valid/created/hello-world.deca
+decac -a ../context/valid/created/ifthenelse.deca
+decac -a ../context/valid/created/init-champs-type-herite.deca
+decac -a ../context/valid/created/int-in-float.deca
+decac -a ../context/valid/created/method-complete-void.deca
+decac -a ../context/valid/created/method-multiple-params.deca
+decac -a ../context/valid/created/method-simple.deca
+decac -a ../context/valid/created/no-init.deca
+decac -a ../context/valid/created/op-bool.deca
+decac -a ../context/valid/created/redeclaration.deca
+decac -a ../context/valid/created/redefinition-field.deca
+decac -a ../context/valid/created/redef-method-chgt-type.deca
+decac -a ../context/valid/created/selection-simple.deca
+decac -a ../context/valid/created/selection-this.deca
+decac -a ../context/valid/created/selection-this-not-implicit.deca
+decac -a ../context/valid/created/simple-cast-class.deca
+decac -a ../context/valid/created/unary-minus.deca
+decac -a ../context/valid/created/while.deca
