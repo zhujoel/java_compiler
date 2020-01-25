@@ -121,7 +121,6 @@ public class CompilerOptions {
                         try {
                             x = Integer.parseInt(args[i + 1]);
                             if (x >= 4 && x <= 16) {// 4 <= X <= 16
-                                //  System.out.println("X = " + x);
                                 registers = true;
                                 x = x - 1;
                             } else {
