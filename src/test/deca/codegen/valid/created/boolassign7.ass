@@ -1,0 +1,21 @@
+; start main program
+; Class Declaration
+; Code de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main Function
+; Test pour savoir si la pile est pleine
+	TSTO #3
+	BOV pile_pleine
+	ADDSP #3
+; Declaration des variables
+; >=
+	LOAD #0, R2
+	LOAD #1, R3
+	CMP R2, R3
+	STORE R3, 3(GB)
+; Beginning of main instructions:
+	HALT
+; end main program

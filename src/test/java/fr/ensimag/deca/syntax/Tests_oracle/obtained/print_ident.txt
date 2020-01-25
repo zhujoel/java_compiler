@@ -1,13 +1,23 @@
 `> Program
    +> ListDeclClass [List with 0 elements]
    `> Main
-      +> ListDeclVar [List with 1 elements]
+      +> ListDeclVar [List with 2 elements]
+      |  []> DeclVar
+      |  ||  +> Identifier (int)
+      |  ||  +> Identifier (a)
+      |  ||  `> Initialization
+      |  ||     `> Int (5)
       |  []> DeclVar
       |      +> Identifier (int)
-      |      +> Identifier (a)
+      |      +> Identifier (b)
       |      `> Initialization
-      |         `> Int (5)
-      `> ListInst [List with 1 elements]
+      |         `> Int (6)
+      `> ListInst [List with 2 elements]
          []> Print
-             `> ListExpr [List with 1 elements]
+         ||  `> ListExpr [List with 2 elements]
+         ||     []> Identifier (a)
+         ||     []> Identifier (b)
+         []> Println
+             `> ListExpr [List with 2 elements]
                 []> Identifier (a)
+                []> Identifier (b)
