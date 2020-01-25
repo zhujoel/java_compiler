@@ -135,8 +135,6 @@ public class DeclField extends AbstractDeclField {
 			e.printStackTrace();
 		}
 		
-		compiler.getStackManager().subStackCpt();
-				
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg1 = initialization.codeGenInit(compiler, this.type.getType());
 		compiler.addInstruction(new STORE(reg1, varDef.getOperand()));

@@ -17,6 +17,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
@@ -181,13 +182,14 @@ public class DeclMethod extends AbstractDeclMethod {
 		// label du corps de la méthode
 		Label methLabel = new Label("code."+className.getName()+"."+this.methName.getName().getName());
 		compiler.addLabel(methLabel);
-		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
 		
 		this.params.codeGenListParamIn(compiler, localEnv);
 		
 		this.corps.codeGenMethodBody(compiler, className, localEnv);
-
-		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size())));
+		
+		compiler.addSecond(new ADDSP(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
+		compiler.addSecond(new BOV(ErrorManager.tabLabel[0]));
+		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
 		
 		// bloc de fin de méthode
 		compiler.addIMABloc();

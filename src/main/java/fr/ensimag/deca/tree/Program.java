@@ -93,9 +93,10 @@ public class Program extends AbstractProgram {
         compiler.addComment("Main Function");
         main.codeGenMain(compiler);
 
-        compiler.addFirst(new ADDSP(compiler.getStackManager().getStackCpt()));    	
+        int d2 = compiler.getStackManager().getStackCpt()-classes.getNbDeclField();
+        compiler.addFirst(new ADDSP(d2));
         compiler.addFirst(new BOV(ErrorManager.tabLabel[0]));
-        compiler.addFirst(new TSTO(compiler.getStackManager().getStackCpt()+2));
+        compiler.addFirst(new TSTO(d2+2));
     	compiler.addFirst("Test pour savoir si la pile est pleine");
 
 

@@ -21,4 +21,6 @@ public abstract class AbstractMethodBody extends Tree{
 	 * @param compiler
 	 */
 	public abstract void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv);
+	
+	public abstract int getNbVarLocal();
 }

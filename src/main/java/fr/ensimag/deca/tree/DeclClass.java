@@ -220,4 +220,9 @@ public class DeclClass extends AbstractDeclClass {
 		this.methods.codeGenListMethod(compiler, this.className);
 		compiler.deactivateStoring();
 	}
+
+	@Override
+	public int getFieldNb() {
+		return this.fields.getList().size();
+	}
 }

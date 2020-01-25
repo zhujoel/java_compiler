@@ -57,5 +57,10 @@ public class MethodAsmBody extends AbstractMethodBody{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public int getNbVarLocal() {
+		return 0;
+	}
 
 }

@@ -1,9 +1,10 @@
 class P{
 	int x;
 	void move(int b){
-		this.x = 5;
+		int c = 5;
 	}
 }
 
 {
+	int x = 5;
 }

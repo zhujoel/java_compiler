@@ -76,4 +76,12 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
             i.codeGenDeclClass(compiler);
         }  
     }
+    
+    public int getNbDeclField() {
+    	int i = 0;
+    	for(AbstractDeclClass c : this.getList()) {
+    		i += c.getFieldNb();
+    	}
+    	return i;
+    }
 }

@@ -68,4 +68,9 @@ public class MethodBody extends AbstractMethodBody {
 		this.decls.codeGenListDeclVarLocale(compiler, localEnv);
 		this.insts.codeGenListInst(compiler, className, localEnv);
 	}
+
+	@Override
+	public int getNbVarLocal() {
+		return this.decls.getList().size();
+	}
 }
