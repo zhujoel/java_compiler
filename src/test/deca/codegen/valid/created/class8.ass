@@ -5,7 +5,6 @@
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
-code.Object.equals:
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
 	STORE R0, 3(GB)
@@ -13,6 +12,11 @@ code.Object.equals:
 	STORE R0, 4(GB)
 	LOAD code.A.methA, R0
 	STORE R0, 5(GB)
+init.A:
+	TSTO #0
+	BOV pile_pleine
+	NEW #0, R2
+	RTS
 ; Code de la table des méthodes de B
 	LEA 3(GB), R0
 	STORE R0, 6(GB)
@@ -22,6 +26,11 @@ code.Object.equals:
 	STORE R0, 8(GB)
 	LOAD code.B.methB, R0
 	STORE R0, 9(GB)
+init.B:
+	TSTO #0
+	BOV pile_pleine
+	NEW #0, R3
+	RTS
 ; Code de la table des méthodes de C
 	LEA 6(GB), R0
 	STORE R0, 10(GB)
@@ -31,6 +40,11 @@ code.Object.equals:
 	STORE R0, 12(GB)
 	LOAD code.C.methB, R0
 	STORE R0, 13(GB)
+init.C:
+	TSTO #0
+	BOV pile_pleine
+	NEW #0, R4
+	RTS
 ; Code de la table des méthodes de D
 	LEA 6(GB), R0
 	STORE R0, 14(GB)
@@ -40,33 +54,45 @@ code.Object.equals:
 	STORE R0, 16(GB)
 	LOAD code.D.methB, R0
 	STORE R0, 17(GB)
+init.D:
+	TSTO #0
+	BOV pile_pleine
+	NEW #0, R5
+	RTS
 ; Main Function
-; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
 	TSTO #2
 	BOV pile_pleine
 	ADDSP #2
 ; Declaration des variables
-; Instructions
+; Beginning of main instructions:
 	HALT
-pile_pleine:
-	WSTR "Erreur : Pile pleine."
-	WNL
-	ERROR
-dereferencement_null:
-	WSTR "Erreur : dereferencement null."
-	WNL
-	ERROR
-tas_plein:
-	WSTR "Erreur : Tas plein."
-	WNL
-	ERROR
-debordement:
-	WSTR "Erreur : debordement durant une operation arithmétique"
-	WNL
-	ERROR
-io_error:
-	WSTR "Erreur : input ou output"
-	WNL
-	ERROR
+code.A.methA:
+	TSTO #0
+	BOV pile_pleine
+; Sauvegarde des registres
+fin.A.methA:
+; Restauration des registres
+	RTS
+code.B.methB:
+	TSTO #0
+	BOV pile_pleine
+; Sauvegarde des registres
+fin.B.methB:
+; Restauration des registres
+	RTS
+code.C.methB:
+	TSTO #0
+	BOV pile_pleine
+; Sauvegarde des registres
+fin.C.methB:
+; Restauration des registres
+	RTS
+code.D.methB:
+	TSTO #0
+	BOV pile_pleine
+; Sauvegarde des registres
+fin.D.methB:
+; Restauration des registres
+	RTS
 ; end main program

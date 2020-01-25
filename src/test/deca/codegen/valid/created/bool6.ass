@@ -5,9 +5,7 @@
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
-code.Object.equals:
 ; Main Function
-; Beginning of main instructions:
 ; Test pour savoir si la pile est pleine
 	TSTO #3
 	BOV pile_pleine
@@ -15,7 +13,7 @@ code.Object.equals:
 ; Declaration des variables
 	LOAD #0, R2
 	STORE R2, 3(GB)
-; Instructions
+; Beginning of main instructions:
 ; Début du if_1
 ; ||
 ; &&
@@ -33,24 +31,4 @@ else_1:
 	WNL
 endif_1:
 	HALT
-pile_pleine:
-	WSTR "Erreur : Pile pleine."
-	WNL
-	ERROR
-dereferencement_null:
-	WSTR "Erreur : dereferencement null."
-	WNL
-	ERROR
-tas_plein:
-	WSTR "Erreur : Tas plein."
-	WNL
-	ERROR
-debordement:
-	WSTR "Erreur : debordement durant une operation arithmétique"
-	WNL
-	ERROR
-io_error:
-	WSTR "Erreur : input ou output"
-	WNL
-	ERROR
 ; end main program
