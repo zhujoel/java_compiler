@@ -14,7 +14,12 @@ import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Line;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Deca complete program (class definition plus main block)
@@ -87,10 +92,18 @@ public class Program extends AbstractProgram {
     	classes.codeGenListClass(compiler);
         compiler.addComment("Main Function");
         main.codeGenMain(compiler);
+
+        compiler.addFirst(new ADDSP(compiler.getStackManager().getStackCpt()));    	
+        compiler.addFirst(new BOV(ErrorManager.tabLabel[0]));
+        compiler.addFirst(new TSTO(compiler.getStackManager().getStackCpt()+2));
+    	compiler.addFirst("Test pour savoir si la pile est pleine");
+
+
+        
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
         compiler.appendAllBlocs();
-        //ErrorManager.addErrorLabels(compiler);
+        ErrorManager.addErrorLabels(compiler);
     }
 
     @Override
