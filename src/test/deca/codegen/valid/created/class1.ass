@@ -1,3 +1,7 @@
+; Test pour savoir si la pile est pleine
+	TSTO #7
+	BOV pile_pleine
+	ADDSP #5
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -10,17 +14,34 @@
 	STORE R0, 3(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 4(GB)
-init.A:
-	TSTO #0
-	BOV pile_pleine
-	NEW #0, R2
-	RTS
 ; Main Function
-; Test pour savoir si la pile est pleine
-	TSTO #2
-	BOV pile_pleine
-	ADDSP #2
 ; Declaration des variables
 ; Beginning of main instructions:
 	HALT
+code.Object.equals:
+init.A:
+	TSTO #0
+	BOV tas_plein
+	NEW #0, R2
+	RTS
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
 ; end main program

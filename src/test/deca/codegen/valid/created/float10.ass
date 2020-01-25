@@ -1,3 +1,7 @@
+; Test pour savoir si la pile est pleine
+	TSTO #7
+	BOV pile_pleine
+	ADDSP #5
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -6,10 +10,6 @@
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
 ; Main Function
-; Test pour savoir si la pile est pleine
-	TSTO #4
-	BOV pile_pleine
-	ADDSP #4
 ; Declaration des variables
 	LOAD #0x1.266666p1, R2
 	STORE R2, 3(GB)
@@ -26,4 +26,25 @@
 	LOAD 3(GB), R1
 	WFLOAT
 	HALT
+code.Object.equals:
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
 ; end main program
