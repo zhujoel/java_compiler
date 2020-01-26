@@ -1,0 +1,9 @@
+#include "inclu_mult_suite1.deca"
+#include "inclu_mult_suite2.deca"
+
+class B{
+
+}
+{
+	print("yo");
+}

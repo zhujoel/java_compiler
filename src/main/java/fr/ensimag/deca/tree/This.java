@@ -21,7 +21,8 @@ import fr.ensimag.ima.pseudocode.GPRegister;
  */
 public class This extends AbstractExpr {
 	
-	// indique si la déclaration de this est explicit ou pas
+	// indique si la déclaration de this est explicit ou pas (e.g. si il n'y a pas d'ambiguité
+	// alors on a pas forcément besoin de this pour désigner l'attr/methode de classe)
 	private boolean estExplicit;
 	
 	public This(boolean estExplicit) {
@@ -32,8 +33,12 @@ public class This extends AbstractExpr {
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		if(currentClass == null) {
+			throw new ContextualError("Appel de l'identificateur this hors d'une classe", this.getLocation());
+		}
+		this.setType(currentClass.getType());
+		return this.getType();
+		
 	}
 
 	@Override
@@ -44,8 +49,9 @@ public class This extends AbstractExpr {
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		if(estExplicit) {
+			s.print("this.");
+		}
 	}
 
 	@Override

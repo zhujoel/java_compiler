@@ -1,16 +1,16 @@
 package fr.ensimag.deca.syntax;
 
-import fr.ensimag.deca.CompilerOptions;
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.tree.AbstractProgram;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.CompilerOptions;
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.tree.AbstractProgram;
 
 /**
  * Driver to test the Parser (and lexer).
@@ -20,10 +20,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
  */
 public class ManualTestSynt {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ContextualError {
         // Uncomment the following line to activate debug traces
         // unconditionally for test_synt
-        // Logger.getRootLogger().setLevel(Level.DEBUG);
+        Logger.getRootLogger().setLevel(Level.OFF);
         DecaLexer lex = AbstractDecaLexer.createLexerFromArgs(args);
         CommonTokenStream tokens = new CommonTokenStream(lex);
         DecaParser parser = new DecaParser(tokens);
@@ -38,6 +38,8 @@ public class ManualTestSynt {
             System.exit(1);
         } else {
             prog.prettyPrint(System.out);
+            prog.checkAllLocations();
+            prog.verifyProgram(decacCompiler);
             prog.decompile(System.out);
             prog.codeGenProgram(decacCompiler);
             String assembleur = decacCompiler.displayIMAProgram(); 

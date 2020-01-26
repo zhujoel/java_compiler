@@ -18,7 +18,20 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractIdentifier;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.DeclVar;
+import fr.ensimag.deca.tree.Identifier;
+import fr.ensimag.deca.tree.Initialization;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class assign_string {
 	
@@ -35,9 +48,9 @@ public class assign_string {
                 new ListDeclClass(),
                 new Main(lDecl,linst));
 
-        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("string"));
+        AbstractIdentifier type = new Identifier(compiler.getSymbolTable().create("String"));
         AbstractIdentifier varName = new Identifier(compiler.getSymbolTable().create("s"));
-        Initialization init = new Initialization(new StringLiteral("hello"));
+        Initialization init = new Initialization(new StringLiteral("\"hello\""));
         lDecl.add(new DeclVar(type, varName, init));
 		
         return source;

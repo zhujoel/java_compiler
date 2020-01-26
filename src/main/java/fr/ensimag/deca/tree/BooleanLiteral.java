@@ -1,18 +1,18 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-
-import java.io.PrintStream;
 
 /**
  *
@@ -62,7 +62,7 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     protected GPRegister codeGenReg(DecacCompiler compiler) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	// Le booléen a pour valeur 1
     	if(value) {
     		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
@@ -76,7 +76,7 @@ public class BooleanLiteral extends AbstractExpr {
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	// Le booléen a pour valeur 1
     	if(value) {
     		compiler.addInstruction(new LOAD(new ImmediateInteger(1), reg));
@@ -87,12 +87,11 @@ public class BooleanLiteral extends AbstractExpr {
     }
     
     @Override
-    protected void codeGenPrint(DecacCompiler compiler) {
-    	if(value) {
-            compiler.addInstruction(new WSTR(new ImmediateString("true")));
-    	}
-    	else {
-            compiler.addInstruction(new WSTR(new ImmediateString("false")));
+    protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
+        //compiler.addInstruction(new ImmediateInteger(this.getValue()));
+    	// Le booléen a pour valeur 1
+    	if((value && b) || (!value && !b)) {
+    		compiler.addInstruction(new BRA(label));
     	}
     }
 }

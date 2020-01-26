@@ -1,8 +1,11 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 /**
  * @author gl48
@@ -18,24 +21,15 @@ public class Plus extends AbstractOpArith {
     protected String getOperatorName() {
         return "+";	 
     }
-    
+
+
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-        compiler.addInstruction(new ADD(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
+    protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+        compiler.addInstruction(new ADD(op1, op2));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            //if the noCheck option isn't activated, the line for the test is added 
+            compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
+        }
     }
 
-
-	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-        compiler.addInstruction(new ADD(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
-	}
 }

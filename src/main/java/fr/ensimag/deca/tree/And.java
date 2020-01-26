@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
 
 /**
@@ -19,24 +21,33 @@ public class And extends AbstractOpBool {
     protected String getOperatorName() {
         return "&&";
     }
-    
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-        compiler.addInstruction(new MUL(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-    }
-    
+	
+	 /**
+     * Génère le code pour l'opération booléenne correspondante. Lorsque b vaut vrai,
+     * on jump si le résultat est faux.
+     */
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	// Le AND équivaut à un MUL
-        compiler.addInstruction(new MUL(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
+        //compiler.addInstruction(new CMP(new ImmediateInteger(1), regDroite));
+		
+		Label labFin = new Label("Fin_and_"+ compiler.getRegManager().getNAnd());
+		compiler.getRegManager().addNAnd();
+		
+        if(b) {
+        	this.getLeftOperand().codeGenBool(compiler, labFin, !b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
+        	compiler.addLabel(labFin);
+        }
+        else {
+        	this.getLeftOperand().codeGenBool(compiler, label, b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
+        }
+	}
+
+	@Override
+	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+		// TODO Auto-generated method stub
+		compiler.addInstruction(new MUL(op1, op2));
 	}
 }

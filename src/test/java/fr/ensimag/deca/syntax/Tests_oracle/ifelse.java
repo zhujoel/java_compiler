@@ -18,7 +18,22 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Greater;
+import fr.ensimag.deca.tree.IfThenElse;
+import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListExpr;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Print;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class ifelse {
 	
@@ -38,14 +53,14 @@ public class ifelse {
         AbstractExpr condition = new Greater(new IntLiteral(5), new IntLiteral(2));
         ListInst then = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("if boucle"));
+        then_expr1.add(new StringLiteral("\"if boucle\""));
         ListExpr then_expr2 = new ListExpr();
-        then_expr2.add(new StringLiteral("if boucle2"));
+        then_expr2.add(new StringLiteral("\"if boucle2\""));
         then.add(new Print(false, then_expr1));
         then.add(new Print(false, then_expr2));
         ListInst els = new ListInst();
         ListExpr else_expr = new ListExpr();
-        else_expr.add(new StringLiteral("else boucle"));
+        else_expr.add(new StringLiteral("\"else boucle\""));
         els.add(new Print(false, else_expr));
         linst.add(new IfThenElse(condition, then, els));
 		

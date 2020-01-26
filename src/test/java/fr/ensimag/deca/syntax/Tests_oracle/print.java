@@ -18,7 +18,18 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListExpr;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Println;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class print {
 	
@@ -36,7 +47,7 @@ public class print {
                 new Main(lDecl,linst));
 
         ListExpr lexpr = new ListExpr();
-        lexpr.add(new StringLiteral("Alex le Boss"));
+        lexpr.add(new StringLiteral("\"Alex le Boss\""));
 		linst.add(new Println(false, lexpr));
         
         return source;

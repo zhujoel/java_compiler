@@ -1,15 +1,9 @@
 {
-    int a =  2;
-    while(a < 5){
-        a = a + 1;
-        print(a);
-    }
-    while( a < 10){
-        a = a + 1;
-        print(a);
-    }
-    while(a < 15){
-        a = a + 1;
-        print(a);
-    }
+    bool a = false;
+    bool b = true;
+    int c = 1;
+    a = a && b;
+    b = b || a;
+    print(c);
+    print(b);
 }

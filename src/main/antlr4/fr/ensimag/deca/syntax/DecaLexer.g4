@@ -87,7 +87,8 @@ STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"' ;
 MULTI_LINE_STRING : '"' (STRING_CAR | '\n' | '\\"' | '\\\\')* '"' ;
 
 // Commentaires
-MULTI_LINE_COMMENT : '/*' MULTI_LINE_STRING '*/' { skip() ; } ;
+fragment COMMENT_CAR : .;
+MULTI_LINE_COMMENT : '/*' SEPAR* COMMENT_CAR* SEPAR* '*/' { skip() ; } ;
 MONO_LINE_COMMENT : '//' (~('\n'))* ('\n' | EOF) { skip() ; } ;
 
 // Séparateurs
@@ -95,4 +96,4 @@ SEPAR : ( ' ' | '\t' | '\n' | '\r' ) { skip(); } ;
 
 // Inclusion de fichier
 fragment FILENAME : (LETTER | DIGIT | '.' | '-' | '_')+ ;
-INCLUDE : '#include' (' ')* '"' FILENAME '"' {};
+INCLUDE : '#include' (' ')* '"' FILENAME '"' { doInclude(getText()); };

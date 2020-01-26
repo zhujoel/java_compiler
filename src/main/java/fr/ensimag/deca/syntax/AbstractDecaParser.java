@@ -1,17 +1,21 @@
 package fr.ensimag.deca.syntax;
 
+import java.io.PrintStream;
+
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.Parser;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
+import org.apache.log4j.Logger;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.deca.tree.Tree;
-
-import java.io.PrintStream;
-
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.ParseCancellationException;
-import org.apache.log4j.Logger;
 
 /**
  * The super class of the generated parser. It is extended by the generated
@@ -50,6 +54,9 @@ public abstract class AbstractDecaParser extends Parser {
             }
         } catch (DecaRecognitionException e) {
             e.display(err);
+            return null;
+        } catch (NumberFormatException e){
+            err.append("Underflow/Overflow problem, parsing cancelled.\n");
             return null;
         }
     }

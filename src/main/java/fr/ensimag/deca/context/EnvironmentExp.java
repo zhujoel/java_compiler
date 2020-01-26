@@ -22,10 +22,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
  * @date 01/01/2020
  */
 public class EnvironmentExp {
-    // A FAIRE : implémenter la structure de donnée représentant un
-    // environnement (association nom -> définition, avec possibilité
-    // d'empilement).
-
+	
     EnvironmentExp parentEnvironment;
     
     private HashMap<Symbol, ExpDefinition> env;//Ici je met ExpDefinition et pas Definition car le dictionnaire n'est
@@ -45,6 +42,11 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
+    	if(this.parentEnvironment == null) {
+    		return env.get(key);
+    	} else if (env.get(key) == null) {
+    		return this.parentEnvironment.get(key);
+    	} 
     	return env.get(key);
     }
 
@@ -81,6 +83,8 @@ public class EnvironmentExp {
     	//peut etre a modifier plus tard (voir dans les env parents ?)
     	return env.containsKey(name);
     }
+    
+    
     /**
      * Ajoute la définition la définition associé à un symbol dans l'environnement.
      * Si le symbole existe déjà, change sa définition si les deux définitions sont différentes,
@@ -96,6 +100,10 @@ public class EnvironmentExp {
     		}
     	}
     	env.put(name, def);
+    }
+    
+    public HashMap<Symbol, ExpDefinition> getEnv(){
+    	return this.env;
     }
 
 }

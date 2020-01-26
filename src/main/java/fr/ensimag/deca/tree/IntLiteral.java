@@ -1,18 +1,18 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
-
-import java.io.PrintStream;
 
 /**
  * Integer literal
@@ -62,14 +62,14 @@ public class IntLiteral extends AbstractExpr {
     @Override
     protected GPRegister codeGenReg(DecacCompiler compiler) {
         //compiler.addInstruction(new ImmediateInteger(this.getValue()));
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	compiler.addInstruction(new LOAD(new ImmediateInteger(value), reg));
     	return reg;
     }
     
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	compiler.addInstruction(new LOAD(new ImmediateInteger(value), reg));
     }
     

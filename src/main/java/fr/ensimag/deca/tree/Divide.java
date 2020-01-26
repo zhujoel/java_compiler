@@ -1,8 +1,11 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.DIV;
+import fr.ensimag.ima.pseudocode.instructions.QUO;
 
 /**
  *
@@ -14,31 +17,26 @@ public class Divide extends AbstractOpArith {
         super(leftOperand, rightOperand);
     }
 
-
     @Override
     protected String getOperatorName() {
         return "/";
     }
 
 
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-        compiler.addInstruction(new DIV(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-    }
-
-
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-        compiler.addInstruction(new DIV(regGauche, regDroite));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
+	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+		Type typeLeft = this.getLeftOperand().getType();
+    	Type typeRight = this.getRightOperand().getType();
+    	
+    	// Cas des entiers
+    	if(typeLeft.isInt() && typeRight.isInt()) {
+    		compiler.addInstruction(new QUO(op1, op2));
+    	}
+    	
+    	// Cas des flottants
+    	else if(typeLeft.isFloat() && typeRight.isFloat()) {
+    		compiler.addInstruction(new DIV(op1, op2));;
+    	}
 	}
 
 }

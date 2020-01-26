@@ -10,7 +10,7 @@
              +> ListInst [List with 1 elements]
              |  []> Print
              |      `> ListExpr [List with 1 elements]
-             |         []> StringLiteral (if branch)
+             |         []> StringLiteral ("if branch")
              `> ListInst [List with 1 elements]
                 []> IfThenElse
                     +> Equals
@@ -19,8 +19,8 @@
                     +> ListInst [List with 1 elements]
                     |  []> Print
                     |      `> ListExpr [List with 1 elements]
-                    |         []> StringLiteral (else if branch)
+                    |         []> StringLiteral ("else if branch")
                     `> ListInst [List with 1 elements]
                        []> Print
                            `> ListExpr [List with 1 elements]
-                              []> StringLiteral (else branch)
+                              []> StringLiteral ("else branch")

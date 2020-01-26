@@ -1,0 +1,8 @@
+class A{
+	int a = 3;
+}
+{
+	A obj = new A();
+	int b;
+	b = obj.a;
+}

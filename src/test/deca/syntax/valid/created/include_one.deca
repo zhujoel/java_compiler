@@ -1,0 +1,5 @@
+#include "include_two.deca"
+
+{
+	int a;
+}

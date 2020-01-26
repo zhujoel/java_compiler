@@ -1,16 +1,17 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
-
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
 
 /**
  *
@@ -75,10 +76,10 @@ public class While extends AbstractInst {
     	
     	compiler.addLabel(begin);
     	
-    	condition.codeGenBool(compiler, end, true);
-    	compiler.addComment("Instructions du while_" + compiler.getRegManager().getNWhile());
+    	condition.codeGenBool(compiler, end, false);
+    	//compiler.addComment("Instructions du while_" + compiler.getRegManager().getNWhile());
     	body.codeGenListInst(compiler);
-    	compiler.addComment("Fin Instructions du while_" + compiler.getRegManager().getNWhile());
+    	//compiler.addComment("Fin Instructions du while_" + compiler.getRegManager().getNWhile());
     	compiler.addInstruction(new BRA(begin));
     	compiler.addLabel(end);
     	compiler.getRegManager().addNWhile();

@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import fr.ensimag.deca.CompilerOptions;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -19,7 +20,7 @@ import fr.ensimag.deca.syntax.DecaParser;
  */
 public class TestUltime {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ContextualError  {
         // Uncomment the following line to activate debug traces
         // unconditionally for test_synt
         // Logger.getRootLogger().setLevel(Level.DEBUG);
@@ -36,9 +37,12 @@ public class TestUltime {
         if (prog == null) {
             System.exit(1);
         } else {
+            
+            //prog.decompile(System.out);
+            prog.verifyProgram(decacCompiler);
             prog.prettyPrint(System.out);
-            prog.decompile(System.out);
             prog.codeGenProgram(decacCompiler);
+            System.out.println("\nCode assembleur :\n");
             String assembleur = decacCompiler.displayIMAProgram(); 
             System.out.println(assembleur);
         }

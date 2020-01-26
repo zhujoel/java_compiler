@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.commons.lang.Validate;
 
 /**
@@ -83,5 +84,11 @@ public abstract class TreeList<TreeType extends Tree> extends Tree {
             i.iter(f);
         }
     }
-
+    
+    /**
+     * Met l'élément au début de liste
+     */
+    public void putAtBeginning(TreeType elem) {
+    	this.list.add(0, elem);
+    }
 }

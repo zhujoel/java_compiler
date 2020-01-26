@@ -1,7 +1,9 @@
 package fr.ensimag.deca.context;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,10 +82,6 @@ public class TestClass {
 		assertTrue(classTypeA.isClassOrNull());
 	}
 	
-	@Test
-	public void testClassTypeSameType() {
-		assertTrue(classTypeC.sameType(classTypeB));
-	}
 	
 	@Test
 	public void testClassTypeDefintion() {

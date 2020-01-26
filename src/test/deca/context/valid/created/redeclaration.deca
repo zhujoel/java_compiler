@@ -1,0 +1,8 @@
+class A {
+	int getX() {
+	}
+}
+class B extends A{
+	int getX(){
+	}
+}

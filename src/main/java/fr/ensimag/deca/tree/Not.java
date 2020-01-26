@@ -8,10 +8,6 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.BEQ;
-import fr.ensimag.ima.pseudocode.instructions.BNE;
-import fr.ensimag.ima.pseudocode.instructions.CMP;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 
 /**
@@ -42,27 +38,13 @@ public class Not extends AbstractUnaryExpr {
         return "!";
     }
 
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.addComment(this.getOperatorName());
-    	GPRegister reg = this.getOperand().codeGenReg(compiler);
-    	GPRegister regTemp = compiler.getRegManager().getRegistreLibre();
-        compiler.addInstruction(new LOAD(new ImmediateInteger(1), regTemp));
-        compiler.addInstruction(new SUB(regTemp, reg));
-    }
-    
-	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		compiler.addComment(this.getOperatorName());
-    	GPRegister reg = this.getOperand().codeGenReg(compiler);
-    	GPRegister regTemp = compiler.getRegManager().getRegistreLibre();
-        compiler.addInstruction(new LOAD(new ImmediateInteger(1), regTemp));
-        compiler.addInstruction(new SUB(regTemp, reg));
-        return regTemp;
-	}
 	
-	@Override
 	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		this.getOperand().codeGenBool(compiler, label, !b);
+	}
+
+	@Override
+	protected void codeGenUnary(DecacCompiler compiler, GPRegister reg) {
+		compiler.addInstruction(new SUB(new ImmediateInteger(1), reg));
 	}
 }

@@ -1,6 +1,7 @@
 package fr.ensimag.deca.syntax;
 
 import java.io.IOException;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -14,7 +15,7 @@ public class ManualTestLex {
     // but just throw exception to the user if something goes wrong (=> throws
     // IOException)
     public static void main(String[] args) throws IOException {
-        Logger.getRootLogger().setLevel(Level.DEBUG);
+        Logger.getRootLogger().setLevel(Level.OFF);
         DecaLexer lex = AbstractDecaLexer.createLexerFromArgs(args);
         System.exit(lex.debugTokenStream() ? 1 : 0);
     }

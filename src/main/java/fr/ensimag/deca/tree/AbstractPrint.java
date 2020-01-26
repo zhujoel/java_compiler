@@ -1,15 +1,16 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import java.util.Iterator;
 
 import org.apache.commons.lang.Validate;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
  * Print statement (print, println, ...).
@@ -38,13 +39,20 @@ public abstract class AbstractPrint extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        //throw new UnsupportedOperationException("not yet implemented");
+    	Type t;
+    	
     	//recuperer un iterateur sur arguments (qui est une treelist) 
     	//et parcourir arguments pour appliquer verify a chaque fois
+    	
         Iterator<AbstractExpr> i = arguments.getList().iterator();
         
         while (i.hasNext()) {
-        	i.next().verifyExpr(compiler, localEnv, currentClass);
+        	t = i.next().verifyExpr(compiler, localEnv, currentClass);
+        	if (t.isBoolean()) {
+        		throw new ContextualError("Tentative d'affichage de booleen avec l'instruction " +
+        	(this.printHex ? "printx " : "print "), this.getLocation());
+        		
+        	}
         }
     }
 

@@ -1,8 +1,9 @@
 package fr.ensimag.deca.context;
 
-import fr.ensimag.deca.tree.Location;
-import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
+
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.Location;
 
 /**
  * Definition of a class.
@@ -76,5 +77,58 @@ public class ClassDefinition extends TypeDefinition {
         members = new EnvironmentExp(parent);
         this.superClass = superClass;
     }
+    
+    /**
+     * Chercher recursivement la definition d'un identifier
+     * @param name le symbol de l'identifier
+     * @return true si l'identifier est defini dans l'une des classes parente
+     */
+    public boolean checkFirstSuperDefinition(Symbol name) {
+    	if(this.superClass == null){
+    		return false;
+    	}
+    	return this.superClass.getMembers().isIn(name) || superClass.checkFirstSuperDefinition(name);
+    }
+    
+    /**
+     * Retourne la premier classe en partant de this qui contient l'identifier name
+     * @param name le symbole de l'identifier recherché
+     * @return la ClassDefinition si elle existe et null sinon
+     */
+    public ClassDefinition getFirstSuperClassWithDef(Symbol name) {
+    	if(superClass != null && this.superClass.getMembers().isIn(name)) {
+    		return superClass;
+    	}else if(superClass != null){
+    		return superClass.getFirstSuperClassWithDef(name);
+    	}else {
+    		return null;
+    	}
+    	
+    }
+    
+    /**
+     * On remonte recursivement la chaine de parent pour voir si l'un d'entre eux est egal à c
+     * @param c le potentiel parent
+     * @return true si l'une des classe parent est identique à c false sinon
+     */
+    public boolean hasForParent(ClassDefinition c) {
+    	if (superClass != null){
+    		return c.getType().sameType(this.getType()) || superClass.hasForParent(c);
+    	}else{
+    		return c.getType().sameType(this.getType()) ;
+    	}
+    }
+    
+    /**
+     * Indique si la définition à une classe mère
+     * @return vrai si oui, sinon faux
+     */
+    public boolean hasSuperclass() {
+    	if(this.superClass != null) {
+    		return true;
+    	}
+    	return false;
+    }
+    
     
 }

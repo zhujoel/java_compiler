@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
 import fr.ensimag.ima.pseudocode.instructions.SHR;
 
@@ -16,21 +18,38 @@ public class Or extends AbstractOpBool {
         super(leftOperand, rightOperand);
     }
 
+    
     @Override
     protected String getOperatorName() {
         return "||";
     }
 
+
 	@Override
-	protected GPRegister codeGenReg(DecacCompiler compiler) {
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		compiler.addComment(this.getOperatorName());
-    	GPRegister regGauche = this.getLeftOperand().codeGenReg(compiler);
-    	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
-    	// Le OR équivaut à un ADD décalé vers la droite (dans le cas 0x0001, le décalage à droite n'est pas fait)
-        compiler.addInstruction(new ADD(regGauche, regDroite));
-        compiler.addInstruction(new SHR(regGauche));
-        compiler.getRegManager().freeRegistre(regDroite.getNumber());
-        return regGauche;
+        //compiler.addInstruction(new CMP(new ImmediateInteger(1), regDroite));
+		
+		Label labFin = new Label("Fin_or_"+ compiler.getRegManager().getNOr());
+		compiler.getRegManager().addNOr();
+		
+        if(b) {
+        	this.getLeftOperand().codeGenBool(compiler, label, b);
+        	this.getRightOperand().codeGenBool(compiler, label, !b); 
+        }
+        else {
+        	this.getLeftOperand().codeGenBool(compiler, labFin, !b);
+        	this.getRightOperand().codeGenBool(compiler, label, b);
+        	compiler.addLabel(labFin);
+        }
+        //return regGauche;
 	}
 
+
+	@Override
+	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+		compiler.addInstruction(new ADD(op1, op2));
+	    compiler.addInstruction(new SHR(op2));
+		
+	}
 }

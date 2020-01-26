@@ -8,6 +8,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -31,16 +32,28 @@ public class Selection extends AbstractLValue {
 		this.expr = expr;
 		this.ident = ident;
 	}
+	
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Type t = expr.verifyExpr(compiler, localEnv, currentClass);
+		
+		//On controle que l'on fait la selection sur une classe
+		ClassDefinition cDef = t.asClassType(t.getName() + " n'est pas une classe", this.expr.getLocation()).getDefinition();
+		Type t2 = ident.verifyExpr(compiler, cDef.getMembers(), currentClass);
+		FieldDefinition fDef = ident.getDefinition().asFieldDefinition(ident.getName() + " n'est pas un champ", ident.getLocation());
+		if (fDef.getVisibility() == Visibility.PROTECTED && !cDef.hasForParent(currentClass)) {
+			throw new ContextualError(ident.getName() + " est PROTECTED", expr.getLocation());
+		}
+		this.setType(t2);
+		return this.getType();
 	}
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		this.expr.decompile(s);
+		this.ident.decompile(s);
 		
 	}
 

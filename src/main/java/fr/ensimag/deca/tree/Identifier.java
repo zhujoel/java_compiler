@@ -182,21 +182,17 @@ public class Identifier extends AbstractIdentifier {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
     	
-    	
-    	//POUR UNE VARIABLE
-    	//TODO a refacto !!! c est pas top la
     	Symbol s = this.getName();
-    	if(!localEnv.isIn(s)) {
-    		throw new ContextualError("Utilisation d'une variable non déclarée", this.getLocation());
-    	}
     	Definition d = localEnv.get(s);
+    	if(d == null) {
+    		throw new ContextualError("Utilisation d'un identificateur non déclarée", this.getLocation());
+    	}
     	
     	//TODO tester si le type existe !
     	this.setType(d.getType());
     	this.setDefinition(d);
     	return this.getType();
     	
-    	//faire pour un field et une class aussi :) :D :X
         
     }
 
@@ -246,25 +242,35 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    /**
+     * Génère le code pour prendre la valeur correspondant à l'indentifier, ainsi que le type,
+     * et renvoie le registre dans lequel la valeur est chargée.
+     */
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
-    	// on récupère la définition du symbol correspondant à l'identifier dans la stack
+		this.setType(compiler.getEnvironmentExp().get(this.getName()).getType());
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
+    	// on récupère la définition du symbole correspondant à l'identifier dans la stack
     	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
     	return reg;	
 	}
 	
+	/**
+	 * Génère le code dans le cas ou l'instruction est juste a; (par exemple)
+	 */
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) {
-    	GPRegister reg = compiler.getRegManager().getRegistreLibre();
+    	GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
     	// on récupère la définition du symbol correspondant à l'identifier dans la stack
     	ExpDefinition expDef = compiler.getEnvironmentExp().get(this.getName());
     	compiler.addInstruction(new LOAD(expDef.getOperand(), reg));
 	}
 	
-	
-	protected void codeGenBool(DecacCompiler compiler,Label label, boolean b) {
+	/**
+	 * Génère le code pour dans le cas ou l'identifier est booléen.
+	 */
+	protected void codeGenBool(DecacCompiler compiler, Label label, boolean b) {
 		GPRegister reg = this.codeGenReg(compiler);
         compiler.addInstruction(new CMP(new ImmediateInteger(1), reg));
         if(b) {
@@ -275,6 +281,9 @@ public class Identifier extends AbstractIdentifier {
         }
 	}
 	
+	/**
+	 * Génère le code pour afficher ce qu'il y a dans l'indentifier.
+	 */
 	@Override
     protected void codeGenPrint(DecacCompiler compiler) {
 		// On doit sauvegarder la valeur dans le registre R1 pour afficher
@@ -287,7 +296,7 @@ public class Identifier extends AbstractIdentifier {
 		if(type.isFloat()) {
 			compiler.addInstruction(new WFLOAT());
 		}
-		else if(type.isBoolean() || type.isInt()) {
+		else if(type.isInt()) {
 			compiler.addInstruction(new WINT());
 		}
 		else if(type.isNull()) {

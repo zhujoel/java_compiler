@@ -1,4 +1,4 @@
 {
 	float a = 5.33;
-	a = (int)(a);
+	int b = (int)(a);
 }

@@ -18,7 +18,23 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Equals;
+import fr.ensimag.deca.tree.GreaterOrEqual;
+import fr.ensimag.deca.tree.Identifier;
+import fr.ensimag.deca.tree.IfThenElse;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListExpr;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Print;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class ifthenelse {
 	
@@ -39,7 +55,7 @@ public class ifthenelse {
         AbstractExpr condition1 = new GreaterOrEqual(new Identifier(compiler.getSymbolTable().create("b")), new Identifier(compiler.getSymbolTable().create("a")));
         ListInst then1 = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("if branch"));
+        then_expr1.add(new StringLiteral("\"if branch\""));
         then1.add(new Print(false, then_expr1));
         
         //boucle else
@@ -48,12 +64,12 @@ public class ifthenelse {
         AbstractExpr condition2 = new Equals(new Identifier(compiler.getSymbolTable().create("a")), new Identifier(compiler.getSymbolTable().create("b")));
         ListInst then2 = new ListInst();
         ListExpr then_expr2 = new ListExpr();
-        then_expr2.add(new StringLiteral("else if branch"));
+        then_expr2.add(new StringLiteral("\"else if branch\""));
         then2.add(new Print(false, then_expr2));
         //    sous boucle else
         ListInst els = new ListInst();
         ListExpr else_expr = new ListExpr();
-        else_expr.add(new StringLiteral("else branch"));
+        else_expr.add(new StringLiteral("\"else branch\""));
         els.add(new Print(false, else_expr));
         
         elsif.add(new IfThenElse(condition2, then2, els));

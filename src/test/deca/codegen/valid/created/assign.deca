@@ -1,5 +1,8 @@
 {
-    int a = 5;
-    float b = 2.4;
-    bool a = true;
+    int a = 0;
+    while(a > 10){
+        a = a + 1;
+        println(a);
+    }
+    println("fin du while");
 }

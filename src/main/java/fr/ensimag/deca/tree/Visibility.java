@@ -8,6 +8,17 @@ package fr.ensimag.deca.tree;
  */
 
 public enum Visibility {
-    PUBLIC,
-    PROTECTED
+	// on leur assigne un string pour un affichage plus sympatique :)
+    PUBLIC("public"),
+    PROTECTED("protected");
+    
+    private String affichage;
+    
+    Visibility(String affichage){
+    	this.affichage = affichage;
+    }
+    
+    public String getAffichage() {
+    	return this.affichage;
+    }
 }

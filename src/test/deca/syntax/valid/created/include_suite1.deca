@@ -1,0 +1,5 @@
+#include "include_suite2.deca"
+
+class A{
+
+}

@@ -5,13 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
-import fr.ensimag.deca.codegen.EnvironmentDefault;
 import fr.ensimag.deca.codegen.RegManager;
+import fr.ensimag.deca.codegen.StackManager;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.context.Type;
@@ -24,6 +25,7 @@ import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.deca.tree.Program;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
@@ -46,14 +48,19 @@ import fr.ensimag.ima.pseudocode.Label;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     private SymbolTable symbolTable;
+    
+    // gère les registres
     private RegManager regManager;
+    // gère la stack
+    private StackManager stackManager;
     
     private EnvironmentType envType;
     
     // représente les variables d'environnement du compiler
     private EnvironmentExp envExp;
     
-
+    // associe une classe avec son emplacement dans le stack
+    private HashMap<Symbol, DAddr> envClass;
     
     /**
      * Portable newline character.
@@ -68,6 +75,8 @@ public class DecacCompiler {
         this.regManager = new RegManager(16);
         this.envType = new EnvironmentType(symbolTable);
         this.envExp = new EnvironmentExp(null);
+        this.envClass = new HashMap<Symbol, DAddr>();
+        this.stackManager = new StackManager();
     }
     
     public DecacCompiler(CompilerOptions compilerOptions, File source,  int nbRegMax) {
@@ -77,6 +86,9 @@ public class DecacCompiler {
         this.symbolTable = new SymbolTable();
         this.regManager = new RegManager(nbRegMax);
         this.envType = new EnvironmentType(symbolTable);
+        this.envExp = new EnvironmentExp(null);
+        this.envClass = new HashMap<Symbol, DAddr>();
+        this.stackManager = new StackManager();
     }
 
     public SymbolTable getSymbolTable() {
@@ -87,12 +99,20 @@ public class DecacCompiler {
     	return this.regManager;
     }
     
+    public StackManager getStackManager() {
+		return stackManager;
+	}
+    
     public EnvironmentType getEnvironmentType() {
     	return this.envType;
     }
     
     public EnvironmentExp getEnvironmentExp() {
     	return this.envExp;
+    }
+    
+    public HashMap<Symbol, DAddr> getEnvironmentClass() {
+    	return this.envClass;
     }
     
     public Type getType(String s) {
@@ -182,8 +202,6 @@ public class DecacCompiler {
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
         String destFile = sourceFile.replace(".deca", ".ass");
-        // DONE! A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // DONE! A FAIRE: fichier .deca.
         
         PrintStream err = System.err;
         PrintStream out = System.out;
@@ -212,6 +230,21 @@ public class DecacCompiler {
             return true;
         }
     }
+    
+    public boolean verify(){
+        String sourceFile = source.getAbsolutePath();
+        PrintStream err = System.err;
+        LOG.debug("Compiling and verifying file " + sourceFile);
+        try{
+            return doVerify(sourceFile, err);
+        }catch(DecacFatalError e){
+        	e.printStackTrace();
+            return true;
+        }catch(LocationException e){
+        	e.display(err);
+            return true;
+        }
+    }
 
     /**
      * Internal function that does the job of compiling (i.e. calling lexer,
@@ -234,8 +267,6 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-        
-        
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
 
@@ -259,6 +290,31 @@ public class DecacCompiler {
         return false;
     }
     
+    /**
+     * Internal function used for the verification (-v) option (i.e. 
+     * calling lexer and verification.
+     *
+     * @param sourceName name of the source (deca) file
+     * @param destName name of the destination (assembly) file
+     * @param out stream to use for standard output (output of decac -p)
+     * @param err stream to use to display compilation errors
+     *
+     * @return true on error
+     */
+    private boolean doVerify(String sourceName,PrintStream err)
+            throws DecacFatalError, LocationException{
+        AbstractProgram prog = doLexingAndParsing(sourceName, err);
+        
+        if (prog == null) {
+            LOG.info("Parsing failed");
+            return true;
+        }
+        assert(prog.checkAllLocations());
+        prog.verifyProgram(this); //decac must stop after doing the verification
+        assert(prog.checkAllDecorations());
+        return false;
+    }
+    
      /**
      * Run the compiler (parse source file, arrête decac après 
      * l’étape de construction de l’arbre, et affiche la décompilation 
@@ -269,8 +325,6 @@ public class DecacCompiler {
     public boolean compileDecompile() {
         String sourceFile = source.getAbsolutePath();
         String destFile = sourceFile.replace(".deca", ".ass");
-        // DONE! A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // DONE! A FAIRE: fichier .deca.
         
         PrintStream err = System.err;
         PrintStream out = System.out;
@@ -324,7 +378,6 @@ public class DecacCompiler {
         assert(prog.checkAllLocations());
         
         
-        prog.verifyProgram(this);
         Program p = (Program) prog;
         p.decompile(out);
         

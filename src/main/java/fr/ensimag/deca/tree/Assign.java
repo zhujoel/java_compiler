@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
@@ -31,7 +32,6 @@ public class Assign extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-    	//TODO gerer les convfloat
         Type type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         this.setType(type1);
         this.setRightOperand(this.getRightOperand().verifyRValue(compiler, localEnv, currentClass, type1));
@@ -46,7 +46,7 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
+		// Normalement cette fonction n'est pas appelée.
 		return null;
 	}
 	
@@ -56,6 +56,13 @@ public class Assign extends AbstractBinaryExpr {
 		Identifier leftOp = (Identifier)getLeftOperand();
 		ExpDefinition expDef = compiler.getEnvironmentExp().get(leftOp.getName());
         compiler.addInstruction(new STORE(reg, expDef.getOperand()));
+        compiler.getRegManager().freeRegistre(reg.getNumber(), compiler);
+	}
+
+	@Override
+	protected void codeGenAssemblyInst(DecacCompiler compiler, DVal op1, GPRegister op2) {
+		// Normalement cette fonction n'est pas appelée.
+		
 	}
 
 }

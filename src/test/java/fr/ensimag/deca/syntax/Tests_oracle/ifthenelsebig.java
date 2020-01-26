@@ -18,7 +18,24 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.syntax.AbstractDecaLexer;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
-import fr.ensimag.deca.tree.*;
+import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Equals;
+import fr.ensimag.deca.tree.Greater;
+import fr.ensimag.deca.tree.IfThenElse;
+import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.deca.tree.ListDeclClass;
+import fr.ensimag.deca.tree.ListDeclVar;
+import fr.ensimag.deca.tree.ListExpr;
+import fr.ensimag.deca.tree.ListInst;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.deca.tree.Lower;
+import fr.ensimag.deca.tree.Main;
+import fr.ensimag.deca.tree.Print;
+import fr.ensimag.deca.tree.Program;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.deca.tree.Tree;
+import fr.ensimag.deca.tree.TreeFunction;
 
 public class ifthenelsebig {
 	
@@ -39,7 +56,7 @@ public class ifthenelsebig {
         AbstractExpr condition1 = new Greater(new IntLiteral(5), new IntLiteral(2));
         ListInst then1 = new ListInst();
         ListExpr then_expr1 = new ListExpr();
-        then_expr1.add(new StringLiteral("of"));
+        then_expr1.add(new StringLiteral("\"of\""));
         then1.add(new Print(false, then_expr1));
         //boucle else1
         ListInst else1 = new ListInst();
@@ -52,7 +69,7 @@ public class ifthenelsebig {
         
         AbstractExpr condition3 = new Lower(new IntLiteral(3), new IntLiteral(2));
         ListExpr then3_expr = new ListExpr();
-        then3_expr.add(new StringLiteral("if"));
+        then3_expr.add(new StringLiteral("\"if\""));
         ListInst then3 = new ListInst();
         then3.add(new Print(false, then3_expr));
         ListInst else3 = new ListInst();

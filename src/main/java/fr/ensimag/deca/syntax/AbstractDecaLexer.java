@@ -1,8 +1,8 @@
 package fr.ensimag.deca.syntax;
 
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Stack;
 
@@ -135,6 +135,7 @@ public abstract class AbstractDecaLexer extends Lexer {
     // Code needed to implement the #include directive.
     // Adapted from https://theantlrguy.atlassian.net/wiki/pages/viewpage.action?pageId=2686987
     private static class IncludeSaveStruct {
+    	//
         IncludeSaveStruct(CharStream input, int line, int charPositionInline) {
             this.input = input;
             this.line = line;

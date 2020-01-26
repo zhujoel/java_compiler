@@ -1,4 +1,6 @@
 {
 	int a = 5;
-	print(a);
+        int b = 6;
+	print(a, b);
+        println(a, b);
 }

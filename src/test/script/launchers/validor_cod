@@ -17,7 +17,6 @@ ABSOPATH=$(pwd);
 
 cd $DECAC_HOME/src/test/deca/codegen/valid/created
 
-tmpfile=$(mktemp /tmp/temp.XXX)
 
 for prog in *.deca
 do
@@ -26,6 +25,9 @@ do
     ima $ABSOPATH/src/test/deca/codegen/valid/created/${prog%.*}.ass
 done
 
-
+: '
+decac -a $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.deca
+ima $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.ass
+'
 
 exit

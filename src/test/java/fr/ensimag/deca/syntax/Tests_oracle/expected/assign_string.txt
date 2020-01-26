@@ -3,8 +3,8 @@
    `> Main
       +> ListDeclVar [List with 1 elements]
       |  []> DeclVar
-      |      +> Identifier (string)
+      |      +> Identifier (String)
       |      +> Identifier (s)
       |      `> Initialization
-      |         `> StringLiteral (hello)
+      |         `> StringLiteral ("hello")
       `> ListInst [List with 0 elements]

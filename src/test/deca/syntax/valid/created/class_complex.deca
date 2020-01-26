@@ -1,11 +1,21 @@
+class B{
+}
+
 class A extends B{
-	int a, b = 3;
+	protected int a = 8, b = 3;
 	float c;
 	float g = 5.2;
 
-	float meth1(){
+	float meth1(int a, float b){
 		return 5.2;
 	}
+
+	bool bool1;
+
+	void meth2(){
+		bool1 = false;
+	}
 }
+
 {
 }
