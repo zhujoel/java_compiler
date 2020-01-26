@@ -32,132 +32,136 @@ class Math {
 	    }
 		
 	    // calcul du polynôme avec la méthode de Horner
-//		float _sin_horner(float f) {// dev à l'ordre 22
-//			int compteur = 10;
-//			float sign = _pow_opti(- 1, compteur);
-//			float sinus = sign / _fact(2 * compteur + 1);
-//			while (compteur > 0) {
-//				sign = - sign;
-//				compteur = compteur - 1;
-//				sinus = sinus * _pow_opti(f, 2) + sign / _fact(2 * compteur + 1);
-//			}
-//			return sinus * f;
-//		}
-//		
-//		// séparation de [0 ; 2PI] en 4 intervalles centrés autour de 0, PI/2, PI et 3PI/2
-//		float _sin_intervalles(float f) { //précision à 10^-7 près
-//			float fmod = f % (2 * PI);
-//			if (fmod >= 0.0 && fmod <= PI / 4) {
-//				println("x est dans ]0 ; PI / 4]");
-//				return _sinCordic(fmod, 40);
-//			}
-//			else if (fmod > PI / 4 && fmod <= 3 * PI / 4) {
-//				println("x est dans ]PI / 4 ; 3 * PI / 4]");
-//				return _cosCordic(PI / 2 - fmod, 40);
-//			}
-//			else if (fmod > 3 * PI / 4 && fmod <= 5 * PI / 4) {
-//				println("x est dans ]3 * PI / 4 ; 5 * PI / 4]");
-//				return _sinCordic(PI - fmod, 40);
-//			}
-//			else if (fmod > 5 * PI / 4 && fmod <= 7 * PI / 4) {
-//				println("x est dans ]5 * PI / 4 ; 7 * PI / 4]");
-//				return - _cosCordic(3 * PI / 2 - fmod, 40);
-//			}
-//			else {
-//				println("x est dans ]- PI / 4 ; 0]");
-//				return _sinCordic(fmod - 2 * PI, 40);
-//			}
-//	    }
-//		
-//	    float cos(float f) {
-//	    	int i = 0;
-//			int sign = 1;
-//			float cosinus = 0;
-//			float coef = 0;
-//			while (i < 8) {// dev a l'ordre 15
-//				coef = sign * _pow_opti(f, 2 * i);
-//				sign = - sign;
-//				coef = coef / _fact(2 * i);
-//				i = i + 1;
-//				cosinus = cosinus + coef;
-//			}
-//			return cosinus;	        
-//	    }
-//	    
-//	    // calcul du polynôme avec la méthode de Horner
-//	    float _cos_horner(float f) { // dev à l'ordre 21
-//			int compteur = 10;
-//			float sign = _pow_opti(- 1, compteur);
-//			float cosinus = sign / _fact(2 * compteur);
-//			while (compteur > 0) {
-//				sign = - sign;
-//				compteur = compteur - 1;
-//				cosinus = cosinus * _pow_opti(f, 2) + sign / _fact(2 * compteur);
-//			}
-//			return cosinus;
-//		}
-//	    
-//		// séparation de [0 ; 2PI] en 4 intervalles centrés autour de 0, PI/2, PI et 3PI/2
-//	    float _cos_intervalles(float f) { // précision à 10^-7 près
-//			float fmod = f % (2 * PI);
-//			if (fmod >= 0.0 && fmod <= PI / 4) {
-//				println("x est dans ]0 ; PI / 4]");
-//				return _cosCordic(fmod, 40);
-//			}
-//			else if (fmod > PI / 4 && fmod <= 3 * PI / 4) {
-//				println("x est dans ]PI / 4 ; 3 * PI / 4]");
-//				return _sinCordic(PI / 2 - fmod, 40);
-//			}
-//			else if (fmod > 3 * PI / 4 && fmod <= 5 * PI / 4) {
-//				println("x est dans ]3 * PI / 4 ; 5 * PI / 4]");
-//				return - _cosCordic(PI - fmod, 40);
-//			}
-//			else if (fmod > 5 * PI / 4 && fmod <= 7 * PI / 4) {
-//				println("x est dans ]5 * PI / 4 ; 7 * PI / 4]");
-//				return - _sinCordic(3 * PI / 2 - fmod, 40);
-//			}
-//			else {
-//				println("x est dans ]- PI / 4 ; 0]");
-//				return _cosCordic(fmod - 2 * PI, 40);
-//			}
-//	    }
-//	    
-//	    float asin(float f) {
-//	    	int i = 0;
-//			float asin = 0;
-//			float coef = 0;
-//			while (i < 8) {// dev a l'ordre 15
-//				coef = _pow(f, 2 * i + 1)/(2 * i + 1);
-//				coef = coef * _fact(2 * i)/ _pow((_fact(i) * _pow(2, i)), 2);
-//				i = i + 1;
-//				asin = asin + coef;
-//			}
-//			
-//			return asin;
-//	        
-//	    }
-//	    float atan(float f) {
-//	    	int i = 0;
-//	    	int sign = 1;
-//			float arctan = 0;
-//			float coef = 0;
-//			while (i < 8) {// dev a l'ordre 15
-//				coef = sign * _pow(f, 2 * i + 1)/(2 * i + 1);
-//				sign = sign * - 1;
-//				i = i + 1;
-//				arctan = arctan + coef;
-//			}
-//			
-//			return arctan;
-//	        
-//	    }
+		float _sin_horner(float f) {// dev à l'ordre 22
+			int compteur = 10;
+			float sign = _pow_opti(- 1, compteur);
+			float sinus = sign / _fact(2 * compteur + 1);
+			while (compteur > 0) {
+				sign = - sign;
+				compteur = compteur - 1;
+				sinus = sinus * _pow_opti(f, 2) + sign / _fact(2 * compteur + 1);
+			}
+			return sinus * f;
+		}
+		
+		// séparation de [0 ; 2PI] en 4 intervalles centrés autour de 0, PI/2, PI et 3PI/2
+		float _sin_intervalles(float f) { //précision à 10^-7 près
+			float fmod = _modulo(f, 2 * PI);
+			if (fmod >= 0.0 && fmod <= PI / 4) {
+				println("x est dans ]0 ; PI / 4]");
+				return _sinCordic(fmod, 40);
+			}
+			else if (fmod > PI / 4 && fmod <= 3 * PI / 4) {
+				println("x est dans ]PI / 4 ; 3 * PI / 4]");
+				return _cosCordic(PI / 2 - fmod, 40);
+			}
+			else if (fmod > 3 * PI / 4 && fmod <= 5 * PI / 4) {
+				println("x est dans ]3 * PI / 4 ; 5 * PI / 4]");
+				return _sinCordic(PI - fmod, 40);
+			}
+			else if (fmod > 5 * PI / 4 && fmod <= 7 * PI / 4) {
+				println("x est dans ]5 * PI / 4 ; 7 * PI / 4]");
+				return - _cosCordic(3 * PI / 2 - fmod, 40);
+			}
+			else {
+				println("x est dans ]- PI / 4 ; 0]");
+				return _sinCordic(fmod - 2 * PI, 40);
+			}
+	    }
+
+		float _modulo(float f, float p){
+			if (f <= 0.0){
+				return _modulo(f + p, p);
+			} else if (f > p){
+				return _modulo(f - p, p);
+			}
+			return f;
+		}
+		
+	    float cos(float f) {
+	    	int i = 0;
+			int sign = 1;
+			float cosinus = 0;
+			float coef = 0;
+			while (i < 8) {// dev a l'ordre 15
+				coef = sign * _pow_opti(f, 2 * i);
+				sign = - sign;
+				coef = coef / _fact(2 * i);
+				i = i + 1;
+				cosinus = cosinus + coef;
+			}
+			return cosinus;	        
+	    }
 	    
-	    /**
-	     * Calcul de f^n
-	     * @param f
-	     * @param n
-	     * @return f^n
-	     */
+	    // calcul du polynôme avec la méthode de Horner
+	    float _cos_horner(float f) { // dev à l'ordre 21
+			int compteur = 10;
+			float sign = _pow_opti(- 1, compteur);
+			float cosinus = sign / _fact(2 * compteur);
+			while (compteur > 0) {
+				sign = - sign;
+				compteur = compteur - 1;
+				cosinus = cosinus * _pow_opti(f, 2) + sign / _fact(2 * compteur);
+			}
+			return cosinus;
+		}
+	    
+		// séparation de [0 ; 2PI] en 4 intervalles centrés autour de 0, PI/2, PI et 3PI/2
+	    float _cos_intervalles(float f) { // précision à 10^-7 près
+			float fmod = _modulo(f, 2 * PI);
+			if (fmod >= 0.0 && fmod <= PI / 4) {
+				println("x est dans ]0 ; PI / 4]");
+				return _cosCordic(fmod, 40);
+			}
+			else if (fmod > PI / 4 && fmod <= 3 * PI / 4) {
+				println("x est dans ]PI / 4 ; 3 * PI / 4]");
+				return _sinCordic(PI / 2 - fmod, 40);
+			}
+			else if (fmod > 3 * PI / 4 && fmod <= 5 * PI / 4) {
+				println("x est dans ]3 * PI / 4 ; 5 * PI / 4]");
+				return - _cosCordic(PI - fmod, 40);
+			}
+			else if (fmod > 5 * PI / 4 && fmod <= 7 * PI / 4) {
+				println("x est dans ]5 * PI / 4 ; 7 * PI / 4]");
+				return - _sinCordic(3 * PI / 2 - fmod, 40);
+			}
+			else {
+				println("x est dans ]- PI / 4 ; 0]");
+				return _cosCordic(fmod - 2 * PI, 40);
+			}
+	    }
+	    
+	    float asin(float f) {
+	    	int i = 0;
+			float asin = 0;
+			float coef = 0;
+			while (i < 8) {// dev a l'ordre 15
+				coef = _pow(f, 2 * i + 1)/(2 * i + 1);
+				coef = coef * _fact(2 * i)/ _pow((_fact(i) * _pow(2, i)), 2);
+				i = i + 1;
+				asin = asin + coef;
+			}
+			
+			return asin;
+	        
+	    }
+	    float atan(float f) {
+	    	int i = 0;
+	    	int sign = 1;
+			float arctan = 0;
+			float coef = 0;
+			while (i < 8) {// dev a l'ordre 15
+				coef = sign * _pow(f, 2 * i + 1)/(2 * i + 1);
+				sign = sign * - 1;
+				i = i + 1;
+				arctan = arctan + coef;
+			}
+			
+			return arctan;
+	        
+	    }
+	    
+
 	    float _pow(float f, int n) {
 	    	float res;
 	    	int compteur;
@@ -186,12 +190,6 @@ class Math {
 	    	}
 	    }
 	    
-	    /**
-	     * Calcul plus optimal (en nombre d'opérations) de f^n
-	     * @param f
-	     * @param n
-	     * @return f^n
-	     */
 	    float _pow_opti(float f, int n) {
 	    	float res;
 	    	if (n == 0) {
@@ -215,11 +213,6 @@ class Math {
 	    	}
 	    }
 	    
-	    /**
-	     * Calcul de n!
-	     * @param n
-	     * @return n!
-	     */
 	    int _fact(int n) {
 	    	int compteur = 1;
 	    	int res = 1;
@@ -230,244 +223,238 @@ class Math {
 	    	return res;
 	    }
 	    
-	    /**
-	     * Approximation de tan(theta) avec l'algorithme de cordic
-	     * @param f l'angle auquel on applique la fonction tangente
-	     * @param n l'ordre de precision
-	     * @return tan(f)
-	     */
-//	    float _tanCordic(float f, int n) {
-//	    	int compteur = 0;
-//	    	int sign;
-//	    	float x = 1;
-//	    	float y = 0;
-//	    	float a;
-//	    	float e = f;
-//	    	float rotation = PI / 4;
-//	    	float puissance_de_2 = 1;
-//	    	while(compteur <= n) {
-//	    		compteur = compteur + 1;
-//	    		if (e >= 0.0) {
-//	    			sign = 1;
-//	    		}
-//	    		else {
-//	    			sign = - 1;
-//	    		}
-//	    		a = x - (sign * y * puissance_de_2);
-//	    		y = y + (sign * x * puissance_de_2);
-//	    		x = a;
-//	    		e = e - (sign * rotation);
-//	    		puissance_de_2 = puissance_de_2 / 2;
-//	    		rotation = atan(puissance_de_2);
-//	    	}
-//	    	return x / y;
-//	    }
-//	    
-//	    float _cosCordic(float f, int n) {
-//	    	int compteur = 0;
-//	    	float sign;
-//	    	float x = 1;
-//	    	float y = 0;
-//	    	float a;
-//	    	float e = f;
-//	    	float rotation = PI / 4;
-//	    	float puissance_de_2 = 1;
-//	    	while(compteur <= n) {
-//	    		compteur = compteur + 1;
-//	    		if (e >= 0.0) {
-//	    			sign = 1;
-//	    		}
-//	    		else {
-//	    			sign = - 1;
-//	    		}
-//	    		a = x - (sign * y * puissance_de_2);
-//	    		y = y + (sign * x * puissance_de_2);
-//	    		x = a;
-//	    		e = e - (sign * rotation);
-//	    		puissance_de_2 = puissance_de_2 / 2;
-//	    		rotation = atan(puissance_de_2);
-//	    	}
-//	    	return x * K;
-//	    }
-//	    
-//	    float _sinCordic(float f, int n) {
-//	    	int compteur = 0;
-//	    	float sign;
-//	    	float x = 1;
-//	    	float y = 0;
-//	    	float a;
-//	    	float e = f;
-//	    	float rotation = PI / 4;
-//	    	float puissance_de_2 = 1;
-//	    	while(compteur <= n) {
-//	    		compteur = compteur + 1;
-//	    		if (e >= 0.0) {
-//	    			sign = 1;
-//	    		}
-//	    		else {
-//	    			sign = - 1;
-//	    		}
-//	    		a = x - (sign * y * puissance_de_2);
-//	    		y = y + (sign * x * puissance_de_2);
-//	    		x = a;
-//	    		e = e - (sign * rotation);
-//	    		puissance_de_2 = puissance_de_2 / 2;
-//	    		rotation = atan(puissance_de_2);
-//	    	}
-//	    	return y * K;
-//	    }
-//	    
-//	    // algorithme gaussien des fractions continues pour atan, très précis sur [-1/3; 1/3]
-//	    float _atan_gauss(float f) {
-//	    	float y;
-//	    	float a;
-//	    	int b;
-//	    	float c;
-//	    	float d;
-//	    	float u;
-//	    	float atan_u;
-//	    	if (f < 0.0) {
-//	    		return - _atan_gauss(- f);
-//	    	}
-//	    	else if (f <= 1.7 * _pow_opti(10, - 9)) {
-//	    		return f;
-//	    	}
-//	    	else if (f <= 2 * _pow_opti(10, - 2)) {
-//	    		return f - _pow_opti(f, 3) / 3 + _pow_opti(f, 5) / 5 - _pow_opti(f, 7) / 7;
-//	    	}
-//	    	else if (f <= 1.0) {
-//	    		y = f;
-//	    		a = 0;
-//	    		b = 1;
-//	    	}
-//	    	else {
-//	    		y = 1 / f;
-//	    		a = PI / 2;
-//	    		b = - 1;
-//	    	}
-//	    	if (y <= _sqrt_Heron(2) - 1) {
-//    			c = PI/16;
-//    		}
-//	    	else {
-//	    		c = 3 * PI / 16;
-//	    	}
-//			d = _tanCordic(c, 40);
-//			u = (y - d)/(1 + d * y);
-//			atan_u = u * (135135 + 171962.46f * _pow_opti(u, 2) + 52490.4832f * _pow_opti(u, 4) + 2218.1f * _pow_opti(u, 6)) / (135135 + 217007.46f * _pow_opti(u, 2) + 97799.3033f * _pow_opti(u, 4) + 10721.3745f * _pow_opti(u, 6));
-//			return a + b * (c + atan_u);
-//	    }
-//	    
-//	    // algorithme gaussien des fractions continues pour asin, très précis sur [-1/3; 1/3]
-//	    float _asin_gauss(float f) {
-//	    	float a;
-//	    	float b;
-//	    	float u;
-//	    	float asin_u;
-//	    	if (f < 0.0) {
-//	    		return - _asin_gauss(- f);
-//	    	}
-//	    	else if (f < _pow_opti(10, - 8)) {
-//	    		return f;
-//	    	}
-//	    	else if (f < 1 / 2) {
-//	    		u = f;
-//	    		a = 0;
-//	    		b = 1;
-//	    	}
-//	    	else if (f < _sqrt_Heron(3) / 2) {
-//	    		u = 2 * _pow_opti(f, 2) - 1;
-//	    		a = PI / 4;
-//	    		b = 1 / 2;
-//	    	}
-//	    	else if (f < _sqrt_Heron(2 + _sqrt_Heron(3)) / 2) {
-//	    		u = 8 * _pow_opti(f, 4) - 8 * _pow_opti(f, 2) + 1;
-//	    		a = 3 * PI / 8;
-//	    		b = 1 / 4;
-//	    	}
-//	    	else {
-//	    		u = _sqrt_Heron((1 - f) / 2);
-//	    		a = PI / 2;
-//	    		b = - 2;
-//	    	}
-//	    	asin_u = u * (1.0f + _pow_opti(u, 2) / 6 + 0.075f * _pow_opti(u, 4) + 0.04464286f * _pow_opti(u, 6) + 0.03038182f * _pow_opti(u, 8) + 0.02237f * _pow_opti(u, 10) + 0.01731276f * _pow_opti(u, 12) + 0.01433124f * _pow_opti(u, 14) + 0.009342806f * _pow_opti(u, 16) + 0.01835667f * _pow_opti(u, 18) - 0.01186224f * _pow_opti(u, 20) + 0.03162712f * _pow_opti(u, 22));
-//	    	return a + b * asin_u;
-//	    }
-//	    
-//	    // calcul de atan avec l'algorithme de Padé
-//	    float _atanPade(float f) {
-//	    	if (f < 0.0) {
-//	    		return - _atanPade(- f);
-//	    	}
-//	    	return _atan_repositionnement(f);
-//	    }
-//	     
-//	    // repositionnement sur l'intervalle [0; sqrt(2) - 1]
-//	    float _atan_repositionnement(float f) {    
-//	    	if (f < _sqrt_Heron(2) - 1) {
-//	    		return _atan_calcul(f);
-//	    	}
-//	    	else if (f > _sqrt_Heron(2) + 1) {
-//	    		return PI / 2 - _atan_calcul(1 / f);
-//	    	}
-//	    	else {
-//	    		return PI / 4 + _atan_calcul((f - 1) / (f + 1));
-//	    	}
-//	    }
-//	    
-//	    // atan calculé sur l'intervalle choisi (cf _atan_repositionnement)
-//	    float _atan_calcul(float f) {
-//	    	float p4  = 16.1536412982230228262;
-//		    float p3  = 268.42548195503973794141;
-//		    float p2  = 1153.0293515404850115428136;
-//		    float p1  = 1780.40631643319697105464587;
-//		    float p0  = 896.78597403663861959987488;
-//		     
-//		    float q4  = 58.95697050844462222791;
-//		    float q3  = 536.265374031215315104235;
-//		    float q2  = 1666.7838148816337184521798;
-//		    float q1  = 2079.33497444540981287275926;
-//		    float q0  = 896.78597403663861962481162;
-//		    
-//	    	float f_carre = _pow_opti(f, 2);
-//	    	float p = ( ( ( (p4 * f_carre + p3) * f_carre + p2) * f_carre + p1) * f_carre + p0);
-//	    	float q = ( ( ( ( (f_carre + q4) * f_carre + q3) * f_carre + q2) * f_carre + q1) * f_carre + q0);
-//	    	return f * (p / q);
-//	    }
-//
-//	    // calcul de asin avec l'algorithme de Padé utilisé sur atan 
-//	    float _asin_with_atan(float f) {
-//	    	return 2 * _atanPade(f / (1 + _sqrt_Heron(1 - _pow_opti(f, 2))));
-//	    }
-//	    
-//	    // calcul de l'ulp
-//	    float ulp(float f) {
-//    		float ulp = _pow_opti(2, - 23);
-//    		if (f < 0.0) {
-//    			return ulp(- f);
-//    		}
-//	    	if (f == 0.0) {
-//	    		return _pow_opti(2, - 149);
-//	    	}
-//    		while (f < 1.0) {
-//    			f = f * 2;
-//    			ulp = ulp / 2;
-//    		}
-//    		while (f >= 2.0) {
-//    			f = f / 2;
-//    			ulp = ulp * 2;
-//    		}
-//	    	return ulp;
-//	    }
-//	    
-//	    int test() {
-//	    	int compteur = 0;
-//	    	float f = _pow_opti(10, - 8); 
-//	    	while (f < 1.0) {
-//	    		f = f * 2;
-//	    		compteur = compteur + 1;
-//	    	}
-//	    	return compteur;
-//	    }
+	    float _tanCordic(float f, int n) {
+	    	int compteur = 0;
+	    	int sign;
+	    	float x = 1;
+	    	float y = 0;
+	    	float a;
+	    	float e = f;
+	    	float rotation = PI / 4;
+	    	float puissance_de_2 = 1;
+	    	while(compteur <= n) {
+	    		compteur = compteur + 1;
+	    		if (e >= 0.0) {
+	    			sign = 1;
+	    		}
+	    		else {
+	    			sign = - 1;
+	    		}
+	    		a = x - (sign * y * puissance_de_2);
+	    		y = y + (sign * x * puissance_de_2);
+	    		x = a;
+	    		e = e - (sign * rotation);
+	    		puissance_de_2 = puissance_de_2 / 2;
+	    		rotation = atan(puissance_de_2);
+	    	}
+	    	return x / y;
+	    }
+	    
+	    float _cosCordic(float f, int n) {
+	    	int compteur = 0;
+	    	float sign;
+	    	float x = 1;
+	    	float y = 0;
+	    	float a;
+	    	float e = f;
+	    	float rotation = PI / 4;
+	    	float puissance_de_2 = 1;
+	    	while(compteur <= n) {
+	    		compteur = compteur + 1;
+	    		if (e >= 0.0) {
+	    			sign = 1;
+	    		}
+	    		else {
+	    			sign = - 1;
+	    		}
+	    		a = x - (sign * y * puissance_de_2);
+	    		y = y + (sign * x * puissance_de_2);
+	    		x = a;
+	    		e = e - (sign * rotation);
+	    		puissance_de_2 = puissance_de_2 / 2;
+	    		rotation = atan(puissance_de_2);
+	    	}
+	    	return x * K;
+	    }
+	    
+	    float _sinCordic(float f, int n) {
+	    	int compteur = 0;
+	    	float sign;
+	    	float x = 1;
+	    	float y = 0;
+	    	float a;
+	    	float e = f;
+	    	float rotation = PI / 4;
+	    	float puissance_de_2 = 1;
+	    	while(compteur <= n) {
+	    		compteur = compteur + 1;
+	    		if (e >= 0.0) {
+	    			sign = 1;
+	    		}
+	    		else {
+	    			sign = - 1;
+	    		}
+	    		a = x - (sign * y * puissance_de_2);
+	    		y = y + (sign * x * puissance_de_2);
+	    		x = a;
+	    		e = e - (sign * rotation);
+	    		puissance_de_2 = puissance_de_2 / 2;
+	    		rotation = atan(puissance_de_2);
+	    	}
+	    	return y * K;
+	    }
+	    
+	    // algorithme gaussien des fractions continues pour atan, très précis sur [-1/3; 1/3]
+	    float _atan_gauss(float f) {
+	    	float y;
+	    	float a;
+	    	int b;
+	    	float c;
+	    	float d;
+	    	float u;
+	    	float atan_u;
+	    	if (f < 0.0) {
+	    		return - _atan_gauss(- f);
+	    	}
+	    	else if (f <= 1.7 * _pow_opti(10, - 9)) {
+	    		return f;
+	    	}
+	    	else if (f <= 2 * _pow_opti(10, - 2)) {
+	    		return f - _pow_opti(f, 3) / 3 + _pow_opti(f, 5) / 5 - _pow_opti(f, 7) / 7;
+	    	}
+	    	else if (f <= 1.0) {
+	    		y = f;
+	    		a = 0;
+	    		b = 1;
+	    	}
+	    	else {
+	    		y = 1 / f;
+	    		a = PI / 2;
+	    		b = - 1;
+	    	}
+	    	if (y <= _sqrt_Heron(2) - 1) {
+    			c = PI/16;
+    		}
+	    	else {
+	    		c = 3 * PI / 16;
+	    	}
+			d = _tanCordic(c, 40);
+			u = (y - d)/(1 + d * y);
+			atan_u = u * (135135 + 171962.46f * _pow_opti(u, 2) + 52490.4832f * _pow_opti(u, 4) + 2218.1f * _pow_opti(u, 6)) / (135135 + 217007.46f * _pow_opti(u, 2) + 97799.3033f * _pow_opti(u, 4) + 10721.3745f * _pow_opti(u, 6));
+			return a + b * (c + atan_u);
+	    }
+	    
+	    // algorithme gaussien des fractions continues pour asin, très précis sur [-1/3; 1/3]
+	    float _asin_gauss(float f) {
+	    	float a;
+	    	float b;
+	    	float u;
+	    	float asin_u;
+	    	if (f < 0.0) {
+	    		return - _asin_gauss(- f);
+	    	}
+	    	else if (f < _pow_opti(10, - 8)) {
+	    		return f;
+	    	}
+	    	else if (f < 0.5) {
+	    		u = f;
+	    		a = 0;
+	    		b = 1;
+	    	}
+	    	else if (f < _sqrt_Heron(3) / 2) {
+	    		u = 2 * _pow_opti(f, 2) - 1;
+	    		a = PI / 4;
+	    		b = 1 / 2;
+	    	}
+	    	else if (f < _sqrt_Heron(2 + _sqrt_Heron(3)) / 2) {
+	    		u = 8 * _pow_opti(f, 4) - 8 * _pow_opti(f, 2) + 1;
+	    		a = 3 * PI / 8;
+	    		b = 1 / 4;
+	    	}
+	    	else {
+	    		u = _sqrt_Heron((1 - f) / 2);
+	    		a = PI / 2;
+	    		b = - 2;
+	    	}
+	    	asin_u = u * (1.0f + _pow_opti(u, 2) / 6 + 0.075f * _pow_opti(u, 4) + 0.04464286f * _pow_opti(u, 6) + 0.03038182f * _pow_opti(u, 8) + 0.02237f * _pow_opti(u, 10) + 0.01731276f * _pow_opti(u, 12) + 0.01433124f * _pow_opti(u, 14) + 0.009342806f * _pow_opti(u, 16) + 0.01835667f * _pow_opti(u, 18) - 0.01186224f * _pow_opti(u, 20) + 0.03162712f * _pow_opti(u, 22));
+	    	return a + b * asin_u;
+	    }
+	    
+	    // calcul de atan avec l'algorithme de Padé
+	    float _atanPade(float f) {
+	    	if (f < 0.0) {
+	    		return - _atanPade(- f);
+	    	}
+	    	return _atan_repositionnement(f);
+	    }
+	     
+	    // repositionnement sur l'intervalle [0; sqrt(2) - 1]
+	    float _atan_repositionnement(float f) {    
+	    	if (f < _sqrt_Heron(2) - 1) {
+	    		return _atan_calcul(f);
+	    	}
+	    	else if (f > _sqrt_Heron(2) + 1) {
+	    		return PI / 2 - _atan_calcul(1 / f);
+	    	}
+	    	else {
+	    		return PI / 4 + _atan_calcul((f - 1) / (f + 1));
+	    	}
+	    }
+	    
+	    // atan calculé sur l'intervalle choisi (cf _atan_repositionnement)
+	    float _atan_calcul(float f) {
+	    	float p4  = 16.1536412982230228262;
+		    float p3  = 268.42548195503973794141;
+		    float p2  = 1153.0293515404850115428136;
+		    float p1  = 1780.40631643319697105464587;
+		    float p0  = 896.78597403663861959987488;
+		     
+		    float q4  = 58.95697050844462222791;
+		    float q3  = 536.265374031215315104235;
+		    float q2  = 1666.7838148816337184521798;
+		    float q1  = 2079.33497444540981287275926;
+		    float q0  = 896.78597403663861962481162;
+		    
+	    	float f_carre = _pow_opti(f, 2);
+	    	float p = ( ( ( (p4 * f_carre + p3) * f_carre + p2) * f_carre + p1) * f_carre + p0);
+	    	float q = ( ( ( ( (f_carre + q4) * f_carre + q3) * f_carre + q2) * f_carre + q1) * f_carre + q0);
+	    	return f * (p / q);
+	    }
+
+	    // calcul de asin avec l'algorithme de Padé utilisé sur atan 
+	    float _asin_with_atan(float f) {
+	    	return 2 * _atanPade(f / (1 + _sqrt_Heron(1 - _pow_opti(f, 2))));
+	    }
+	    
+	    // calcul de l'ulp
+	    float ulp(float f) {
+    		float res = _pow_opti(2, - 23);
+    		if (f < 0.0) {
+    			return ulp(- f);
+    		}
+	    	if (f == 0.0) {
+	    		return _pow_opti(2, - 149);
+	    	}
+    		while (f < 1.0) {
+    			f = f * 2;
+    			res = res / 2;
+    		}
+    		while (f >= 2.0) {
+    			f = f / 2;
+    			res = res * 2;
+    		}
+	    	return res;
+	    }
+	    
+	    int test() {
+	    	int compteur = 0;
+	    	float f = _pow_opti(10, - 8); 
+	    	while (f < 1.0) {
+	    		f = f * 2;
+	    		compteur = compteur + 1;
+	    	}
+	    	return compteur;
+	    }
 }
 {
 }

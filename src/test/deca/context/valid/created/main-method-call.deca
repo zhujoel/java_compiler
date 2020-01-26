@@ -1,0 +1,13 @@
+class A {
+	int mult(int a, int b){
+		return a * b;
+	}
+	
+	void remult(int a, int b){
+		int c = mult(a, b);
+	}
+}
+{
+	A a = new A();
+	println(a.mult(1,2));
+}
