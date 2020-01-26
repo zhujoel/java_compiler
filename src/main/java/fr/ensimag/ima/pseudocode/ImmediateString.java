@@ -16,6 +16,8 @@ public class ImmediateString extends Operand {
 
     @Override
     public String toString() {
+    	//TODO a modifier
         return "\"" + value.replace("\"", "") + "\"";
+        //ancien : return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 }

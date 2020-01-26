@@ -8,4 +8,4 @@
          []> Assign
              +> Identifier (a)
              `> Not
-                `> Float (8.7)
+                `> FloatLiteral (8.7)

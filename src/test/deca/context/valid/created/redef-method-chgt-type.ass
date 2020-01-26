@@ -1,0 +1,55 @@
+; start main program
+; Class Declaration
+; Code de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+code.Object.equals:
+; Code de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Code de la table des méthodes de B
+	LEA 3(GB), R0
+	STORE R0, 5(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 6(GB)
+; Code de la table des méthodes de C
+	LEA 1(GB), R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+	LOAD code.C.fonction, R0
+	STORE R0, 9(GB)
+; Code de la table des méthodes de D
+	LEA 7(GB), R0
+	STORE R0, 10(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 11(GB)
+	LOAD code.D.fonction, R0
+	STORE R0, 12(GB)
+; Main Function
+	HALT
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
+; end main program

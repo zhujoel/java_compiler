@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * Variable declaration
@@ -33,4 +34,11 @@ public abstract class AbstractDeclVar extends Tree {
      * @param compiler
      */
     protected abstract void codeGenDeclVar(DecacCompiler compiler);
+    
+    /**
+     * Génère le code assembleur lors de la déclaration d'une variable locale
+     * @param compiler
+     * @param cptLB Compteur de la base locale
+     */
+    protected abstract void codeGenDeclVarLocale(DecacCompiler compiler, int cptLB, EnvironmentExp localEnv);
 }

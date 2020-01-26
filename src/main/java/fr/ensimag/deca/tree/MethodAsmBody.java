@@ -52,4 +52,15 @@ public class MethodAsmBody extends AbstractMethodBody{
 		
 	}
 
+	@Override
+	public void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public int getNbVarLocal() {
+		return 0;
+	}
+
 }

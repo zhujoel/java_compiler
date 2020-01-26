@@ -15,4 +15,12 @@ public abstract class AbstractMethodBody extends Tree{
 
 	public abstract void verifyMethodBody(DecacCompiler compiler, EnvironmentExp envParam, ClassDefinition currentClass,
 			Type t) throws ContextualError;
+	
+	/**
+	 * Génère les instructions de la méthode
+	 * @param compiler
+	 */
+	public abstract void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv);
+	
+	public abstract int getNbVarLocal();
 }

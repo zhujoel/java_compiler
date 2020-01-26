@@ -1,8 +1,12 @@
 package fr.ensimag.ima.pseudocode;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 import java.util.LinkedList;
+
+import fr.ensimag.deca.CompilerOptions;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  * Abstract representation of an IMA program, i.e. set of Lines.
@@ -11,7 +15,8 @@ import java.util.LinkedList;
  * @date 01/01/2020
  */
 public class IMAProgram {
-    private final LinkedList<AbstractLine> lines = new LinkedList<AbstractLine>();
+
+	private final LinkedList<AbstractLine> lines = new LinkedList<AbstractLine>();
 
     public void add(AbstractLine line) {
         lines.add(line);
@@ -48,7 +53,15 @@ public class IMAProgram {
     public void addFirst(Line l) {
         lines.addFirst(l);
     }
+    
+    public void addFirst(String s) {
+        lines.addFirst(new Line(s));
+    }
 
+    public void addSecond(Instruction i) {
+        lines.add(1, new Line(i));
+    }
+    
     /**
      * Display the program in a textual form readable by IMA to stream s.
      */

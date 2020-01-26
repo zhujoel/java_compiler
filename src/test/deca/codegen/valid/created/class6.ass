@@ -1,3 +1,7 @@
+; Test pour savoir si la pile est pleine
+	TSTO #12
+	BOV pile_pleine
+	ADDSP #10
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -5,7 +9,6 @@
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
-code.Object.equals:
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
 	STORE R0, 3(GB)
@@ -23,14 +26,38 @@ code.Object.equals:
 	LOAD code.B.methB, R0
 	STORE R0, 9(GB)
 ; Main Function
-; Beginning of main instructions:
-; Test pour savoir si la pile est pleine
-	TSTO #2
-	BOV pile_pleine
-	ADDSP #2
 ; Declaration des variables
-; Instructions
+; Beginning of main instructions:
 	HALT
+code.Object.equals:
+init.A:
+	TSTO #0
+	BOV tas_plein
+	NEW #0, R2
+	RTS
+code.A.methA:
+	TSTO #0
+	BOV pile_pleine
+	ADDSP #0
+; Sauvegarde des registres
+; Declaration des variables locales
+fin.A.methA:
+; Restauration des registres
+	RTS
+init.B:
+	TSTO #0
+	BOV tas_plein
+	NEW #0, R3
+	RTS
+code.B.methB:
+	TSTO #0
+	BOV pile_pleine
+	ADDSP #0
+; Sauvegarde des registres
+; Declaration des variables locales
+fin.B.methB:
+; Restauration des registres
+	RTS
 pile_pleine:
 	WSTR "Erreur : Pile pleine."
 	WNL

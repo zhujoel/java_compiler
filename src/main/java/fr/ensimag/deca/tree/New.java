@@ -11,6 +11,8 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 
 /**
  * Déclaration d'une classe.
@@ -40,8 +42,10 @@ public class New extends AbstractExpr{
 
 	@Override
 	protected GPRegister codeGenReg(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);
+		Label init = new Label("init." + this.ident.getName().getName());
+		compiler.addInstruction(new BRA(init));
+		return reg;
 	}
 
 	@Override

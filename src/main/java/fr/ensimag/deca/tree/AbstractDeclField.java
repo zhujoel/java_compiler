@@ -7,6 +7,9 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 /**
  * Déclaration d'un attribut d'une classe.
@@ -41,4 +44,6 @@ public abstract class AbstractDeclField extends Tree{
 	 * @throws ContextualError
 	 */
 	public abstract void verifyField(DecacCompiler compiler, EnvironmentExp lovalEnv, ClassDefinition currentClass) throws ContextualError;
+
+	public abstract void codeGenDeclField(DecacCompiler compiler, RegisterOffset registerOffset);
 }

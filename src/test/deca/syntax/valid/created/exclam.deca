@@ -1,0 +1,4 @@
+{
+	boolean b = false;
+	boolean a = !b;
+}

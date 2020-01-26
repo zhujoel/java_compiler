@@ -1,0 +1,8 @@
+class A{
+	int a;
+	int methA(){
+		this.a = 5;
+	}
+}
+
+{}

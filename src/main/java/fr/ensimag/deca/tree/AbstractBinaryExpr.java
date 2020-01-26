@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -104,7 +105,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
         return regDroite;
 	}
-
+	
 	/**
 	 * Génère le code assembleur en fonction de l'instruction
 	 * @param compiler

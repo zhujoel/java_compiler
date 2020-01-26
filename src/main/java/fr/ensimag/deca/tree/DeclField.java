@@ -12,7 +12,12 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Déclaration d'un attribut d'une classe.
@@ -112,6 +117,29 @@ public class DeclField extends AbstractDeclField {
 			, ClassDefinition currentClass) throws ContextualError{
 		Type t = type.getType();
 		initialization.verifyInitialization(compiler, t, localEnv, currentClass);
+	}
+
+	@Override
+	public void codeGenDeclField(DecacCompiler compiler, RegisterOffset reg) {
+		// on vérifie que le type existe dans notre environnement
+		
+		this.type.setType(compiler.getEnvironmentType().get(this.type.getName()));
+		this.fieldName.setType(compiler.getEnvironmentType().get(this.type.getName()));
+		// on ajoute une variable dans notre environnement et on indique son emplacement dans le stack
+		VariableDefinition varDef = new VariableDefinition(this.type.getType(), fieldName.getLocation());
+		varDef.setOperand(reg);
+		try {
+			compiler.getEnvironmentExp().declareOrSet(fieldName.getName(), varDef);
+		}
+		catch(DoubleDefException e) {
+			e.printStackTrace();
+		}
+		
+		// on génère le code assembleur de l'initialisation
+		GPRegister reg1 = initialization.codeGenInit(compiler, this.type.getType());
+		compiler.addInstruction(new STORE(reg1, varDef.getOperand()));
+		// indique que le registre est libre
+		compiler.getRegManager().freeRegistre(reg1.getNumber(), compiler);
 	}
 
 }

@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 
 /**
  * 
@@ -36,7 +37,13 @@ public class ListInst extends TreeList<AbstractInst> {
             i.codeGenInst(compiler);
         }
     }
-
+    
+    public void codeGenListInst(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv) {
+        for (AbstractInst i : getList()) {
+            i.codeGenInst(compiler, className, localEnv);
+        }
+    }
+    
     @Override
     public void decompile(IndentPrintStream s) {
         for (AbstractInst i : getList()) {

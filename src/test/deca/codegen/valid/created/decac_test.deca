@@ -1,2 +1,8 @@
+class A{
+
+}
+
 {
+    int a = readInt();
+    5 + 7;
 }

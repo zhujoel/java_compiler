@@ -15,6 +15,7 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
@@ -190,8 +191,6 @@ public class DeclClass extends AbstractDeclClass {
 				compiler.addInstruction(new LOAD(new LabelOperand(label), Register.R0));
 				compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
 				compiler.getStackManager().addStackCpt();
-				
-				//compiler.addLabel(label);
 			}
 		}
 	}
@@ -200,15 +199,29 @@ public class DeclClass extends AbstractDeclClass {
 	@Override
 	protected void codeGenDeclClass(DecacCompiler compiler) {
 
-		// Passe 1 de l'étape C avec objet
+		// Passe 1 : on génère le prototype des méthodes
 		compiler.addComment("Code de la table des méthodes de " + this.className.getName().getName());
 		compiler.addInstruction(new LEA(compiler.getEnvironmentClass().get(this.extension.getName()), Register.R0));
 		compiler.getEnvironmentClass().put(this.className.getName(), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB));
 		compiler.getStackManager().addStackCpt();
 		compiler.addInstruction(new STORE(Register.R0, compiler.getEnvironmentClass().get(this.className.getName())));
 
+		// génération du code des prototypes des méthodes
 		codeGenPrototypeMethod(this.className.getName(), compiler, new EnvironmentExp(null));
 
-		//this.methods.codeGenListMethod(compiler, this.className.getName());
+		// génération des attributs
+		// on active le storing car on veut générer le code à la fin du programme
+		compiler.activateStoring();
+		this.fields.codeGenListField(compiler, this.className.getName());
+		
+		// Passe 2 : on génère le corps des méthodes
+		// on donne le className pour générer le bon label
+		this.methods.codeGenListMethod(compiler, this.className);
+		compiler.deactivateStoring();
+	}
+
+	@Override
+	public int getFieldNb() {
+		return this.fields.getList().size();
 	}
 }

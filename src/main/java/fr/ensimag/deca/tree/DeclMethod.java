@@ -6,6 +6,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -14,6 +15,11 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Déclaration d'une méthode d'une classe.
@@ -144,12 +150,6 @@ public class DeclMethod extends AbstractDeclMethod {
 			throw new ContextualError("Methode deja definie", this.methName.getLocation());
 		}
 	}
-	
-	@Override
-	protected void codeGenDeclMethod(DecacCompiler compiler) {
-	}
-
-
 
 	@Override
 	public void verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
@@ -169,8 +169,38 @@ public class DeclMethod extends AbstractDeclMethod {
 		}
 		
 		this.corps.verifyMethodBody(compiler, envParam, currentClass, t);
+	}
+	
+	@Override
+	protected void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className) {
+    	// On défini un nouveau environnement pour les variables locales
+    	EnvironmentExp localEnv = new EnvironmentExp(compiler.getEnvironmentExp());
+		
+		//bloc de début de méthode
+		compiler.addIMABloc();
+		
+		// label du corps de la méthode
+		Label methLabel = new Label("code."+className.getName()+"."+this.methName.getName().getName());
+		compiler.addLabel(methLabel);
+		
+		this.params.codeGenListParamIn(compiler, localEnv);
+		
+		this.corps.codeGenMethodBody(compiler, className, localEnv);
+		
+		compiler.addSecond(new ADDSP(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
+		compiler.addSecond(new BOV(ErrorManager.tabLabel[0]));
+		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
+		
+		// bloc de fin de méthode
+		compiler.addIMABloc();
+		// label de la fin de la méthode
+		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
+		compiler.addLabel(methLabelFin);
+
+		this.params.codeGenListParamOut(compiler, localEnv);
 		
 		
+		this.returnType.codeGenReturn(compiler);
 		
 	}
 
