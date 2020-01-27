@@ -10,6 +10,6 @@ class X {
 	void m() {
 		A a = new A();
 		B b = new B();
-		println(b.getX(a)); // Ok du point de vue de la condition (2)
+		println(b.getX(a)); 
 	}
 }

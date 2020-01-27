@@ -31,7 +31,7 @@ public class Return extends AbstractInst {
 			Type returnType) throws ContextualError {
 		this.expr = this.expr.verifyRValue(compiler, localEnv, currentClass, returnType);
 		if(this.expr.getType().isVoid()) {
-			throw new ContextualError("Retour void", this.expr.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle]Return void type", this.expr.getLocation());
 		}
 		
 	}

@@ -26,8 +26,22 @@ public abstract class AbstractDeclMethod extends Tree {
 	@Override
 	protected abstract void iterChildren(TreeFunction f);
 	
+	/**
+	 * [SyntaxeContextuelle] Verification de la declaration des methodes pour la passe 2
+	 * @param compiler
+	 * @param localEnv
+	 * @param currentClass
+	 * @throws ContextualError
+	 */
 	public abstract void verifyDeclMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError;
 
+	/**
+	 * [SyntaxeContextuelle] Verification du corps des methodes dans la passe 3
+	 * @param compiler
+	 * @param localEnv
+	 * @param currentClass
+	 * @throws ContextualError
+	 */
 	public abstract void verifyMethod(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError;
 	
 	/**

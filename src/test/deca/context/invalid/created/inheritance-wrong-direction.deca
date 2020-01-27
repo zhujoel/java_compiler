@@ -1,0 +1,11 @@
+class A{
+	
+}
+class B extends A{
+	void fonction(){
+	}
+}
+{
+	A a = new A();
+	a.fonction();
+}

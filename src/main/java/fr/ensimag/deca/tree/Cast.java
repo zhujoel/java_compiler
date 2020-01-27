@@ -39,10 +39,10 @@ public class Cast extends AbstractExpr {
 		Type type2 = var.verifyExpr(compiler, localEnv, currentClass);
 		//que se passe-t-il si on cast un null / en null ??
 		if(type1.isClass() && type2.isClass()) {
-			if(!type1.asClassType(type1.toString() + " n'est pas une classe", 
-					this.getLocation()).isSubClassOf(type2.asClassType(type2.toString() 
-							+ " n'est pas une classe", this.getLocation()))) {
-				throw new ContextualError("La classe demandée pour le cast n'est pas une classe parente de l'identifier", this.getLocation());
+			if(!type1.asClassType("[SyntaxeContextuelle] " + type1 + " isn't a class", 
+					this.getLocation()).isSubClassOf(type2.asClassType("[SyntaxeContextuelle] "+ type2 
+							+ " isn't a class", this.getLocation()))) {
+				throw new ContextualError("[SyntaxeContextuelle] Trying to cast a class with a not parent class", this.getLocation());
 			}
 		}
 		this.setType(type1);

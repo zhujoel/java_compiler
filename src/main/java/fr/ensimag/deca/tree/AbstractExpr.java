@@ -98,18 +98,18 @@ public abstract class AbstractExpr extends AbstractInst {
     		this.setType(type);
     		return this;
     	} else if(type.isClass() && expectedType.isClass()) {//si les types sont des classes
-    		if(type.asClassType(type.toString() + " n'est pas une classe", this.getLocation())
-    				.isSubClassOf(expectedType.asClassType(expectedType.toString() + 
-    						" n'est pas une classe", this.getLocation()))) {//si la rvalue est un type qui herite de <type>
+    		if(type.asClassType("[SyntaxeContextuelle]" + type + " isn't a class", this.getLocation())
+    				.isSubClassOf(expectedType.asClassType("[SyntaxeContextuelle]" + expectedType + 
+    						" isn't a class", this.getLocation()))) {//si la rvalue est un type qui herite de <type>
     			this.setType(type);
     			return this;
     		}
     	}else if (type.isNull() && expectedType.isClass()) {
-    		//si on a un objet null
+    		//si on initialise notre objet a null (on peut peut etre compacter avec type.isClassOrNull()...)
     		this.setType(type);
     		return this;
     	}
-    	throw new ContextualError("Affectation error, "
+    	throw new ContextualError("[SyntaxeContextuelle] Affectation error, "
     			+ "type: " + type.toString() + ", expected type: " + expectedType.toString(), getLocation());
     	
     	
@@ -137,7 +137,7 @@ public abstract class AbstractExpr extends AbstractInst {
             ClassDefinition currentClass) throws ContextualError {
         Type t = this.verifyExpr(compiler, localEnv, currentClass);
         if (!t.isBoolean()) {
-        	throw new ContextualError("La condition doit etre un booleen !", this.getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle] The condition must be a boolean", this.getLocation());
         }
     }
 

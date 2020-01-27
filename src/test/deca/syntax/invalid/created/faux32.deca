@@ -1,0 +1,7 @@
+class B{
+	bool methA(){
+		return 2;
+	}
+}
+
+{}

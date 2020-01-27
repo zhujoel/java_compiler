@@ -94,11 +94,13 @@ public class DeclClass extends AbstractDeclClass {
         
     	//On verifie que la classe herite d'une classe existante
     	if (!compiler.getEnvironmentType().isIn(extension.getName())) {
-    		throw new ContextualError("Classe non définie", extension.getLocation());
+    		throw new ContextualError("[SyntaxeContextuelle] Class undefined", extension.getLocation());
     	}
     	
     	//On recupere le type de la superclasse
-    	ClassType superC = compiler.getEnvironmentType().get(extension.getName()).asClassType("La classe doit hériter d'une classe existante", extension.getLocation());
+    	ClassType superC = compiler.getEnvironmentType().get(extension.getName())
+    			.asClassType("[SyntaxeContextuelle] The class must inherit from an existing class"
+    					, extension.getLocation());
         this.extension.setType(superC.getDefinition().getType());
         this.extension.setDefinition(superC.getDefinition());
     	
@@ -113,7 +115,7 @@ public class DeclClass extends AbstractDeclClass {
         	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
         			.create(this.className.getName().toString()),c);
         } catch (DoubleDefException e) { //pas de double definition possible
-        	throw new ContextualError("Declaration d'une classe deja declare precedement", className.getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle] Trying to declare an class that already exist", className.getLocation());
         }
         
     }

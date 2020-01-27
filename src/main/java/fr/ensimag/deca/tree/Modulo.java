@@ -29,10 +29,10 @@ public class Modulo extends AbstractOpArith {
         
         //type _ binary _ op(mod, int, int) = int
         if (!type1.isInt()) {
-        	throw new ContextualError("Type non supporté pour un modulo (le nombre doit etre entier)", 
+        	throw new ContextualError("[SyntaxeContextuelle]Unsupported type for % (must be an integer)", 
         			this.getLeftOperand().getLocation());
         } else if (!type2.isInt()) {
-        	throw new ContextualError("Type non supporté pour un modulo (le nombre doit etre entier)", 
+        	throw new ContextualError("[SyntaxeContextuelle]Unsupported type for % (must be an integer)", 
         			this.getRightOperand().getLocation());
         }
         this.setType(compiler.getType("int"));

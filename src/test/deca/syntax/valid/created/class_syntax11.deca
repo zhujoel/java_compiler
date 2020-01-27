@@ -1,0 +1,16 @@
+class A {
+	int a = 0;
+	float b = 3.23;
+	float c = 0.0;
+	bool d = false;
+	A a;
+	B b;
+}
+
+class B extends A{
+	int methB(){
+		return this.a;
+	}
+}
+
+{}

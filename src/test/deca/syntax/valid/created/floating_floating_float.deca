@@ -1,0 +1,8 @@
+{
+	float a = 2.222;
+	float b = 4.444;
+	float c = 6.666;
+	if(a + b + c){
+		print("ww");
+	}
+}

@@ -44,11 +44,11 @@ public class Selection extends AbstractLValue {
 		Type t = expr.verifyExpr(compiler, localEnv, currentClass);
 		
 		//On controle que l'on fait la selection sur une classe
-		ClassDefinition cDef = t.asClassType(t.getName() + " n'est pas une classe", this.expr.getLocation()).getDefinition();
+		ClassDefinition cDef = t.asClassType("[SyntaxeContextuelle]" + t.getName() + " isn't a class", this.expr.getLocation()).getDefinition();
 		Type t2 = ident.verifyExpr(compiler, cDef.getMembers(), currentClass);
-		FieldDefinition fDef = ident.getDefinition().asFieldDefinition(ident.getName() + " n'est pas un champ", ident.getLocation());
+		FieldDefinition fDef = ident.getDefinition().asFieldDefinition("[SyntaxeContextuelle]" + ident.getName() + " isn't a field", ident.getLocation());
 		if (fDef.getVisibility() == Visibility.PROTECTED && !cDef.hasForParent(currentClass)) {
-			throw new ContextualError(ident.getName() + " est PROTECTED", expr.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle]" + ident.getName() + " is PROTECTED", expr.getLocation());
 		}
 		this.setType(t2);
 		return this.getType();

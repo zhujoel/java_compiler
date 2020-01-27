@@ -19,7 +19,7 @@ for prog in *.deca
 do
     echo "Test de ${prog%.*}..."
     ((total++))
-    test-synt $prog
+    test_synt $prog
     echo "Test effectué"
 	((effectues++))
 done

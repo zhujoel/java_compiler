@@ -1,0 +1,13 @@
+class A{
+	B methA(A a){
+		return (B)a;
+	}
+}
+
+class B extends A{
+	B methA(A a){
+		return new B();
+	}
+}
+
+{}
