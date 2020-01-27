@@ -90,7 +90,30 @@ class Math {
 	    }
 	    
 	   	float _getAtan2I(int i) {
-	    	return PI / (4 * _pow_opti(2, i));
+	    	if (i == 0) {
+	    		return PI / 4;
+	    	}
+	    	else if (i == 1) {
+	    		return 0.463647609;
+	    	}
+	    	else if (i == 2) {
+	    		return 0.244978663;
+	    	}
+	    	else if (i == 3) {
+	    		return 0.124354995;
+	    	}
+	    	else if (i == 4) {
+	    		return 0.06241881;
+	    	}
+	    	else if (i == 5) {
+	    		return 0.0312398334;
+	    	}
+	    	else if (i == 6) {
+	    		return 0.0156237286;
+	    	}
+	    	else {
+	    		return _pow_opti(2, - i);
+	    	}
 	    }
 	    
 	    float _tanCordic(float f, int n) {
