@@ -1,0 +1,11 @@
+class A{
+	int fonction(int a){
+		return a;
+	}
+}
+{
+	A a = new A();
+	A b;
+	b = a.fonction(3);
+	
+}
