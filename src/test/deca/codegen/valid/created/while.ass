@@ -1,18 +1,11 @@
 ; Test pour savoir si la pile est pleine
-<<<<<<< HEAD
 	TSTO #6
 	BOV pile_pleine
 	ADDSP #4
-=======
-	TSTO #26
-	BOV pile_pleine
-	ADDSP #24
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-<<<<<<< HEAD
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
@@ -34,40 +27,12 @@ Begin_While_1:
 	BOV debordement
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
-=======
-	STORE R0, 21(GB)
-	LOAD code.Object.equals, R0
-	STORE R0, 22(GB)
-; Main Function
-; Declaration des variables
-	LOAD #0, R2
-	STORE R2, 23(GB)
-; Beginning of main instructions:
-Begin_While_1:
-; <
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #5, R2
-	CMP R2, R2
-	BGE End_While_1
-	POP R2
-; +
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #1, R2
-	ADD R2, R2
-	BOV debordement
-	POP R2
-	STORE R2, 23(GB)
-	LOAD 23(GB), R1
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	WINT
 	WNL
 	BRA Begin_While_1
 End_While_1:
 Begin_While_2:
 ; !=
-<<<<<<< HEAD
 	LOAD 3(GB), R2
 	LOAD #10, R3
 	CMP R3, R2
@@ -79,30 +44,12 @@ Begin_While_2:
 	BOV debordement
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
-=======
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #10, R2
-	CMP R2, R2
-	BEQ End_While_2
-	POP R2
-; +
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #1, R2
-	ADD R2, R2
-	BOV debordement
-	POP R2
-	STORE R2, 23(GB)
-	LOAD 23(GB), R1
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	WINT
 	WNL
 	BRA Begin_While_2
 End_While_2:
 Begin_While_3:
 ; ==
-<<<<<<< HEAD
 	LOAD 3(GB), R2
 	LOAD #10, R3
 	CMP R3, R2
@@ -114,30 +61,12 @@ Begin_While_3:
 	BOV debordement
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
-=======
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #10, R2
-	CMP R2, R2
-	BNE End_While_3
-	POP R2
-; +
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #1, R2
-	ADD R2, R2
-	BOV debordement
-	POP R2
-	STORE R2, 23(GB)
-	LOAD 23(GB), R1
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	WINT
 	WNL
 	BRA Begin_While_3
 End_While_3:
 Begin_While_4:
 ; >
-<<<<<<< HEAD
 	LOAD 3(GB), R2
 	LOAD #50, R3
 	CMP R3, R2
@@ -149,23 +78,6 @@ Begin_While_4:
 	BOV debordement
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
-=======
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #50, R2
-	CMP R2, R2
-	BLE End_While_4
-	POP R2
-; +
-	LOAD 23(GB), R2
-	PUSH R2
-	LOAD #1, R2
-	ADD R2, R2
-	BOV debordement
-	POP R2
-	STORE R2, 23(GB)
-	LOAD 23(GB), R1
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	WINT
 	WNL
 	BRA Begin_While_4

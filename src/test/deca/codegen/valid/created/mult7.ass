@@ -18,17 +18,9 @@
 ; Beginning of main instructions:
 ; *
 	LOAD 4(GB), R2
-<<<<<<< HEAD
 	LOAD 3(GB), R3
 	MUL R3, R2
 	BOV debordement
-=======
-	PUSH R2
-	LOAD 3(GB), R2
-	MUL R2, R2
-	BOV debordement
-	POP R2
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
 	WINT

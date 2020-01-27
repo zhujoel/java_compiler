@@ -24,10 +24,7 @@ Begin_While_1:
 	BLE End_While_1
 	LOAD 3(GB), R1
 	WINT
-<<<<<<< HEAD
 	WNL
-=======
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; -
 	LOAD 3(GB), R2
 	LOAD #1, R3
