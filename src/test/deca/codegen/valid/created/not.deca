@@ -1,7 +1,5 @@
 {
     bool a = false;
     !a;
-    print(!a);
     a = !a;
-    print(a);
 }

@@ -1,0 +1,4 @@
+{
+    bool a = false;
+    !(true || a);
+}
