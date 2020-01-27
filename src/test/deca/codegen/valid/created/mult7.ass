@@ -18,11 +18,9 @@
 ; Beginning of main instructions:
 ; *
 	LOAD 4(GB), R2
-	PUSH R2
-	LOAD 3(GB), R2
-	MUL R2, R2
+	LOAD 3(GB), R3
+	MUL R3, R2
 	BOV debordement
-	POP R2
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
 	WINT

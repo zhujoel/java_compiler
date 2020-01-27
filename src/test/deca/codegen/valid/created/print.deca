@@ -6,8 +6,4 @@
     print(2.0);
     float b = 1.2;
     print(b);
-    print(true);
-    print(false);
-    bool c = true;
-    print(c);
 }

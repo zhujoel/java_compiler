@@ -22,6 +22,7 @@ Begin_While_1:
 	BGE End_While_1
 	LOAD 3(GB), R1
 	WINT
+	WNL
 ; +
 	LOAD 3(GB), R2
 	LOAD #1, R3

@@ -1,19 +1,19 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #21
+	TSTO #7
 	BOV pile_pleine
-	ADDSP #19
+	ADDSP #5
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 14(GB)
+	STORE R0, 2(GB)
 ; Code de la table des méthodes de A
 	LEA 1(GB), R0
-	STORE R0, 15(GB)
+	STORE R0, 3(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 16(GB)
+	STORE R0, 4(GB)
 ; Main Function
 ; Declaration des variables
 ; Beginning of main instructions:

@@ -1,0 +1,3 @@
+a est égal à deux.
+b vaut false
+c vaut 5.2

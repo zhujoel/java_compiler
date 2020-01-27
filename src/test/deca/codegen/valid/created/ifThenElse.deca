@@ -3,24 +3,24 @@
     bool b;
     float c;
     if(a == 2){
-        print("a est égal à deux.");
+        println("a est égal à deux.");
     }
     else{
-        print("a est différent de deux.");
+        println("a est différent de deux.");
     }
 
     b = false;
     if(b){
-        print("b vaut true");
+        println("b vaut true");
     }
     else{
-        print("b vaut false");
+        println("b vaut false");
     }
     c = 5.2;
     if(c == 5.2){
-        print("c vaut 5.2");
+        println("c vaut 5.2");
     }
     else{
-        print("c est différent de 5.2");
+        println("c est différent de 5.2");
     }
 }

@@ -9,8 +9,4 @@
     println(2.0);
     b = 1.2;
     println(b);
-    println(true);
-    println(false);
-    c = true;
-    println(c);
 }

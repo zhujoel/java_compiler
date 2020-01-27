@@ -34,6 +34,7 @@ Fin_or_1:
 	CMP R5, R4
 	BGE End_While_1
 	WSTR "a vaut true"
+	WNL
 ; +
 	LOAD 5(GB), R4
 	LOAD #1, R5
