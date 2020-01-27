@@ -1,0 +1,14 @@
+class A{
+	bool equals(Object o){
+
+	}
+	void methA(int a, int b){
+
+	}
+}
+
+class B extends A{
+	void methA(int a, int b){}
+}
+
+{}

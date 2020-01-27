@@ -1,0 +1,10 @@
+class A{
+	int a;	
+	int b;
+	void methA(){
+		this.a = 5;
+		this.b = 7;
+	}	
+}
+
+{}

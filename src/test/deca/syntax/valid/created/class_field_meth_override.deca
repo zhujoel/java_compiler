@@ -1,0 +1,11 @@
+class A{
+	int a;
+}
+
+class B extends A{
+	void methA(){
+		this.a = 5;
+	}
+}
+
+{}

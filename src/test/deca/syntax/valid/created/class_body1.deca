@@ -1,0 +1,11 @@
+class A{
+	void methA(){
+		int a;
+		int b;
+		a = 5;
+		b = 2;
+		a = a + b;
+	}
+}
+
+{}
