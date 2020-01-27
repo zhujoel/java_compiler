@@ -1,7 +1,0 @@
-class P extends Object{
-	bool equals(Object o){
-	}
-}
-{
-	int x = 5;
-}
