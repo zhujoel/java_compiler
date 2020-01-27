@@ -26,10 +26,12 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         
         //Controle du type
         if (!type1.isBoolean()) {
-        	throw new ContextualError("Type " + type1.toString() + " utilisé sur une operation booleenne", 
+        	throw new ContextualError("[SyntaxeContextuelle]Type " 
+        			+ type1.toString() + " used on a boolean operation", 
         			this.getLeftOperand().getLocation());
         } else if(!type2.isBoolean()) {
-        	throw new ContextualError("Type " + type2.toString() + " utilisé sur une operation booleenne", 
+        	throw new ContextualError("[SyntaxeContextuelle]Type " 
+        			+ type2.toString() + " used on a boolean operation", 
         			this.getLeftOperand().getLocation());
         }
         

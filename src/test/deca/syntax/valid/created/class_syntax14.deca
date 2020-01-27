@@ -1,0 +1,8 @@
+class AEFE{
+	int a = 28;
+	int getA(){
+		return this.a;
+	}
+}
+
+{}

@@ -1,0 +1,22 @@
+class A{
+	A methA(A a, B b, C c){
+		a.methA(new A(), new B(), new C());
+		return a;
+	}
+}
+
+class B{
+	void methB(){
+	
+	}
+}
+
+class C{
+
+	float methC(){
+		return 5.23232;
+	}
+
+}
+
+{}

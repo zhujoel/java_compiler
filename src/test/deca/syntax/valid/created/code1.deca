@@ -1,0 +1,12 @@
+{
+	int a = 2;
+	int b = 3;
+	bool c = true;
+	bool f = false;
+	while(a < 3 && true){
+		a = a * 28;
+	}
+	while (a > 3 && true || f){
+		a = b + 28 / 45 * 2;
+	}
+}

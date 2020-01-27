@@ -1,30 +1,52 @@
 ; Test pour savoir si la pile est pleine
+<<<<<<< HEAD
 	TSTO #6
 	BOV pile_pleine
 	ADDSP #4
+=======
+	TSTO #14
+	BOV pile_pleine
+	ADDSP #12
+>>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
+<<<<<<< HEAD
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
+=======
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+>>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; Main Function
 ; Declaration des variables
 ; -
 	LOAD #1, R2
 	SUB #0, R2
+<<<<<<< HEAD
 	STORE R2, 3(GB)
 ; Beginning of main instructions:
 	LOAD 3(GB), R1
 	WINT
 	WNL
+=======
+	STORE R2, 11(GB)
+; Beginning of main instructions:
+	LOAD 11(GB), R1
+	WINT
+>>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; -
 	LOAD #2, R2
 	SUB #0, R2
 	LOAD R2, R1
 	WINT
+<<<<<<< HEAD
 	WNL
+=======
+>>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 ; -
 	LOAD #3, R3
 	SUB #0, R3

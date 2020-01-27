@@ -1,0 +1,8 @@
+{
+	int a = 3;
+	float c = 5;
+	bool d = false;
+	float f = (float)a;
+	a = (int)f;
+	c = (float)a;
+}

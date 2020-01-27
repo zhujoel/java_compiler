@@ -1,0 +1,12 @@
+class A{
+
+}
+
+class B{
+	int methA(int a, int b){
+		return a;
+	}
+}
+
+{
+}

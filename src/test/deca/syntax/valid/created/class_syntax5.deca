@@ -1,0 +1,8 @@
+class A{
+	int methA(Object o){
+		return 28;
+	}
+}
+
+
+{}

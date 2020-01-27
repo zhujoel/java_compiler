@@ -51,7 +51,7 @@ public class Program extends AbstractProgram {
 
         //Construction de la classe object
         ClassType o = compiler.getEnvironmentType().get(compiler.getSymbolTable()
-        		.create("Object")).asClassType("Object n'est pas une classe", Location.BUILTIN);
+        		.create("Object")).asClassType("[SyntaxeContextuelle] Object isn't a class", Location.BUILTIN);
         ClassDefinition oDef = o.getDefinition();
         
         
@@ -64,7 +64,7 @@ public class Program extends AbstractProgram {
         	o.getDefinition().getMembers().declare(compiler.getSymbolTable()
         			.create("equals"), equalsDef);
         }catch(DoubleDefException e) {
-        	throw new ContextualError("equals a deja été declaré", Location.BUILTIN);
+        	throw new ContextualError("Equals is already declared", Location.BUILTIN);
         }
         
         
@@ -73,14 +73,10 @@ public class Program extends AbstractProgram {
         	c.verifyClass(compiler);
         }
         //PASSE 2
-        for(AbstractDeclClass c : classes.getList()) {
-        	c.verifyClassMembers(compiler);
-        }
+        classes.verifyListClassMembers(compiler);
         
         //PASSE 3
-        for(AbstractDeclClass c : classes.getList()) {
-        	c.verifyClassBody(compiler);
-        }
+        classes.verifyListClassBody(compiler);
         
         //on ne met pas liste_decl pour le hello world mais il faudra l'ajouter
         main.verifyMain(compiler);

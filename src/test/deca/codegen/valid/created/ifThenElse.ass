@@ -1,29 +1,31 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #8
+	TSTO #19
 	BOV pile_pleine
-	ADDSP #6
+	ADDSP #17
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 12(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 13(GB)
 ; Main Function
 ; Declaration des variables
 	LOAD #2, R2
-	STORE R2, 3(GB)
+	STORE R2, 14(GB)
 	LOAD #0, R0
-	STORE R0, 4(GB)
+	STORE R0, 15(GB)
 	LOAD #0x0.0p0, R0
-	STORE R0, 5(GB)
+	STORE R0, 16(GB)
 ; Beginning of main instructions:
 ; Début du if_1
 ; ==
-	LOAD 3(GB), R2
-	LOAD #2, R3
-	CMP R3, R2
+	LOAD 14(GB), R2
+	PUSH R2
+	LOAD #2, R2
+	CMP R2, R2
 	BNE else_1
+	POP R2
 ; Contenu du if_1
 	WSTR "a est égal à deux."
 	WNL
@@ -33,9 +35,9 @@ else_1:
 	WNL
 endif_1:
 	LOAD #0, R2
-	STORE R2, 4(GB)
+	STORE R2, 15(GB)
 ; Début du if_2
-	LOAD 4(GB), R2
+	LOAD 15(GB), R2
 	CMP #1, R2
 	BNE else_2
 ; Contenu du if_2
@@ -46,14 +48,18 @@ else_2:
 	WSTR "b vaut false"
 	WNL
 endif_2:
-	LOAD #0x1.4cccccp2, R3
-	STORE R3, 5(GB)
+	PUSH R2
+	LOAD #0x1.4cccccp2, R2
+	STORE R2, 16(GB)
+	POP R2
 ; Début du if_3
 ; ==
-	LOAD 5(GB), R3
-	LOAD #0x1.4cccccp2, R4
-	CMP R4, R3
+	LOAD 16(GB), R2
+	PUSH R2
+	LOAD #0x1.4cccccp2, R2
+	CMP R2, R2
 	BNE else_3
+	POP R2
 ; Contenu du if_3
 	WSTR "c vaut 5.2"
 	WNL

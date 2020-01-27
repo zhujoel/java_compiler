@@ -18,6 +18,10 @@ public class TestClass {
 	public final int NB_FIELD_A = 5;
 	public ClassType t = new ClassType(null);
 	ClassDefinition classDefC = new ClassDefinition(null, null, null);
+	TypeDefinition typeDef = new TypeDefinition(null, null);
+	StringType s1 = new StringType(null);
+	StringType s2 = new StringType(null);
+	VoidType v = new VoidType(null);
 	
 
 	@Mock
@@ -34,6 +38,7 @@ public class TestClass {
 	
 	@Mock
 	EnvironmentExp envExp;
+	
 	
 
 	
@@ -130,4 +135,44 @@ public class TestClass {
 		classDefB.asFieldDefinition(null, null);
 	}
 
+	@Test
+	public void testTypeDefgetNature() {
+		assertEquals(typeDef.getNature(), "type");
+	}
+	
+	@Test
+	public void testTypeDefIsExpression() {
+		assertFalse(typeDef.isExpression());
+	}
+	
+	@Test
+	public void testStringSame() {
+		assertTrue(s1.sameType(s2));
+	}
+	
+	@Test
+	public void testStringisString() {
+		assertTrue(s1.isString());
+	}
+	
+	@Test
+	public void testVoidIsSameType() {
+		assertTrue(v.sameType(new VoidType(null)));
+	}
+	
+	@Test
+	public void testVoidIsVoid() {
+		assertTrue(v.isVoid());
+	}
+	
+	@Test(expected = ContextualError.class)
+	public void testAsClassDefinitionWrong() throws ContextualError {
+		v.asClassType(null, null);
+	}
+	
+	@Test
+	public void testAsClassDefiniton() throws ContextualError {
+		t.asClassType(null, null);
+	}
+	
 }

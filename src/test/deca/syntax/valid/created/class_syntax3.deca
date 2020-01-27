@@ -1,0 +1,10 @@
+class A{
+	int methA(int a, float b, bool c){
+		if(c == true){
+			return a;
+		}
+		return b;
+	}
+
+}
+{}
