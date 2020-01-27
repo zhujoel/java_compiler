@@ -13,7 +13,8 @@
 ; Declaration des variables
 ; -
 	LOAD #1, R2
-	SUB #0, R2
+	LOAD #0, R3
+	SUB R3, R2
 	STORE R2, 3(GB)
 ; Beginning of main instructions:
 	LOAD 3(GB), R1
@@ -21,13 +22,15 @@
 	WNL
 ; -
 	LOAD #2, R2
-	SUB #0, R2
+	LOAD #0, R3
+	SUB R3, R2
 	LOAD R2, R1
 	WINT
 	WNL
 ; -
 	LOAD #3, R3
-	SUB #0, R3
+	LOAD #0, R4
+	SUB R4, R3
 	HALT
 code.Object.equals:
 pile_pleine:

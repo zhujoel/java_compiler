@@ -13,7 +13,8 @@
 ; Declaration des variables
 ; -
 	LOAD #5, R2
-	SUB #0, R2
+	LOAD #0, R3
+	SUB R3, R2
 	STORE R2, 3(GB)
 	LOAD #4, R2
 	STORE R2, 4(GB)
