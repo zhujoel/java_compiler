@@ -1,0 +1,14 @@
+{
+	bool a = true;
+	bool b = false;
+	bool c = true;
+	bool d = false;
+	bool e = false;
+	bool f = false;
+	if (a&&b&&c||d&&e||f){
+		print("wtf");
+	}
+	else{
+		print("wtf");
+	}
+}

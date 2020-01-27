@@ -1,0 +1,8 @@
+{
+	float dec = 5.2;
+	int a = dec + 2;
+	float dec2 = dec + a;
+	float dec3 = a + dec;
+	dec = dec + dec2 + a + dec3;
+	dec = a + dec2 + dec + dec3;
+}

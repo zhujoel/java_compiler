@@ -1,0 +1,5 @@
+{
+	if(true && false == false = true){
+		printlnx("qsfsd");
+	}
+}

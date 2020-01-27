@@ -1,0 +1,11 @@
+class A extends Object{
+
+}
+
+class B extends A{
+	bool equals(Object o){
+		return true;
+	}
+}
+
+{}

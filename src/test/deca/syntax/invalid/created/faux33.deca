@@ -1,0 +1,7 @@
+class CCEC{
+	void methC(int a, int b){
+		int a = a + b;
+	}
+}
+
+{}

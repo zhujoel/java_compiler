@@ -1,0 +1,10 @@
+class A{
+	int methA(){
+		return 2;
+	}
+}
+
+{
+	A a = new A();
+	print(a.methA());
+}

@@ -1,0 +1,9 @@
+class EFEFEFE{
+	float a = 2.22;
+	
+	void setA(float a){
+		this.a = a;
+	}
+}
+
+{}

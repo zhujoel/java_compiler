@@ -1,0 +1,15 @@
+class A{
+	bool a = false;
+	int b = 2;
+	float c;
+	bool methA(){
+		if(this.a && this.b == 2){
+			this.c = 5.232;
+		}
+		else{
+			this.c = 2.222;
+		}
+	}
+}
+
+{}

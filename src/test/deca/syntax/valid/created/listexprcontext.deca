@@ -1,0 +1,14 @@
+{
+	int a = 0;
+	int b = 2;
+	int c = 23;
+	print(c);
+	c = 0;
+	if(c){
+		a = 28;
+		b = 2-2;
+	}
+	else{
+
+	}
+}

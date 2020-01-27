@@ -1,0 +1,19 @@
+class C {
+	int a;
+}
+
+class B{
+	int b;
+}
+
+class EF extends C{
+	int b;
+	int a;
+
+	void methEF(){
+		this.a = 22;
+		this.b = 3;
+	}
+}
+
+{}

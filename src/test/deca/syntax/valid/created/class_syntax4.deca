@@ -1,0 +1,13 @@
+class A{
+	void methA(){
+		bool c = true;
+		if(!c){
+			c = true;
+		}
+		else{
+			c = false;
+		}
+	}
+}
+{}
+

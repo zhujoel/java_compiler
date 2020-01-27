@@ -1,0 +1,7 @@
+class A{
+	A methA(A a){
+		return a;
+	}
+}
+
+{}

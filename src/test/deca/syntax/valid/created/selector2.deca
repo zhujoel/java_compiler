@@ -1,0 +1,9 @@
+class A{
+	void meth(){
+	}
+}
+
+{
+	A a = new A();
+	a.meth();
+}
