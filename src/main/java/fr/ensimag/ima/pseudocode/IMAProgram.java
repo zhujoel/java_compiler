@@ -53,6 +53,10 @@ public class IMAProgram {
     public void addFirst(Line l) {
         lines.addFirst(l);
     }
+    
+    public void addFirst(String s) {
+        lines.addFirst(new Line(s));
+    }
 
     public void addSecond(Instruction i) {
         lines.add(1, new Line(i));

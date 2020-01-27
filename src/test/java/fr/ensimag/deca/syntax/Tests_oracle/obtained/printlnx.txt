@@ -5,4 +5,4 @@
       `> ListInst [List with 1 elements]
          []> Println
              `> ListExpr [List with 1 elements]
-                []> Float (5.2256)
+                []> FloatLiteral (5.2256)

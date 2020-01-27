@@ -1,5 +1,5 @@
 class A{
 	int methodA(int a){
-		int a = 5;
+		a = 5;
 	}
 }

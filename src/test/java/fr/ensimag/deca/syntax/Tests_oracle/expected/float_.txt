@@ -6,5 +6,5 @@
       |      +> Identifier (float)
       |      +> Identifier (c)
       |      `> Initialization
-      |         `> Float (5.3423424)
+      |         `> FloatLiteral (5.3423424)
       `> ListInst [List with 0 elements]

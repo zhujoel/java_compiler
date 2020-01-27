@@ -14,7 +14,12 @@ import fr.ensimag.deca.context.EnvironmentExp.DoubleDefException;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Line;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Deca complete program (class definition plus main block)
@@ -43,7 +48,7 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        
+
         //Construction de la classe object
         ClassType o = compiler.getEnvironmentType().get(compiler.getSymbolTable()
         		.create("Object")).asClassType("Object n'est pas une classe", Location.BUILTIN);
@@ -71,6 +76,7 @@ public class Program extends AbstractProgram {
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassMembers(compiler);
         }
+        
         //PASSE 3
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassBody(compiler);
@@ -83,12 +89,19 @@ public class Program extends AbstractProgram {
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-
         compiler.addComment("Class Declaration");
     	classes.codeGenListClass(compiler);
         compiler.addComment("Main Function");
         main.codeGenMain(compiler);
+
+        int d2 = compiler.getStackManager().getStackCpt()-classes.getNbDeclField();
+        compiler.addFirst(new ADDSP(d2));
+        compiler.addFirst(new BOV(ErrorManager.tabLabel[0]));
+        compiler.addFirst(new TSTO(d2+2));
+    	compiler.addFirst("Test pour savoir si la pile est pleine");
+
+
+        
         compiler.getRegManager().clearStack(compiler);
         compiler.addInstruction(new HALT());
         compiler.appendAllBlocs();

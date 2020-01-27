@@ -13,7 +13,7 @@
          []> Println
              `> ListExpr [List with 1 elements]
                 []> Multiply
-                    +> Float (0.5)
+                    +> FloatLiteral (0.5)
                     `> Multiply
                        +> Identifier (x)
                        `> Identifier (x)

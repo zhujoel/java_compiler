@@ -30,6 +30,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 
 	
 	public void codeGenListField(DecacCompiler compiler, Symbol symbol) {
+		compiler.addIMABloc();
 		// On vérifie qu'il y a de la place pour ranger les attributs dans le tas
 		Label init = new Label("init." + symbol.getName());
 		GPRegister reg = compiler.getRegManager().getRegistreLibre(compiler);

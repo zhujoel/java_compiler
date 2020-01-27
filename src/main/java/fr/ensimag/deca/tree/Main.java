@@ -42,11 +42,6 @@ public class Main extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
-        // A FAIRE: traiter les déclarations de variables.
-    	compiler.addComment("Test pour savoir si la pile est pleine");
-    	compiler.addInstruction(new TSTO(new ImmediateInteger(this.declVariables.getList().size() + 2)));
-    	compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
-    	compiler.addInstruction(new ADDSP(new ImmediateInteger(this.declVariables.getList().size() + 2)));
         declVariables.codeGenListDeclVar(compiler);
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);

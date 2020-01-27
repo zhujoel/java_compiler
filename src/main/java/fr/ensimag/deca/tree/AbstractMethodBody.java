@@ -20,5 +20,7 @@ public abstract class AbstractMethodBody extends Tree{
 	 * Génère les instructions de la méthode
 	 * @param compiler
 	 */
-	public abstract void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className);
+	public abstract void codeGenMethodBody(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv);
+	
+	public abstract int getNbVarLocal();
 }

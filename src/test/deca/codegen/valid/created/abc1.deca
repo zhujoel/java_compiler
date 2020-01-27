@@ -1,0 +1,14 @@
+{
+    int a, b, c, d, e, f;
+    float w, x, y, z, p;
+    a = 54;
+    b = 78987;
+    c = 875;
+    e = 99982;
+    w = a * 96;
+    x = w * 7784 + e;
+    y = b + c;
+    w = d + e + y;
+    f = a + b + c + e;
+    p = f * f;
+}
