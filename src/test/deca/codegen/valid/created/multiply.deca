@@ -5,14 +5,14 @@
     float d;
     a * b;
     6 * 1;
-    print(a * b);
+    println(a * b);
     a = a * b;
-    print(5 * 2);
+    println(5 * 2);
     c = 5;
     d = 2;
     c * d;
     6.0 * 1.0;
-    print(c * d);
+    println(c * d);
     c = c * d;
-    print(5.0 * 2.0);
+    println(5.0 * 2.0);
 }

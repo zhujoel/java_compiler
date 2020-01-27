@@ -1,5 +1,4 @@
 {
-    float a;
+    float a = 0;
     a = a / 3.4;
-    print(a);
 }
