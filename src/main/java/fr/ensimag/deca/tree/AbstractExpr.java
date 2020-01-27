@@ -89,7 +89,6 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
     	type = this.verifyExpr(compiler, localEnv, currentClass);
     	
-    	
     	if(type.isInt() && expectedType.isFloat()) {//si on stocke un int dans un nombre flottant
     		ConvFloat c = new ConvFloat(this);
     		//c.verifyExpr(compiler, localEnv, currentClass);
@@ -105,6 +104,10 @@ public abstract class AbstractExpr extends AbstractInst {
     			this.setType(type);
     			return this;
     		}
+    	}else if (type.isNull() && expectedType.isClass()) {
+    		//si on a un objet null
+    		this.setType(type);
+    		return this;
     	}
     	throw new ContextualError("Affectation error, "
     			+ "type: " + type.toString() + ", expected type: " + expectedType.toString(), getLocation());

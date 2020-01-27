@@ -45,12 +45,12 @@ public class ManualChainTestContext {
 	        try {
 	            prog.verifyProgram(compiler);
 	            System.out.println("Fichier: " + i);
-	            System.out.println(GREEN + "\t status: execution success" + RESET);
+	            System.out.println(GREEN + "\t status: correct context" + RESET);
 	        
 	        }
 	        catch (Exception e) {
 	        	System.out.println("Fichier: " + i);
-	            System.out.println(RED + "\t status: execution failure" + RESET);
+	            System.out.println(RED + "\t status: incorrect context" + RESET);
 	        }
         }
     }

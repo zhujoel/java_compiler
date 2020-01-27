@@ -1,0 +1,10 @@
+//code invalde mais contextuellement correct
+class A{
+	int a;
+}
+
+{
+
+	A b = null;
+	b.a;
+}

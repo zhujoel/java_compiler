@@ -1,0 +1,11 @@
+class A{
+	int a = 3;
+}
+class B extends A{
+
+}
+{
+	B obj = new B();
+	int b;
+	b = obj.a;
+}

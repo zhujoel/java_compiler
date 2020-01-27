@@ -69,6 +69,7 @@ public class MethodCall extends AbstractExpr{
 				throw new ContextualError("La methode " + nomMethode.getName() + " n'est pas definie", nomMethode.getLocation());
 			}
 		}
+		this.setType(retourType);
 		//On controle que l'appel se fait avec le bon nombre d'arguments et que leurs types sont corrects
 		Signature s = nomMethode.getMethodDefinition().getSignature();
 		for (int i = 0 ; i < s.getList().size() ; i++) {
@@ -77,7 +78,7 @@ public class MethodCall extends AbstractExpr{
 		
 		
 		
-		return null;
+		return this.getType();
 	}
 
 	@Override

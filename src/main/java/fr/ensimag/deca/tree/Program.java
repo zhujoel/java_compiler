@@ -48,7 +48,7 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        
+
         //Construction de la classe object
         ClassType o = compiler.getEnvironmentType().get(compiler.getSymbolTable()
         		.create("Object")).asClassType("Object n'est pas une classe", Location.BUILTIN);
@@ -76,6 +76,7 @@ public class Program extends AbstractProgram {
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassMembers(compiler);
         }
+        
         //PASSE 3
         for(AbstractDeclClass c : classes.getList()) {
         	c.verifyClassBody(compiler);
