@@ -1,0 +1,9 @@
+{
+    int a = 0;
+    if(a < 0){
+        print("dans le if");
+    }
+    else{
+        print("dans le else");
+    }
+}
