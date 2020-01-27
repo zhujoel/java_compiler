@@ -76,19 +76,6 @@ public class CompilerOptions {
         int i = 0;
         while (i < args.length) {
         	switch (args[i]) {
-                    //option pour faire toute la compilation et 
-                    //generer et montrer le fichier .ass
-//                    case "-a":
-//                        if(verification){
-//                            System.out.println("The options -a and -v are incompatibles"); 
-//                            System.exit(1);
-//                        }else if(parse){
-//                            System.out.println("The options -a and -p are incompatibles");
-//                            System.exit(1);
-//                        }else{
-//                        allCompilation = true;
-//                        }
-//                        break;
                     case "-b":
                         if (i == 0 && args.length == 1) {
                             printBanner = true;
@@ -102,9 +89,6 @@ public class CompilerOptions {
                         if (verification) {
                             System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
-                            System.exit(1);
-                        } else if (allCompilation) {
-                            System.out.println("The options -a and -p are incompatibles");
                             System.exit(1);
                         } else {
                             parse = true;
@@ -120,9 +104,6 @@ public class CompilerOptions {
                         if (parse) {
                             System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
-                            System.exit(1);
-                        } else if (allCompilation) {
-                            System.out.println("The options -a and -v are incompatibles");
                             System.exit(1);
                         } else {
                             verification = true;
@@ -178,14 +159,13 @@ public class CompilerOptions {
             System.exit(1);
         }
         
+        //if none of the verify and parse options are activated
+        //allCopilation is activated to do the whole compilation
+        //and generate the assambly code
         if(!sourceFiles.isEmpty() && (!parse && !verification)){
             allCompilation  = true;
-            //System.out.println("No compilation option (-a, -p or -v) was selected");
-            //System.exit(1);
         }
         
-        
-        // DONE! A FAIRE : parcourir args pour positionner les options correctement.
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
@@ -219,7 +199,6 @@ public class CompilerOptions {
 
     protected void displayUsage() {
         System.out.println("\n Options pour le compilateur\n");
-        System.out.println("  -a\n    Compiler le fichier source et generer le fichier .ass");
         System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
         System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
                 + "    l’arbre, et affiche la décompilation de ce dernier.");
