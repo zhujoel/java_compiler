@@ -138,13 +138,12 @@ public class DeclMethod extends AbstractDeclMethod {
 		
 		//definition de la methode
 		MethodDefinition methDef = new MethodDefinition(t, methName.getLocation(), s, currentClass.getNumberOfMethods());
-		
+		methName.setDefinition(methDef);
+		methName.setType(t);
 		//declaration de la methode dans l'environement local
 		try {
 			
 			localEnv.declare(this.methName.getName(), methDef);
-			methName.setDefinition(methDef);
-			methName.setType(t);
 			
 		}catch(DoubleDefException e) {
 			throw new ContextualError("Methode deja definie", this.methName.getLocation());
