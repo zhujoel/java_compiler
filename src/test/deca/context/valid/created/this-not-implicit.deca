@@ -1,0 +1,7 @@
+//ici il faut regarder dans l'arbre quel sont les a selectionnés par la verification contextuelle
+class A {
+	int a;
+	void fonction(int a){
+		a = a; //on doit avoir 2 fois le même a défini à 4, 19
+	}
+}
