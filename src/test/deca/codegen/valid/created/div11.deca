@@ -1,0 +1,7 @@
+{
+    int a = 10.0;
+    int b = 5.0;
+    print(a / b);
+    a = a / b;
+    print(a);
+}

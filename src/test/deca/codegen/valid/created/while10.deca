@@ -1,0 +1,8 @@
+{
+    bool a = true;
+    bool b = true;
+    while(a && b){
+        print("a vaut true");
+        a = false;
+    }
+}
