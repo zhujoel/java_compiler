@@ -112,11 +112,12 @@ public class DeclMethod extends AbstractDeclMethod {
 		if (sC != null) {
 			//recuperation de la methode dans cette classe parent
 			MethodDefinition methSuperC = sC.getMembers()
-					.get(methName.getName()).asMethodDefinition(methName.getName().toString()
-							+ " n'est pas une methode", methName.getLocation());
+					.get(methName.getName()).asMethodDefinition("[SyntaxeContextuelle] " + methName.getName()
+							+ " isn't a method", methName.getLocation());
 			//On compare les deux signatures
 			if(!methSuperC.getSignature().equals(s)) {
-				throw new ContextualError("Redefinition de methode avec deux signatures differentes", methName.getLocation());
+				throw new ContextualError("[SyntaxeContextuelle] Trying to redefine a function with a different signature", 
+						methName.getLocation());
 			}
 				
 				
@@ -124,14 +125,14 @@ public class DeclMethod extends AbstractDeclMethod {
 			if(t.isClass()) {
 				//on recupere la ClassDefinition du type de retour de la methode fille
 				ClassDefinition cDefThis = compiler.getEnvironmentType().get(t.getName())
-						.asClassType(t.getName().toString() + " n'est pas une classe", this.returnType.getLocation()).getDefinition();
+						.asClassType("[SyntaxeContextuelle] " + t.getName() + " isn't a class", this.returnType.getLocation()).getDefinition();
 				//on recupere la ClassDefinition du type de retour de la methode mere
 				ClassDefinition cDefSuper = compiler.getEnvironmentType().get(methSuperC.getType().getName())
-						.asClassType(methSuperC.getType().getName().toString() + " n'est pas une classe", methSuperC.getLocation()).getDefinition();
+						.asClassType("[SyntaxeContextuelle] " + methSuperC.getType().getName() + " isn't a class", methSuperC.getLocation()).getDefinition();
 				//on les compares
 				if(!cDefThis.hasForParent(cDefSuper)) {
-					throw new ContextualError("Le type de retour de la fonction " + cDefThis.getType().toString() 
-							+ " doit etre herite de " + cDefSuper.getType().toString(), this.returnType.getLocation());
+					throw new ContextualError("[SyntaxeContextuelle] The type returned by the function  " + cDefThis.getType() 
+							+ " must inherit from " + cDefSuper.getType().toString(), this.returnType.getLocation());
 				}
 			}
 		}
@@ -146,7 +147,7 @@ public class DeclMethod extends AbstractDeclMethod {
 			localEnv.declare(this.methName.getName(), methDef);
 			
 		}catch(DoubleDefException e) {
-			throw new ContextualError("Methode deja definie", this.methName.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle] Method already defined", this.methName.getLocation());
 		}
 	}
 
@@ -163,7 +164,7 @@ public class DeclMethod extends AbstractDeclMethod {
 				//TODO a changer
 				envParam.declare(p.getName(), p.getExpDefinition());
 			}catch(DoubleDefException e) {
-				throw new ContextualError("Parametre deja déclaré", p.getLocation());
+				throw new ContextualError("[SyntaxeContextuelle] Parameter already declared", p.getLocation());
 			}
 		}
 		

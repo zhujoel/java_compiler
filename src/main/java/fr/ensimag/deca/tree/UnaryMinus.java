@@ -24,7 +24,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
             ClassDefinition currentClass) throws ContextualError {
     	Type t = this.getOperand().verifyExpr(compiler, localEnv, currentClass);
     	if(!(t.isInt() || t.isFloat())) { //type := type _ unary _ op(op, type 1 )
-    		throw new ContextualError("Type non supporté par l'opération \"-\"", 
+    		throw new ContextualError("[SyntaxeContextuelle]Unsupported type by the operation \"-\"", 
     			this.getOperand().getLocation());
     	}
     	this.setType(t);

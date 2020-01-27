@@ -98,8 +98,8 @@ public class DeclField extends AbstractDeclField {
 		if(cSuperDef != null) {
 			//dans ce cas si la superDefinition n est pas un champ c est une erreur
 			if(!cSuperDef.getMembers().get(fieldName.getName()).isField()) {
-				throw new ContextualError(this.fieldName.getName().toString() + 
-						" n'est pas un champ dans l'une des classes parente", this.fieldName.getLocation());
+				throw new ContextualError("[SyntaxeContextuelle] " + this.fieldName.getName() + 
+						" isn't a parent class", this.fieldName.getLocation());
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class DeclField extends AbstractDeclField {
 			fieldName.setDefinition(fDef);
 			fieldName.setType(t);
 		}catch(DoubleDefException e) {
-			throw new ContextualError("Champ deja defini", this.fieldName.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle] Field already defined", this.fieldName.getLocation());
 		}
 	}
 	

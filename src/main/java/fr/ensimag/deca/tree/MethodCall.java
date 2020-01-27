@@ -54,19 +54,19 @@ public class MethodCall extends AbstractExpr{
 		//si on fait une selection (appel d'une methode dans un objet)
 		if(expr != null) {
 			//On recupere la definition de l'objet duquel on veut appeler la methode
-			ClassDefinition cDef = expr.verifyExpr(compiler, localEnv, currentClass).asClassType(expr
-				.getType() + " n'est pas une classe", expr.getLocation()).getDefinition();
+			ClassDefinition cDef = expr.verifyExpr(compiler, localEnv, currentClass).asClassType("[SyntaxeContextuelle]" + expr
+				.getType() + " isn't a class", expr.getLocation()).getDefinition();
 			
 			retourType = nomMethode.verifyExpr(compiler, cDef.getMembers(), currentClass);
 			
 			//Si l'objet n est pas declaré : on renvoie une erreur
 			if(cDef.getMembers().get(nomMethode.getName()) == null) {
-				throw new ContextualError(nomMethode.getName() + " n'est pas une methode de " + expr.getType().getName(), expr.getLocation());
+				throw new ContextualError("[SyntaxeContextuelle]" + nomMethode.getName() + " isn't a method from " + expr.getType().getName(), expr.getLocation());
 			}
 		}else {//Si on ne fait pas de selection (appel dans l'objet)
 			retourType = nomMethode.verifyExpr(compiler, localEnv, currentClass);
 			if (localEnv.get(nomMethode.getName()) == null) {
-				throw new ContextualError("La methode " + nomMethode.getName() + " n'est pas definie", nomMethode.getLocation());
+				throw new ContextualError("[SyntaxeContextuelle] The method " + nomMethode.getName() + " isn't defined", nomMethode.getLocation());
 			}
 		}
 		this.setType(retourType);
