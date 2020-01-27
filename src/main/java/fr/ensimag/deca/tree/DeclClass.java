@@ -115,7 +115,7 @@ public class DeclClass extends AbstractDeclClass {
         	compiler.getEnvironmentType().declare(compiler.getSymbolTable()
         			.create(this.className.getName().toString()),c);
         } catch (DoubleDefException e) { //pas de double definition possible
-        	throw new ContextualError("[SyntaxeContextuelle] Trying to declare an class that already exist", className.getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle] Trying to declare a class that already exist", className.getLocation());
         }
         
     }
