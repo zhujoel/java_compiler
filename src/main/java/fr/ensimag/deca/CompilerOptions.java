@@ -76,6 +76,17 @@ public class CompilerOptions {
         int i = 0;
         while (i < args.length) {
         	switch (args[i]) {
+                    case "-a":
+                        if(verification){
+                            System.out.println("The options -a and -v are incompatibles"); 
+                            System.exit(1);
+                        }else if(parse){
+                            System.out.println("The options -a and -p are incompatibles");
+                            System.exit(1);
+                        }else{
+                        allCompilation = true;
+                        }
+                        break;
                     case "-b":
                         if (i == 0 && args.length == 1) {
                             printBanner = true;
@@ -89,6 +100,9 @@ public class CompilerOptions {
                         if (verification) {
                             System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
+                            System.exit(1);
+                        } else if (allCompilation) {
+                            System.out.println("The options -a and -p are incompatibles");
                             System.exit(1);
                         } else {
                             parse = true;
@@ -104,6 +118,9 @@ public class CompilerOptions {
                         if (parse) {
                             System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
+                            System.exit(1);
+                        } else if (allCompilation) {
+                            System.out.println("The options -a and -p are incompatibles");
                             System.exit(1);
                         } else {
                             verification = true;
@@ -162,6 +179,8 @@ public class CompilerOptions {
         //if none of the verify and parse options are activated
         //allCopilation is activated to do the whole compilation
         //and generate the assambly code
+        //this is the same as when the -a option is entered in
+        //command line
         if(!sourceFiles.isEmpty() && (!parse && !verification)){
             allCompilation  = true;
         }
