@@ -1,5 +1,9 @@
+/**
+ * Fibonacci test program
+ */
 {
-	int cpt = 100;
+	// compteur
+	int cpt = 10;
 	int a = 1;
 	int b = 2;
 	int c = 3;
