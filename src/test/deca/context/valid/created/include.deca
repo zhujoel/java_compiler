@@ -1,5 +1,6 @@
 #include "Math.decah"
 
 {
-	float a = cos(2.3);
+	Math m = new Math();
+	float a = m.cos(3.2);
 }
