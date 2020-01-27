@@ -1,0 +1,9 @@
+class A{
+	int meth1(){}
+}
+
+class B extends A{
+
+}
+
+{}

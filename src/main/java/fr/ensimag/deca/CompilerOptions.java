@@ -79,36 +79,50 @@ public class CompilerOptions {
                     //option pour faire toute la compilation et 
                     //generer et montrer le fichier .ass
                     case "-a":
-                        allCompilation = true; 
+                        if(verification){
+                            System.out.println("The options -a and -v are incompatibles"); 
+                            System.exit(1);
+                        }else if(parse){
+                            System.out.println("The options -a and -p are incompatibles");
+                            System.exit(1);
+                        }else{
+                        allCompilation = true;
+                        }
                         break;
                     case "-b":
                         if (i == 0 && args.length == 1) {
                             printBanner = true;
                         } else {
-                            System.out.println("The -b option cannot "
+                            System.out.println("The option -b cannot "
                                     + "be used with other options");
                             System.exit(1);
                         }
                         break;
                     case "-p":
                         if (verification) {
-                            System.err.println("Les options [-p] et [-v] "
+                            System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
                             System.exit(1);
+                        } else if (allCompilation) {
+                            System.out.println("The options -a and -p are incompatibles");
+                            System.exit(1);
                         } else {
-                        parse = true;
+                            parse = true;
                         }
                         break;
                     case "-P":
-                            parallel = true;
+                        parallel = true;
                         break;
                     case "-d":
                         debug++;
                         break;
                     case "-v":
                         if (parse) {
-                            System.err.println("Les options [-p] et [-v] "
+                            System.err.println("Les options -p et -v "
                                     + "sont incompatibles.");
+                            System.exit(1);
+                        } else if (allCompilation) {
+                            System.out.println("The options -a and -v are incompatibles");
                             System.exit(1);
                         } else {
                             verification = true;
@@ -161,6 +175,11 @@ public class CompilerOptions {
             System.exit(1);
         }else if(!sourceFiles.isEmpty() && args.length > 0 && parallel && sourceFiles.size() < 2){
             System.err.println("The -P option needs at least 2 source files");
+            System.exit(1);
+        }
+        
+        if(!sourceFiles.isEmpty() && (!allCompilation && !parse && !verification)){
+            System.out.println("No compilation option (-a, -p or -v) was selected");
             System.exit(1);
         }
         

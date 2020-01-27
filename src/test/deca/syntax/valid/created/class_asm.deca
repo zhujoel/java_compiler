@@ -1,0 +1,4 @@
+class A{
+	void methASM()
+	asm ("LOAD #5, R1");
+}
