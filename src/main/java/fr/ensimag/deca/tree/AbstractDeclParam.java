@@ -27,6 +27,14 @@ public abstract class AbstractDeclParam extends Tree{
 	@Override
 	protected abstract void iterChildren(TreeFunction f);
 	
+	/**
+	 * [SyntaxeContextuelle] Verification des parametres des methodes dans la passe 2
+	 * @param compiler
+	 * @param localEnv
+	 * @param CurrentClass
+	 * @return
+	 * @throws ContextualError
+	 */
 	public abstract Type verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition CurrentClass) throws ContextualError;
 
 	

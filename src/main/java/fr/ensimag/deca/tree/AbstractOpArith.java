@@ -25,19 +25,24 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         Type type1 = this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         Type type2 = this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         
-        //type := type _ binary _ op(op, type 1 , type 2 )
+        //Si l'operation est réalisée sur autre chose qu'un float ou un int
         if (!(type1.isInt() || type1.isFloat())) {
-        	throw new ContextualError("Type " + type1.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getLeftOperand().getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle] Type " 
+        			+ type1.toString() + " not supported by the operation " + this.getOperatorName(), 
+        			this.getLeftOperand().getLocation());
         } else if(!(type2.isInt() || type2.isFloat())){
-        	throw new ContextualError("Type " + type2.toString() + " non supporté par l'operation " + this.getOperatorName(), this.getRightOperand().getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle] Type " 
+        			+ type2.toString() + " not supported by the operation " + this.getOperatorName(), 
+        			this.getRightOperand().getLocation());
         }
-        
+        //Si les types des deux operandes sont identiques
         if (type1.sameType(type2)){
         	this.setType(type1);
         	return this.getType();
         } 
+        
         //Dans le cas d'un convfloat
-        else if (type1.isInt() && type2.isFloat()) //Convfloat si l'un est int et l'autre float
+        else if (type1.isInt() && type2.isFloat()) //Convfloat si le premier est int et l'autre float
         {
         	//Creation d'un nouveau noeud Convfloat
         	ConvFloat c = new ConvFloat(this.getLeftOperand());
@@ -47,7 +52,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         	this.setType(type2);
         	return this.getType();
         }
-        else if(type1.isFloat() && type2.isInt())//Convfloat si l'un est int et l'autre float
+        else if(type1.isFloat() && type2.isInt())//Convfloat si le premier est float et l'autre int
         {
         	//Creation d'un nouveau noeud Convfloat
         	ConvFloat c = new ConvFloat(this.getRightOperand());
@@ -59,8 +64,8 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         }
         
         
-        throw new ContextualError("Operation entre un element de type " + type1.toString()
-        + " et un element de type " + type2.toString(), getLocation());
+        throw new ContextualError("[SyntaxeContextuelle] Operation between the type " + type1.toString()
+        + " and the type " + type2.toString(), getLocation());
     	
     }
     

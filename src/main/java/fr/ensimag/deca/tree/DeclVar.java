@@ -57,7 +57,7 @@ public class DeclVar extends AbstractDeclVar {
     	LOG.debug("verify Type : end");
     	//condition type != void
     	if (t.isVoid()) {
-    		throw new ContextualError("Variable de type void", type.getLocation());
+    		throw new ContextualError("[SyntaxeContextuelle] Void variable", type.getLocation());
     	}
     	
     	//generation de la definition pour la decoration de l'arbre
@@ -76,7 +76,7 @@ public class DeclVar extends AbstractDeclVar {
 			localEnv.declare(this.varName.getName(), d);
 			
 		} catch (DoubleDefException e) {
-			throw new ContextualError("Declaration d'une variable deja déclarée précédement", varName.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle] Variable already declared", varName.getLocation());
 		}
     	
     }

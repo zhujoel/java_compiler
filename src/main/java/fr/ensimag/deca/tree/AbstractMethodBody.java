@@ -12,7 +12,15 @@ import fr.ensimag.deca.context.Type;
  *
  */
 public abstract class AbstractMethodBody extends Tree{
-
+	
+	/**
+	 * [SyntaxeContextuelle] Verification du corps d'une methode dans la passe 3
+	 * @param compiler
+	 * @param envParam
+	 * @param currentClass
+	 * @param t
+	 * @throws ContextualError
+	 */
 	public abstract void verifyMethodBody(DecacCompiler compiler, EnvironmentExp envParam, ClassDefinition currentClass,
 			Type t) throws ContextualError;
 	
