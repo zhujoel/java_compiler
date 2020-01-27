@@ -1,0 +1,11 @@
+class A{
+	
+}
+class B{
+	A fonction(A a){
+		return null;
+	}
+}
+{
+	
+}

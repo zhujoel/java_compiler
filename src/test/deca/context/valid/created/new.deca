@@ -1,6 +1,6 @@
-Class A {
+class A {
 	protected int a;
 }
 {
-	A b = new A()
+	A b = new A();
 }

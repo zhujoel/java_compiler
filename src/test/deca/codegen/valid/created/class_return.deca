@@ -1,0 +1,6 @@
+class A{
+	int methA(){
+		return 5;
+	}
+}
+{}

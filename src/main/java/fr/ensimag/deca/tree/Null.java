@@ -16,7 +16,8 @@ public class Null extends AbstractExpr{
 	public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass)
 			throws ContextualError {
 		// TODO Auto-generated method stub
-			throw new UnsupportedOperationException("not yet implemented");
+			this.setType(compiler.getType("null"));
+			return this.getType();
 	}
 
 	@Override
