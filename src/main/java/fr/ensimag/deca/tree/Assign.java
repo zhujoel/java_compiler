@@ -68,7 +68,7 @@ public class Assign extends AbstractBinaryExpr {
 	}
 	
 	@Override
-	protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className) {
+	protected void codeGenInst(DecacCompiler compiler, AbstractIdentifier className, EnvironmentExp localEnv) {
 		GPRegister reg = getRightOperand().codeGenReg(compiler);
 		if(getLeftOperand() instanceof Identifier) {
 			Identifier leftOp = (Identifier)getLeftOperand();

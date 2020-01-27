@@ -200,6 +200,24 @@ public class DecacCompiler {
     	}
     }
     
+    public void addFirst(Instruction instruction) {
+    	if(!isStoring) {
+            program.addFirst(instruction);    	
+    	}
+    	else {
+    		this.getLastBloc().addFirst(instruction);
+    	}
+    }
+    
+    public void addFirst(String s) {
+    	if(!isStoring) {
+            program.addFirst(s);    	
+    	}
+    	else {
+    		this.getLastBloc().addFirst(s);
+    	}
+    }
+    
     public void append(IMAProgram prog) {
     	if(!isStoring) {
         	program.append(prog);	

@@ -1,3 +1,7 @@
+; Test pour savoir si la pile est pleine
+	TSTO #12
+	BOV pile_pleine
+	ADDSP #10
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -12,6 +16,7 @@
 	STORE R0, 4(GB)
 	LOAD code.A.methA, R0
 	STORE R0, 5(GB)
+<<<<<<< HEAD
 init.A:
 	TSTO #0
 	BOV tas_plein
@@ -22,6 +27,8 @@ init.A:
 	BOV tas_plein
 	NEW #0, R3
 	RTS
+=======
+>>>>>>> c423b6d2167ba364dc50207abb16cf5dd4ebba6e
 ; Code de la table des méthodes de B
 	LEA 3(GB), R0
 	STORE R0, 6(GB)
@@ -31,6 +38,7 @@ init.A:
 	STORE R0, 8(GB)
 	LOAD code.B.methB, R0
 	STORE R0, 9(GB)
+<<<<<<< HEAD
 init.B:
 	TSTO #0
 	BOV tas_plein
@@ -41,25 +49,38 @@ init.B:
 	BOV tas_plein
 	NEW #0, R5
 	RTS
+=======
+>>>>>>> c423b6d2167ba364dc50207abb16cf5dd4ebba6e
 ; Main Function
-; Test pour savoir si la pile est pleine
-	TSTO #2
-	BOV pile_pleine
-	ADDSP #2
 ; Declaration des variables
 ; Beginning of main instructions:
 	HALT
+code.Object.equals:
+init.A:
+	TSTO #0
+	BOV tas_plein
+	NEW #0, R2
+	RTS
 code.A.methA:
 	TSTO #0
 	BOV pile_pleine
+	ADDSP #0
 ; Sauvegarde des registres
+; Declaration des variables locales
 fin.A.methA:
 ; Restauration des registres
+	RTS
+init.B:
+	TSTO #0
+	BOV tas_plein
+	NEW #0, R3
 	RTS
 code.B.methB:
 	TSTO #0
 	BOV pile_pleine
+	ADDSP #0
 ; Sauvegarde des registres
+; Declaration des variables locales
 fin.B.methB:
 ; Restauration des registres
 	RTS

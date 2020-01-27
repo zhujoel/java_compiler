@@ -3,15 +3,21 @@ package fr.ensimag.deca.tree;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Liste des classes d'un programme.
@@ -68,12 +74,23 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addInstruction(new STORE(Register.getR(0), new RegisterOffset(compiler.getStackManager().getStackCpt(), Register.GB)));
         compiler.getStackManager().addStackCpt();
 		
-        //compiler.addLabel(objEq0);
+        compiler.activateStoring();
+        compiler.addIMABloc();
+        compiler.addLabel(objEq0);
+        compiler.deactivateStoring();
         
         compiler.getEnvironmentClass().put(compiler.getType("Object").getName(), new RegisterOffset(1, Register.GB));
 
         for (AbstractDeclClass i : getList()) {
             i.codeGenDeclClass(compiler);
-        }  
+        }
+    }
+    
+    public int getNbDeclField() {
+    	int i = 0;
+    	for(AbstractDeclClass c : this.getList()) {
+    		i += c.getFieldNb();
+    	}
+    	return i;
     }
 }

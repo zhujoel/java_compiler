@@ -134,9 +134,7 @@ public class DeclField extends AbstractDeclField {
 		catch(DoubleDefException e) {
 			e.printStackTrace();
 		}
-		// un registre de plus est occupé
-		compiler.getStackManager().addStackCpt();
-				
+		
 		// on génère le code assembleur de l'initialisation
 		GPRegister reg1 = initialization.codeGenInit(compiler, this.type.getType());
 		compiler.addInstruction(new STORE(reg1, varDef.getOperand()));

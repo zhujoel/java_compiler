@@ -17,6 +17,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
@@ -172,19 +173,23 @@ public class DeclMethod extends AbstractDeclMethod {
 	
 	@Override
 	protected void codeGenDeclMethod(DecacCompiler compiler, AbstractIdentifier className) {
+    	// On défini un nouveau environnement pour les variables locales
+    	EnvironmentExp localEnv = new EnvironmentExp(compiler.getEnvironmentExp());
+		
 		//bloc de début de méthode
 		compiler.addIMABloc();
 		
 		// label du corps de la méthode
 		Label methLabel = new Label("code."+className.getName()+"."+this.methName.getName().getName());
 		compiler.addLabel(methLabel);
-		compiler.addInstruction(new BOV(ErrorManager.tabLabel[0]));
 		
-		this.params.codeGenListParamIn(compiler);
+		this.params.codeGenListParamIn(compiler, localEnv);
 		
-		this.corps.codeGenMethodBody(compiler, className);
-
-		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size())));
+		this.corps.codeGenMethodBody(compiler, className, localEnv);
+		
+		compiler.addSecond(new ADDSP(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
+		compiler.addSecond(new BOV(ErrorManager.tabLabel[0]));
+		compiler.addSecond(new TSTO(new ImmediateInteger(this.params.size()+this.corps.getNbVarLocal())));
 		
 		// bloc de fin de méthode
 		compiler.addIMABloc();
@@ -192,7 +197,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		Label methLabelFin = new Label("fin."+className.getName()+"."+this.methName.getName().getName());
 		compiler.addLabel(methLabelFin);
 
-		this.params.codeGenListParamOut(compiler);
+		this.params.codeGenListParamOut(compiler, localEnv);
 		
 		
 		this.returnType.codeGenReturn(compiler);
