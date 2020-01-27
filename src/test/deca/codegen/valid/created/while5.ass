@@ -19,7 +19,8 @@ Begin_While_1:
 	LOAD 3(GB), R2
 ; -
 	LOAD #5, R3
-	SUB #0, R3
+	LOAD #0, R4
+	SUB R4, R3
 	CMP R3, R2
 	BLE End_While_1
 	LOAD 3(GB), R1

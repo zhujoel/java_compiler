@@ -14,7 +14,8 @@
 ; Beginning of main instructions:
 ; -
 	LOAD #1, R2
-	SUB #0, R2
+	LOAD #0, R3
+	SUB R3, R2
 	HALT
 code.Object.equals:
 pile_pleine:

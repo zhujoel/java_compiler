@@ -19,7 +19,8 @@
 ; *
 ; -
 	LOAD 3(GB), R2
-	SUB #0, R2
+	LOAD #0, R3
+	SUB R3, R2
 	LOAD 4(GB), R3
 	MUL R3, R2
 	BOV debordement
