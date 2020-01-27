@@ -1,7 +1,7 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #9
+	TSTO #6
 	BOV pile_pleine
-	ADDSP #7
+	ADDSP #4
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -13,15 +13,8 @@
 ; Declaration des variables
 ; <=
 	LOAD #0, R2
-<<<<<<< HEAD
 	LOAD #1, R3
 	CMP R3, R2
-=======
-	PUSH R2
-	LOAD #1, R2
-	CMP R2, R2
-	POP R2
->>>>>>> 645423c5a5200285d2d288475bba4fa2fada735a
 	STORE R2, 3(GB)
 ; Beginning of main instructions:
 ; !
