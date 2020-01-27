@@ -1,0 +1,10 @@
+{
+    bool a = false;
+    bool b = false;
+    if(a && b){
+        print("dans le if");
+    }
+    else{
+        print("dans le else");
+    }
+}

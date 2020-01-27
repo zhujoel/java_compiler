@@ -1,8 +1,8 @@
-class A{
-
-}
 
 {
-    int a = readInt();
-    5 + 7;
+    int a = 1;
+    while(a <= 10){
+        print(a);
+        a = a * 2;
+    }
 }

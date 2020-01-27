@@ -2,8 +2,6 @@
     int c = 5;
     int d = 2;
     c > d;
-    print(c > d);
     d = 6;
     c > d;
-    print(c > d);
 }

@@ -99,11 +99,11 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     	GPRegister regDroite = this.getRightOperand().codeGenReg(compiler);
     	
     	// On génère le code correspondant à l'opération, et on fait un test en cas de debordement
-    	codeGenAssemblyInst(compiler, regGauche, regDroite);
+    	codeGenAssemblyInst(compiler, regDroite, regGauche);
     	//compiler.addInstruction(new BOV(ErrorManager.tabLabel[3]));
     	
-        compiler.getRegManager().freeRegistre(regGauche.getNumber(), compiler);
-        return regDroite;
+        compiler.getRegManager().freeRegistre(regDroite.getNumber(), compiler);
+        return regGauche;
 	}
 	
 	/**
