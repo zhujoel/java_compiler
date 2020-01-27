@@ -1,0 +1,5 @@
+#include "Math.decah"
+
+{
+	float a = cos(2.3);
+}
