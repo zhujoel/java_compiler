@@ -1,7 +1,7 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #8
+	TSTO #5
 	BOV pile_pleine
-	ADDSP #6
+	ADDSP #3
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
@@ -9,34 +9,22 @@
 	STORE R0, 1(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 2(GB)
-; Code de la table des méthodes de P
-	LEA 1(GB), R0
-	STORE R0, 3(GB)
-	LOAD code.P.equals, R0
-	STORE R0, 4(GB)
 ; Main Function
 ; Declaration des variables
-	LOAD #5, R3
-	STORE R3, 5(GB)
 ; Beginning of main instructions:
+; Début du if_1
+; Contenu du if_2
+; Début du if_2
+; Contenu du if_3
+	WSTR "true"
+	BRA endif_2
+else_2:
+endif_2:
+	BRA endif_1
+else_1:
+endif_1:
 	HALT
 code.Object.equals:
-init.P:
-	TSTO #0
-	BOV tas_plein
-	NEW #0, R2
-	RTS
-code.P.equals:
-	TSTO #1
-	BOV pile_pleine
-	ADDSP #1
-; Sauvegarde des registres
-	PUSH R2
-; Declaration des variables locales
-fin.P.equals:
-; Restauration des registres
-	POP R2
-	RTS
 pile_pleine:
 	WSTR "Erreur : Pile pleine."
 	WNL

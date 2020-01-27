@@ -74,6 +74,8 @@ public class While extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) {
     	Label begin = new Label("Begin_While_" + compiler.getRegManager().getNWhile());
     	Label end = new Label("End_While_" + compiler.getRegManager().getNWhile());
+
+    	compiler.getRegManager().addNWhile();
     	
     	compiler.addLabel(begin);
     	
@@ -83,7 +85,6 @@ public class While extends AbstractInst {
     	//compiler.addComment("Fin Instructions du while_" + compiler.getRegManager().getNWhile());
     	compiler.addInstruction(new BRA(begin));
     	compiler.addLabel(end);
-    	compiler.getRegManager().addNWhile();
     }
 
 }
