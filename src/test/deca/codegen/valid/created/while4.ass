@@ -25,9 +25,9 @@ Begin_While_1:
 ; -
 	LOAD 3(GB), R2
 	LOAD #1, R3
-	SUB R2, R3
+	SUB R3, R2
 	BOV debordement
-	STORE R3, 3(GB)
+	STORE R2, 3(GB)
 	BRA Begin_While_1
 End_While_1:
 	HALT

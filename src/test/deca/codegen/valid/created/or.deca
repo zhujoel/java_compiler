@@ -6,5 +6,4 @@
     a = true || a;
     a = true || false;
     a || b;
-    print(a || b);
 }

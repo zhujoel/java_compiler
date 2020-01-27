@@ -34,12 +34,13 @@ Fin_or_1:
 	CMP R5, R4
 	BGE End_While_1
 	WSTR "a vaut true"
+	WNL
 ; +
 	LOAD 5(GB), R4
 	LOAD #1, R5
-	ADD R4, R5
+	ADD R5, R4
 	BOV debordement
-	STORE R5, 5(GB)
+	STORE R4, 5(GB)
 	BRA Begin_While_1
 End_While_1:
 	HALT

@@ -37,11 +37,11 @@ code.A.methbody:
 ; +
 	LOAD -2(LB), R3
 	LOAD #5, R4
-	ADD R3, R4
+	ADD R4, R3
 	BOV debordement
-	LOAD -2(LB), R3
-	LOAD 1(R3), R5
-	STORE R4, 1(R5)
+	LOAD -2(LB), R4
+	LOAD 1(R4), R5
+	STORE R3, 1(R5)
 fin.A.methbody:
 ; Restauration des registres
 	RTS

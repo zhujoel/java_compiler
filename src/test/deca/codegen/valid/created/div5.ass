@@ -19,8 +19,8 @@
 ; /
 	LOAD #0x1.4p2, R2
 	LOAD #0x1.0p1, R4
-	DIV R2, R4
-	LOAD R4, R1
+	DIV R4, R2
+	LOAD R2, R1
 	WINT
 	HALT
 code.Object.equals:

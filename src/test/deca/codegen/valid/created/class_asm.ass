@@ -17,6 +17,8 @@
 	LOAD code.A.methASM, R0
 	STORE R0, 5(GB)
 ; Main Function
+; Declaration des variables
+; Beginning of main instructions:
 	HALT
 code.Object.equals:
 init.A:

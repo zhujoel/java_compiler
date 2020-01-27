@@ -18,8 +18,8 @@
 ; &&
 	LOAD 3(GB), R2
 	LOAD #1, R3
-	MUL R2, R3
-	SUB #1, R3
+	MUL R3, R2
+	SUB #1, R2
 	HALT
 code.Object.equals:
 pile_pleine:

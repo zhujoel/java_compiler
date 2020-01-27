@@ -19,8 +19,8 @@
 ; /
 	LOAD #5, R2
 	LOAD #2, R4
-	QUO R2, R4
-	LOAD R4, R1
+	QUO R4, R2
+	LOAD R2, R1
 	WINT
 	HALT
 code.Object.equals:

@@ -19,23 +19,23 @@
 ; &&
 	LOAD 3(GB), R2
 	LOAD 4(GB), R3
-	MUL R2, R3
-	STORE R3, 3(GB)
+	MUL R3, R2
+	STORE R2, 3(GB)
 ; &&
 	LOAD 3(GB), R2
 	LOAD #1, R3
-	MUL R2, R3
-	STORE R3, 3(GB)
+	MUL R3, R2
+	STORE R2, 3(GB)
 ; &&
 	LOAD #1, R2
 	LOAD 3(GB), R3
-	MUL R2, R3
-	STORE R3, 3(GB)
+	MUL R3, R2
+	STORE R2, 3(GB)
 ; &&
 	LOAD #1, R2
 	LOAD #0, R3
-	MUL R2, R3
-	STORE R3, 3(GB)
+	MUL R3, R2
+	STORE R2, 3(GB)
 ; &&
 	LOAD 3(GB), R2
 	LOAD 4(GB), R3

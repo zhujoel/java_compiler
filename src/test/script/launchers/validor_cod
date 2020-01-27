@@ -11,6 +11,9 @@ reset=`tput sgr0`
 reussis=0
 total=0
 
+tmpfile=$(mktemp /tmp/temp.XXX)
+
+
 cd $DECAC_HOME
 
 ABSOPATH=$(pwd);
@@ -20,14 +23,26 @@ cd $DECAC_HOME/src/test/deca/codegen/valid/created
 
 for prog in *.deca
 do
-    echo "Test de ${prog%.*}..."
+    # echo "Test de ${prog%.*}..."
     decac -a $ABSOPATH/src/test/deca/codegen/valid/created/$prog
-    ima $ABSOPATH/src/test/deca/codegen/valid/created/${prog%.*}.ass
+    ima $ABSOPATH/src/test/deca/codegen/valid/created/${prog%.*}.ass > $tmpfile
+
+    DIFF=$(diff -u ../expected/${prog%.*}.txt $tmpfile)
+    if [$DIFF == ""]
+    then
+        # echo "${green}Test réussi${reset}"
+        ((reussis++))
+    else
+        echo "${red}Test de ${prog%.*} échoué${reset}"
+        echo "${grey}Obtenu                              Attendu${reset}"
+        # Affiche les deux fichiers sur deux colonnes
+        pr -m -t $tmpfile ../expected/${prog%.*}.txt
+        # diff  ../alexpected/${prog%.*}.txt $tmpfile
+    fi
+    tmpfile=$(mktemp /tmp/temp.XXX)
+    ((total++))
 done
 
-: '
-decac -a $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.deca
-ima $ABSOPATH/src/test/deca/codegen/valid/created/decac_test.ass
-'
+echo "$reussis tests réussis sur $total"
 
 exit
