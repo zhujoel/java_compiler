@@ -4,8 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.ima.pseudocode.Label;
 
 public class TestMethod {
@@ -14,6 +16,16 @@ public class TestMethod {
 	Signature s = new Signature();
 	Label lbl = new Label("meth1");
 	MethodDefinition meth1 = new MethodDefinition(null, null, s, 0);
+	Signature s1 = new Signature();
+	Signature s2 = new Signature();
+	Definition meth2 = new MethodDefinition(null, Location.BUILTIN, s2, 0);
+	
+	@Before
+	public void setup() {
+		Type t = new ClassType(null);
+		s1.add(t);
+		s2.add(t);
+	}
 	
 	@Test
 	public void testLabel() {
@@ -41,4 +53,32 @@ public class TestMethod {
 		assertEquals(meth1.getNature(), "method");
 		assertTrue(meth1.isMethod());
 	}
+	
+	@Test
+	public void testSignSize() {
+		assertEquals(s.size(), 0);
+		assertEquals(s1.size(), 1);
+	}
+	
+	@Test
+	public void testSignEquals() {
+		assertEquals(s1, s2);
+		assertFalse(s.equals(s2));
+	}
+	
+	@Test
+	public void testAsMethodDefinition() throws ContextualError {
+		meth2 = meth2.asMethodDefinition("", null);
+	}
+	
+	@Test(expected = ContextualError.class)
+	public void testAsFieldDefinition() throws ContextualError {
+		meth2 = meth2.asFieldDefinition("", null);
+	}
+	
+	@Test
+	public void testIsClass() {
+		assertFalse(meth1.isClass());
+	}
+	
 }

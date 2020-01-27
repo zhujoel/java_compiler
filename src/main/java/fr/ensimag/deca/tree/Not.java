@@ -26,7 +26,7 @@ public class Not extends AbstractUnaryExpr {
             ClassDefinition currentClass) throws ContextualError {
         Type t = this.getOperand().verifyExpr(compiler, localEnv, currentClass);
         if (!t.isBoolean()) { //type := type _ unary _ op(op, type 1 )
-        	throw new ContextualError("Type non supporté par l'opération \"!\"", this.getOperand().getLocation());
+        	throw new ContextualError("[SyntaxeContextuelle]Type not supported by the operation \"!\"", this.getOperand().getLocation());
         }
         this.setType(t);
         return this.getType();

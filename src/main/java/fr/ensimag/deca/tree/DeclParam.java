@@ -79,7 +79,7 @@ public class DeclParam extends AbstractDeclParam{
 			throws ContextualError {
 		Type t = this.type.verifyType(compiler);
 		if(t.isVoid()) {
-			throw new ContextualError("Parametre de type void", this.parametre.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle] Void Parameter", this.parametre.getLocation());
 		}
 		this.parametre.setType(t);
 		ExpDefinition pDef = new VariableDefinition(this.parametre.getType(), this.parametre.getLocation());

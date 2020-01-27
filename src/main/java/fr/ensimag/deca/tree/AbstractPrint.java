@@ -49,7 +49,7 @@ public abstract class AbstractPrint extends AbstractInst {
         while (i.hasNext()) {
         	t = i.next().verifyExpr(compiler, localEnv, currentClass);
         	if (t.isBoolean()) {
-        		throw new ContextualError("Tentative d'affichage de booleen avec l'instruction " +
+        		throw new ContextualError("[SyntaxeContextuelle]Printing a boolean with " +
         	(this.printHex ? "printx " : "print "), this.getLocation());
         		
         	}
