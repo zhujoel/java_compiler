@@ -1,0 +1,6 @@
+class A {
+	protected int a;
+}
+{
+	A b = null;
+}

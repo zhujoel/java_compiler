@@ -12,5 +12,6 @@
 	c = 2.0;
 	a = b + b;
 	a = a + b;
-	c = a % b;
+	a = a * b + c;
+	a = a * b + c / a - b * c - c - c;
 }
