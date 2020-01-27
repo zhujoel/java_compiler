@@ -218,6 +218,7 @@ public class CompilerOptions {
 
     protected void displayUsage() {
         System.out.println("\n Options pour le compilateur\n");
+        System.out.println("  -a\n    Compiler le fichier source et generer le fichier .ass");
         System.out.println("  -b\n    Affiche une bannière indiquant le nom de l’équipe.");
         System.out.println("  -p\n    Arrête decac après l’étape de construction de\n"
                 + "    l’arbre, et affiche la décompilation de ce dernier.");
