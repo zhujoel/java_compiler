@@ -78,17 +78,17 @@ public class CompilerOptions {
         	switch (args[i]) {
                     //option pour faire toute la compilation et 
                     //generer et montrer le fichier .ass
-                    case "-a":
-                        if(verification){
-                            System.out.println("The options -a and -v are incompatibles"); 
-                            System.exit(1);
-                        }else if(parse){
-                            System.out.println("The options -a and -p are incompatibles");
-                            System.exit(1);
-                        }else{
-                        allCompilation = true;
-                        }
-                        break;
+//                    case "-a":
+//                        if(verification){
+//                            System.out.println("The options -a and -v are incompatibles"); 
+//                            System.exit(1);
+//                        }else if(parse){
+//                            System.out.println("The options -a and -p are incompatibles");
+//                            System.exit(1);
+//                        }else{
+//                        allCompilation = true;
+//                        }
+//                        break;
                     case "-b":
                         if (i == 0 && args.length == 1) {
                             printBanner = true;
@@ -178,9 +178,10 @@ public class CompilerOptions {
             System.exit(1);
         }
         
-        if(!sourceFiles.isEmpty() && (!allCompilation && !parse && !verification)){
-            System.out.println("No compilation option (-a, -p or -v) was selected");
-            System.exit(1);
+        if(!sourceFiles.isEmpty() && (!parse && !verification)){
+            allCompilation  = true;
+            //System.out.println("No compilation option (-a, -p or -v) was selected");
+            //System.exit(1);
         }
         
         
