@@ -1,0 +1,11 @@
+class A{
+	bool b = false;
+}
+
+{
+	A a = new A();
+	a.b = true;
+	if(a.b){
+		print("ln");
+	}
+}

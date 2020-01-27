@@ -1,0 +1,10 @@
+class A{
+	bool b = true;
+	bool c = false;
+	
+	void setB(bool c){
+		this.b = c;
+	}
+}
+
+{}

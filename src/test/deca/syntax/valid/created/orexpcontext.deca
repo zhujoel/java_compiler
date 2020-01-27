@@ -1,0 +1,10 @@
+{
+	bool a = false;
+	int b = 2;
+	if(a == false){
+		b = 28;
+	}
+	else{
+		b = 27;
+	}
+}

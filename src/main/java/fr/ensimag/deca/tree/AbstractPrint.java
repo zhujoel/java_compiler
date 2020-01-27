@@ -76,7 +76,8 @@ public abstract class AbstractPrint extends AbstractInst {
     protected void iterChildren(TreeFunction f) {
         arguments.iter(f);
     }
-
+    
+ 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         arguments.prettyPrint(s, prefix, true);
