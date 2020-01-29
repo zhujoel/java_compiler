@@ -40,7 +40,7 @@ public class ManualTestSynt {
             prog.prettyPrint(System.out);
             prog.checkAllLocations();
             prog.verifyProgram(decacCompiler);
-            //prog.decompile(System.out);
+            prog.decompile(System.out);
             prog.codeGenProgram(decacCompiler);
             String assembleur = decacCompiler.displayIMAProgram(); 
             System.out.println(assembleur);
