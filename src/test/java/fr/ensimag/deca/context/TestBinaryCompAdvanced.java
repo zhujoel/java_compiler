@@ -21,6 +21,7 @@ import fr.ensimag.deca.tree.NotEquals;
 public class TestBinaryCompAdvanced {
 	final Type INT = new IntType(null);
 	final Type FLOAT = new FloatType(null);
+	final Type BOOLEAN = new BooleanType(null);
 
 	
 	DecacCompiler compiler;
@@ -33,6 +34,10 @@ public class TestBinaryCompAdvanced {
 	AbstractExpr floatExpr1;
 	@Mock
 	AbstractExpr floatExpr2;
+	@Mock
+	AbstractExpr boolExpr1;
+	@Mock
+	AbstractExpr boolExpr2;
 
 	@Before
 	public void setup() throws ContextualError {
@@ -42,6 +47,8 @@ public class TestBinaryCompAdvanced {
         when(intExpr2.verifyExpr(compiler, null, null)).thenReturn(INT);
         when(floatExpr1.verifyExpr(compiler, null, null)).thenReturn(FLOAT);
         when(floatExpr2.verifyExpr(compiler, null, null)).thenReturn(FLOAT);
+        when(boolExpr1.verifyExpr(compiler, null, null)).thenReturn(BOOLEAN);
+        when(boolExpr2.verifyExpr(compiler, null, null)).thenReturn(BOOLEAN);
 
 	}
 	
@@ -139,5 +146,21 @@ public class TestBinaryCompAdvanced {
         assertTrue(t.verifyExpr(compiler, null, null).isBoolean());
         verify(floatExpr1).verifyExpr(compiler, null, null);
         verify(floatExpr2).verifyExpr(compiler, null, null);
+	}
+	
+	@Test
+	public void testEqBoolBool() throws ContextualError{
+		Equals t = new Equals(boolExpr1, boolExpr2);
+		assertTrue(t.verifyExpr(compiler, null, null).isBoolean());
+		verify(boolExpr1).verifyExpr(compiler, null, null);
+		verify(boolExpr2).verifyExpr(compiler, null, null);
+	}
+	
+	@Test
+	public void testNEqBoolBool() throws ContextualError{
+		NotEquals t = new NotEquals(boolExpr1, boolExpr2);
+		assertTrue(t.verifyExpr(compiler, null, null).isBoolean());
+		verify(boolExpr1).verifyExpr(compiler, null, null);
+		verify(boolExpr2).verifyExpr(compiler, null, null);
 	}
 }
