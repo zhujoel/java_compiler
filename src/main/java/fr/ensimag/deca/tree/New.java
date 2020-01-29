@@ -34,7 +34,7 @@ public class New extends AbstractExpr{
 			throws ContextualError {
 		Type t = this.ident.verifyType(compiler);
 		if(!t.isClass()) {
-			throw new ContextualError("Trying to instanciate with a type which is not a class", this.ident.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle]Trying to instanciate with a type which is not a class", this.ident.getLocation());
 		}
 		this.setType(t);
 		return t;

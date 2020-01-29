@@ -84,7 +84,7 @@ public class DeclField extends AbstractDeclField {
 	public void verifyDeclField(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
 		Type t = this.type.verifyType(compiler);
 		if(t.isVoid()) {
-			throw new ContextualError("Variable de type void", type.getLocation());
+			throw new ContextualError("[SyntaxeContextuelle]Void variable", type.getLocation());
 		}
 		
 		//On incremente le nombre de champs
