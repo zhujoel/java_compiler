@@ -1,0 +1,6 @@
+{
+    int a = readInt();
+    print(" a vaut ");
+    print(a);
+    print(".");
+}

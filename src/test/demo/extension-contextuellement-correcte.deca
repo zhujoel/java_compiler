@@ -1,4 +1,4 @@
-#include math.decah
+#include "Math.decah"
 {
-	Math m = new Math();
+    println("inclusion de Math.deca.");
 }

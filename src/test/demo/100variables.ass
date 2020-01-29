@@ -1,0 +1,239 @@
+; Test pour savoir si la pile est pleine
+	TSTO #105
+	BOV pile_pleine
+	ADDSP #103
+; start main program
+; Class Declaration
+; Code de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main Function
+; Declaration des variables
+	LOAD #1, R2
+	STORE R2, 3(GB)
+	LOAD #1, R2
+	STORE R2, 4(GB)
+	LOAD #1, R2
+	STORE R2, 5(GB)
+	LOAD #1, R2
+	STORE R2, 6(GB)
+	LOAD #1, R2
+	STORE R2, 7(GB)
+	LOAD #1, R2
+	STORE R2, 8(GB)
+	LOAD #1, R2
+	STORE R2, 9(GB)
+	LOAD #1, R2
+	STORE R2, 10(GB)
+	LOAD #1, R2
+	STORE R2, 11(GB)
+	LOAD #1, R2
+	STORE R2, 12(GB)
+	LOAD #1, R2
+	STORE R2, 13(GB)
+	LOAD #1, R2
+	STORE R2, 14(GB)
+	LOAD #1, R2
+	STORE R2, 15(GB)
+	LOAD #1, R2
+	STORE R2, 16(GB)
+	LOAD #1, R2
+	STORE R2, 17(GB)
+	LOAD #1, R2
+	STORE R2, 18(GB)
+	LOAD #1, R2
+	STORE R2, 19(GB)
+	LOAD #1, R2
+	STORE R2, 20(GB)
+	LOAD #1, R2
+	STORE R2, 21(GB)
+	LOAD #1, R2
+	STORE R2, 22(GB)
+	LOAD #1, R2
+	STORE R2, 23(GB)
+	LOAD #1, R2
+	STORE R2, 24(GB)
+	LOAD #1, R2
+	STORE R2, 25(GB)
+	LOAD #1, R2
+	STORE R2, 26(GB)
+	LOAD #1, R2
+	STORE R2, 27(GB)
+	LOAD #1, R2
+	STORE R2, 28(GB)
+	LOAD #1, R2
+	STORE R2, 29(GB)
+	LOAD #1, R2
+	STORE R2, 30(GB)
+	LOAD #1, R2
+	STORE R2, 31(GB)
+	LOAD #1, R2
+	STORE R2, 32(GB)
+	LOAD #1, R2
+	STORE R2, 33(GB)
+	LOAD #1, R2
+	STORE R2, 34(GB)
+	LOAD #1, R2
+	STORE R2, 35(GB)
+	LOAD #1, R2
+	STORE R2, 36(GB)
+	LOAD #1, R2
+	STORE R2, 37(GB)
+	LOAD #1, R2
+	STORE R2, 38(GB)
+	LOAD #1, R2
+	STORE R2, 39(GB)
+	LOAD #1, R2
+	STORE R2, 40(GB)
+	LOAD #1, R2
+	STORE R2, 41(GB)
+	LOAD #1, R2
+	STORE R2, 42(GB)
+	LOAD #1, R2
+	STORE R2, 43(GB)
+	LOAD #1, R2
+	STORE R2, 44(GB)
+	LOAD #1, R2
+	STORE R2, 45(GB)
+	LOAD #1, R2
+	STORE R2, 46(GB)
+	LOAD #1, R2
+	STORE R2, 47(GB)
+	LOAD #1, R2
+	STORE R2, 48(GB)
+	LOAD #1, R2
+	STORE R2, 49(GB)
+	LOAD #1, R2
+	STORE R2, 50(GB)
+	LOAD #1, R2
+	STORE R2, 51(GB)
+	LOAD #1, R2
+	STORE R2, 52(GB)
+	LOAD #1, R2
+	STORE R2, 53(GB)
+	LOAD #1, R2
+	STORE R2, 54(GB)
+	LOAD #1, R2
+	STORE R2, 55(GB)
+	LOAD #1, R2
+	STORE R2, 56(GB)
+	LOAD #1, R2
+	STORE R2, 57(GB)
+	LOAD #1, R2
+	STORE R2, 58(GB)
+	LOAD #1, R2
+	STORE R2, 59(GB)
+	LOAD #1, R2
+	STORE R2, 60(GB)
+	LOAD #1, R2
+	STORE R2, 61(GB)
+	LOAD #1, R2
+	STORE R2, 62(GB)
+	LOAD #1, R2
+	STORE R2, 63(GB)
+	LOAD #1, R2
+	STORE R2, 64(GB)
+	LOAD #1, R2
+	STORE R2, 65(GB)
+	LOAD #1, R2
+	STORE R2, 66(GB)
+	LOAD #1, R2
+	STORE R2, 67(GB)
+	LOAD #1, R2
+	STORE R2, 68(GB)
+	LOAD #1, R2
+	STORE R2, 69(GB)
+	LOAD #1, R2
+	STORE R2, 70(GB)
+	LOAD #1, R2
+	STORE R2, 71(GB)
+	LOAD #1, R2
+	STORE R2, 72(GB)
+	LOAD #1, R2
+	STORE R2, 73(GB)
+	LOAD #1, R2
+	STORE R2, 74(GB)
+	LOAD #1, R2
+	STORE R2, 75(GB)
+	LOAD #1, R2
+	STORE R2, 76(GB)
+	LOAD #1, R2
+	STORE R2, 77(GB)
+	LOAD #1, R2
+	STORE R2, 78(GB)
+	LOAD #1, R2
+	STORE R2, 79(GB)
+	LOAD #1, R2
+	STORE R2, 80(GB)
+	LOAD #1, R2
+	STORE R2, 81(GB)
+	LOAD #1, R2
+	STORE R2, 82(GB)
+	LOAD #1, R2
+	STORE R2, 83(GB)
+	LOAD #1, R2
+	STORE R2, 84(GB)
+	LOAD #1, R2
+	STORE R2, 85(GB)
+	LOAD #1, R2
+	STORE R2, 86(GB)
+	LOAD #1, R2
+	STORE R2, 87(GB)
+	LOAD #1, R2
+	STORE R2, 88(GB)
+	LOAD #1, R2
+	STORE R2, 89(GB)
+	LOAD #1, R2
+	STORE R2, 90(GB)
+	LOAD #1, R2
+	STORE R2, 91(GB)
+	LOAD #1, R2
+	STORE R2, 92(GB)
+	LOAD #1, R2
+	STORE R2, 93(GB)
+	LOAD #1, R2
+	STORE R2, 94(GB)
+	LOAD #1, R2
+	STORE R2, 95(GB)
+	LOAD #1, R2
+	STORE R2, 96(GB)
+	LOAD #1, R2
+	STORE R2, 97(GB)
+	LOAD #1, R2
+	STORE R2, 98(GB)
+	LOAD #1, R2
+	STORE R2, 99(GB)
+	LOAD #1, R2
+	STORE R2, 100(GB)
+	LOAD #1, R2
+	STORE R2, 101(GB)
+	LOAD #1, R2
+	STORE R2, 102(GB)
+; Beginning of main instructions:
+	WSTR "execution du programme de 100 variables sans erreur"
+	WNL
+	HALT
+code.Object.equals:
+pile_pleine:
+	WSTR "Erreur : Pile pleine."
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Erreur : dereferencement null."
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Erreur : Tas plein."
+	WNL
+	ERROR
+debordement:
+	WSTR "Erreur : debordement durant une operation arithmétique"
+	WNL
+	ERROR
+io_error:
+	WSTR "Erreur : input ou output"
+	WNL
+	ERROR
+; end main program
