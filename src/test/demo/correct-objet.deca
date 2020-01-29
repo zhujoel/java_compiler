@@ -1,0 +1,29 @@
+class Point{
+	protected int x;
+	protected int y;
+	
+	int getX(){
+		return this.x;
+	}
+	int getY(){
+		return this.y;
+	}
+	void setX(int x){
+		this.x = x;
+	}
+	void setY(int y){
+		this.y = y;
+	}
+	
+	void toString(){
+		print(x);
+		print(", ");
+		println(y);
+	}
+}
+{
+	Point p = new Point();
+	p.setX(3);
+	p.setY(5);
+	p.toString();
+}
