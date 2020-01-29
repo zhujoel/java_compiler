@@ -1,28 +1,28 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #9
+	TSTO #19
 	BOV pile_pleine
-	ADDSP #7
+	ADDSP #17
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 11(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 12(GB)
 ; Main Function
 ; Declaration des variables
 	LOAD #5, R2
-	STORE R2, 3(GB)
+	STORE R2, 13(GB)
 	LOAD #2, R2
-	STORE R2, 4(GB)
+	STORE R2, 14(GB)
 	LOAD #0x0.0p0, R0
-	STORE R0, 5(GB)
+	STORE R0, 15(GB)
 	LOAD #0x0.0p0, R0
-	STORE R0, 6(GB)
+	STORE R0, 16(GB)
 ; Beginning of main instructions:
 ; +
-	LOAD 3(GB), R2
-	LOAD 4(GB), R3
+	LOAD 13(GB), R2
+	LOAD 14(GB), R3
 	ADD R2, R3
 	BOV debordement
 ; +
@@ -31,63 +31,79 @@
 	ADD R2, R4
 	BOV debordement
 ; +
-	LOAD 3(GB), R2
-	LOAD 4(GB), R5
-	ADD R5, R2
+	LOAD 13(GB), R2
+	PUSH R4
+	LOAD 14(GB), R4
+	ADD R4, R2
 	BOV debordement
+	POP R4
 	LOAD R2, R1
 	WINT
 	WNL
 ; +
-	LOAD 3(GB), R5
-	LOAD 4(GB), R6
-	ADD R6, R5
+	LOAD 13(GB), R4
+	PUSH R4
+	LOAD 14(GB), R4
+	ADD R4, R4
 	BOV debordement
-	STORE R5, 3(GB)
+	POP R4
+	STORE R4, 13(GB)
 ; +
-	LOAD #5, R5
-	LOAD #2, R6
-	ADD R6, R5
+	LOAD #5, R4
+	PUSH R4
+	LOAD #2, R4
+	ADD R4, R4
 	BOV debordement
-	LOAD R5, R1
+	POP R4
+	LOAD R4, R1
 	WINT
 	WNL
-	LOAD #5, R6
-	FLOAT R6, R6
-	STORE R6, 5(GB)
-	LOAD #2, R6
-	FLOAT R6, R6
-	STORE R6, 6(GB)
+	LOAD #5, R4
+	FLOAT R4, R4
+	STORE R4, 15(GB)
+	LOAD #2, R4
+	FLOAT R4, R4
+	STORE R4, 16(GB)
 ; +
-	LOAD 5(GB), R6
-	LOAD 6(GB), R7
-	ADD R6, R7
+	LOAD 15(GB), R4
+	PUSH R4
+	LOAD 16(GB), R4
+	ADD R4, R4
 	BOV debordement
+	POP R4
 ; +
-	LOAD #0x1.8p2, R6
-	LOAD #0x1.0p0, R8
-	ADD R6, R8
+	LOAD #0x1.8p2, R4
+	PUSH R4
+	LOAD #0x1.0p0, R4
+	ADD R4, R4
 	BOV debordement
+	POP R4
 ; +
-	LOAD 5(GB), R6
-	LOAD 6(GB), R9
-	ADD R9, R6
+	LOAD 15(GB), R4
+	PUSH R4
+	LOAD 16(GB), R4
+	ADD R4, R4
 	BOV debordement
-	LOAD R6, R1
+	POP R4
+	LOAD R4, R1
 	WINT
 	WNL
 ; +
-	LOAD 5(GB), R9
-	LOAD 6(GB), R10
-	ADD R10, R9
+	LOAD 15(GB), R4
+	PUSH R4
+	LOAD 16(GB), R4
+	ADD R4, R4
 	BOV debordement
-	STORE R9, 5(GB)
+	POP R4
+	STORE R4, 15(GB)
 ; +
-	LOAD #0x1.4p2, R9
-	LOAD #0x1.0p1, R10
-	ADD R10, R9
+	LOAD #0x1.4p2, R4
+	PUSH R4
+	LOAD #0x1.0p1, R4
+	ADD R4, R4
 	BOV debordement
-	LOAD R9, R1
+	POP R4
+	LOAD R4, R1
 	WINT
 	WNL
 	HALT

@@ -19,9 +19,9 @@
 	STORE R0, 5(GB)
 	LOAD code.Object.equals, R0
 	STORE R0, 6(GB)
-	LOAD code.A.meth2, R0
-	STORE R0, 7(GB)
 	LOAD code.A.meth1, R0
+	STORE R0, 7(GB)
+	LOAD code.A.meth2, R0
 	STORE R0, 8(GB)
 ; Main Function
 ; Declaration des variables

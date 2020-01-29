@@ -1,27 +1,27 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #7
+	TSTO #27
 	BOV pile_pleine
-	ADDSP #5
+	ADDSP #25
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
 	LOAD #null, R0
-	STORE R0, 1(GB)
+	STORE R0, 21(GB)
 	LOAD code.Object.equals, R0
-	STORE R0, 2(GB)
+	STORE R0, 22(GB)
 ; Main Function
 ; Declaration des variables
 	LOAD #0x1.266666p1, R2
-	STORE R2, 3(GB)
+	STORE R2, 23(GB)
 	LOAD #0x1.333334p0, R2
-	STORE R2, 4(GB)
+	STORE R2, 24(GB)
 ; Beginning of main instructions:
 ; *
-	LOAD 3(GB), R2
-	LOAD 4(GB), R3
+	LOAD 23(GB), R2
+	LOAD 24(GB), R3
 	MUL R2, R3
 	BOV debordement
-	LOAD 3(GB), R1
+	LOAD 23(GB), R1
 	WFLOAT
 	HALT
 code.Object.equals:

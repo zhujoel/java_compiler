@@ -18,10 +18,12 @@
 ; Beginning of main instructions:
 ; *
 	LOAD 3(GB), R2
-	LOAD #5, R3
-	FLOAT R3, R3
-	MUL R3, R2
+	PUSH R2
+	LOAD #5, R2
+	FLOAT R2, R2
+	MUL R2, R2
 	BOV debordement
+	POP R2
 	STORE R2, 3(GB)
 	LOAD 3(GB), R1
 	WFLOAT

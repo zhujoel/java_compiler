@@ -38,12 +38,12 @@ code.A.methA:
 ; Declaration des variables locales
 	LOAD #5, R3
 	LOAD -2(LB), R4
-	LOAD 2(R4), R5
-	STORE R3, 2(R5)
-	LOAD #7, R3
-	LOAD -2(LB), R4
 	LOAD 1(R4), R5
 	STORE R3, 1(R5)
+	LOAD #7, R3
+	LOAD -2(LB), R4
+	LOAD 2(R4), R5
+	STORE R3, 2(R5)
 fin.A.methA:
 ; Restauration des registres
 	RTS

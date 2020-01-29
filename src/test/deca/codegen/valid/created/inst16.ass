@@ -1,7 +1,7 @@
 ; Test pour savoir si la pile est pleine
-	TSTO #5
+	TSTO #9
 	BOV pile_pleine
-	ADDSP #3
+	ADDSP #7
 ; start main program
 ; Class Declaration
 ; Code de la table des méthodes de Object
