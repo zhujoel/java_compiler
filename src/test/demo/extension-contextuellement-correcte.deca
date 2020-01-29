@@ -1,4 +1,0 @@
-#include "Math.decah"
-{
-    println("inclusion de Math.deca.");
-}
