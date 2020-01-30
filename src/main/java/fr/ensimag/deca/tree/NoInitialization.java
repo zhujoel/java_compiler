@@ -59,7 +59,7 @@ public class NoInitialization extends AbstractInitialization {
     protected GPRegister codeGenInit(DecacCompiler compiler, Type type) {
     	// Pour l'instant on met n'importe quoi dans la case lors de la non-initialisation.
     	GPRegister reg = Register.getR(0);
-    	if(type == compiler.getType("int") || type == compiler.getType("bool")) {
+    	if(type == compiler.getType("int") || type == compiler.getType("boolean")) {
         	compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
     	}
     	else if(type == compiler.getType("float")){

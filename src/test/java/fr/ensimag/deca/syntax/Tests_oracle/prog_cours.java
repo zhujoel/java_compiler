@@ -54,7 +54,7 @@ public class prog_cours {
                 new ListDeclClass(),
                 new Main(lDecl,linst));
 
-        AbstractIdentifier type_bool = new Identifier(compiler.getSymbolTable().create("bool"));
+        AbstractIdentifier type_bool = new Identifier(compiler.getSymbolTable().create("boolean"));
         AbstractIdentifier varName_a = new Identifier(compiler.getSymbolTable().create("a"));
         AbstractIdentifier varName_b = new Identifier(compiler.getSymbolTable().create("b"));
         AbstractIdentifier type_int = new Identifier(compiler.getSymbolTable().create("int"));

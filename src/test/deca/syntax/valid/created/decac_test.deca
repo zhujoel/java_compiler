@@ -1,11 +1,3 @@
 {
-	if(true){
-		if(true){
-			print("true");
-		}
-		else{
-		}
-	}
-	else{
-	}
+	boolean b = true;
 }

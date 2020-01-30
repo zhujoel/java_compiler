@@ -16,6 +16,6 @@ class B extends A{
 }
 {
 	A a = new A();
-	a.set(1.2);
+	a.setX(1);
 	
 }

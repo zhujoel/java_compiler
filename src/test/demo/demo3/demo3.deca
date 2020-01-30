@@ -9,8 +9,8 @@ class B extends A{
 
 	
 }
-class A extends B{
-	float fonction(int a, float b){
+class C extends B{
+	float fonction2(int a, float b){
 		return a*b;
 	}
 }

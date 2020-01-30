@@ -59,7 +59,7 @@ public class Program extends AbstractProgram {
         oDef.incNumberOfMethods();
         Signature s = new Signature();
         s.add(compiler.getType("Object"));
-        MethodDefinition equalsDef = new MethodDefinition(compiler.getType("bool"), Location.BUILTIN, s, oDef.getNumberOfMethods());
+        MethodDefinition equalsDef = new MethodDefinition(compiler.getType("boolean"), Location.BUILTIN, s, oDef.getNumberOfMethods());
         try {
         	o.getDefinition().getMembers().declare(compiler.getSymbolTable()
         			.create("equals"), equalsDef);

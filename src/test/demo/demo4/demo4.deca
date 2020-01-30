@@ -1,6 +1,6 @@
 {
     bool booleen = true;
-    if((booleen) && false || true)){
+    if((booleen) && false || true){
         print("dans le if");
     }
     else{
