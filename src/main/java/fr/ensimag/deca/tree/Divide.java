@@ -35,7 +35,7 @@ public class Divide extends AbstractOpArith {
     	
     	// Cas des flottants
     	else if(typeLeft.isFloat() && typeRight.isFloat()) {
-    		compiler.addInstruction(new DIV(op1, op2));;
+    		compiler.addInstruction(new DIV(op1, op2));
     	}
 	}
 
