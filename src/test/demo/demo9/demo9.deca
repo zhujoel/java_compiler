@@ -1,5 +1,8 @@
 {
     if(false && (true || false && false || false && true)){
-        print("hi");
+        print("Bonjour dans le if !");
+    }
+    else{
+        print("Bonjour dans le else !");
     }
 }
